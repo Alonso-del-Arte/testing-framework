@@ -1,11 +1,11 @@
 /**
  * 
  */
-package testframegeneric.platform;
+package testframegeneric.engine;
 
 /**
+ * 
  * @author Alonso del Arte
- *
  */
 public class TestRunner {
 
