@@ -1,13 +1,12 @@
 package testframegeneric.api;
 
-import java.lang.annotation.Annotation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public class Test implements Annotation {
-
-	@Override
-	public Class<? extends Annotation> annotationType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Test {
 
 }
