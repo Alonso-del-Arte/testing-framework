@@ -1,5 +1,6 @@
 package testframegeneric.engine;
 
+import java.util.List;
 import java.util.Set;
 
 import testframegeneric.api.Test;
@@ -7,7 +8,7 @@ import static testframegeneric.api.Asserters.*;
 
 public class TestRunnerTest {
 	
-	public static void checkResultSetSizeIsPositive(Set<TestResult> results) {
+	public static void checkResultSetSizeIsPositive(List<TestResult> results) {
 		int size = results.size();
 		if (size == 0) {
 			String msg = "TestRunner failed to pick up any tests";
@@ -18,7 +19,7 @@ public class TestRunnerTest {
 	}
 	
 	public static void main(String[] args) {
-		Set<TestResult> results = TestRunner.run(new TestRunnerTest.ToyTests());
+		List<TestResult> results = TestRunner.run(new TestRunnerTest.ToyTests());
 		checkResultSetSizeIsPositive(results);
 	}
 	
