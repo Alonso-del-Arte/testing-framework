@@ -1,13 +1,9 @@
 package testframegeneric.engine;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import testframegeneric.api.Test;
 
@@ -36,12 +32,11 @@ public class TestRunner {
 			status = TestResultStatus.PASSED;
 		} catch (InvocationTargetException ite) {
 			Throwable cause = ite.getCause();
+			info = cause;
 			if (cause instanceof AssertionError) {
 				status = TestResultStatus.FAILED;
-				info = cause;
 			} else {
 				status = TestResultStatus.ERROR;
-				info = cause;
 			}
 		} catch (IllegalAccessException iae) {
 			String excMsg = "Unable to run test " + test.getName() 
@@ -75,11 +70,17 @@ public class TestRunner {
 	}
 
 	/**
-	 * @param args
+	 * Runs the tests of a test class and reports the results.
+	 * @param args First the fully qualified name of the test class, then the 
+	 * command line options (currently no command line options are supported). 
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// c.newInstance(); ???
+		if (args.length == 0) {
+			System.out.println("Please specify class to test");
+		} else {
+			List<TestResult> results = run(args[0]);
+			TestResultsReporter.report(results);
+		}
 	}
 
 }

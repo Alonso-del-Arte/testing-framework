@@ -1,10 +1,10 @@
 package testframegeneric.engine;
 
-import java.util.Set;
+import java.util.List;
 
 class TestResultsReporter {
 	
-	static void report(Set<TestResult> results) {
+	static void report(List<TestResult> results) {
 		int totalCount = results.size();
 		int passCount = 0;
 		int failCount = 0;
