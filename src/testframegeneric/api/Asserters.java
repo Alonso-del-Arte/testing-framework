@@ -1,5 +1,7 @@
 package testframegeneric.api;
 
+import java.time.Duration;
+
 public class Asserters {
 	
 	/**
@@ -197,7 +199,7 @@ public class Asserters {
 	}
 	
 	public static void fail(String msg) {
-		throw new AssertionError(msg);
+		throw new AssertionError("Sorry, not the message you were expecting");
 	}
 	
 	// TODO: Write tests for this
@@ -207,6 +209,11 @@ public class Asserters {
 	}
 
 	public static void assertDoesNotThrow(Procedure lambda, String msg) {
+		// TODO: Write tests for this
+	}
+	
+	public static void assertTimeout(Procedure lambda, Duration allottedTime, 
+			String msg) {
 		// TODO: Write tests for this
 	}
 

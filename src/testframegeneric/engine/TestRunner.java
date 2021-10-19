@@ -8,7 +8,9 @@ import java.util.List;
 import testframegeneric.api.Test;
 
 /**
- * 
+ * Runs the tests in a test class. You can use the -enableassertions switch on 
+ * the command line, but that's not necessary, because this test runner makes 
+ * sure that assertions are turned on.
  * @author Alonso del Arte
  */
 public class TestRunner {
@@ -73,6 +75,7 @@ public class TestRunner {
 	 * Runs the tests of a test class and reports the results.
 	 * @param args First the fully qualified name of the test class, then the 
 	 * command line options (currently no command line options are supported). 
+	 * For example, "org.example.demo.textops.PalindromeCheckerTest".
 	 */
 	public static void main(String[] args) {
 		if (args.length == 0) {
