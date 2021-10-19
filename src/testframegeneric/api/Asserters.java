@@ -106,6 +106,96 @@ public class Asserters {
 	
 	// No assertFalse will be provided. Use plain Java assert.
 	
+	// TODO: Write tests for this
+	public static void assertDifferent(int some, int other) {
+		 String msg = "Sorry, default message not implemented yet";
+		 assertDifferent(some, other, msg);
+	}
+	
+	public static void assertDifferent(int some, int other, String msg) {
+		// TODO: Write tests for this
+	}
+	
+	// TODO: Write tests for this
+	public static void assertDifferent(double some, double other) {
+		 String msg = "Sorry, default message not implemented yet";
+		 assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
+	}
+	
+	// TODO: Write tests for this
+	public static void assertDifferent(double some, double other, 
+			double delta) {
+		 String msg = "Sorry, default message not implemented yet";
+		 assertDifferent(some, other, delta, msg);
+	}
+	
+	// TODO: Write tests for this
+	public static void assertDifferent(double some, double other, 
+			String msg) {
+		 assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
+	}
+	
+	public static void assertDifferent(double some, double other, 
+			double delta, String msg) {
+		// TODO: Write tests for this
+	}
+	
+	// TODO: Write tests for this
+	public static void assertDifferent(Object some, Object other) {
+		 String msg = "Sorry, default message not implemented yet";
+		 assertDifferent(some, other, msg);
+	}
+	
+	public static void assertDifferent(Object some, Object other, 
+			String msg) {
+		// TODO: Write tests for this
+	}
+	
+	// TODO: Write tests for this
+	public static void assertDifferent(int[] some, int[] other) {
+		 String msg = "Sorry, default message not implemented yet";
+		 assertDifferent(some, other, msg);
+	}
+	
+	public static void assertDifferent(int[] some, int[] other, String msg) {
+		// TODO: Write tests for this
+	}
+	
+	// TODO: Write tests for this
+	public static void assertDifferent(double[] some, double[] other) {
+		 String msg = "Sorry, default message not implemented yet";
+		 assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
+	}
+	
+	// TODO: Write tests for this
+	public static void assertDifferent(double[] some, double[] other, 
+			double delta) {
+		 String msg = "Sorry, default message not implemented yet";
+		 assertDifferent(some, other, delta, msg);
+	}
+	
+	// TODO: Write tests for this
+	public static void assertDifferent(double[] some, double[] other, 
+			String msg) {
+		 assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
+	}
+	
+	public static void assertDifferent(double[] some, double[] other, 
+			double delta, String msg) {
+		// TODO: Write tests for this
+	}
+	
+	// TODO: Write tests for this
+	public static void assertDifferent(Object[] some, Object[] other) {
+		 String msg = "Sorry, default message not implemented yet";
+		 assertDifferent(some, other, msg);
+	}
+	
+	public static void assertDifferent(Object[] some, Object[] other, 
+			String msg) {
+		// TODO: Write tests for this
+	}
+	
 	public static void fail(String msg) {
 		throw new AssertionError(msg);
 	}
