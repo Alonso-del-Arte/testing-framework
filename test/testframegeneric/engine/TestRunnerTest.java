@@ -1,13 +1,22 @@
 package testframegeneric.engine;
 
+import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Set;
 
-import testframegeneric.api.Test;
-import static testframegeneric.api.Asserters.*;
-
+/**
+ * Tests of the TestRunner class. Obviously we can't use TestRunner itself to 
+ * run the tests for TestRunner. So we're going to make an ad hoc test runner 
+ * for each test. It's going to be verbose and repetitive, and it'll sure make  
+ * us appreciate TestRunner once we have it working properly. Also note that 
+ * this is designed so that if any test before the last test fails, the 
+ * remaining tests will not run.
+ * @author Alonso del Arte
+ */
 public class TestRunnerTest {
 	
+	private static final String testClassName 
+	        = "testframegeneric.engine.ToyTests";
+
 	public static void checkResultSetSizeIsPositive(List<TestResult> results) {
 		int size = results.size();
 		if (size == 0) {
@@ -18,41 +27,185 @@ public class TestRunnerTest {
 		}
 	}
 	
-	public static void main(String[] args) {
-		List<TestResult> results = TestRunner.run(new TestRunnerTest.ToyTests());
-		checkResultSetSizeIsPositive(results);
+	public static void checkTestThatShouldFailDoesFail() {
+		try {
+			ClassLoader loader = ClassLoader.getSystemClassLoader();
+			Class<?> type = loader.loadClass(testClassName);
+			Object testClassInstance = type.newInstance();
+			Method test = type.getDeclaredMethod("testThatShouldFail");
+			TestResult result = TestRunner.run(test, testClassInstance);
+			TestResultStatus status = result.getStatus();
+			if (status.equals(TestResultStatus.FAILED)) {
+				System.out.println("Test that should fail indeed failed");
+			} else {
+				String msg = "Expected failing test to be reported as " 
+			            + TestResultStatus.FAILED.toString() 
+			            + " but it was reported as "
+			            + status.toString() + " instead";
+				throw new AssertionError(msg);
+			}
+		} catch (NoSuchMethodException nsme) {
+			String msg = "Unable to find test procedure";
+			throw new AssertionError(msg, nsme);
+		} catch (ClassNotFoundException cnfe) {
+			String msg = "Unable to find test class";
+			throw new AssertionError(msg, cnfe);
+		} catch (IllegalAccessException iae) {
+			String msg = "Unable to access test class";
+			throw new AssertionError(msg, iae);
+		} catch (InstantiationException ie) {
+			String msg = "Unable to instantiate " + testClassName;
+			throw new AssertionError(msg, ie);
+		} catch (SecurityException se) {
+			String msg = "Encountered security problem";
+			throw new AssertionError(msg, se);
+		}
 	}
 	
-	public static class ToyTests {
-		
-		private static boolean relay(boolean flag) {
-			return flag;
+	public static void checkTestThatShouldPassDoesPass() {
+		try {
+			ClassLoader loader = ClassLoader.getSystemClassLoader();
+			Class<?> type = loader.loadClass(testClassName);
+			Object testClassInstance = type.newInstance();
+			Method test = type.getDeclaredMethod("testThatShouldPass");
+			TestResult result = TestRunner.run(test, testClassInstance);
+			TestResultStatus status = result.getStatus();
+			if (status.equals(TestResultStatus.PASSED)) {
+				System.out.println("Test that should pass indeed passed");
+			} else {
+				String msg = "Expected passing test to be reported as " 
+			            + TestResultStatus.PASSED.toString() 
+			            + " but it was reported as "
+			            + status.toString() + " instead";
+				throw new AssertionError(msg);
+			}
+		} catch (NoSuchMethodException nsme) {
+			String msg = "Unable to find test procedure";
+			throw new AssertionError(msg, nsme);
+		} catch (ClassNotFoundException cnfe) {
+			String msg = "Unable to find test class";
+			throw new AssertionError(msg, cnfe);
+		} catch (IllegalAccessException iae) {
+			String msg = "Unable to access test class";
+			throw new AssertionError(msg, iae);
+		} catch (InstantiationException ie) {
+			String msg = "Unable to instantiate " + testClassName;
+			throw new AssertionError(msg, ie);
+		} catch (SecurityException se) {
+			String msg = "Encountered security problem";
+			throw new AssertionError(msg, se);
 		}
-		
-		@Test
-		public void testThatShouldPass() {
-			String msg = "This test should be reported as passing";
-			System.out.println(msg);
-			assert relay(true) : msg;
+	}
+	
+	public static void checkTestThatShouldCauseErrorDoesCauseError() {
+		try {
+			ClassLoader loader = ClassLoader.getSystemClassLoader();
+			Class<?> type = loader.loadClass(testClassName);
+			Object testClassInstance = type.newInstance();
+			Method test = type.getDeclaredMethod("testThatShouldCauseError");
+			TestResult result = TestRunner.run(test, testClassInstance);
+			TestResultStatus status = result.getStatus();
+			if (status.equals(TestResultStatus.ERROR)) {
+				System.out.println("Error causing test indeed caused error");
+			} else {
+				String msg = "Expected test with error to be reported as " 
+			            + TestResultStatus.ERROR.toString() 
+			            + " but it was reported as "
+			            + status.toString() + " instead";
+				throw new AssertionError(msg);
+			}
+		} catch (NoSuchMethodException nsme) {
+			String msg = "Unable to find test procedure";
+			throw new AssertionError(msg, nsme);
+		} catch (ClassNotFoundException cnfe) {
+			String msg = "Unable to find test class";
+			throw new AssertionError(msg, cnfe);
+		} catch (IllegalAccessException iae) {
+			String msg = "Unable to access test class";
+			throw new AssertionError(msg, iae);
+		} catch (InstantiationException ie) {
+			String msg = "Unable to instantiate " + testClassName;
+			throw new AssertionError(msg, ie);
+		} catch (SecurityException se) {
+			String msg = "Encountered security problem";
+			throw new AssertionError(msg, se);
 		}
-		
-		@Test
-		public void testThatShouldFail() {
-			String msg = "This test should be reported as failing";
-			System.out.println(msg);
-			assert relay(false) : msg;
+	}
+	
+	public static void checkFailingTestResultHasStackTrace() {
+		try {
+			ClassLoader loader = ClassLoader.getSystemClassLoader();
+			Class<?> type = loader.loadClass(testClassName);
+			Object testClassInstance = type.newInstance();
+			Method test = type.getDeclaredMethod("testThatShouldFail");
+			TestResult result = TestRunner.run(test, testClassInstance);
+			Throwable info = result.getInformation();
+			if (info instanceof AssertionError) {
+				System.out.println("Failing test result carries stack trace");
+			} else {
+				String msg = "Expected AssertionError with stack trace but was " 
+			            + info + " instead";
+				throw new AssertionError(msg);
+			}
+		} catch (NoSuchMethodException nsme) {
+			String msg = "Unable to find test procedure";
+			throw new AssertionError(msg, nsme);
+		} catch (ClassNotFoundException cnfe) {
+			String msg = "Unable to find test class";
+			throw new AssertionError(msg, cnfe);
+		} catch (IllegalAccessException iae) {
+			String msg = "Unable to access test class";
+			throw new AssertionError(msg, iae);
+		} catch (InstantiationException ie) {
+			String msg = "Unable to instantiate " + testClassName;
+			throw new AssertionError(msg, ie);
+		} catch (SecurityException se) {
+			String msg = "Encountered security problem";
+			throw new AssertionError(msg, se);
 		}
-		
-		// TODO: Write test that should be skipped
-		
-		@Test
-		public void testThatShouldCauseError() {
-			String msg 
-			        = "This test should be reported as having caused an error";
-			System.out.println(msg);
-			throw new RuntimeException(msg);
+	}
+	
+	public static void checkErrorCausingTestResultHasStackTrace() {
+		try {
+			ClassLoader loader = ClassLoader.getSystemClassLoader();
+			Class<?> type = loader.loadClass(testClassName);
+			Object testClassInstance = type.newInstance();
+			Method test = type.getDeclaredMethod("testThatShouldCauseError");
+			TestResult result = TestRunner.run(test, testClassInstance);
+			Throwable info = result.getInformation();
+			if (info instanceof Exception) {
+				System.out.println("Test with error carries stack trace");
+			} else {
+				String msg = "Expected Exception with stack trace but was " 
+			            + info + " instead";
+				throw new AssertionError(msg);
+			}
+		} catch (NoSuchMethodException nsme) {
+			String msg = "Unable to find test procedure";
+			throw new AssertionError(msg, nsme);
+		} catch (ClassNotFoundException cnfe) {
+			String msg = "Unable to find test class";
+			throw new AssertionError(msg, cnfe);
+		} catch (IllegalAccessException iae) {
+			String msg = "Unable to access test class";
+			throw new AssertionError(msg, iae);
+		} catch (InstantiationException ie) {
+			String msg = "Unable to instantiate " + testClassName;
+			throw new AssertionError(msg, ie);
+		} catch (SecurityException se) {
+			String msg = "Encountered security problem";
+			throw new AssertionError(msg, se);
 		}
-		
 	}
 
+	public static void main(String[] args) {
+		List<TestResult> results = TestRunner.run(testClassName);
+		checkResultSetSizeIsPositive(results);
+		checkTestThatShouldFailDoesFail();
+		checkTestThatShouldPassDoesPass();
+		checkTestThatShouldCauseErrorDoesCauseError();
+		checkFailingTestResultHasStackTrace();
+		checkErrorCausingTestResultHasStackTrace();
+	}
+	
 }

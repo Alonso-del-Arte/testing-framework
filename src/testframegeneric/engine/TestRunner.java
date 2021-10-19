@@ -1,6 +1,7 @@
 package testframegeneric.engine;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,26 +28,48 @@ public class TestRunner {
 		return tests;
 	}
 	
-	public static TestResult run(Method test, Object instance) {
+	static TestResult run(Method test, Object instance) {
 		TestResultStatus status;
 		Throwable info = null;
 		try {
 			test.invoke(instance);
 			status = TestResultStatus.PASSED;
-		} catch (AssertionError ae) {
-			status = TestResultStatus.FAILED;
-		} catch (Exception e) {
-			status = TestResultStatus.ERROR;
+		} catch (InvocationTargetException ite) {
+			Throwable cause = ite.getCause();
+			if (cause instanceof AssertionError) {
+				status = TestResultStatus.FAILED;
+				info = cause;
+			} else {
+				status = TestResultStatus.ERROR;
+				info = cause;
+			}
+		} catch (IllegalAccessException iae) {
+			String excMsg = "Unable to run test " + test.getName() 
+			        + " due to illegal access";
+			throw new RuntimeException(excMsg, iae);
 		}
 		return new TestResult(test, status, info);
 	}
 	
-	public static List<TestResult> run(Object testClass) {
-		List<TestResult> results = new ArrayList<TestResult>();
-		Method[] procedures = testClass.getClass().getMethods();
-		List<Method> tests = filter(procedures);
-		for (Method test : tests) {
-			results.add(run(test, testClass));
+	public static List<TestResult> run(String testClassName) {
+		ClassLoader loader = ClassLoader.getSystemClassLoader();
+		loader.setDefaultAssertionStatus(true);
+	    List<TestResult> results = new ArrayList<TestResult>();
+		try {
+			Class<?> type = loader.loadClass(testClassName);
+		    Object testClassInstance = type.newInstance();
+		    Method[] procedures = type.getMethods();
+		    List<Method> tests = filter(procedures);
+		    for (Method test : tests) {
+		    	results.add(run(test, testClassInstance));
+		    }
+		} catch (ClassNotFoundException cnfe) {
+			System.err.println("No tests ran");
+			System.err.println("Unable to find class " + testClassName);
+			System.err.println("\"" + cnfe.getMessage() + "\"");
+		} catch (IllegalAccessException | InstantiationException ie) {
+			System.err.println("No tests ran because of " 
+		            + ie.getClass().getName());
 		}
 		return results;
 	}
