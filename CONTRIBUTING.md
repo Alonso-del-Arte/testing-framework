@@ -16,3 +16,7 @@ is to be used for this project.
 
 Remember that the goal of this project isn't to replace an existing testing 
 framework, or even to try to do that.
+
+Except for `org.example.demo`, everything in `com.example` and `org.example` is 
+meant to be exercises. Finished classes in those packages are not meant to be 
+checked in.
