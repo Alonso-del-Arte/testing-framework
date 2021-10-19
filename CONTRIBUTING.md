@@ -19,4 +19,37 @@ framework, or even to try to do that.
 
 Except for `org.example.demo`, everything in `com.example` and `org.example` is 
 meant to be exercises. Finished classes in those packages are not meant to be 
-checked in.
+checked in. This will eventually be enforced by the Git Ignore.
+
+As much as possible, commits to the demonstration packages should be one each to 
+a step of the TDD cycle (fail, pass, refactor). That's a pain in the neck and I 
+don't expect it for any other packages in this project.
+
+## Style guidelines
+
+* No blanket import statements except for static imports or when everything in a 
+given package is imported.
+* Column width is 80.
+* Although this testing framework does not require test procedures to be named 
+starting with `test`, that is highly recommended for the sake of clarity. The 
+only exemption is `TestRunnerTest`, even though that one doesn't actually use 
+the `@Test` annotation.
+* If it doesn't have To Do comments, it should have Javadoc. Any other type of 
+comment should be removed in refactoring commits, if it even makes into a fail 
+or pass commit.
+* Each checked in test class should provide some output that is distinct from 
+that given by `TestRunner`.
+* Given my preference for shallow inheritance hierarchies, I'm more concerned 
+with whether a unit returns a result or not. Therefore, at least in the Javadoc, 
+units that return a result will be referred to as functions and units that don't 
+return a result will be referred to as procedures.
+* As much as possible, inheritance hierarchies should be limited to four levels, 
+e.g., `Object` extended by an abstract class that is extended by a concrete 
+class.
+* As much as possible, adhere to the principles in *Building Maintainable 
+Software: Java Edition* by Joost Visser et al, while keeping in mind that that 
+book allows for slight deviations.
+* Also note that the tests in `TestRunnerTest` and `AssertersTest` by necessity 
+need to be verbose, including a lot of "boilerplate" that will be rendered 
+unnecessary for other test classes by the fully functional `TestRunner` and 
+`Asserters`.
