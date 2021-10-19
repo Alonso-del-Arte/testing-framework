@@ -107,7 +107,7 @@ public class Asserters {
 	// No assertFalse will be provided. Use plain Java assert.
 	
 	public static void fail(String msg) {
-		// TODO: Write tests for this
+		throw new AssertionError(msg);
 	}
 	
 	// TODO: Write tests for this
