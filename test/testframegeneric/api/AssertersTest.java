@@ -1,5 +1,6 @@
 package testframegeneric.api;
 
+import java.math.BigInteger;
 import java.util.Random;
 
 public class AssertersTest {
@@ -59,9 +60,92 @@ public class AssertersTest {
 			failOccurred = true;
 			System.out.println("\"" + ae.getMessage() + "\"");
 		}
-		String message = "Asserting " + someNumber + " is equal to " + sameNumber 
-				+ " should not have failed the test";
+		String message = "Asserting " + someNumber + " is equal to " 
+		        + sameNumber + " should not have failed the test";
 		assert !failOccurred : message;
+	}
+	
+	@Test
+	public void testAssertNotEqualsIntDefaultMessage() {
+		int someNumber = RANDOM.nextInt();
+		int otherNumber = 2 * someNumber + 1;
+		String expected = "Expected = " + someNumber + ". Actual = " 
+		        + otherNumber;
+		boolean failOccurred = false;
+		try {
+			Asserters.assertEquals(someNumber, otherNumber);
+		} catch (AssertionError ae) {
+			failOccurred = true;
+			String actual = ae.getMessage();
+			String msg = "Expected \"" + expected + "\" but was \"" + actual 
+					+ "\"";
+			assert expected.equals(actual) : msg;
+		}
+		String msg = "Asserting " + someNumber + " is equal to " + otherNumber 
+				+ " should have failed the test";
+		assert failOccurred : msg;
+	}
+	
+	@Test
+	public void testAssertNotEqualsObject() {
+		BigInteger someNumber = new BigInteger(72, RANDOM);
+		BigInteger otherNumber = someNumber.add(someNumber).add(BigInteger.ONE);
+		String msgCustomPart = "Customizable part of assertion message";
+		String msgStandardPart = "Expected = " + someNumber.toString() 
+		        + ". Actual = " + otherNumber.toString();
+		String expected = msgCustomPart + ". " + msgStandardPart;
+		boolean failOccurred = false;
+		try {
+			Asserters.assertEquals(someNumber, otherNumber, msgCustomPart);
+		} catch (AssertionError ae) {
+			failOccurred = true;
+			String actual = ae.getMessage();
+			String msg = "Expected \"" + expected + "\" but was \"" + actual 
+					+ "\"";
+			assert expected.equals(actual) : msg;
+		}
+		String msg = "Asserting " + someNumber.toString() + " is equal to " 
+		        + otherNumber.toString() + " should have failed the test";
+		assert failOccurred : msg;
+	}
+	
+	@Test
+	public void testAssertEqualsObject() {
+		BigInteger someNumber = new BigInteger(64, RANDOM);
+		BigInteger sameNumber = someNumber.add(someNumber);
+		sameNumber = sameNumber.subtract(someNumber);
+		String msg = "Customizable part of assertion message";
+		boolean failOccurred = false;
+		try {
+			Asserters.assertEquals(someNumber, sameNumber, msg);
+		} catch (AssertionError ae) {
+			failOccurred = true;
+			System.out.println("\"" + ae.getMessage() + "\"");
+		}
+		String message = "Asserting " + someNumber.toString() + " is equal to " 
+		        + sameNumber.toString() + " should not have failed the test";
+		assert !failOccurred : message;
+	}
+	
+	@Test
+	public void testAssertNotEqualsObjectDefaultMessage() {
+		BigInteger someNumber = new BigInteger(72, RANDOM);
+		BigInteger otherNumber = someNumber.add(someNumber).add(BigInteger.ONE);
+		String expected = "Expected = " + someNumber.toString() + ". Actual = " 
+		        + otherNumber.toString();
+		boolean failOccurred = false;
+		try {
+			Asserters.assertEquals(someNumber, otherNumber);
+		} catch (AssertionError ae) {
+			failOccurred = true;
+			String actual = ae.getMessage();
+			String msg = "Expected \"" + expected + "\" but was \"" + actual 
+					+ "\"";
+			assert expected.equals(actual) : msg;
+		}
+		String msg = "Asserting " + someNumber.toString() + " is equal to " 
+		        + otherNumber.toString() + " should have failed the test";
+		assert failOccurred : msg;
 	}
 	
 	@Test

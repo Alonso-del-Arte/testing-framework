@@ -2,6 +2,13 @@ package testframegeneric.api;
 
 import java.time.Duration;
 
+/**
+ * Static class containing procedures to simplify making assertions in tests. It 
+ * almost goes without saying that each of these throws an 
+ * <code>AssertionError</code> if the specified assertion fails, so that's not 
+ * repeated in any procedure's Javadoc.
+ * @author Alonso del Arte
+ */
 public class Asserters {
 	
 	/**
@@ -12,15 +19,36 @@ public class Asserters {
 	public static final double DEFAULT_TEST_DELTA 
 	        = Double.longBitsToDouble(4503599627370497L);
 
-	// TODO: Write tests for this
+	/**
+	 * Asserts that two integers are equal. If they are indeed equal and there 
+	 * are no other assertions in the test, the test should pass. But if they 
+	 * are not equal, the test should fail. The test failure explanation will 
+	 * state what the expected value was and what the actual value was.
+	 * @param expected The expected integer. For example, 73.
+	 * @param actual The actual integer. For example, &minus;410.
+	 */
 	public static void assertEquals(int expected, int actual) {
-		 String msg = "Sorry, default message not implemented yet";
-		 assertEquals(expected, actual, msg);
+		 assertEquals(expected, actual, "");
 	}
 	
+	/**
+	 * Asserts that two integers are equal. If they are indeed equal and there 
+	 * are no other assertions in the test, the test should pass. But if they 
+	 * are not equal, the test should fail.
+	 * @param expected The expected integer. For example, &minus;489.
+	 * @param actual The actual integer. For example, 22050.
+	 * @param msg The message to put into the test failure explanation if the 
+	 * test fails because of the assertion. For example, "The two lists have the 
+	 * same elements and should therefore they should be the same size." The 
+	 * expected and actual values will be appended to the test failure 
+	 * explanation.
+	 */
 	public static void assertEquals(int expected, int actual, String msg) {
 		String message = msg + ". Expected = " + expected + ". Actual = " 
 		        + actual;
+		if (message.startsWith(". ")) {
+			message = message.substring(2);
+		}
 		assert expected == actual : message;
 	}
 	
@@ -48,15 +76,49 @@ public class Asserters {
 		// TODO: Write tests for this
 	}
 	
-	// TODO: Write tests for this
+	/**
+	 * Asserts that two objects are equal according to the pertinent 
+	 * <code>equals()</code> function. If they are indeed equal and there are no 
+	 * other assertions in the test, the test should pass. But if they are not  
+	 * equal, the test should fail. The test failure explanation will state what 
+	 * the expected value was and what the actual value was.
+	 * @param expected The expected object. For example, a 
+	 * <code>LocalDateTime</code> object for right now. Note that it is this  
+	 * parameter's <code>equals()</code> function that will be called.
+	 * @param actual The actual object. For example, a 
+	 * <code>LocalDateTime</code> object for this time of day tomorrow.
+	 * @throws NullPointerException If <code>expected</code> is null.
+	 */
 	public static void assertEquals(Object expected, Object actual) {
-		 String msg = "Sorry, default message not implemented yet";
-		 assertEquals(expected, actual, msg);
+		 assertEquals(expected, actual, "");
 	}
 	
+	/**
+	 * Asserts that two objects are equal according to the pertinent 
+	 * <code>equals()</code> function. If they are indeed equal and there are no 
+	 * other assertions in the test, the test should pass. But if they are not  
+	 * equal, the test should fail. The test failure explanation will state what 
+	 * the expected value was and what the actual value was.
+	 * @param expected The expected object. For example, a 
+	 * <code>LocalDateTime</code> object for right now. Note that it is this  
+	 * parameter's <code>equals()</code> function that will be called.
+	 * @param actual The actual object. For example, a 
+	 * <code>LocalDateTime</code> object for this time of day tomorrow.
+	 * @param msg The message to put into the test failure explanation if the 
+	 * test fails because of the assertion. For example, "Transaction date of 
+	 * withdrawal from account A should match date of deposit to account B." The 
+	 * expected and actual values will be appended to the test failure 
+	 * explanation.
+	 * @throws NullPointerException If <code>expected</code> is null.
+	 */
 	public static void assertEquals(Object expected, Object actual, 
 			String msg) {
-		// TODO: Write tests for this
+		String message = msg + ". Expected = " + expected.toString() 
+		        + ". Actual = " + actual.toString();
+		if (message.startsWith(". ")) {
+			message = message.substring(2);
+		}
+		assert expected.equals(actual) : message;
 	}
 	
 	// TODO: Write tests for this
@@ -109,6 +171,8 @@ public class Asserters {
 	// No assertTrue will be provided. Use plain Java assert.
 	
 	// No assertFalse will be provided. Use plain Java assert.
+	
+	// No assertNull will provided. Use plain Java assert.
 	
 	// TODO: Write tests for this
 	public static void assertDifferent(int some, int other) {
@@ -200,10 +264,40 @@ public class Asserters {
 		// TODO: Write tests for this
 	}
 	
+	/**
+	 * Fails a test regardless of anything else. Hence it generally makes sense 
+	 * to use this in a branch of a flow control statement. However, if you need 
+	 * it in a Try block or a Catch block, consider instead using {@link 
+	 * #assertThrows} or {@link #assertDoesNotThrow}.
+	 * @param msg The message for the test failure explanation. Nothing will be 
+	 * appended to this message.
+	 */
 	public static void fail(String msg) {
 		throw new AssertionError(msg);
 	}
 	
+	/**
+	 * Asserts that a given lambda caused an exception of a particular type.
+	 * @param <E> The type of exception that should be thrown. For example, 
+	 * <code>ArithmeticException</code>.
+	 * @param lambda The anonymous procedure that should throw the exception of 
+	 * the specified type. For example, <code>() -> { Fraction badResult = 
+	 * oneHalf.divides(zero); }</code>. It would be very similar in Scala.
+	 * @param exceptionType A <code>Class</code> object for the expected 
+	 * exception type. For example, <code>ArithmeticException.class</code>. Note 
+	 * that in Scala this would be <code>classOf[ArithmeticException]</code>.
+	 * @param msg A message for the test failure explanation. For example, 
+	 * "Division by zero should have caused an exception." If the assertion 
+	 * fails, either because an exception of the wrong type was thrown or 
+	 * because no exception was thrown, that information will be appended to the 
+	 * test failure explanation.
+	 * @return An exception of the specified type. However, this is not 
+	 * guaranteed if assertions are not enabled. Then again, this whole class is 
+	 * useless if assertions are not enabled. 
+	 * @throws NullPointerException If <code>lambda</code>, 
+	 * <code>exceptionType</code> or <code>msg</code> is null.
+	 */
+	@SuppressWarnings("unchecked")
 	public static <E extends Exception> E assertThrows(Procedure lambda, 
 			Class<E> exceptionType, String msg) {
 		try {
@@ -219,6 +313,19 @@ public class Asserters {
 		}
 	}
 
+	/**
+	 * Asserts that a given lambda does not throw exceptions of any type.
+	 * @param lambda The anonymous procedure that should not throw any 
+	 * exceptions. For example, <code>() -> { arrayBackedList.expandCapacity; 
+	 * }</code>.
+	 * @param msg A message for the test failure explanation. For example, 
+	 * "Expanding list capacity should not cause any exceptions." If an 
+	 * exception does occur, that will be appended to the test failure 
+	 * explanation. For example, "No exceptions should have occurred but 
+	 * ArrayIndexOutOfBoundsException did."
+	 * @throws NullPointerException If <code>lambda</code> or <code>msg</code> 
+	 * is null.
+	 */
 	public static void assertDoesNotThrow(Procedure lambda, String msg) {
 		try {
 			lambda.execute();
