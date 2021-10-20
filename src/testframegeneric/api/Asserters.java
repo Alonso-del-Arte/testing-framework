@@ -19,7 +19,9 @@ public class Asserters {
 	}
 	
 	public static void assertEquals(int expected, int actual, String msg) {
-		// TODO: Write tests for this
+		String message = msg + ". Expected = " + expected + ". Actual = " 
+		        + actual;
+		assert expected == actual : message;
 	}
 	
 	// TODO: Write tests for this
@@ -199,17 +201,32 @@ public class Asserters {
 	}
 	
 	public static void fail(String msg) {
-		throw new AssertionError("Sorry, not the message you were expecting");
+		throw new AssertionError(msg);
 	}
 	
-	// TODO: Write tests for this
 	public static <E extends Exception> E assertThrows(Procedure lambda, 
 			Class<E> exceptionType, String msg) {
-		return null;
+		try {
+			lambda.execute();
+			String errMsg = msg + ". Expected " + exceptionType.getName() 
+			        + " but nothing was thrown";
+			throw new AssertionError(errMsg);
+		} catch (Exception e) {
+			String errMsg = msg + ". Expected " + exceptionType.getName() 
+			        + " but was " + e.getClass().getName();
+			assert exceptionType.isAssignableFrom(e.getClass()) : errMsg;
+			return (E) e;
+		}
 	}
 
 	public static void assertDoesNotThrow(Procedure lambda, String msg) {
-		// TODO: Write tests for this
+		try {
+			lambda.execute();
+		} catch (Exception e) {
+			String errMsg = msg + ". No exception should have occurred but " 
+		            + e.getClass().getName() + " did";
+			throw new AssertionError(errMsg);
+		}
 	}
 	
 	public static void assertTimeout(Procedure lambda, Duration allottedTime, 
