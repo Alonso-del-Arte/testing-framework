@@ -5,8 +5,10 @@ import java.time.Duration;
 /**
  * Static class containing procedures to simplify making assertions in tests. It 
  * almost goes without saying that each of these throws an 
- * <code>AssertionError</code> if the specified assertion fails, so that's not 
- * repeated in any procedure's Javadoc.
+ * <code>AssertionError</code> if the specified assertion fails. That particular 
+ * bit of information is not repeated in any procedure's Javadoc, but I do try 
+ * to make a note of other throwables that might arise even if they seem obvious 
+ * (e.g., <code>NullPointerException</code>). 
  * @author Alonso del Arte
  */
 public class Asserters {
