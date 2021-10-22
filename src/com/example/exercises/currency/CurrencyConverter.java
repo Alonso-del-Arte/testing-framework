@@ -7,9 +7,9 @@ import org.example.demo.secrets.EnvironmentVariableAPIKeyStore;
 public class CurrencyConverter {
 	
 	// TODO: Write tests for this
-	public static CurrencyAmount convert(CurrencyAmount target, 
-			Currency source) {
-		return target;
+	public static CurrencyAmount convert(CurrencyAmount source, 
+			Currency target) {
+		return source;
 	}
 
 }
