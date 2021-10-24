@@ -15,7 +15,7 @@ import java.util.List;
 public class TestRunnerTest {
 	
 	private static final String testClassName 
-	        = "testframegeneric.engine.ToyTests";
+	        = "testframe.engine.ToyTests";
 
 	public static void checkResultSetSizeIsPositive(List<TestResult> results) {
 		int size = results.size();
