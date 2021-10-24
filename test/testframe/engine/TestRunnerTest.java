@@ -1,4 +1,4 @@
-package testframegeneric.engine;
+package testframe.engine;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -206,6 +206,7 @@ public class TestRunnerTest {
 		checkTestThatShouldCauseErrorDoesCauseError();
 		checkFailingTestResultHasStackTrace();
 		checkErrorCausingTestResultHasStackTrace();
+		System.out.println("All tests have PASSED");
 	}
 	
 }

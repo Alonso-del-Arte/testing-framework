@@ -1,4 +1,4 @@
-package testframegeneric.api;
+package testframe.api;
 
 //TODO: Turn this into an annotation
 public class BeforeEachTest {

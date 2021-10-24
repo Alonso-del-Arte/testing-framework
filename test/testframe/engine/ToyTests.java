@@ -1,6 +1,6 @@
-package testframegeneric.engine;
+package testframe.engine;
 
-import testframegeneric.api.Test;
+import testframe.api.Test;
 
 public class ToyTests {
 

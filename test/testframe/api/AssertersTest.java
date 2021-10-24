@@ -1,4 +1,4 @@
-package testframegeneric.api;
+package testframe.api;
 
 import java.math.BigInteger;
 import java.util.Arrays;

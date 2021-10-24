@@ -1,4 +1,4 @@
-package testframegeneric.api;
+package testframe.api;
 
 /**
  * Parameter type for lambdas that don't return a result but may throw 

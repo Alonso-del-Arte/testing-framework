@@ -1,4 +1,4 @@
-package testframegeneric.api;
+package testframe.api;
 
 import java.time.Duration;
 

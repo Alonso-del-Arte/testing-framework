@@ -1,4 +1,4 @@
-package testframegeneric.engine;
+package testframe.engine;
 
 /**
  * Enumerates the four possible outcomes of running a test: it passed, it 

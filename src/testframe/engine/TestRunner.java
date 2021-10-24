@@ -1,11 +1,11 @@
-package testframegeneric.engine;
+package testframe.engine;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import testframegeneric.api.Test;
+import testframe.api.Test;
 
 /**
  * Runs the tests in a test class. You can use the -enableassertions switch on 

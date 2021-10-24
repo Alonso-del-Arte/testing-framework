@@ -1,4 +1,4 @@
-package testframegeneric.engine;
+package testframe.engine;
 
 import java.lang.reflect.Method;
 
