@@ -130,7 +130,12 @@ public class Asserters {
 	}
 	
 	public static void assertEquals(int[] expected, int[] actual, String msg) {
-		// TODO: Write tests for this
+//		if (expected.length != actual.length) {
+			String errMsg = "Arrays differ in length: expected has " 
+			        + expected.length + " elements but actual has " 
+					+ actual.length + " elements";
+			throw new AssertionError(errMsg);
+//		}
 	}
 	
 	// TODO: Write tests for this

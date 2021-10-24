@@ -1,6 +1,7 @@
 package testframegeneric.api;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Random;
 
 public class AssertersTest {
@@ -145,6 +146,29 @@ public class AssertersTest {
 		}
 		String msg = "Asserting " + someNumber.toString() + " is equal to " 
 		        + otherNumber.toString() + " should have failed the test";
+		assert failOccurred : msg;
+	}
+	
+	@Test
+	public void testAssertNotEqualsArrayIntDiffLengths() {
+		int[] someNumbers = {1, 2, 3, 4, 5};
+		int[] moreNumbers = {1, 2, 3, 4, 5, 6, 7};
+		boolean failOccurred = false;
+		try {
+			Asserters.assertEquals(someNumbers, moreNumbers);
+		} catch (AssertionError ae) {
+			failOccurred = true;
+			String expected = "Arrays differ in length: expected has " 
+			        + someNumbers.length + " elements but actual has " 
+					+ moreNumbers.length + " elements";
+			String actual = ae.getMessage();
+			String msg = "Expected \"" + expected + "\" but was \"" + actual 
+					+ "\"";
+			assert expected.equals(actual) : msg;
+		}
+		String msg = "Asserting " + Arrays.toString(someNumbers) 
+		        + " is equal to " + Arrays.toString(moreNumbers) 
+		        + " should have failed the test";
 		assert failOccurred : msg;
 	}
 	
