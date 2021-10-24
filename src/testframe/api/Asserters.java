@@ -54,6 +54,39 @@ public class Asserters {
 		assert expected == actual : message;
 	}
 	
+	/**
+	 * Asserts that two integers are equal. If they are indeed equal and there 
+	 * are no other assertions in the test, the test should pass. But if they 
+	 * are not equal, the test should fail. The test failure explanation will 
+	 * state what the expected value was and what the actual value was.
+	 * @param expected The expected integer. For example, 4294967369.
+	 * @param actual The actual integer. For example, &minus;4294967779.
+	 */
+	public static void assertEquals(long expected, long actual) {
+		 assertEquals(expected, actual, "");
+	}
+	
+	/**
+	 * Asserts that two integers are equal. If they are indeed equal and there 
+	 * are no other assertions in the test, the test should pass. But if they 
+	 * are not equal, the test should fail.
+	 * @param expected The expected integer. For example, &minus;4294968268.
+	 * @param actual The actual integer. For example, 4294990318.
+	 * @param msg The message to put into the test failure explanation if the 
+	 * test fails because of the assertion. For example, "The two lists have the 
+	 * same elements and should therefore they should be the same size." The 
+	 * expected and actual values will be appended to the test failure 
+	 * explanation.
+	 */
+	public static void assertEquals(long expected, long actual, String msg) {
+		String message = msg + ". Expected = " + expected + ". Actual = " 
+		        + actual;
+		if (message.startsWith(". ")) {
+			message = message.substring(2);
+		}
+		assert expected == actual : message;
+	}
+	
 	// TODO: Write tests for this
 	public static void assertEquals(double expected, double actual) {
 		 String msg = "Sorry, default message not implemented yet";

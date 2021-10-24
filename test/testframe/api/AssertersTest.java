@@ -88,6 +88,67 @@ public class AssertersTest {
 	}
 	
 	@Test
+	public void testAssertNotEqualsLong() {
+		long someNumber = RANDOM.nextLong();
+		long otherNumber = 2 * someNumber + 1;
+		String msgCustomPart = "Customizable part of assertion message";
+		String msgStandardPart = "Expected = " + someNumber + ". Actual = " 
+		        + otherNumber;
+		String expected = msgCustomPart + ". " + msgStandardPart;
+		boolean failOccurred = false;
+		try {
+			Asserters.assertEquals(someNumber, otherNumber, msgCustomPart);
+		} catch (AssertionError ae) {
+			failOccurred = true;
+			String actual = ae.getMessage();
+			String msg = "Expected \"" + expected + "\" but was \"" + actual 
+					+ "\"";
+			assert expected.equals(actual) : msg;
+		}
+		String msg = "Asserting " + someNumber + " is equal to " + otherNumber 
+				+ " should have failed the test";
+		assert failOccurred : msg;
+	}
+	
+	@Test
+	public void testAssertEqualsLong() {
+		long someNumber = RANDOM.nextLong();
+		long sameNumber = someNumber;
+		String msg = "Customizable part of assertion message";
+		boolean failOccurred = false;
+		try {
+			Asserters.assertEquals(someNumber, sameNumber, msg);
+		} catch (AssertionError ae) {
+			failOccurred = true;
+			System.out.println("\"" + ae.getMessage() + "\"");
+		}
+		String message = "Asserting " + someNumber + " is equal to " 
+		        + sameNumber + " should not have failed the test";
+		assert !failOccurred : message;
+	}
+	
+	@Test
+	public void testAssertNotEqualsLongDefaultMessage() {
+		long someNumber = RANDOM.nextLong();
+		long otherNumber = 2 * someNumber + 1;
+		String expected = "Expected = " + someNumber + ". Actual = " 
+		        + otherNumber;
+		boolean failOccurred = false;
+		try {
+			Asserters.assertEquals(someNumber, otherNumber);
+		} catch (AssertionError ae) {
+			failOccurred = true;
+			String actual = ae.getMessage();
+			String msg = "Expected \"" + expected + "\" but was \"" + actual 
+					+ "\"";
+			assert expected.equals(actual) : msg;
+		}
+		String msg = "Asserting " + someNumber + " is equal to " + otherNumber 
+				+ " should have failed the test";
+		assert failOccurred : msg;
+	}
+	
+	@Test
 	public void testAssertNotEqualsObject() {
 		BigInteger someNumber = new BigInteger(72, RANDOM);
 		BigInteger otherNumber = someNumber.add(someNumber).add(BigInteger.ONE);
