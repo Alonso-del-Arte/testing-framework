@@ -63,6 +63,10 @@ public class Fraction {
 	}
 	
 	public Fraction(long numer, long denom) {
+		if ((denom & Long.MAX_VALUE) == 0) {
+			String excMsg = "Denominator 0 is not valid";
+			throw new ArithmeticException(excMsg);
+		}
 		this.numerator = numer;
 		this.denominator = denom;
 	}
