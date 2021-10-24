@@ -6,8 +6,8 @@ import java.util.Currency;
 import java.util.Locale;
 import java.util.Random;
 
-import static testframegeneric.api.Asserters.*;
-import testframegeneric.api.Test;
+import static testframe.api.Asserters.*;
+import testframe.api.Test;
 
 public class CurrencyConverterTest {
 
