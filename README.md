@@ -1,4 +1,4 @@
-# Testing Framework Generic
+# Testing Framework
 
 The idea isn't to supplant JUnit or any other existing unit testing framework, 
 but to understand how a testing framework could be created from scratch through 
