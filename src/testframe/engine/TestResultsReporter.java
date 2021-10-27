@@ -3,15 +3,19 @@ package testframe.engine;
 import java.util.List;
 
 /**
- * Reports the test results to <code>System.out</code>. Any frills in the 
- * output, such as text in different colors, is courtesy of the host 
- * environment, e.g., if you're running this in an integrated development 
- * environment (IDE) like Eclipse or NetBeans. An IDE might provide clickable 
- * line numbers (e.g., <code>AssertersTest.java:17</code>) that take you to the 
- * line that caused the test failure or error.
+ * Reports the test results. Any frills in the output, such as text in different 
+ * colors, is courtesy of the host environment, e.g., if you're running this in 
+ * an integrated development environment (IDE) like Eclipse or NetBeans. An IDE 
+ * might provide clickable line numbers (e.g., 
+ * <code>AssertersTest.java:17</code>) that take you to the line that caused the 
+ * test failure or error.
  * @author Alonso del Arte
  */
-class TestResultsReporter {
+public class TestResultsReporter {
+	
+	private final String testClassName;
+	
+	private final List<TestResult> resultsList;
 	
 	/**
 	 * Reports the test results to <code>System.out</code>. The output includes 
@@ -19,14 +23,15 @@ class TestResultsReporter {
 	 * @param results The list of test results to report. Preferably not an 
 	 * empty list.
 	 */
-	static void report(List<TestResult> results) {
-		int totalCount = results.size();
+	public void report() {
+		int totalCount = this.resultsList.size();
 		int passCount = 0;
 		int failCount = 0;
 		int skipCount = 0;
 		int errorCount = 0;
 		System.out.println();
-		for (TestResult result : results) {
+		System.out.println("Test results for " + this.testClassName);
+		for (TestResult result : this.resultsList) {
 			System.out.print(result.getProcedure().getName() + " ");
 			TestResultStatus status = result.getStatus();
 			System.out.print(status.toString() + " ");
@@ -60,6 +65,11 @@ class TestResultsReporter {
 				+ ". Skipped: " + skipCount + ". Caused an error: " 
 				+ errorCount);
 		System.out.println("Total: " + totalCount);
+	}
+	
+	public TestResultsReporter(String name, List<TestResult> results) {
+		this.testClassName = name;
+		this.resultsList = results;
 	}
 
 }

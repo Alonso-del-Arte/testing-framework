@@ -82,7 +82,9 @@ public class TestRunner {
 			System.out.println("Please specify class to test");
 		} else {
 			List<TestResult> results = run(args[0]);
-			TestResultsReporter.report(results);
+			TestResultsReporter reporter 
+			        = new TestResultsReporter(args[0], results);
+			reporter.report();
 		}
 	}
 
