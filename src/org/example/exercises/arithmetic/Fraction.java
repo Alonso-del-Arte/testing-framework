@@ -2,6 +2,9 @@ package org.example.exercises.arithmetic;
 
 public class Fraction {
 	
+	// HINT: Use IntegerMath.euclideanGCD() to
+	// put fractions in lowest terms
+	
 	private final long numerator, denominator;
 	
 	// TODO: Write tests for this

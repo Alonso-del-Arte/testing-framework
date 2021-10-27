@@ -45,10 +45,9 @@ public class Range implements Iterable<Integer> {
 		return new RangeIterator();
 	}
 	
-	// TODO: Write tests for this
 	@Override
 	public String toString() {
-		return "Sorry, not implemented yet";
+		return this.begin + " to " + this.finish + " by " + this.interval;
 	}
 	
 	// TODO: Write tests for this
