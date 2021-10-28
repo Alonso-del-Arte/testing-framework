@@ -8,13 +8,13 @@ import testframe.api.Test;
 import static testframe.api.Asserters.*;
 
 public class TransactionTest {
-	
-	private static class TransactionImpl extends Transaction {
-		
-		public TransactionImpl(CurrencyAmount amount, LocalDateTime date) {
-			super(amount, date);
-		}
-		
-	}
+    
+    private static class TransactionImpl extends Transaction {
+        
+        public TransactionImpl(CurrencyAmount amount, LocalDateTime date) {
+            super(amount, date);
+        }
+        
+    }
 
 }

@@ -35,6 +35,9 @@ don't expect it for `com.example.exercises`, `org.example.exercises` or even
 * No blanket import statements except for static imports or when absolutely 
 everything in a given package is imported.
 * Column width is 80.
+* Prefer spaces to tabs. One annoying side effect of my choice of Eclipse for 
+this project is that Eclipse uses tabs by default. I tried to replace all the 
+tabs, but there might be stragglers.
 * Although this testing framework does not require test procedures to be named 
 starting with `test`, that is highly recommended for the sake of clarity. The 
 only exemption is `TestRunnerTest`, even though that one doesn't actually use 

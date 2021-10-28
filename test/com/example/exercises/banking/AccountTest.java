@@ -8,11 +8,11 @@ import testframe.api.Test;
 import static testframe.api.Asserters.*;
 
 public class AccountTest {
-	
-	private static class AccountImpl extends Account {
-		
-		//
-		
-	}
+    
+    private static class AccountImpl extends Account {
+        
+        //
+        
+    }
 
 }
