@@ -7,7 +7,7 @@ package testframe.api;
  */
 @FunctionalInterface
 public interface Procedure {
-	
-	void execute() throws Exception;
+    
+    void execute() throws Exception;
 
 }
