@@ -42,6 +42,25 @@ public class TestRunnerTest {
         }
     }
     
+    static void checkPreAndPostWereExecuted() {
+        String msg = "@BeforeAllTests should've run once";
+        if (ToyTests.beforeAllCounter != 1) {
+            throw new AssertionError(msg);
+        }
+        msg = "@BeforeEachTest should've run " + NUMBER_OF_TOY_TESTS + " times";
+        if (ToyTests.beforeEachCounter != NUMBER_OF_TOY_TESTS) {
+            throw new AssertionError(msg);
+        }
+        msg = "@AfterEachTest should've run " + NUMBER_OF_TOY_TESTS + " times";
+        if (ToyTests.afterEachCounter != NUMBER_OF_TOY_TESTS) {
+            throw new AssertionError(msg);
+        }
+        msg = "@AfterAllTests should've run just once";
+        if (ToyTests.afterAllCounter != 1) {
+            throw new AssertionError(msg);
+        }
+    }
+    
     /**
      * Checks that the test that should fail does fail and is reported as 
      * failing.
@@ -246,6 +265,7 @@ public class TestRunnerTest {
     public static void main(String[] args) {
         List<TestResult> results = TestRunner.run(TEST_CLASS_NAME);
         checkResultSetSizeIsPositive(results);
+        checkPreAndPostWereExecuted();
         checkTestThatShouldFailDoesFail();
         checkTestThatShouldPassDoesPass();
         checkTestThatShouldCauseErrorDoesCauseError();

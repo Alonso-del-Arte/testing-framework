@@ -1,10 +1,15 @@
 package testframe.engine;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import testframe.api.AfterAllTests;
+import testframe.api.AfterEachTest;
+import testframe.api.BeforeAllTests;
+import testframe.api.BeforeEachTest;
 import testframe.api.Test;
 
 /**
@@ -15,11 +20,12 @@ import testframe.api.Test;
  */
 public class TestRunner {
 
-    private static List<Method> filter(Method[] procedures) {
+    private static List<Method> filter(Method[] procedures, 
+            Class<? extends Annotation> annotation) {
         List<Method> tests = new ArrayList<>();
         for (Method procedure : procedures) {
-            Test testAnnotation = (Test) procedure.getAnnotation(Test.class);
-            if (testAnnotation != null) {
+            Annotation holder = procedure.getAnnotation(annotation);
+            if (holder != null) {
                 tests.add(procedure);
             }
         }
@@ -64,7 +70,7 @@ public class TestRunner {
             Class<?> type = loader.loadClass(testClassName);
             Object testClassInstance = type.newInstance();
             Method[] procedures = type.getMethods();
-            List<Method> tests = filter(procedures);
+            List<Method> tests = filter(procedures, Test.class);
             for (Method test : tests) {
                 results.add(run(test, testClassInstance));
             }
