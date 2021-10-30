@@ -4,7 +4,7 @@ public class ToyUtilities {
     
     // TODO: Write tests for this
     public static boolean repeater(boolean flag) {
-        return !flag;
+        return flag;
     }
     
     // TODO: Write tests for this
