@@ -12,7 +12,7 @@ Eclipse's JUnit integration, I don't feel like I'm missing much.
 
 This project uses Java 8. Contributors may use later versions of Java provided 
 they don't use features not available in Java 8. No existing testing framework 
-is to be used for this project.
+is to be used for this project, except as references or models.
 
 Remember that the goal of this project isn't to replace an existing testing 
 framework, or even to try to do that, but to understand how a testing framework 
@@ -20,6 +20,25 @@ can be made from scratch through test-driven development (TDD).
 
 To understand how this works, I suggest you first look at `TestRunner` and 
 `TestRunnerTest`, in the `testframe.engine` package.
+
+Run `TestRunnerTest`'s `main()` to make sure `TestRunner` is working properly.
+
+Once you're sure that `TestRunner` is working properly, or at least that it 
+correctly picks up `@Test` annotations, you can use it to run `AssertersTest` by 
+calling `TestRunner`'s `main()` with the command line argument 
+`testframe.api.AssertersTest`.
+
+If `Asserters` has all the assertions you need for a particular test class, you 
+can go ahead and use it to write new test classes. But if not, maybe you can 
+develop the assertions you need.
+
+But remember that this framework will not provide `assertTrue()`, 
+`assertFalse()`, `assertNull()` or `assertNotNull()`. Use a plain Java `assert` 
+for those, or import a specialized assertions library like AssertJ (but don't 
+pull request to add any dependencies to this project besides the JDK).
+
+As for `assertArrayEquals()`, that will be provided as overloads of 
+`assertEquals()`, much like in TestNG.
 
 Except for `org.example.demo`, everything in `com.example` and `org.example` is 
 meant to be exercises. Finished classes in those packages are not meant to be 
