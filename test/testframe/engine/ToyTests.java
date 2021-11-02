@@ -1,5 +1,7 @@
 package testframe.engine;
 
+import java.util.logging.Logger;
+
 import testframe.api.AfterAllTests;
 import testframe.api.AfterEachTest;
 import testframe.api.BeforeAllTests;
@@ -8,45 +10,41 @@ import testframe.api.Test;
 
 public class ToyTests {
     
-    private static boolean relay(boolean flag) {
-        return flag;
-    }
+    private static final String TEST_CLASS_NAME = "testframe.engine.ToyTests";
+    
+    private static final Logger INVOCATION_LOGGER 
+            = Logger.getLogger(TEST_CLASS_NAME);
     
     @BeforeAllTests
     public void setUpClass() {
-        // TODO: Figure out how to report that this was invoked
+        INVOCATION_LOGGER.entering(TEST_CLASS_NAME, "@BeforeAllTests");
     }
     
     @BeforeEachTest
     public void setUp() {
-        // TODO: Figure out how to report that this was invoked
-    }
-    
-    private void recordTestIsRunning() {
-        // TODO: Figure out how to report that this was invoked
+        INVOCATION_LOGGER.entering(TEST_CLASS_NAME, "@BeforeEachTest");
     }
     
     @Test
     public void testThatShouldPass() {
-        recordTestIsRunning();
+        INVOCATION_LOGGER.entering(TEST_CLASS_NAME, "@Test");
         String msg = "This test should be reported as passing";
         System.out.println(msg);
-        assert relay(true) : msg;
     }
     
     @Test
     public void testThatShouldFail() {
-        recordTestIsRunning();
+        INVOCATION_LOGGER.entering(TEST_CLASS_NAME, "@Test");
         String msg = "This test should be reported as failing";
         System.out.println(msg);
-        assert relay(false) : msg;
+        assert false : msg;
     }
     
     // TODO: Write test that should be skipped
     
     @Test
     public void testThatShouldCauseError() {
-        recordTestIsRunning();
+        INVOCATION_LOGGER.entering(TEST_CLASS_NAME, "@Test");
         String msg 
                 = "This test should be reported as having caused an error";
         System.out.println(msg);
@@ -55,12 +53,12 @@ public class ToyTests {
     
     @AfterEachTest
     public void tearDown() {
-        // TODO: Figure out how to report that this was invoked
+        INVOCATION_LOGGER.entering(TEST_CLASS_NAME, "@AfterEachTest");
     }
     
     @AfterAllTests
     public void tearDownClass() {
-        // TODO: Figure out how to report that this was invoked
+        INVOCATION_LOGGER.entering(TEST_CLASS_NAME, "@AfterAllTests");
     }
     
 }
