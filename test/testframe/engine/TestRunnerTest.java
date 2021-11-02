@@ -43,24 +43,7 @@ public class TestRunnerTest {
     }
     
     static void checkPreAndPostWereExecuted() {
-//        String msg = "Oops, can't check invocation counts that way";
-//        throw new AssertionError(msg);
-//        String msg = "@BeforeAllTests should've run once";
-//        if (ToyTests.beforeAllCounter != 1) {
-//            throw new AssertionError(msg);
-//        }
-//        msg = "@BeforeEachTest should've run " + NUMBER_OF_TOY_TESTS + " times";
-//        if (ToyTests.beforeEachCounter != NUMBER_OF_TOY_TESTS) {
-//            throw new AssertionError(msg);
-//        }
-//        msg = "@AfterEachTest should've run " + NUMBER_OF_TOY_TESTS + " times";
-//        if (ToyTests.afterEachCounter != NUMBER_OF_TOY_TESTS) {
-//            throw new AssertionError(msg);
-//        }
-//        msg = "@AfterAllTests should've run just once";
-//        if (ToyTests.afterAllCounter != 1) {
-//            throw new AssertionError(msg);
-//        }
+        // TODO: Figure out how to actually check this
     }
     
     /**
@@ -267,7 +250,7 @@ public class TestRunnerTest {
     public static void main(String[] args) {
         List<TestResult> results = TestRunner.run(TEST_CLASS_NAME);
         checkResultSetSizeIsPositive(results);
-//        checkPreAndPostWereExecuted();
+        checkPreAndPostWereExecuted();
         checkTestThatShouldFailDoesFail();
         checkTestThatShouldPassDoesPass();
         checkTestThatShouldCauseErrorDoesCauseError();
