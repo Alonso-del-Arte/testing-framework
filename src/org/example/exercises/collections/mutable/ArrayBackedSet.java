@@ -41,7 +41,11 @@ public class ArrayBackedSet<E> {
     }
 
     public ArrayBackedSet(int initialCapacity) {
-        // TODO: Check initialCapacity > 0
+        if (initialCapacity < 0) {
+            String excMsg = "Capacity " + initialCapacity 
+                    + " not valid, should be positive";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.elements = new Object[initialCapacity];
     }
 

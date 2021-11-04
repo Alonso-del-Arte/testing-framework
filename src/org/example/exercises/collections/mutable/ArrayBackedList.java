@@ -76,7 +76,11 @@ public class ArrayBackedList<E> implements Iterable<E> {
     }
     
     public ArrayBackedList(int initialCapacity) {
-        //
+        if (initialCapacity < 0) {
+            String excMsg = "Capacity " + initialCapacity 
+                    + " not valid, should be positive";
+            throw new IllegalArgumentException(excMsg);
+        }
     }
 
 }
