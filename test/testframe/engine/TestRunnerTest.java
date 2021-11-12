@@ -1,6 +1,5 @@
 package testframe.engine;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -35,6 +34,19 @@ public class TestRunnerTest {
     private static final int NUMBER_OF_TOY_TESTS = 3;
     
     /**
+     * Checks that a condition is true, throws an AssertionError if it's not. 
+     * This is necessary because assertions are almost certainly off and 
+     * therefore can't be thrown with the usual assertion syntax.
+     * @param condition The condition to check for.
+     * @param msg The message for the AssertionError if it's thrown.
+     */
+    private static void check(boolean condition, String msg) {
+        if (!condition) {
+            throw new AssertionError(msg);
+        }
+    }
+    
+    /**
      * Checks that TestRunner correctly identified the three or four tests in 
      * the toy test class, and gives a list of three or four test result 
      * objects.
@@ -62,12 +74,10 @@ public class TestRunnerTest {
      */
     static void checkInvocationCount() {
         int actual = INVOCATION_COUNTER.testCount;
-        if (actual != NUMBER_OF_TOY_TESTS) {
-            String msg = "Expected " + NUMBER_OF_TOY_TESTS 
-                    + " toy tests to be invoked, but only " + actual 
-                    + " toy tests were actually invoked";
-            throw new AssertionError(msg);
-        }
+        String msg = "Expected " + NUMBER_OF_TOY_TESTS 
+                + " toy tests to be invoked, but only " + actual 
+                + " toy tests were actually invoked";
+        check(actual == NUMBER_OF_TOY_TESTS, msg);
     }
     
     private static TestResult lookForResult(String testName, 
@@ -99,11 +109,9 @@ public class TestRunnerTest {
         }
         TestResultStatus expected = TestResultStatus.PASSED;
         TestResultStatus actual = result.getStatus();
-        if (!expected.equals(actual)) {
-            String errMsg = "Expected " + expected.toString() 
-                    + " for passing test but was " + actual.toString();
-            throw new AssertionError(errMsg);
-        }
+        String msg = "Expected " + expected.toString() 
+                + " for passing test but was " + actual.toString();
+        check(expected.equals(actual), msg);
     }
     
     /**
@@ -120,16 +128,12 @@ public class TestRunnerTest {
         }
         TestResultStatus expected = TestResultStatus.FAILED;
         TestResultStatus actual = result.getStatus();
-        if (!expected.equals(actual)) {
-            String errMsg = "Expected " + expected.toString() 
-                    + " for failing test but was " + actual.toString();
-            throw new AssertionError(errMsg);
-        }
+        String msg = "Expected " + expected.toString() 
+                + " for failing test but was " + actual.toString();
+        check(expected.equals(actual), msg);
         Throwable info = result.getInformation();
-        if (!(info instanceof AssertionError)) {
-            String errMsg = "Failing test result should carry AssertionError";
-            throw new AssertionError(errMsg);
-        }
+        String errMsg = "Failing test result should carry AssertionError";
+        check(info instanceof AssertionError, errMsg);
     }
     
     /**
@@ -147,20 +151,33 @@ public class TestRunnerTest {
         }
         TestResultStatus expected = TestResultStatus.ERROR;
         TestResultStatus actual = result.getStatus();
-        if (!expected.equals(actual)) {
-            String errMsg = "Expected " + expected.toString() 
-                    + " for test that caused an error but was " 
-                    + actual.toString();
-            throw new AssertionError(errMsg);
-        }
+        String msg = "Expected " + expected.toString() 
+                + " for test that caused an error but was " 
+                + actual.toString();
+        check(expected.equals(actual), msg);
         Throwable info = result.getInformation();
-        if (!(info instanceof Exception)) {
-            String errMsg = "Failing test result should carry Exception";
-            throw new AssertionError(errMsg);
-        }
+        String errMsg = "Failing test result should carry Exception";
+        check(info instanceof Exception, errMsg);
     }
     
     static void checkPreAndPostWereExecuted() {
+        int expected = 1;
+        int actualPre = INVOCATION_COUNTER.beforeAllCount;
+        String msg = "@BeforeAll was invoked " + actualPre 
+                + " times (should've been invoked only once)";
+        check(expected == actualPre, msg);
+        int actualPost = INVOCATION_COUNTER.afterAllCount;
+        msg = "@AfterAll was invoked " + actualPost 
+                + " times (should've been invoked only once)";
+        check(expected == actualPost, msg);
+        msg = "@BeforeEach should've been invoked " + NUMBER_OF_TOY_TESTS 
+                + " times, once for each test";
+        check(NUMBER_OF_TOY_TESTS == INVOCATION_COUNTER.beforeEachCount, msg);
+        msg = msg.replace("Before", "After");
+        check(NUMBER_OF_TOY_TESTS == INVOCATION_COUNTER.afterEachCount, msg);
+    }
+    
+    static void checkPreAndPostWereExecutedInRightOrder() {
         // TODO: Figure out how to actually check this
     }
     
@@ -176,7 +193,8 @@ public class TestRunnerTest {
         checkTestActuallyPassed(results);
         checkTestActuallyFailed(results);
         checkTestActuallyCausedError(results);
-//        checkPreAndPostWereExecuted();
+        checkPreAndPostWereExecuted();
+//        checkPreAndPostWereExecutedInRightOrder();
         System.out.println("All tests have PASSED");
     }
     
@@ -184,7 +202,16 @@ public class TestRunnerTest {
         
         private boolean open = true;
         
+        int beforeAllCount = 0;
+        int beforeEachCount = 0;
         int testCount = 0;
+        int afterEachCount = 0;
+        int afterAllCount = 0;
+        
+        int beforeAllAfterAnything = 0;
+        int beforeEachAfterTooMany = 0;
+        int afterEachBeforeTooMany = 0;
+        int afterAllBeforeAnything = 0;
         
         @Override
         public void close() {
@@ -201,8 +228,23 @@ public class TestRunnerTest {
             String name = record.getSourceMethodName();
             if (this.open) {
                 switch (name) {
+                    case "@BeforeAllTests":
+                        this.beforeAllCount++;
+                        this.beforeAllAfterAnything = this.beforeEachCount 
+                                + this.testCount + this.afterEachCount 
+                                + this.afterAllCount;
+                        break;
+                    case "@BeforeEachTest":
+                        this.beforeEachCount++;
+                        break;
                     case "@Test":
                         this.testCount++;
+                        break;
+                    case "@AfterEachTest":
+                        this.afterEachCount++;
+                        break;
+                    case "@AfterAllTests":
+                        this.afterAllCount++;
                         break;
                     default:
                         System.err.println("Not sure what to do with log");
