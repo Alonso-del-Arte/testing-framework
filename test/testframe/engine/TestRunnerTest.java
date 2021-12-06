@@ -236,15 +236,22 @@ public class TestRunnerTest {
                         break;
                     case "@BeforeEachTest":
                         this.beforeEachCount++;
+                        this.beforeEachAfterTooMany = this.afterAllCount 
+                                + this.afterEachCount - this.testCount - 1; 
                         break;
                     case "@Test":
                         this.testCount++;
                         break;
                     case "@AfterEachTest":
                         this.afterEachCount++;
+                        this.afterEachBeforeTooMany = this.afterAllCount 
+                                + (this.beforeEachCount - this.afterEachCount);
                         break;
                     case "@AfterAllTests":
                         this.afterAllCount++;
+                        this.afterAllBeforeAnything = this.beforeAllCount 
+                                + this.beforeEachCount + this.testCount 
+                                + this.afterEachCount;
                         break;
                     default:
                         System.err.println("Not sure what to do with log");

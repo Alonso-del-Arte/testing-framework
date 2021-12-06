@@ -19,6 +19,18 @@ import testframe.api.Test;
  * @author Alonso del Arte
  */
 public class TestRunner {
+    
+    private static List<Method> setUps = new ArrayList<Method>();
+
+    private static List<Method> befores = new ArrayList<Method>();
+
+    private static List<Method> tests = new ArrayList<Method>();
+
+    private static List<Method> afters = new ArrayList<Method>();
+    
+    private static List<Method> tearDowns = new ArrayList<Method>();
+    
+    private static List<TestResult> results = new ArrayList<TestResult>();
 
     private static List<Method> filter(Method[] procedures, 
             Class<? extends Annotation> annotation) {
@@ -52,7 +64,99 @@ public class TestRunner {
         }
         return new TestResult(test, status, info);
     }
+    
+    private static void runSetUps(Object instance) {
+        try {
+            for (Method setUp : setUps) {
+                setUp.invoke(instance);
+            }
+        } catch (Exception e) {
+            String msg = "Unable to run @BeforeAllTests because of " 
+                    + e.getClass().getName();
+            throw new RuntimeException(msg, e);
+        }
+    }
+    
+    private static void runBefores(Object instance) {
+        try {
+            befores.get(0).invoke(instance);
+        } catch (Exception e) {
+            String excMsg = "Unable to run @BeforeEach-annotated " 
+                    + befores.get(0).getName() + " due to " 
+                    + e.getClass().getName();
+            throw new RuntimeException(excMsg, e);
+        }
+    }
+    
+    private static void runWithBefores(Object instance) {
+        for (Method test : tests) {
+            results.add(run(test, instance));
+            runBefores(instance);
+        }
+    }
 
+    private static void runWithoutBeforesOrAfters(Object instance) {
+        for (Method test : tests) {
+            results.add(run(test, instance));
+        }
+    }
+
+    private static void runAfters(Object instance) {
+        try {
+            afters.get(0).invoke(instance);
+        } catch (Exception e) {
+            String excMsg = "Unable to run @AfterEach-annotated " 
+                    + afters.get(0).getName() + " due to " 
+                    + e.getClass().getName();
+            throw new RuntimeException(excMsg, e);
+        }
+    }
+    
+    private static void runWithAfters(Object instance) {
+        for (Method test : tests) {
+            runAfters(instance);
+            results.add(run(test, instance));
+        }
+    }
+    
+    private static void runWithBeforesAndAfters(Object instance) {
+        for (Method test : tests) {
+            runAfters(instance);
+            results.add(run(test, instance));
+            runBefores(instance);
+        }
+    }
+
+    private static void run(Object instance) {
+        int totalBefores = befores.size();
+        int totalAfters = afters.size();
+        if (totalBefores > 0 && totalAfters > 0) {
+            runWithBeforesAndAfters(instance);
+        } else {
+            if (totalBefores > 0 && totalAfters == 0) {
+                runWithBefores(instance);
+            } else {
+                if (totalBefores == 0 && totalAfters > 0) {
+                    runWithAfters(instance);
+                } else {
+                    runWithoutBeforesOrAfters(instance);
+                }
+            }
+        }
+    }
+
+    private static void runTearDowns(Object instance) {
+        try {
+            for (Method tearDown : tearDowns) {
+                tearDown.invoke(instance);
+            }
+        } catch (Exception e) {
+            String msg = "Unable to run @AfterAllTests because of " 
+                    + e.getClass().getName();
+            throw new RuntimeException(msg, e);
+        }
+    }
+    
     /**
      * Runs the tests of a test class and reports the results.
      * @param testClassName The name of the test class. It needs to be fully 
@@ -64,15 +168,19 @@ public class TestRunner {
     public static List<TestResult> run(String testClassName) {
         ClassLoader loader = ClassLoader.getSystemClassLoader();
         loader.setDefaultAssertionStatus(true);
-        List<TestResult> results = new ArrayList<TestResult>();
+        
         try {
             Class<?> type = loader.loadClass(testClassName);
             Object testClassInstance = type.newInstance();
             Method[] procedures = type.getMethods();
-            List<Method> tests = filter(procedures, Test.class);
-            for (Method test : tests) {
-                results.add(run(test, testClassInstance));
-            }
+            setUps = filter(procedures, BeforeAllTests.class);
+            befores = filter(procedures, BeforeEachTest.class);
+            tests = filter(procedures, Test.class);
+            afters = filter(procedures, AfterEachTest.class);
+            tearDowns = filter(procedures, AfterAllTests.class);
+            runTearDowns(testClassInstance);
+            run(testClassInstance);
+            runSetUps(testClassInstance);
         } catch (ClassNotFoundException cnfe) {
             System.err.println("No tests ran");
             System.err.println("Unable to find class " + testClassName);
