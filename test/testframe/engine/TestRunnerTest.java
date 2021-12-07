@@ -178,7 +178,49 @@ public class TestRunnerTest {
     }
     
     static void checkPreAndPostWereExecutedInRightOrder() {
-        // TODO: Figure out how to actually check this
+        String msg = "@BeforeAllTests should not have run after anything";
+        if (INVOCATION_COUNTER.beforeAllAfterAnything != 0) {
+            throw new AssertionError(msg);
+        }
+        msg = "@BeforeEachTest should run before tests, not after";
+        if (INVOCATION_COUNTER.beforeEachAfterTooMany != 0) {
+            throw new AssertionError(msg);
+        }
+        msg = "@AfterEachTest should run after tests, not before";
+        if (INVOCATION_COUNTER.afterEachBeforeTooMany != 0) {
+            throw new AssertionError(msg);
+        }
+        msg = "@AfterAllTests should not have run before anything";
+        if (INVOCATION_COUNTER.afterAllBeforeAnything != 0) {
+            throw new AssertionError(msg);
+        }
+    }
+    
+    public static void checkMultipleSetUpsAndTearDownsRun() {
+        String extraTestClassName = TEST_CLASS_NAME.replace("ToyTests", 
+                "MoreToyTests");
+        Logger extraLogger = Logger.getLogger(extraTestClassName);
+        InvocationCounter extraCounter = new InvocationCounter();
+        extraLogger.setLevel(Level.ALL);
+        extraLogger.addHandler(extraCounter);
+        TestRunner.run(extraTestClassName);
+        extraCounter.close();
+        String msg = "Both of @BeforeAllTests in MoreToyTests should have run";
+        if (extraCounter.beforeAllCount != 2) {
+            throw new AssertionError(msg);
+        }
+        msg = msg.replace("@BeforeAllTests", "@BeforeEachTest");
+        if (extraCounter.beforeEachCount != 4) {
+            throw new AssertionError(msg);
+        }
+        msg = msg.replace("@BeforeEachTest", "@AfterEachTest");
+        if (extraCounter.afterEachCount != 4) {
+            throw new AssertionError(msg);
+        }
+        msg = msg.replace("@AfterEachTest", "@AfterAllTests");
+        if (extraCounter.afterAllCount != 2) {
+            throw new AssertionError(msg);
+        }
     }
     
     /**
@@ -194,7 +236,8 @@ public class TestRunnerTest {
         checkTestActuallyFailed(results);
         checkTestActuallyCausedError(results);
         checkPreAndPostWereExecuted();
-//        checkPreAndPostWereExecutedInRightOrder();
+        checkPreAndPostWereExecutedInRightOrder();
+        checkMultipleSetUpsAndTearDownsRun();
         System.out.println("All tests have PASSED");
     }
     
@@ -229,29 +272,34 @@ public class TestRunnerTest {
             if (this.open) {
                 switch (name) {
                     case "@BeforeAllTests":
+                        System.out.println("Logging @BeforeAllTests");
                         this.beforeAllCount++;
                         this.beforeAllAfterAnything = this.beforeEachCount 
                                 + this.testCount + this.afterEachCount 
                                 + this.afterAllCount;
                         break;
                     case "@BeforeEachTest":
+                        System.out.println("Logging @BeforeEachTest");
                         this.beforeEachCount++;
-                        this.beforeEachAfterTooMany = this.afterAllCount 
-                                + this.afterEachCount - this.testCount - 1; 
+                        this.beforeEachAfterTooMany += this.afterAllCount 
+                                + (this.afterEachCount - this.testCount)
+                                + (this.beforeEachCount - this.testCount - 1); 
                         break;
                     case "@Test":
+                        System.out.println("Logging @Test");
                         this.testCount++;
                         break;
                     case "@AfterEachTest":
+                        System.out.println("Logging @AfterEachTest");
                         this.afterEachCount++;
-                        this.afterEachBeforeTooMany = this.afterAllCount 
+                        this.afterEachBeforeTooMany += this.afterAllCount 
                                 + (this.beforeEachCount - this.afterEachCount);
                         break;
                     case "@AfterAllTests":
+                        System.out.println("Logging @AfterAllTests");
                         this.afterAllCount++;
-                        this.afterAllBeforeAnything = this.beforeAllCount 
-                                + this.beforeEachCount + this.testCount 
-                                + this.afterEachCount;
+                        this.afterAllBeforeAnything = -this.beforeAllCount 
+                                + this.afterAllCount;
                         break;
                     default:
                         System.err.println("Not sure what to do with log");
