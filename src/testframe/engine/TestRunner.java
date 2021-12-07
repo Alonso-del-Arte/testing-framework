@@ -79,69 +79,33 @@ public class TestRunner {
     
     private static void runBefores(Object instance) {
         try {
-            befores.get(0).invoke(instance);
+            for (Method before : befores) {
+                before.invoke(instance);
+            }
         } catch (Exception e) {
-            String excMsg = "Unable to run @BeforeEach-annotated " 
-                    + befores.get(0).getName() + " due to " 
+            String excMsg = "Unable to run @BeforeEach due to " 
                     + e.getClass().getName();
             throw new RuntimeException(excMsg, e);
         }
     }
     
-    private static void runWithBefores(Object instance) {
-        for (Method test : tests) {
-            results.add(run(test, instance));
-            runBefores(instance);
-        }
-    }
-
-    private static void runWithoutBeforesOrAfters(Object instance) {
-        for (Method test : tests) {
-            results.add(run(test, instance));
-        }
-    }
-
     private static void runAfters(Object instance) {
         try {
-            afters.get(0).invoke(instance);
+            for (Method after : afters) {
+                after.invoke(instance);
+            }
         } catch (Exception e) {
-            String excMsg = "Unable to run @AfterEach-annotated " 
-                    + afters.get(0).getName() + " due to " 
+            String excMsg = "Unable to run @AfterEach due to " 
                     + e.getClass().getName();
             throw new RuntimeException(excMsg, e);
         }
     }
     
-    private static void runWithAfters(Object instance) {
-        for (Method test : tests) {
-            runAfters(instance);
-            results.add(run(test, instance));
-        }
-    }
-    
-    private static void runWithBeforesAndAfters(Object instance) {
-        for (Method test : tests) {
-            runAfters(instance);
-            results.add(run(test, instance));
-            runBefores(instance);
-        }
-    }
-
     private static void run(Object instance) {
-        int totalBefores = befores.size();
-        int totalAfters = afters.size();
-        if (totalBefores > 0 && totalAfters > 0) {
-            runWithBeforesAndAfters(instance);
-        } else {
-            if (totalBefores > 0 && totalAfters == 0) {
-                runWithBefores(instance);
-            } else {
-                if (totalBefores == 0 && totalAfters > 0) {
-                    runWithAfters(instance);
-                } else {
-                    runWithoutBeforesOrAfters(instance);
-                }
-            }
+        for (Method test : tests) {
+            runBefores(instance);
+            results.add(run(test, instance));
+            runAfters(instance);
         }
     }
 
@@ -178,9 +142,9 @@ public class TestRunner {
             tests = filter(procedures, Test.class);
             afters = filter(procedures, AfterEachTest.class);
             tearDowns = filter(procedures, AfterAllTests.class);
-            runTearDowns(testClassInstance);
-            run(testClassInstance);
             runSetUps(testClassInstance);
+            run(testClassInstance);
+            runTearDowns(testClassInstance);
         } catch (ClassNotFoundException cnfe) {
             System.err.println("No tests ran");
             System.err.println("Unable to find class " + testClassName);
