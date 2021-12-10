@@ -6,6 +6,8 @@ import java.util.Random;
 
 public class AssertersTest {
     
+    private static final double LOCAL_DELTA = 0.0001;
+    
     private static final Random RANDOM = new Random();
     
     @Test
@@ -146,6 +148,49 @@ public class AssertersTest {
         String msg = "Asserting " + someNumber + " is equal to " + otherNumber 
                 + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNotEqualsDouble() {
+        double someNumber = RANDOM.nextDouble();
+        double otherNumber = 2.0 * someNumber + 1.0;
+        String msgCustomPart = "Customizable part of assertion message";
+        String msgStandardPart = "Expected " + someNumber 
+                + " to not differ from " + otherNumber + " by more than " 
+                + LOCAL_DELTA;
+        String expected = msgCustomPart + ". " + msgStandardPart;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumber, otherNumber, LOCAL_DELTA, 
+                    msgCustomPart);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + someNumber + " does not differ from " 
+                + otherNumber + " by more than " + LOCAL_DELTA  
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertEqualsDouble() {
+        double someNumber = RANDOM.nextDouble();
+        double sameNumber = someNumber;
+        String msg = "Customizable part of assertion message";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumber, sameNumber, LOCAL_DELTA, msg);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String message = "Asserting " + someNumber + " is equal to " 
+                + sameNumber + " should not have failed the test";
+        assert !failOccurred : message;
     }
     
     @Test
