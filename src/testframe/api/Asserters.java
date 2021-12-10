@@ -106,9 +106,19 @@ public class Asserters {
          assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
     }
     
+    /**
+     * 
+     * @param expected
+     * @param actual
+     * @param delta
+     * @param msg
+     */
     public static void assertEquals(double expected, double actual, 
             double delta, String msg) {
-        // TODO: Write tests for this
+//        double difference = Math.abs(expected - actual);
+        String message = msg + ". Expected " + expected 
+                + " to not differ from " + actual + " by more than " + delta;
+        assert expected == actual : message;
     }
     
     /**
