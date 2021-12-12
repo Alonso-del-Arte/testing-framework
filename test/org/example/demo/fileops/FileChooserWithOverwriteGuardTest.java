@@ -11,11 +11,115 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import static testframe.api.Asserters.*;
+import testframe.api.AfterAllTests;
+import testframe.api.AfterEachTest;
+import testframe.api.BeforeAllTests;
 import testframe.api.Test;
+import static testframe.api.Asserters.*;
 
 public class FileChooserWithOverwriteGuardTest {
 
+    private static final Random RANDOM = new Random();
+    
+    private static final String TEMP_DIR_PATH 
+            = System.getProperty("java.io.tmpdir");
+    
+    private File createdByTest;
+    
+    private File createdBySetUpClass;
+    
+    /**
+     * Sets up a text file to already exist prior to the tests. The file is 
+     * placed in the user's temporary directory and given a filename consisting 
+     * of "ExistingFile" followed by a pseudorandom number and the *.txt file 
+     * extension.
+     */
+    @BeforeAllTests
+    public void setUpClass() {
+        int number = RANDOM.nextInt();
+        String filename = TEMP_DIR_PATH + File.separatorChar + "ExistingFile" 
+                + number + ".txt";
+        this.createdBySetUpClass = new File(filename);
+        try (FileWriter writer = new FileWriter(this.createdBySetUpClass)) {
+            System.out.println("Successfully created " 
+                    + this.createdBySetUpClass.getName());
+            writer.write("This message was placed by setUpClass()");
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+    }
+    
+    /**
+     * Test of the approveSelection procedure of the 
+     * FileChooserWithOverwriteGuard class. If the file does not already exist, 
+     * there should not be any confirmation to overwrite an existing file.
+     */
+    @Test
+    public void testApproveSelection() {
+        System.out.println("approveSelection");
+        String filename = TEMP_DIR_PATH + File.separatorChar + "NewFile" 
+                + RANDOM.nextInt() + ".txt";
+        this.createdByTest = new File(filename);
+        String preMsg = this.createdByTest.getName() 
+                + " should not already exist";
+        assert !this.createdByTest.exists() : preMsg;
+        MockFileChooser chooser = new MockFileChooser(JOptionPane.YES_OPTION);
+        chooser.setSelectedFile(this.createdByTest);
+        int expected = JFileChooser.APPROVE_OPTION;
+        int actual = chooser.showSaveDialog(null);
+        if (expected == actual) {
+            try (FileWriter writer = new FileWriter(this.createdByTest)) {
+                writer.write("This message placed by testApproveSelection()");
+            } catch (IOException ioe) {
+                String errMsg = "IOException should not have occurred";
+                throw new AssertionError(errMsg, ioe);
+            }
+        } else {
+            String msg = "Save dialog should give JFileChooser.APPROVE_OPTION";
+            fail(msg);
+        }
+        String msg = "No confirmation to overwrite needed for new file";
+        assert !chooser.mockResponseHasBeenGiven() : msg;
+    }
+    
+    private void reportFileContents(File file) {
+        System.out.println(file.getName() + " has the following text:");
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                System.out.println("\"" + scanner.nextLine() + "\"");
+            }
+        } catch (FileNotFoundException fnfe) {
+            String excMsg = "Somehow can't find file " + file.getAbsolutePath();
+            throw new RuntimeException(excMsg, fnfe);
+        }
+    }
+    
+    /**
+     * Reports on the contents of the existing file, and the new file if it has 
+     * been created by now.
+     */
+    @AfterEachTest
+    public void tearDown() {
+        if (this.createdByTest.exists()) {
+            this.reportFileContents(this.createdByTest);
+        }
+        this.reportFileContents(this.createdBySetUpClass);
+    }
+    
+    /**
+     * Deletes the existing file and the new file. Also reports that those 
+     * deletions have taken place.
+     */
+    @AfterAllTests
+    public void tearDownClass() {
+        this.createdByTest.delete();
+        System.out.println("Successfully deleted " 
+                + this.createdByTest.getAbsolutePath());
+        this.createdBySetUpClass.delete();
+        System.out.println("Successfully deleted " 
+                + this.createdBySetUpClass.getAbsolutePath());
+    }
+        
     /**
      * Extends {@link FileChooserWithOverwriteGuard} so that the confirmation 
      * dialog box response can be mocked. Then the user running the tests 
