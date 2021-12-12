@@ -182,6 +182,12 @@ public class FileChooserWithOverwriteGuardTest {
         }
         
         @Override
+        public void approveSelection() {
+            this.returnValue = JFileChooser.APPROVE_OPTION;
+            super.approveSelection();
+        }
+        
+        @Override
         public void cancelSelection() {
             super.cancelSelection();
             this.returnValue = JFileChooser.CANCEL_OPTION;
