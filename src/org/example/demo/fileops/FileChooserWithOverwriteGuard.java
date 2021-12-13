@@ -20,7 +20,12 @@ public class FileChooserWithOverwriteGuard extends JFileChooser {
 
     @Override
     public void approveSelection() {
-        super.approveSelection();
+        File file = this.getSelectedFile();
+        if (file.exists()) {
+            this.cancelSelection();
+        } else {
+            super.approveSelection();
+        }
     }
 
 }
