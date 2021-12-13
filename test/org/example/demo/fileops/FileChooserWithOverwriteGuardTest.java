@@ -47,6 +47,9 @@ public class FileChooserWithOverwriteGuardTest {
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
+        String otherFilename = TEMP_DIR_PATH + File.separatorChar 
+                + "PlaceholderToAvoidNPE.txt";
+        this.createdByTest = new File(otherFilename);
     }
     
     /**
@@ -80,6 +83,32 @@ public class FileChooserWithOverwriteGuardTest {
         }
         String msg = "No confirmation to overwrite needed for new file";
         assert !chooser.mockResponseHasBeenGiven() : msg;
+    }
+    
+    /**
+     * Another test of the approveSelection procedure of the 
+     * FileChooserWithOverwriteGuard class. If the file already exists and the 
+     * user asks that it not be overwritten, it should not be overwritten.
+     */
+    @Test
+    public void testRejectSelectionForExistingFile() {
+        String preMsg = "Existing file should already exist";
+        assert this.createdBySetUpClass.exists() : preMsg;
+        JFileChooser chooser = new MockFileChooser(JOptionPane.CANCEL_OPTION);
+        chooser.setSelectedFile(this.createdBySetUpClass);
+        int expected = JFileChooser.CANCEL_OPTION;
+        int actual = chooser.showSaveDialog(null);
+        if (actual == JFileChooser.APPROVE_OPTION) {
+            try (FileWriter writer = new FileWriter(this.createdBySetUpClass)) {
+                writer.write("This time, the user rejected the overwrite.\n");
+                writer.write("This message should not have been written.");
+                fail("Should not have been able to overwrite after cancel");
+            } catch (IOException ioe) {
+                String errMsg = "IOException should not have occurred";
+                throw new AssertionError(errMsg, ioe);
+            }
+        }
+        assertEquals(actual, expected);
     }
     
     private void reportFileContents(File file) {
