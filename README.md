@@ -9,3 +9,7 @@ For this project, we acknowledge the existence of frameworks like TestNG, and we
 may use ideas from those frameworks, but we won't be using them directly (except 
 maybe as a formality in NetBeans to get the proper separation between Source 
 Packages and Test Packages started).
+
+For instructions on how to use this testing framework, see 
+[How to Use This Framework](UserManual.md). For instructions on how to 
+contribute to this project, see [CONTRIBUTING.md](CONTRIBUTING.md).

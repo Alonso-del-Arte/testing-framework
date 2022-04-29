@@ -1,6 +1,6 @@
-This project is open to Hacktoberfest 2021.
+This project will probably be open to Hacktoberfest 2022.
 
-# Guidelines for Hacktoberfest 2021 Contributors
+# Guidelines for Hacktoberfest 2022 Contributors
 
 I will definitely consider pull requests associated with an issue and maybe 
 consider pull requests associated with a TODO (considered an Action Item in 
@@ -14,7 +14,7 @@ This project uses Java 8. Contributors may use later versions of Java provided
 they don't use features not available in Java 8. No existing testing framework 
 is to be used for this project, except as references or models.
 
-Remember that the goal of this project isn't to replace an existing testing 
+Remember that the goal of this project is not to replace an existing testing 
 framework, or even to try to do that, but to understand how a testing framework 
 can be made from scratch through test-driven development (TDD).
 
@@ -61,10 +61,11 @@ tabs, but there might be stragglers.
 starting with `test`, that is highly recommended for the sake of clarity. The 
 only exemption is `TestRunnerTest`, even though that one doesn't actually use 
 the `@Test` annotation.
-* If it doesn't have To Do comments, it should have Javadoc. Any other type of 
-comment should be removed in refactoring commits, if it even makes into a fail 
-or pass commit. Only exemption for now are the comments in `Asserters` 
-explaining what that static class will not provide.
+* If it doesn't have To Do comments, it should have Javadoc. Files in 
+`com.example.exercises` and `org.example.exercises` may optionally have Hint 
+comments. Any other type of comment should be removed in refactoring commits, if 
+such a comment even makes into a fail or pass commit. Only exemption for now are 
+the comments in `Asserters` explaining what that static class will not provide.
 * Each checked in test class should provide some output that is distinct from 
 that given by `TestRunner`. If nothing else occurs to you, simply have it output 
 the names of the units being tested (like in automatically generated JUnit or 
