@@ -51,7 +51,21 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
     // TODO: Write tests for this
     @Override
     public Iterator<E> iterator() {
-        return new ArrayBackedIterator<>();
+        return new Iterator<E>() {
+
+            // TODO: Write tests for this
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            // TODO: Write tests for this
+            @Override
+            public E next() {
+                return null;
+            }
+
+        };
     }
 
     // TODO: Write tests for this
@@ -63,22 +77,6 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
     // TODO: Write tests for this
     public ArrayBackedCollection(int initialCapacity) {
         this.elements = new Object[DEFAULT_INITIAL_CAPACITY];
-    }
-
-    private class ArrayBackedIterator<E> implements Iterator<E> {
-
-        // TODO: Write tests for this
-        @Override
-        public boolean hasNext() {
-            return false;
-        }
-
-        // TODO: Write tests for this
-        @Override
-        public E next() {
-            return null;
-        }
-
     }
 
 }

@@ -48,9 +48,13 @@ public class Fraction {
     }
     
     // TODO: Write tests for this
+    public double getNumericApproximation() {
+        return Double.NaN;
+    }
+    
     @Override
     public String toString() {
-        return this.numerator + " \\ " + this.denominator;
+        return this.numerator + "/" + this.denominator;
     }
     
     // TODO: Write tests for this
@@ -62,7 +66,12 @@ public class Fraction {
     // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        return (int) (this.numerator + this.denominator);
+    }
+    
+    // TODO: Write tests for this
+    public Fraction(long numer) {
+        this(numer, -1);
     }
     
     public Fraction(long numer, long denom) {

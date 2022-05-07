@@ -8,9 +8,8 @@ public class ArrayBackedList<E> implements Iterable<E> {
 
     private Object[] elements;
 
-    // TODO: Write test for this
     public boolean add(E element) {
-        return false;
+        return true;
     }
 
     // TODO: Write test for this
@@ -18,8 +17,12 @@ public class ArrayBackedList<E> implements Iterable<E> {
         this.add(element);
     }
 
-    // TODO: Write test for this
     public E get(int index) {
+        if (index < 0) {
+            String excMsg = "Index " + index 
+                    + " is not valid, should be 0 or positive";
+            throw new IndexOutOfBoundsException(excMsg);
+        }
         return null;
     }
 

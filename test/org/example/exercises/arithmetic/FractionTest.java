@@ -10,6 +10,28 @@ public class FractionTest {
     private static final Random RANDOM = new Random();
     
     @Test
+    public void testToString() {
+        System.out.println("toString");
+        int numer = RANDOM.nextInt(4096) + 4;
+        int denom = numer + 1;
+        Fraction fraction = new Fraction(numer, denom);
+        String expected = numer + "/" + denom;
+        String actual = fraction.toString().replace(" ", "");
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void testRejectDenominatorZero() {
+        try {
+            Fraction badFraction = new Fraction(1, 0);
+            String errMsg = "Wrongly created " + badFraction.toString();
+            throw new AssertionError(errMsg);
+        } catch (ArithmeticException ae) {
+            System.out.println("Correctly rejected denominator zero");
+        }
+    }
+    
+    @Test
     public void testConstructorRejectsDenominatorZero() {
         int numer = RANDOM.nextInt(1024) + 16;
         String msg = "Denominator 0 for numerator " + numer 
