@@ -9,11 +9,10 @@ import java.util.Scanner;
 
 class RandomDotOrgAccess extends ExternalRandomnessProvider {
     
-    // TODO: Write tests for this
     @Override
     public int[] giveNumbers(int amount, int minimum, int maximum) 
             throws IOException {
-        int[] numbers = {};
+        int[] numbers = new int[100];
         return numbers;
     }
 
