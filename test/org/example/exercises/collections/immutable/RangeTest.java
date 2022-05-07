@@ -1,4 +1,4 @@
-package org.example.exercises.arithmetic;
+package org.example.exercises.collections.immutable;
 
 import java.util.Random;
 
