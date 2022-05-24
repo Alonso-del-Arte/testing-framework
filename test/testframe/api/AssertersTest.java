@@ -1,9 +1,16 @@
 package testframe.api;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Tests of the Asserters class. These are more elegant than the tests of 
+ * testframe.engine.TestRunner, but still more clunky than the tests that can be
+ * written once Asserters is fully tested and proven.
+ * @author Alonso del Arte
+ */
 public class AssertersTest {
     
     private static final double LOCAL_DELTA = 0.0001;
@@ -256,6 +263,29 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertEqualsNoExceptionForNullActual() {
+        LocalDateTime expected = LocalDateTime.now();
+        LocalDateTime actual = null;
+        try {
+            Asserters.assertEquals(expected, actual);
+            String errMsg = "Comparing " + expected.toString() 
+                    + " to null should've failed the assertion";
+            throw new AssertionError(errMsg);
+        } catch (NullPointerException npe) {
+            String errMsg = "Comparing " + expected.toString() 
+                    + " to null wrongly caused NPE";
+            throw new AssertionError(errMsg, npe);
+        } catch (RuntimeException re) {
+            String errMsg = re.getClass().getName() 
+                    + " should not have occurred";
+            throw new AssertionError(errMsg, re);
+        } catch (AssertionError ae) {
+            System.out.println("Comparing " + expected.toString() 
+                    + " to null correctly failed the assertion without NPE");
+        }
+    }
+    
+    @Test
     public void testAssertNotEqualsArrayIntDiffLengths() {
         int[] someNumbers = {1, 2, 3, 4, 5};
         int[] moreNumbers = {1, 2, 3, 4, 5, 6, 7};
@@ -326,6 +356,25 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertThrowsSavesWrongExceptionThrown() {
+        RuntimeException expected 
+                = new RuntimeException("For testing purposes");
+        try {
+            IllegalArgumentException iae = Asserters.assertThrows(() -> {
+                throw expected;
+            }, IllegalArgumentException.class, 
+                    "Throwing wrong exception on purpose");
+            System.out.println("Thrown exception is of type " 
+                    + iae.getClass().getName());
+        } catch (AssertionError ae) {
+            Throwable actual = ae.getCause();
+            String msg = "Expected " + expected.toString() + " but got " 
+                    + actual;
+            assert expected.equals(actual) : msg;
+        }
+    }
+    
+    @Test
     public void testAssertDoesNotThrowButDoes() {
         boolean failOccurred = false;
         String msg = "Assertion should fail if exception thrown";
@@ -341,6 +390,22 @@ public class AssertersTest {
             assert errMsg.contains("RuntimeException") : checkMsg;
         }
         assert failOccurred : msg;
+    }
+
+    @Test
+    public void testAssertDoesNotThrowSavesThrown() {
+        RuntimeException expected 
+                = new RuntimeException("For testing purposes");
+        try {
+            Asserters.assertDoesNotThrow(() -> {
+                throw expected;
+            }, "Throwing exception on purpose");
+        } catch (AssertionError ae) {
+            Throwable actual = ae.getCause();
+            String msg = "Expected " + expected.toString() + " but got " 
+                    + actual;
+            assert expected.equals(actual) : msg;
+        }
     }
 
     @Test

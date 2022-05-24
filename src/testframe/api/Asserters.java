@@ -159,7 +159,7 @@ public class Asserters {
     public static void assertEquals(Object expected, Object actual, 
             String msg) {
         String message = msg + ". Expected = " + expected.toString() 
-                + ". Actual = " + actual.toString();
+                + ". Actual = " + actual;
         if (message.startsWith(". ")) {
             message = message.substring(2);
         }
@@ -358,7 +358,9 @@ public class Asserters {
         } catch (Exception e) {
             String errMsg = msg + ". Expected " + exceptionType.getName() 
                     + " but was " + e.getClass().getName();
-            assert exceptionType.isAssignableFrom(e.getClass()) : errMsg;
+            if (!exceptionType.isAssignableFrom(e.getClass())) {
+                throw new AssertionError(errMsg, e);
+            };
             return (E) e;
         }
     }
@@ -382,7 +384,7 @@ public class Asserters {
         } catch (Exception e) {
             String errMsg = msg + ". No exception should have occurred but " 
                     + e.getClass().getName() + " did";
-            throw new AssertionError(errMsg);
+            throw new AssertionError(errMsg, e);
         }
     }
     
