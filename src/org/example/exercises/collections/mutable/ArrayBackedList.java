@@ -7,8 +7,12 @@ public class ArrayBackedList<E> implements Iterable<E> {
     private static final int DEFAULT_STARTING_CAPACITY = 16;
 
     private Object[] elements;
+    
+    private int nextUp = 0;
 
     public boolean add(E element) {
+        this.elements[this.nextUp] = element;
+        this.nextUp++;
         return true;
     }
 
@@ -18,12 +22,15 @@ public class ArrayBackedList<E> implements Iterable<E> {
     }
 
     public E get(int index) {
-        if (index < 0) {
+        if (index < 0 || index >= this.nextUp) {
             String excMsg = "Index " + index 
-                    + " is not valid, should be 0 or positive";
+                    + " is not valid, should not be negative nor more than " 
+                    + (this.nextUp - 1);
             throw new IndexOutOfBoundsException(excMsg);
         }
-        return null;
+        @SuppressWarnings("unchecked")
+        E element = (E) this.elements[index];
+        return element;
     }
 
     // TODO: Write test for this
@@ -84,6 +91,7 @@ public class ArrayBackedList<E> implements Iterable<E> {
                     + " not valid, should be positive";
             throw new IllegalArgumentException(excMsg);
         }
+        this.elements = new Object[initialCapacity];
     }
 
 }
