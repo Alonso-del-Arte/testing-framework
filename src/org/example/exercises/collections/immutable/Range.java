@@ -20,12 +20,26 @@ public class Range implements Iterable<Integer> {
         return -1;
     }
     
+    public int getStart() {
+        return this.begin;
+    }
+    
+    public int getEnd() {
+        return this.finish;
+    }
+    
+    public int getStep() {
+        return this.interval;
+    }
+
     // TODO: Write tests for this
+    // TODO: Write Javadoc, mention this is different from getStart()
     public int min() {
         return Integer.MAX_VALUE;
     }
     
     // TODO: Write tests for this
+    // TODO: Write Javadoc, mention this is different from getEnd()
     public int max() {
         return Integer.MIN_VALUE;
     }
@@ -35,9 +49,8 @@ public class Range implements Iterable<Integer> {
         return this;
     }
     
-    // TODO: Write tests for this
     public boolean contains(int number) {
-        return false;
+        return this.begin <= number && number <= this.finish;
     }
     
     @Override
@@ -61,7 +74,12 @@ public class Range implements Iterable<Integer> {
 
     @Override
     public String toString() {
-        return this.begin + " to " + this.finish + " by " + this.interval;
+        String fromAndTo = this.begin + " to " + this.finish;
+        if (this.interval == 1) {
+            return fromAndTo;
+        } else {
+            return fromAndTo + " by " + this.interval;
+        }
     }
     
     // TODO: Write tests for this
@@ -76,10 +94,8 @@ public class Range implements Iterable<Integer> {
         return 0;
     }
     
-    // TODO: Write tests for this chained constructor
-    // It should infer a step of +/-1.
     public Range(int start, int end) {
-        this(start, end, 0);
+        this(start, end, Integer.signum(end - start));
     }
     
     // TODO: Write tests for this constructor
