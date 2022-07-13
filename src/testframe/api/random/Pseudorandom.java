@@ -25,7 +25,7 @@ public class Pseudorandom {
     }
     
     public static char nextASCIIChar() {
-        return '\u4E00';// (char) (' ' + RANDOM.nextInt(PRINTABLE_ASCII_SPAN));
+        return ' ';// (char) (' ' + RANDOM.nextInt(PRINTABLE_ASCII_SPAN));
     }
 
     public static String nextASCIICharSeq(int length) {
