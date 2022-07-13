@@ -47,6 +47,8 @@ public class PseudorandomTest {
         }
     }
 
+    // TODO: Uncomment out next test. The skip test annotation is not available
+    // yet.
 //    @Test
     public void testFlipCoin() {
         final int tries = 1000;
@@ -84,22 +86,22 @@ public class PseudorandomTest {
         }
     }
 
-//    @Test
-//    public void testNextASCIIChar() {
-//        System.out.println("nextASCIIChar");
-//        Set<Character> characters = new HashSet<>(PRINTABLE_ASCII_SPAN);
-//        for (int i = 0; i < PRINTABLE_ASCII_SPAN; i++) {
-//            characters.add(Pseudorandom.nextASCIIChar());
-//        }
-//        int expected = 55 * PRINTABLE_ASCII_SPAN / 100;
-//        int actual = characters.size();
-//        String msg = "Calling nextASCIIChar() " + PRINTABLE_ASCII_SPAN
-//                + " times gave " + actual
-//                + " distinct character(s), ought to be at least " + expected
-//                + " distinct";
-//        assert expected <= actual : msg;
-//    }
-//
+    @Test
+    public void testNextASCIIChar() {
+        System.out.println("nextASCIIChar");
+        Set<Character> characters = new HashSet<>(PRINTABLE_ASCII_SPAN);
+        for (int i = 0; i < PRINTABLE_ASCII_SPAN; i++) {
+            characters.add(Pseudorandom.nextASCIIChar());
+        }
+        int expected = 55 * PRINTABLE_ASCII_SPAN / 100;
+        int actual = characters.size();
+        String msg = "Calling nextASCIIChar() " + PRINTABLE_ASCII_SPAN
+                + " times gave " + actual
+                + " distinct character(s), ought to be at least " + expected
+                + " distinct";
+        assert expected <= actual : msg;
+    }
+
 //    @Test
 //    public void testNextASCIICharSeqOneParamGivesRightLength() {
 //        for (int expected = 2; expected < 80; expected++) {
