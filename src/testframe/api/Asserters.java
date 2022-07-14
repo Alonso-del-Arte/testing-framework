@@ -21,6 +21,27 @@ public class Asserters {
     public static final double DEFAULT_TEST_DELTA 
             = Double.longBitsToDouble(4503599627370497L);
 
+    // TODO: Write tests for this
+    public static void assertMinimum(long minimum, long actual, String msg) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertMinimum(double minimum, double actual, 
+            String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertMinimum(long minimum, long actual) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertMinimum(double minimum, double actual) {
+        //
+    }
+
     /**
      * Asserts that two integers are equal. If they are indeed equal and there 
      * are no other assertions in the test, the test should pass. But if they 
@@ -224,6 +245,27 @@ public class Asserters {
     
     // No assertNull will provided. Use plain Java assert.
     
+    // TODO: Write tests for this
+    public static void assertMaximum(long maximum, long actual, String msg) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertMaximum(double maximum, double actual, 
+            String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertMaximum(long maximum, long actual) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertMaximum(double maximum, double actual) {
+        //
+    }
+
     // TODO: Write tests for this
     public static void assertDifferent(int some, int other) {
          String msg = "Sorry, default message not implemented yet";
