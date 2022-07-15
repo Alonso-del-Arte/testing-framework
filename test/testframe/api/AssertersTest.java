@@ -309,6 +309,15 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertBelowMinimumLong() {
+        throw new AssertionError("PLACEHOLDER FOR TEST");
+    }
+    
+    // TODO: Write the rest of the tests for assertMinimum()
+    
+    // TODO: Write tests for assertMaximum()
+    
+    @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
         String msg = "Division by zero should cause ArithmeticException";

@@ -102,21 +102,34 @@ public class PseudorandomTest {
         assert expected <= actual : msg;
     }
 
-//    @Test
-//    public void testNextASCIICharSeqOneParamGivesRightLength() {
-//        for (int expected = 2; expected < 80; expected++) {
-//            String s = Pseudorandom.nextASCIICharSeq(expected);
-//            int actual = s.length();
-//            String msg = "Pseudorandom String \"" + s
-//                    + "\" should be of length " + expected;
-//            assertEquals(expected, actual, msg);
-//        }
-//    }
-//
-//    @Test
-//    public void testNextASCIICharSeq() {
-//        System.out.println("nextASCIICharSeq");
-//        fail("Haven't written test yet");
-//    }
+    @Test
+    public void testNextASCIICharSeqOneParamGivesRightLength() {
+        for (int expected = 2; expected < 80; expected++) {
+            String s = Pseudorandom.nextASCIICharSeq(expected);
+            int actual = s.length();
+            String msg = "Pseudorandom String \"" + s
+                    + "\" should be of length " + expected;
+            assertEquals(expected, actual, msg);
+        }
+    }
+
+    @Test
+    public void testNextASCIICharSeq() {
+        System.out.println("nextASCIICharSeq");
+        int length = RANDOM.nextInt(8) + 32;
+        int capacity = RANDOM.nextInt(128) + 32;
+        Set<String> strings = new HashSet<String>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            strings.add(Pseudorandom.nextASCIICharSeq(length));
+        }
+        int tolerance = capacity / (length - 6);
+        int expected = capacity - tolerance;
+        int actual = strings.size();
+        String msg = "Asking for " + capacity + " String instances of length " 
+                + length + " gave " + actual 
+                + " distinct, should have given at least " + expected 
+                + " distinct";
+        assert expected <= actual : msg;
+    }
 
 }

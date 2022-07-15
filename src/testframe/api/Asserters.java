@@ -34,7 +34,7 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertMinimum(long minimum, long actual) {
-        //
+        String msg = "Value " + actual + " ought to be at least " + minimum;
     }
     
     // TODO: Write tests for this
