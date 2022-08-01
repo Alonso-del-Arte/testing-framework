@@ -201,6 +201,43 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertEqualsDoubleCloseEnough() {
+        double someNumber = RANDOM.nextDouble();
+        double nearNumber = someNumber + LOCAL_DELTA / 2;
+        String msg = "Customizable part of assertion message";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumber, nearNumber, LOCAL_DELTA, msg);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String message = "Asserting " + someNumber + " is equal to " 
+                + nearNumber + " within variance " + LOCAL_DELTA 
+                + " should not have failed the test";
+        assert !failOccurred : message;
+    }
+    
+    @Test
+    public void testAssertEqualsDoubleJustAtVariance() {
+        double someNumber = RANDOM.nextDouble();
+        double variance = 0.0078125;
+        double nearNumber = someNumber + variance;
+        String msg = "Customizable part of assertion message";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumber, nearNumber, variance, msg);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String message = "Asserting " + someNumber + " is equal to " 
+                + nearNumber + " within variance " + variance 
+                + " should not have failed the test";
+        assert !failOccurred : message;
+    }
+    
+    @Test
     public void testAssertNotEqualsObject() {
         BigInteger someNumber = new BigInteger(72, RANDOM);
         BigInteger otherNumber = someNumber.add(someNumber).add(BigInteger.ONE);
@@ -430,6 +467,27 @@ public class AssertersTest {
             failOccurred = true;
         }
         assert !failOccurred : msg;
+    }
+    
+    /**
+     * Although <code>int</code> already has an object wrapper 
+     * (<code>Integer</code>), I needed a quick <code>Comparable</code> type 
+     * that would work without my having to worry about autoboxing.
+     * @author Alonso del Arte
+     */
+    private class IntegerWrapper implements Comparable<IntegerWrapper> {
+        
+        private final int wrappedNumber;
+        
+        @Override
+        public int compareTo(IntegerWrapper other) {
+            return Integer.compare(this.wrappedNumber, other.wrappedNumber);
+        }
+        
+        IntegerWrapper(int n) {
+            this.wrappedNumber = n;
+        }
+
     }
 
 }
