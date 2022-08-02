@@ -198,12 +198,12 @@ more:
 ```
     @Test
     public void testRejectDenominatorZero() {
-        RuntimeException re = assertThrows(() -> {
+        ArithmeticException ae = assertThrows(() -> {
             Fraction badFraction = new Fraction(1, 0);
             System.out.println("Should not have been able to create " 
                     + badFraction.toString());
         }, ArithmeticException.class, "Denominator 0 should be rejected");
-        String excMsg = re.getMessage();
+        String excMsg = ae.getMessage();
         assert excMsg != null : "Message should not be null";
     }
 ```
@@ -211,6 +211,24 @@ more:
 We don't need to write a Catch for `RuntimeException` because `assertThrows()` 
 will take care of notifying us if any exception other than an 
 `ArithmeticException` occurs.
+
+Likewise, `assertDoesNotThrow()` simplifies the writing of a test that asserts a 
+given kind of call causes no exceptions.
+
+```
+    @Test
+    public void testAddCanExpandCapacity() {
+        int size = // get a small pseudorandom positive integer
+        // create list of some type E with size as initial capacity
+        // fill list to initial capacity
+        E oneMore = // make some new instance of E
+        String msg = "List of " + size 
+                + " elements should have expanded for one more element";
+        assertDoesNotThrow(() -> {
+            list.add(oneMore);
+        }, msg);
+    }
+```
 
 (finish writing)
 
@@ -257,3 +275,28 @@ Total: 3
 ## Using this testing framework with Scala, Kotlin
 
 (finish writing)
+
+If you want to use `assertThrows()` or `assertDoesNotThrow()` in Scala, note 
+that the syntax has some important differences that go beyond the much-maligned 
+semicolons, which you can leave in if you want. Assuming you have `apply()` 
+defined in the `Fraction` companion object:
+
+```
+    val ae = assertThrows(() => {
+      val badFraction = Fraction(1, 0)
+      println("Should not have been able to create " +
+          badFraction.toString())
+    }, classOf[ArithmeticException], "Denominator 0 should be rejected")
+```
+
+The two little details that trip me up every now and then:
+
+* Instead of `() -> {}` you have to write `() => {}`.
+* Instead of `Exception.class`, you have to write `classOf[Exception]`.
+
+The other differences either are due to overall differences between Java and 
+Scala (e.g., the more generally available type inference) or are purely 
+superficial (e.g., the preference for two spaces instead of four for the 
+indentation interval).
+ 
+A consequence of semicolon inference (finish writing) operators 
