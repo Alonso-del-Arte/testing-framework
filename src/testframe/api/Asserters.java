@@ -21,27 +21,6 @@ public class Asserters {
     public static final double DEFAULT_TEST_DELTA 
             = Double.longBitsToDouble(4503599627370497L);
 
-    // TODO: Write tests for this
-    public static void assertMinimum(long minimum, long actual, String msg) {
-        //
-    }
-    
-    // TODO: Write tests for this
-    public static void assertMinimum(double minimum, double actual, 
-            String msg) {
-        //
-    }
-
-    // TODO: Write tests for this
-    public static void assertMinimum(long minimum, long actual) {
-        String msg = "Value " + actual + " ought to be at least " + minimum;
-    }
-    
-    // TODO: Write tests for this
-    public static void assertMinimum(double minimum, double actual) {
-        //
-    }
-
     /**
      * Asserts that two integers are equal. If they are indeed equal and there 
      * are no other assertions in the test, the test should pass. But if they 
@@ -148,7 +127,7 @@ public class Asserters {
         double difference = Math.abs(expected - actual);
         String message = msg + ". Expected " + expected 
                 + " to not differ from " + actual + " by more than " + delta;
-        assert difference < delta : message;
+        assert delta >= difference : message;
     }
     
     /**
@@ -204,9 +183,12 @@ public class Asserters {
     
     public static void assertEquals(int[] expected, int[] actual, String msg) {
 // if (expected.length != actual.length) {
-            String errMsg = "Arrays differ in length: expected has " 
+            String errMsg = msg + ". Arrays differ in length: expected has " 
                     + expected.length + " elements but actual has " 
                     + actual.length + " elements";
+            if (errMsg.startsWith(". ")) {
+                errMsg = errMsg.substring(2);
+            }
             throw new AssertionError(errMsg);
 // }
     }
@@ -255,23 +237,203 @@ public class Asserters {
     // No assertNull will provided. Use plain Java assert.
     
     // TODO: Write tests for this
-    public static void assertMaximum(long maximum, long actual, String msg) {
-        //
+    public static void assertMinimum(long minimum, long actual) {
+        String msg = "Value " + actual + " ought to be at least " + minimum;
+    }
+    
+    /**
+     * Asserts that an integer is greater than or equal to a specified minimum.
+     * @param minimum The minimum permissible value. For example, 100.
+     * @param actual The value to compare against the specified minimum. For 
+     * example, 95.
+     * @param msg The message to put into the test failure explanation if the 
+     * test fails because of the assertion. For example, "List should have at 
+     * least as many elements as the set." The minimum and actual values will be 
+     * appended to the test failure explanation.
+     */
+    public static void assertMinimum(long minimum, long actual, String msg) {
+        String errMsg = msg + ". Number " + actual + " expected to be at least " 
+                + minimum;
+        assert actual >= minimum : errMsg;
     }
     
     // TODO: Write tests for this
-    public static void assertMaximum(double maximum, double actual, 
+    public static void assertMinimum(double minimum, double actual) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertMinimum(double minimum, double actual, 
             String msg) {
         //
     }
 
     // TODO: Write tests for this
-    public static void assertMaximum(long maximum, long actual) {
+    public static <T extends Comparable<T>> void assertMinimum(T minimum, 
+            T actual) {
+        //
+    }
+
+    public static <T extends Comparable<T>> void assertMinimum(T minimum, 
+            T actual, String msg) {
+        String errMsg = msg + ". Number " + actual + " expected to be at least " 
+                + minimum;
+        int comparison = minimum.compareTo(actual);
+        assert comparison < 1 : errMsg;
+    }
+
+    // TODO: Write tests for this
+    public static void assertInRange(long minimum, long actual, long maximum) {
         //
     }
     
     // TODO: Write tests for this
-    public static void assertMaximum(double maximum, double actual) {
+    public static void assertNegative(long actual) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNegative(long actual, String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNegative(double actual) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNegative(double actual, String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNotPositive(long actual) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNotPositive(long actual, String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNotPositive(double actual) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNotPositive(double actual, String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertZero(long actual) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertZero(long actual, String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertZero(double actual) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertZero(double actual, String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNotNegative(long actual) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNotNegative(long actual, String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNotNegative(double actual) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertNotNegative(double actual, String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    // TODO: Write tests for this
+    // TODO: Write tests for this
+    // TODO: Write tests for this
+    // TODO: Write tests for this
+    // TODO: Write tests for this
+    // TODO: Write tests for this
+    // TODO: Write tests for this
+    public static void assertInRange(long minimum, long actual, long maximum, 
+            String msg) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertInRange(double minimum, double actual, 
+            double maximum) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertInRange(double minimum, double actual, 
+            double maximum, String msg) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static <T extends Comparable<T>> void assertInRange(T minimum, 
+            T actual, T maximum) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static <T extends Comparable<T>> void assertInRange(T minimum, 
+            T actual, T maximum, String msg) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertMaximum(long actual, long maximum) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertMaximum(long actual, long maximum, String msg) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertMaximum(double actual, double maximum) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static void assertMaximum(double actual, double maximum,  
+            String msg) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static <T extends Comparable<T>> void assertMaximum(T actual, 
+            T maximum) {
+        //
+    }
+
+    // TODO: Write tests for this
+    public static <T extends Comparable<T>> void assertMaximum(T actual, 
+            T maximum, String msg) {
         //
     }
 

@@ -326,12 +326,14 @@ public class AssertersTest {
     public void testAssertNotEqualsArrayIntDiffLengths() {
         int[] someNumbers = {1, 2, 3, 4, 5};
         int[] moreNumbers = {1, 2, 3, 4, 5, 6, 7};
+        String msgCustomPart = "Arrays should be the same";
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumbers, moreNumbers);
+            Asserters.assertEquals(someNumbers, moreNumbers, msgCustomPart);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Arrays differ in length: expected has " 
+            String expected = msgCustomPart 
+                    + ". Arrays differ in length: expected has " 
                     + someNumbers.length + " elements but actual has " 
                     + moreNumbers.length + " elements";
             String actual = ae.getMessage();
@@ -345,12 +347,103 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    // TODO: Write more tests for assertEquals() for arrays
+    
     @Test
     public void testAssertBelowMinimumLong() {
-        throw new AssertionError("PLACEHOLDER FOR TEST");
+        int halfIntMax = -(Integer.MIN_VALUE / 2);
+        long minimum = ((long) Integer.MAX_VALUE) + RANDOM.nextInt(halfIntMax);
+        long belowMinimum = minimum - RANDOM.nextInt(128) - 1;
+        String msgCustomPart = "Customizable part of assertion message";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMinimum(minimum, belowMinimum, msgCustomPart);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String msgStandardPart = "Number " + belowMinimum 
+                    + " expected to be at least " + minimum;
+            String expected = msgCustomPart + ". " + msgStandardPart;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + belowMinimum 
+                + " is equal to or greater than " + minimum 
+                + " should have failed the test";
+        assert failOccurred : msg;
     }
     
-    // TODO: Write the rest of the tests for assertMinimum()
+    @Test
+    public void testAssertMinimum() {
+        System.out.println("assertMinimum");
+        int halfIntMax = -(Integer.MIN_VALUE / 2);
+        long minimum = ((long) Integer.MAX_VALUE) + RANDOM.nextInt(halfIntMax);
+        long atOrAboveMinimum = minimum + RANDOM.nextInt(128);
+        String msgCustomPart = "Customizable part of assertion message";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMinimum(minimum, atOrAboveMinimum, msgCustomPart);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that " + atOrAboveMinimum 
+                + " is equal to or greater than " + minimum 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    // TODO: Write tests for assertMinimum(long, long) with default message
+    
+    // TODO: Write tests for assertMinimum(double, double)
+    
+    @Test
+    public void testAssertBelowMinimumComparable() {
+        BigInteger minimum = new BigInteger(72, RANDOM);
+        BigInteger belowMinimum = minimum.subtract(BigInteger.ONE);
+        String msgCustomPart = "Customizable part of assertion message";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMinimum(minimum, belowMinimum, msgCustomPart);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+            String msgStandardPart = "Number " + belowMinimum.toString() 
+                    + " expected to be at least " + minimum.toString();
+            String expected = msgCustomPart + ". " + msgStandardPart;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + belowMinimum.toString() 
+                + " is equal to or greater than " + minimum.toString() 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertMinimumComparable() {
+        System.out.println("assertMinimum");
+        int halfIntMax = -(Integer.MIN_VALUE / 2);
+        BigInteger minimum = new BigInteger(84, RANDOM);
+//        long atOrAboveMinimum = minimum.add(RANDOM.nextInt(128));
+//        String msgCustomPart = "Customizable part of assertion message";
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertMinimum(minimum, atOrAboveMinimum, msgCustomPart);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//            System.out.println("\"" + ae.getMessage() + "\"");
+//        }
+//        String msg = "Asserting that " + atOrAboveMinimum 
+//                + " is equal to or greater than " + minimum 
+//                + " should not have failed the test";
+//        assert !failOccurred : msg;
+    }
+    
+    // TODO: Write tests for assertInRange()
     
     // TODO: Write tests for assertMaximum()
     
@@ -469,25 +562,4 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-    /**
-     * Although <code>int</code> already has an object wrapper 
-     * (<code>Integer</code>), I needed a quick <code>Comparable</code> type 
-     * that would work without my having to worry about autoboxing.
-     * @author Alonso del Arte
-     */
-    private class IntegerWrapper implements Comparable<IntegerWrapper> {
-        
-        private final int wrappedNumber;
-        
-        @Override
-        public int compareTo(IntegerWrapper other) {
-            return Integer.compare(this.wrappedNumber, other.wrappedNumber);
-        }
-        
-        IntegerWrapper(int n) {
-            this.wrappedNumber = n;
-        }
-
-    }
-
 }
