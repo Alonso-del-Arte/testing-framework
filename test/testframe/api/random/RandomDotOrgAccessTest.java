@@ -12,6 +12,7 @@ import static testframe.api.Asserters.*;
  * Tests of the RandomDotOrgAccess class. We take it on faith that 
  * RandomDotOrgAccess will connect to random.org for the numbers, but check that 
  * the numbers meet our requirements for distribution and range.
+ * @author Alonso del Arte
  */
 public class RandomDotOrgAccessTest {
     
