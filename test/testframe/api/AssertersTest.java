@@ -425,22 +425,22 @@ public class AssertersTest {
     
     @Test
     public void testAssertMinimumComparable() {
-        System.out.println("assertMinimum");
-        int halfIntMax = -(Integer.MIN_VALUE / 2);
+        assert false : "Resume working here";
         BigInteger minimum = new BigInteger(84, RANDOM);
-//        long atOrAboveMinimum = minimum.add(RANDOM.nextInt(128));
-//        String msgCustomPart = "Customizable part of assertion message";
-//        boolean failOccurred = false;
-//        try {
-//            Asserters.assertMinimum(minimum, atOrAboveMinimum, msgCustomPart);
-//        } catch (AssertionError ae) {
-//            failOccurred = true;
-//            System.out.println("\"" + ae.getMessage() + "\"");
-//        }
-//        String msg = "Asserting that " + atOrAboveMinimum 
-//                + " is equal to or greater than " + minimum 
-//                + " should not have failed the test";
-//        assert !failOccurred : msg;
+        BigInteger atOrAboveMinimum 
+                = minimum.add(BigInteger.valueOf(RANDOM.nextInt(128)));
+        String msgCustomPart = "Customizable part of assertion message";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMinimum(minimum, atOrAboveMinimum, msgCustomPart);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that " + atOrAboveMinimum 
+                + " is equal to or greater than " + minimum 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     // TODO: Write tests for assertInRange()
