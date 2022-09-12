@@ -278,9 +278,8 @@ public class Asserters {
             T actual, String msg) {
         String errMsg = msg + ". Number " + actual + " expected to be at least " 
                 + minimum;
-        throw new AssertionError(errMsg, null);
-//        int comparison = minimum.compareTo(actual);
-//        assert comparison < 1 : errMsg;
+        int comparison = minimum.compareTo(actual);
+        assert comparison < 1 : errMsg;
     }
 
     // TODO: Write tests for this

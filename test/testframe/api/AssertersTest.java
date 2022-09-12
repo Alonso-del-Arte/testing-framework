@@ -425,7 +425,6 @@ public class AssertersTest {
     
     @Test
     public void testAssertMinimumComparable() {
-        assert false : "Resume working here";
         BigInteger minimum = new BigInteger(84, RANDOM);
         BigInteger atOrAboveMinimum 
                 = minimum.add(BigInteger.valueOf(RANDOM.nextInt(128)));
