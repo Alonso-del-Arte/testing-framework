@@ -1,6 +1,6 @@
-This project will probably be open to Hacktoberfest 2022.
+This project will probably be open to Hacktoberfest 2023.
 
-# Guidelines for Hacktoberfest 2022 Contributors
+# Guidelines for Hacktoberfest 2023 Contributors
 
 I will definitely consider pull requests associated with an issue and maybe 
 consider pull requests associated with a TODO (considered an Action Item in 
@@ -19,10 +19,12 @@ Remember that the goal of this project is not to replace an existing testing
 framework, or even to try to do that, but to understand how a testing framework 
 can be made from scratch through test-driven development (TDD).
 
-To understand how this works, I suggest you first look at `TestRunner` and 
-`TestRunnerTest`, in the `testframe.engine` package.
+To understand how this testing framework works, I suggest you first look at 
+`TestRunner` and `TestRunnerTest`, in the `testframe.engine` package.
 
-Run `TestRunnerTest`'s `main()` to make sure `TestRunner` is working properly.
+Once you've got the project loaded in your favorite IDE with the necessary 
+project settings (such as compiler output directory for IntelliJ IDEA), run
+`TestRunnerTest`'s `main()` to make sure `TestRunner` is working properly.
 
 Once you're sure that `TestRunner` is working properly, or at least that it 
 correctly picks up `@Test` annotations, you can use it to run `AssertersTest` by 
@@ -48,12 +50,16 @@ meant to be exercises. Finished classes in those packages are not meant to be
 checked in. This will eventually be enforced by the Git Ignore.
 
 As much as possible, commits to the demonstration packages should be one each to 
-a step of the TDD cycle (fail, pass, refactor). That's a pain in the neck and I 
-don't expect it for `com.example.exercises`, `org.example.exercises` or even 
-`testframe.api` or `testframe.engine`.
+a step of the TDD cycle (fail, pass, refactor). That can be a pain in the neck 
+&mdash; and I don't expect it for `com.example.exercises`, 
+`org.example.exercises` or even `testframe.api` or `testframe.engine`. But 
+remember: one push can contain multiple commits.
 
 ## Style guidelines
 
+* Access levels will be respected as much as possible. This means, for one 
+thing, that for tests to be discoverable by `TestRunner`, they must be public, 
+not package private like in JUnit 5.
 * No blanket import statements except for static imports or when absolutely 
 everything in a given package is imported.
 * Column width is 80.
