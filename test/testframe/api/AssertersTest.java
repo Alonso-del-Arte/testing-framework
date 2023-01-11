@@ -409,7 +409,7 @@ public class AssertersTest {
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
-            String msgStandardPart = "Number " + belowMinimum.toString() 
+            String msgStandardPart = "Value " + belowMinimum.toString() 
                     + " expected to be at least " + minimum.toString();
             String expected = msgCustomPart + ". " + msgStandardPart;
             String actual = ae.getMessage();
@@ -440,6 +440,11 @@ public class AssertersTest {
                 + " is equal to or greater than " + minimum 
                 + " should not have failed the test";
         assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertBelowRange() {
+        throw new AssertionError("Resume work here");
     }
     
     // TODO: Write tests for assertInRange()
