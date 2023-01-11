@@ -259,7 +259,8 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertMinimum(double minimum, double actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertMinimum(minimum, actual, msg);
     }
 
     // TODO: Write tests for this
@@ -271,25 +272,36 @@ public class Asserters {
     // TODO: Write tests for this
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertMinimum(minimum, actual, msg);
     }
 
+    /**
+     * Asserts that the value held by a <code>Comparable</code> object is 
+     * greater than or equal to a specified minimum.
+     * @param <T> The type of the <code>minimum</code> and <code>actual</code> 
+     * parameters. Must implement <code>Comparable&lt;T&gt;</code>. For example, 
+     * <code>Fraction implements Comparable&lt;Fraction&gt;</code>.
+     * @param minimum The minimum permissible value. For example, 
+     * <sup>3</sup>&frasl;<sub>2</sub>.
+     * @param actual The value to compare against the specified minimum. For 
+     * example, <sup>21</sup>&frasl;<sub>16</sub>.
+     * @param msg The message to put into the test failure explanation if the 
+     * test fails because of the assertion. The minimum and actual values will 
+     * be appended to the test failure explanation.
+     */
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual, String msg) {
-        String errMsg = msg + ". Number " + actual + " expected to be at least " 
+        String errMsg = msg + ". Value " + actual + " expected to be at least " 
                 + minimum;
         int comparison = minimum.compareTo(actual);
         assert comparison < 1 : errMsg;
     }
 
     // TODO: Write tests for this
-    public static void assertInRange(long minimum, long actual, long maximum) {
-        //
-    }
-    
-    // TODO: Write tests for this
     public static void assertNegative(long actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertNegative(actual, msg);
     }
 
     // TODO: Write tests for this
@@ -299,7 +311,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNegative(double actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertNegative(actual, msg);
     }
 
     // TODO: Write tests for this
@@ -309,7 +322,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNotPositive(long actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertNotPositive(actual, msg);
     }
 
     // TODO: Write tests for this
@@ -319,7 +333,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNotPositive(double actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertNotPositive(actual, msg);
     }
 
     // TODO: Write tests for this
@@ -329,7 +344,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertZero(long actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertZero(actual, msg);
     }
 
     // TODO: Write tests for this
@@ -339,7 +355,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertZero(double actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertZero(actual, msg);
     }
 
     // TODO: Write tests for this
@@ -349,7 +366,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNotNegative(long actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertNotNegative(actual, msg);
     }
 
     // TODO: Write tests for this
@@ -359,7 +377,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNotNegative(double actual) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertNotNegative(actual, msg);
     }
 
     // TODO: Write tests for this
@@ -368,12 +387,11 @@ public class Asserters {
     }
 
     // TODO: Write tests for this
-    // TODO: Write tests for this
-    // TODO: Write tests for this
-    // TODO: Write tests for this
-    // TODO: Write tests for this
-    // TODO: Write tests for this
-    // TODO: Write tests for this
+    public static void assertInRange(long minimum, long actual, long maximum) {
+        String msg = "Sorry, default message not implemented yet";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
     // TODO: Write tests for this
     public static void assertInRange(long minimum, long actual, long maximum, 
             String msg) {
@@ -383,7 +401,8 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertInRange(double minimum, double actual, 
             double maximum) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertInRange(minimum, actual, maximum, msg);
     }
     
     // TODO: Write tests for this
@@ -395,7 +414,8 @@ public class Asserters {
     // TODO: Write tests for this
     public static <T extends Comparable<T>> void assertInRange(T minimum, 
             T actual, T maximum) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertInRange(minimum, actual, maximum, msg);
     }
     
     // TODO: Write tests for this
@@ -406,7 +426,8 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertMaximum(long actual, long maximum) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertMaximum(actual, maximum, msg);
     }
     
     // TODO: Write tests for this
@@ -416,7 +437,8 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertMaximum(double actual, double maximum) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertMaximum(actual, maximum, msg);
     }
 
     // TODO: Write tests for this
@@ -428,7 +450,8 @@ public class Asserters {
     // TODO: Write tests for this
     public static <T extends Comparable<T>> void assertMaximum(T actual, 
             T maximum) {
-        //
+        String msg = "Sorry, default message not implemented yet";
+        assertMaximum(actual, maximum, msg);
     }
 
     // TODO: Write tests for this
