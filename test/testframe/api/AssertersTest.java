@@ -443,6 +443,29 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertBelowMinimumComparableDefaultMessage() {
+        BigInteger minimum = new BigInteger(72, RANDOM);
+        BigInteger belowMinimum = minimum.subtract(BigInteger.ONE);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMinimum(minimum, belowMinimum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+            String expected = "Value " + belowMinimum.toString() 
+                    + " expected to be at least " + minimum.toString();
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + belowMinimum.toString() 
+                + " is equal to or greater than " + minimum.toString() 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+//    @Test
     public void testAssertBelowRange() {
         throw new AssertionError("Resume work here");
     }

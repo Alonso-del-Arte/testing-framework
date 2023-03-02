@@ -269,11 +269,12 @@ public class Asserters {
         //
     }
 
-    // TODO: Write tests for this
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual) {
-        String msg = "Sorry, default message not implemented yet";
-        assertMinimum(minimum, actual, msg);
+        String msg = "Value " + actual.toString() + " expected to be at least " 
+                + minimum.toString();
+        throw new AssertionError(msg);
+//        assertMinimum(minimum, actual, msg);
     }
 
     /**
@@ -292,8 +293,8 @@ public class Asserters {
      */
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual, String msg) {
-        String errMsg = msg + ". Value " + actual + " expected to be at least " 
-                + minimum;
+        String errMsg = msg + ". Value " + actual.toString() 
+                + " expected to be at least " + minimum.toString();
         int comparison = minimum.compareTo(actual);
         assert comparison < 1 : errMsg;
     }
