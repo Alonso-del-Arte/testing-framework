@@ -271,10 +271,7 @@ public class Asserters {
 
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual) {
-        String msg = "Value " + actual.toString() + " expected to be at least " 
-                + minimum.toString();
-        throw new AssertionError(msg);
-//        assertMinimum(minimum, actual, msg);
+        assertMinimum(minimum, actual, "");
     }
 
     /**
@@ -295,6 +292,9 @@ public class Asserters {
             T actual, String msg) {
         String errMsg = msg + ". Value " + actual.toString() 
                 + " expected to be at least " + minimum.toString();
+        if (errMsg.startsWith(". ")) {
+            errMsg = errMsg.substring(2);
+        }
         int comparison = minimum.compareTo(actual);
         assert comparison < 1 : errMsg;
     }

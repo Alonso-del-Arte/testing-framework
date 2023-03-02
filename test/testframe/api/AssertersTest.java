@@ -436,8 +436,8 @@ public class AssertersTest {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
         }
-        String msg = "Asserting that " + atOrAboveMinimum 
-                + " is equal to or greater than " + minimum 
+        String msg = "Asserting that " + atOrAboveMinimum.toString() 
+                + " is equal to or greater than " + minimum.toString() 
                 + " should not have failed the test";
         assert !failOccurred : msg;
     }
@@ -463,6 +463,24 @@ public class AssertersTest {
                 + " is equal to or greater than " + minimum.toString() 
                 + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertMinimumComparableDefaultMessage() {
+        BigInteger minimum = new BigInteger(84, RANDOM);
+        BigInteger atOrAboveMinimum 
+                = minimum.add(BigInteger.valueOf(RANDOM.nextInt(128)));
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMinimum(minimum, atOrAboveMinimum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that " + atOrAboveMinimum.toString() 
+                + " is equal to or greater than " + minimum.toString() 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
     }
     
 //    @Test
