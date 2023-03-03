@@ -264,23 +264,32 @@ public class Asserters {
     }
 
     /**
-     * 
-     * @param minimum
-     * @param actual
-     * @param msg
+     * Asserts that a floating point number is equal to or greater than a 
+     * specified minimum.
+     * @param minimum The minimum possible number. For example, &minus;0.5.
+     * @param actual The number to compare against the specified minimum. For 
+     * example, &minus;1.83.
+     * @param msg The message to put into the test failure explanation if the 
+     * test fails because of the assertion. The minimum and actual values will 
+     * be appended to the test failure explanation.
      */
     public static void assertMinimum(double minimum, double actual, 
             String msg) {
         String errMsg = msg + ". Value " + actual + " expected to be at least " 
                 + minimum;
-        throw new AssertionError(errMsg);
+        assert actual >= minimum : errMsg;
     }
 
     /**
-     * 
-     * @param <T>
-     * @param minimum
-     * @param actual
+     * Asserts that the value held by a <code>Comparable</code> object is 
+     * greater than or equal to a specified minimum.
+     * @param <T> The type of the <code>minimum</code> and <code>actual</code> 
+     * parameters. Must implement <code>Comparable&lt;T&gt;</code>. For example, 
+     * <code>Fraction implements Comparable&lt;Fraction&gt;</code>.
+     * @param minimum The minimum permissible value. For example, 
+     * <sup>3</sup>&frasl;<sub>2</sub>.
+     * @param actual The value to compare against the specified minimum. For 
+     * example, <sup>21</sup>&frasl;<sub>16</sub>.
      */
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual) {
