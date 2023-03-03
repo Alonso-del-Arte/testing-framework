@@ -394,9 +394,32 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-    // TODO: Write tests for assertMinimum(long, long) with default message
-    
-    // TODO: Write tests for assertMinimum(double, double)
+    @Test
+    public void testAssertBelowMinimumDouble() {
+        double multiplier = RANDOM.nextInt(256) - 128;
+        double unitIntervalNumber = RANDOM.nextDouble();
+        double minimum = multiplier * unitIntervalNumber;
+        double belowMinimum = minimum - unitIntervalNumber;
+        String msgCustomPart = "Customizable part of assertion message";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMinimum(minimum, belowMinimum, msgCustomPart);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+            String msgStandardPart = "Value " + belowMinimum 
+                    + " expected to be at least " + minimum;
+            String expected = msgCustomPart + ". " + msgStandardPart;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + belowMinimum 
+                + " is equal to or greater than " + minimum 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
     
     @Test
     public void testAssertBelowMinimumComparable() {

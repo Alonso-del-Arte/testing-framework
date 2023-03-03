@@ -263,12 +263,25 @@ public class Asserters {
         assertMinimum(minimum, actual, msg);
     }
 
-    // TODO: Write tests for this
+    /**
+     * 
+     * @param minimum
+     * @param actual
+     * @param msg
+     */
     public static void assertMinimum(double minimum, double actual, 
             String msg) {
-        //
+        String errMsg = msg + ". Value " + actual + " expected to be at least " 
+                + minimum;
+        throw new AssertionError(errMsg);
     }
 
+    /**
+     * 
+     * @param <T>
+     * @param minimum
+     * @param actual
+     */
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual) {
         assertMinimum(minimum, actual, "");
