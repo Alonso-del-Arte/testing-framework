@@ -257,10 +257,11 @@ public class Asserters {
         assert actual >= minimum : errMsg;
     }
     
-    // TODO: Write tests for this
     public static void assertMinimum(double minimum, double actual) {
-        String msg = "Sorry, default message not implemented yet";
-        assertMinimum(minimum, actual, msg);
+        String errMsg = "Value " + actual + " expected to be at least " 
+                + minimum;
+        throw new AssertionError(errMsg);
+//        assertMinimum(minimum, actual, msg);
     }
 
     /**

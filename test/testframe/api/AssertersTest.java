@@ -442,6 +442,31 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertBelowMinimumDoubleDefaultMessage() {
+        double multiplier = RANDOM.nextInt(256) - 128;
+        double unitIntervalNumber = RANDOM.nextDouble();
+        double minimum = multiplier * unitIntervalNumber;
+        double belowMinimum = minimum - unitIntervalNumber;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMinimum(minimum, belowMinimum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+            String expected = "Value " + belowMinimum 
+                    + " expected to be at least " + minimum;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + belowMinimum 
+                + " is equal to or greater than " + minimum 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertBelowMinimumComparable() {
         BigInteger minimum = new BigInteger(72, RANDOM);
         BigInteger belowMinimum = minimum.subtract(BigInteger.ONE);
