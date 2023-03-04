@@ -467,6 +467,25 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertMinimumDoubleDefaultMessage() {
+        double multiplier = RANDOM.nextInt(256) - 128;
+        double unitIntervalNumber = RANDOM.nextDouble();
+        double minimum = multiplier * unitIntervalNumber;
+        double atOrAboveMinimum = minimum + unitIntervalNumber;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMinimum(minimum, atOrAboveMinimum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that " + atOrAboveMinimum 
+                + " is equal to or greater than " + minimum 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertBelowMinimumComparable() {
         BigInteger minimum = new BigInteger(72, RANDOM);
         BigInteger belowMinimum = minimum.subtract(BigInteger.ONE);

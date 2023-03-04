@@ -242,7 +242,9 @@ public class Asserters {
     }
     
     /**
-     * Asserts that an integer is greater than or equal to a specified minimum.
+     * Asserts that an integer is greater than or equal to a specified minimum. 
+     * The test failure explanation will include both the expected minimum and 
+     * the actual number if it's below the minimum.
      * @param minimum The minimum permissible value. For example, 100.
      * @param actual The value to compare against the specified minimum. For 
      * example, 95.
@@ -257,16 +259,26 @@ public class Asserters {
         assert actual >= minimum : errMsg;
     }
     
+    /**
+     * Asserts that a floating point number is equal to or greater than a 
+     * specified minimum. Due to the vagaries of floating point, numbers 
+     * slightly below the minimum might register as equal to the minimum. The 
+     * test failure explanation will include both the expected minimum and the 
+     * actual number if it's below the minimum.
+     * @param minimum The minimum possible number. For example, &minus;0.5.
+     * @param actual The number to compare against the specified minimum. For 
+     * example, &minus;1.83.
+     */
     public static void assertMinimum(double minimum, double actual) {
-        String errMsg = "Value " + actual + " expected to be at least " 
-                + minimum;
-        throw new AssertionError(errMsg);
-//        assertMinimum(minimum, actual, msg);
+        assertMinimum(minimum, actual, "");
     }
 
     /**
      * Asserts that a floating point number is equal to or greater than a 
-     * specified minimum.
+     * specified minimum. Due to the vagaries of floating point, numbers 
+     * slightly below the minimum might register as equal to the minimum. The 
+     * test failure explanation will include both the expected minimum and the 
+     * actual number if it's below the minimum.
      * @param minimum The minimum possible number. For example, &minus;0.5.
      * @param actual The number to compare against the specified minimum. For 
      * example, &minus;1.83.
@@ -278,6 +290,9 @@ public class Asserters {
             String msg) {
         String errMsg = msg + ". Value " + actual + " expected to be at least " 
                 + minimum;
+        if (errMsg.startsWith(". ")) {
+            errMsg = errMsg.substring(2);
+        }
         assert actual >= minimum : errMsg;
     }
 
