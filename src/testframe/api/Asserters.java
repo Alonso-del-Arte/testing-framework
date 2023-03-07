@@ -236,10 +236,16 @@ public class Asserters {
     
     // No assertNull will provided. Use plain Java assert.
     
+    /**
+     * Asserts that an integer is greater than or equal to a specified minimum. 
+     * The test failure explanation will include both the expected minimum and 
+     * the actual number if it's below the minimum.
+     * @param minimum The minimum permissible value. For example, 100.
+     * @param actual The value to compare against the specified minimum. For 
+     * example, 95.
+     */
     public static void assertMinimum(long minimum, long actual) {
-        String errMsg = "Number " + actual + " expected to be at least " 
-                + minimum;
-        throw new AssertionError(errMsg);
+        assertMinimum(minimum, actual, "");
     }
     
     /**
@@ -257,6 +263,9 @@ public class Asserters {
     public static void assertMinimum(long minimum, long actual, String msg) {
         String errMsg = msg + ". Number " + actual + " expected to be at least " 
                 + minimum;
+        if (errMsg.startsWith(". ")) {
+            errMsg = errMsg.substring(2);
+        }
         assert actual >= minimum : errMsg;
     }
     
