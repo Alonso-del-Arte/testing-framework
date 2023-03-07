@@ -20,6 +20,14 @@ public class Asserters {
      */
     public static final double DEFAULT_TEST_DELTA 
             = Double.longBitsToDouble(4503599627370497L);
+    
+    private static String prepMsg(String intermediate) {
+        if (intermediate.startsWith(". ")) {
+            return intermediate.substring(2);
+        } else {
+            return intermediate;
+        }
+    }
 
     /**
      * Asserts that two integers are equal. If they are indeed equal and there 
@@ -46,12 +54,10 @@ public class Asserters {
      * explanation.
      */
     public static void assertEquals(int expected, int actual, String msg) {
-        String message = msg + ". Expected = " + expected + ". Actual = " 
+        String intermediate = msg + ". Expected = " + expected + ". Actual = " 
                 + actual;
-        if (message.startsWith(". ")) {
-            message = message.substring(2);
-        }
-        assert expected == actual : message;
+        String errMsg = prepMsg(intermediate);
+        assert expected == actual : errMsg;
     }
     
     /**
@@ -79,12 +85,10 @@ public class Asserters {
      * explanation.
      */
     public static void assertEquals(long expected, long actual, String msg) {
-        String message = msg + ". Expected = " + expected + ". Actual = " 
+        String intermediate = msg + ". Expected = " + expected + ". Actual = " 
                 + actual;
-        if (message.startsWith(". ")) {
-            message = message.substring(2);
-        }
-        assert expected == actual : message;
+        String errMsg = prepMsg(intermediate);
+        assert expected == actual : errMsg;
     }
     
     // TODO: Write tests for this
@@ -167,12 +171,10 @@ public class Asserters {
      */
     public static void assertEquals(Object expected, Object actual, 
             String msg) {
-        String message = msg + ". Expected = " + expected.toString() 
+        String intermediate = msg + ". Expected = " + expected.toString() 
                 + ". Actual = " + actual;
-        if (message.startsWith(". ")) {
-            message = message.substring(2);
-        }
-        assert expected.equals(actual) : message;
+        String errMsg = prepMsg(intermediate);
+        assert expected.equals(actual) : errMsg;
     }
     
     // TODO: Write tests for this
@@ -261,11 +263,9 @@ public class Asserters {
      * appended to the test failure explanation.
      */
     public static void assertMinimum(long minimum, long actual, String msg) {
-        String errMsg = msg + ". Number " + actual + " expected to be at least " 
-                + minimum;
-        if (errMsg.startsWith(". ")) {
-            errMsg = errMsg.substring(2);
-        }
+        String intermediate = msg + ". Number " + actual 
+                + " expected to be at least " + minimum;
+        String errMsg = prepMsg(intermediate);
         assert actual >= minimum : errMsg;
     }
     
@@ -298,11 +298,9 @@ public class Asserters {
      */
     public static void assertMinimum(double minimum, double actual, 
             String msg) {
-        String errMsg = msg + ". Value " + actual + " expected to be at least " 
-                + minimum;
-        if (errMsg.startsWith(". ")) {
-            errMsg = errMsg.substring(2);
-        }
+        String intermediate = msg + ". Value " + actual 
+                + " expected to be at least " + minimum;
+        String errMsg = prepMsg(intermediate);
         assert actual >= minimum : errMsg;
     }
 
@@ -338,11 +336,9 @@ public class Asserters {
      */
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual, String msg) {
-        String errMsg = msg + ". Value " + actual.toString() 
+        String intermediate = msg + ". Value " + actual.toString() 
                 + " expected to be at least " + minimum.toString();
-        if (errMsg.startsWith(". ")) {
-            errMsg = errMsg.substring(2);
-        }
+        String errMsg = prepMsg(intermediate);
         int comparison = minimum.compareTo(actual);
         assert comparison < 1 : errMsg;
     }
