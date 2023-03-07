@@ -236,9 +236,10 @@ public class Asserters {
     
     // No assertNull will provided. Use plain Java assert.
     
-    // TODO: Write tests for this
     public static void assertMinimum(long minimum, long actual) {
-        String msg = "Value " + actual + " ought to be at least " + minimum;
+        String errMsg = "Number " + actual + " expected to be at least " 
+                + minimum;
+        throw new AssertionError(errMsg);
     }
     
     /**
