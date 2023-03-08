@@ -629,7 +629,7 @@ public class AssertersTest {
         } catch (AssertionError ae) {
             failOccurred = true;
             String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
-                    + number + " expected to not be negative";
+                    + number + " expected to be at least 0";
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";

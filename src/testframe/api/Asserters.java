@@ -424,7 +424,7 @@ public class Asserters {
      */
     public static void assertNotNegative(long actual, String msg) {
         String intermediate = msg + ". Number " + actual 
-                + " expected to not be negative";
+                + " expected to be at least 0";
         String errMsg = prepMsg(intermediate);
         assert actual > -1 : errMsg;
     }
