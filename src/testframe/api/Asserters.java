@@ -423,10 +423,7 @@ public class Asserters {
      * the test failure explanation.
      */
     public static void assertNotNegative(long actual, String msg) {
-        String intermediate = msg + ". Number " + actual 
-                + " expected to be at least 0";
-        String errMsg = prepMsg(intermediate);
-        assert actual > -1 : errMsg;
+        assertMinimum(0, actual, msg);
     }
 
     // TODO: Write tests for this
