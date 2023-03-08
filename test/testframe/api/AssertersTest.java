@@ -640,6 +640,22 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNotNegative() {
+        System.out.println("assertNotNegative");    
+        int number = RANDOM.nextInt(65536);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
 //    @Test
     public void testAssertBelowRange() {
         throw new AssertionError("Resume work here");
