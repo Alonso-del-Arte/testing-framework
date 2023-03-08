@@ -17,6 +17,9 @@ public class AssertersTest {
     
     private static final Random RANDOM = new Random();
     
+    private static final String EXAMPLE_ASSERTION_MESSAGE_PART 
+            = "Customizable part of assertion message";
+    
     @Test
     public void testFail() {
         System.out.println("fail");
@@ -38,13 +41,14 @@ public class AssertersTest {
     public void testAssertNotEqualsInt() {
         int someNumber = RANDOM.nextInt();
         int otherNumber = 2 * someNumber + 1;
-        String msgCustomPart = "Customizable part of assertion message";
         String msgStandardPart = "Expected = " + someNumber + ". Actual = " 
                 + otherNumber;
-        String expected = msgCustomPart + ". " + msgStandardPart;
+        String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                + msgStandardPart;
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumber, otherNumber, msgCustomPart);
+            Asserters.assertEquals(someNumber, otherNumber, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             String actual = ae.getMessage();
@@ -62,10 +66,10 @@ public class AssertersTest {
         System.out.println("assertEquals");
         int someNumber = RANDOM.nextInt();
         int sameNumber = someNumber;
-        String msg = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumber, sameNumber, msg);
+            Asserters.assertEquals(someNumber, sameNumber, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -100,13 +104,14 @@ public class AssertersTest {
     public void testAssertNotEqualsLong() {
         long someNumber = RANDOM.nextLong();
         long otherNumber = 2 * someNumber + 1;
-        String msgCustomPart = "Customizable part of assertion message";
         String msgStandardPart = "Expected = " + someNumber + ". Actual = " 
                 + otherNumber;
-        String expected = msgCustomPart + ". " + msgStandardPart;
+        String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                + msgStandardPart;
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumber, otherNumber, msgCustomPart);
+            Asserters.assertEquals(someNumber, otherNumber, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             String actual = ae.getMessage();
@@ -123,10 +128,10 @@ public class AssertersTest {
     public void testAssertEqualsLong() {
         long someNumber = RANDOM.nextLong();
         long sameNumber = someNumber;
-        String msg = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumber, sameNumber, msg);
+            Asserters.assertEquals(someNumber, sameNumber, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -161,15 +166,15 @@ public class AssertersTest {
     public void testAssertNotEqualsDouble() {
         double someNumber = RANDOM.nextDouble();
         double otherNumber = 2.0 * someNumber + 1.0;
-        String msgCustomPart = "Customizable part of assertion message";
         String msgStandardPart = "Expected " + someNumber 
                 + " to not differ from " + otherNumber + " by more than " 
                 + LOCAL_DELTA;
-        String expected = msgCustomPart + ". " + msgStandardPart;
+        String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                + msgStandardPart;
         boolean failOccurred = false;
         try {
             Asserters.assertEquals(someNumber, otherNumber, LOCAL_DELTA, 
-                    msgCustomPart);
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             String actual = ae.getMessage();
@@ -187,10 +192,10 @@ public class AssertersTest {
     public void testAssertEqualsDouble() {
         double someNumber = RANDOM.nextDouble();
         double sameNumber = someNumber;
-        String msg = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumber, sameNumber, LOCAL_DELTA, msg);
+            Asserters.assertEquals(someNumber, sameNumber, LOCAL_DELTA, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -204,10 +209,10 @@ public class AssertersTest {
     public void testAssertEqualsDoubleCloseEnough() {
         double someNumber = RANDOM.nextDouble();
         double nearNumber = someNumber + LOCAL_DELTA / 2;
-        String msg = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumber, nearNumber, LOCAL_DELTA, msg);
+            Asserters.assertEquals(someNumber, nearNumber, LOCAL_DELTA, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -223,10 +228,10 @@ public class AssertersTest {
         double someNumber = RANDOM.nextDouble();
         double variance = 0.0078125;
         double nearNumber = someNumber + variance;
-        String msg = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumber, nearNumber, variance, msg);
+            Asserters.assertEquals(someNumber, nearNumber, variance, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -241,13 +246,14 @@ public class AssertersTest {
     public void testAssertNotEqualsObject() {
         BigInteger someNumber = new BigInteger(72, RANDOM);
         BigInteger otherNumber = someNumber.add(someNumber).add(BigInteger.ONE);
-        String msgCustomPart = "Customizable part of assertion message";
         String msgStandardPart = "Expected = " + someNumber.toString() 
                 + ". Actual = " + otherNumber.toString();
-        String expected = msgCustomPart + ". " + msgStandardPart;
+        String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                + msgStandardPart;
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumber, otherNumber, msgCustomPart);
+            Asserters.assertEquals(someNumber, otherNumber, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             String actual = ae.getMessage();
@@ -265,10 +271,10 @@ public class AssertersTest {
         BigInteger someNumber = new BigInteger(64, RANDOM);
         BigInteger sameNumber = someNumber.add(someNumber);
         sameNumber = sameNumber.subtract(someNumber);
-        String msg = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumber, sameNumber, msg);
+            Asserters.assertEquals(someNumber, sameNumber, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -354,15 +360,16 @@ public class AssertersTest {
         int halfIntMax = -(Integer.MIN_VALUE / 2);
         long minimum = ((long) Integer.MAX_VALUE) + RANDOM.nextInt(halfIntMax);
         long belowMinimum = minimum - RANDOM.nextInt(128) - 1;
-        String msgCustomPart = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertMinimum(minimum, belowMinimum, msgCustomPart);
+            Asserters.assertMinimum(minimum, belowMinimum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             String msgStandardPart = "Number " + belowMinimum 
                     + " expected to be at least " + minimum;
-            String expected = msgCustomPart + ". " + msgStandardPart;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                    + msgStandardPart;
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
@@ -380,10 +387,10 @@ public class AssertersTest {
         int halfIntMax = -(Integer.MIN_VALUE / 2);
         long minimum = ((long) Integer.MAX_VALUE) + RANDOM.nextInt(halfIntMax);
         long atOrAboveMinimum = minimum + RANDOM.nextInt(128);
-        String msgCustomPart = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertMinimum(minimum, atOrAboveMinimum, msgCustomPart);
+            Asserters.assertMinimum(minimum, atOrAboveMinimum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -441,16 +448,17 @@ public class AssertersTest {
         double unitIntervalNumber = RANDOM.nextDouble();
         double minimum = multiplier * unitIntervalNumber;
         double belowMinimum = minimum - unitIntervalNumber;
-        String msgCustomPart = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertMinimum(minimum, belowMinimum, msgCustomPart);
+            Asserters.assertMinimum(minimum, belowMinimum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
             String msgStandardPart = "Value " + belowMinimum 
                     + " expected to be at least " + minimum;
-            String expected = msgCustomPart + ". " + msgStandardPart;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                    + msgStandardPart;
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
@@ -468,10 +476,10 @@ public class AssertersTest {
         double unitIntervalNumber = RANDOM.nextDouble();
         double minimum = multiplier * unitIntervalNumber;
         double atOrAboveMinimum = minimum + unitIntervalNumber;
-        String msgCustomPart = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertMinimum(minimum, atOrAboveMinimum, msgCustomPart);
+            Asserters.assertMinimum(minimum, atOrAboveMinimum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -530,16 +538,17 @@ public class AssertersTest {
     public void testAssertBelowMinimumComparable() {
         BigInteger minimum = new BigInteger(72, RANDOM);
         BigInteger belowMinimum = minimum.subtract(BigInteger.ONE);
-        String msgCustomPart = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertMinimum(minimum, belowMinimum, msgCustomPart);
+            Asserters.assertMinimum(minimum, belowMinimum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
             String msgStandardPart = "Value " + belowMinimum.toString() 
                     + " expected to be at least " + minimum.toString();
-            String expected = msgCustomPart + ". " + msgStandardPart;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                    + msgStandardPart;
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
@@ -556,10 +565,10 @@ public class AssertersTest {
         BigInteger minimum = new BigInteger(84, RANDOM);
         BigInteger atOrAboveMinimum 
                 = minimum.add(BigInteger.valueOf(RANDOM.nextInt(128)));
-        String msgCustomPart = "Customizable part of assertion message";
         boolean failOccurred = false;
         try {
-            Asserters.assertMinimum(minimum, atOrAboveMinimum, msgCustomPart);
+            Asserters.assertMinimum(minimum, atOrAboveMinimum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -609,6 +618,11 @@ public class AssertersTest {
                 + " is equal to or greater than " + minimum.toString() 
                 + " should not have failed the test";
         assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNotNegativeWhenItIs() {
+        //
     }
     
 //    @Test
