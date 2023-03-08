@@ -454,12 +454,12 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            System.out.println("\"" + ae.getMessage() + "\"");
             String msgStandardPart = "Value " + belowMinimum 
                     + " expected to be at least " + minimum;
             String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
                     + msgStandardPart;
             String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
             assert expected.equals(actual) : msg;
@@ -501,10 +501,10 @@ public class AssertersTest {
             Asserters.assertMinimum(minimum, belowMinimum);
         } catch (AssertionError ae) {
             failOccurred = true;
-            System.out.println("\"" + ae.getMessage() + "\"");
             String expected = "Value " + belowMinimum 
                     + " expected to be at least " + minimum;
             String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
             assert expected.equals(actual) : msg;
@@ -544,12 +544,12 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            System.out.println("\"" + ae.getMessage() + "\"");
             String msgStandardPart = "Value " + belowMinimum.toString() 
                     + " expected to be at least " + minimum.toString();
             String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
                     + msgStandardPart;
             String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
             assert expected.equals(actual) : msg;
@@ -588,10 +588,10 @@ public class AssertersTest {
             Asserters.assertMinimum(minimum, belowMinimum);
         } catch (AssertionError ae) {
             failOccurred = true;
-            System.out.println("\"" + ae.getMessage() + "\"");
             String expected = "Value " + belowMinimum.toString() 
                     + " expected to be at least " + minimum.toString();
             String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
             assert expected.equals(actual) : msg;
@@ -622,7 +622,22 @@ public class AssertersTest {
     
     @Test
     public void testAssertNotNegativeWhenItIs() {
-        //
+        int number = -RANDOM.nextInt(65536) - 1;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+                    + number + " expected to not be negative";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should have failed the test";
+        assert failOccurred : msg;
     }
     
 //    @Test

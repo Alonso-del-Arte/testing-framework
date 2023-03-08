@@ -415,9 +415,16 @@ public class Asserters {
         assertNotNegative(actual, msg);
     }
 
-    // TODO: Write tests for this
+    /**
+     * 
+     * @param actual
+     * @param msg
+     */
     public static void assertNotNegative(long actual, String msg) {
-        //
+        String intermediate = msg + ". Number " + actual 
+                + " expected to not be negative";
+        String errMsg = prepMsg(intermediate);
+        throw new AssertionError(errMsg);
     }
 
     // TODO: Write tests for this
