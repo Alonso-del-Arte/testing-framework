@@ -409,10 +409,13 @@ public class Asserters {
         //
     }
 
-    // TODO: Write tests for this
+    /**
+     * 
+     * @param actual
+     */
     public static void assertNotNegative(long actual) {
-        String msg = "Sorry, default message not implemented yet";
-        assertNotNegative(actual, msg);
+        String errMsg = "Number " + actual + " expected to be at least 0";
+        throw new AssertionError(errMsg);
     }
 
     /**

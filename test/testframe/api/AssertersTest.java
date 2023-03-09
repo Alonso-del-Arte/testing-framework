@@ -656,10 +656,41 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-//    @Test
-    public void testAssertBelowRange() {
-        throw new AssertionError("Resume work here");
+    @Test
+    public void testAssertNotNegativeWhenItIsDefaultMessage() {
+        int number = -RANDOM.nextInt(65536) - 1;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number 
+                    + " expected to be at least 0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should have failed the test";
+        assert failOccurred : msg;
     }
+    
+//    @Test
+//    public void testAssertNotNegative() {
+//        System.out.println("assertNotNegative");    
+//        int number = RANDOM.nextInt(65536);
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertNotNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//            System.out.println("\"" + ae.getMessage() + "\"");
+//        }
+//        String msg = "Asserting that number " + number 
+//                + " is not negative should not have failed the test";
+//        assert !failOccurred : msg;
+//    }
     
     // TODO: Write tests for assertInRange()
     
