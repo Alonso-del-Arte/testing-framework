@@ -410,12 +410,13 @@ public class Asserters {
     }
 
     /**
-     * 
-     * @param actual
+     * Asserts a given number is not negative. The number may be 0. The number 
+     * will be included in the test failure explanation if the test fails 
+     * because of this assertion.
+     * @param actual The number to be checked. For example, &minus;103.
      */
     public static void assertNotNegative(long actual) {
-        String errMsg = "Number " + actual + " expected to be at least 0";
-        throw new AssertionError(errMsg);
+        assertMinimum(0, actual);
     }
 
     /**
