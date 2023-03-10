@@ -410,9 +410,9 @@ public class Asserters {
     }
 
     /**
-     * Asserts a given number is not negative. The number may be 0. The number 
-     * will be included in the test failure explanation if the test fails 
-     * because of this assertion.
+     * Asserts a given number is not negative. The number may be 0 without 
+     * failing the assertion. The number will be included in the test failure 
+     * explanation if the test fails because of this assertion.
      * @param actual The number to be checked. For example, &minus;103.
      */
     public static void assertNotNegative(long actual) {
@@ -420,7 +420,8 @@ public class Asserters {
     }
 
     /**
-     * Asserts a given number is not negative. The number may be 0.
+     * Asserts a given number is not negative. The number may be 0 without 
+     * failing the assertion.
      * @param actual The number to be checked. For example, &minus;103.
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The actual value will be appended to 
@@ -436,9 +437,10 @@ public class Asserters {
         assertNotNegative(actual, msg);
     }
 
-    // TODO: Write tests for this
     public static void assertNotNegative(double actual, String msg) {
-        //
+        String intermediate = msg + ". Number " + actual 
+                + " expected to be at least 0.0";
+        throw new AssertionError(intermediate);
     }
 
     // TODO: Write tests for this
