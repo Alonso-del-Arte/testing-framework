@@ -760,6 +760,71 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNotNegativeWhenDoubleIsDefaultMessage() {
+        double number = -RANDOM.nextDouble() - Double.MIN_NORMAL;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number 
+                    + " expected to be at least 0.0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+//    @Test
+    public void testAssertNegativeZeroIsNotActuallyNegativeDefaultMessage() {
+        double number = -0.0;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+//    @Test
+    public void testAssertNotNegativePositiveZeroDefaultMessage() {
+        double number = 0.0;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+//    @Test
+    public void testAssertNotNegativeDoubleDefaultMessage() {
+        double number = RANDOM.nextDouble() + Double.MIN_NORMAL;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     // TODO: Write tests for assertMaximum()

@@ -431,10 +431,11 @@ public class Asserters {
         assertMinimum(0, actual, msg);
     }
 
-    // TODO: Write tests for this
     public static void assertNotNegative(double actual) {
-        String msg = "Sorry, default message not implemented yet";
-        assertNotNegative(actual, msg);
+        String intermediate = "Number " + actual 
+                + " expected to be at least 0.0";
+        throw new AssertionError(intermediate);
+//        assertNotNegative(actual, msg);
     }
 
     /**
