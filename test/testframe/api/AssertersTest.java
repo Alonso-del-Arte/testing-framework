@@ -780,7 +780,7 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-//    @Test
+    @Test
     public void testAssertNegativeZeroIsNotActuallyNegativeDefaultMessage() {
         double number = -0.0;
         boolean failOccurred = false;
@@ -795,7 +795,7 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-//    @Test
+    @Test
     public void testAssertNotNegativePositiveZeroDefaultMessage() {
         double number = 0.0;
         boolean failOccurred = false;
@@ -810,7 +810,7 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-//    @Test
+    @Test
     public void testAssertNotNegativeDoubleDefaultMessage() {
         double number = RANDOM.nextDouble() + Double.MIN_NORMAL;
         boolean failOccurred = false;

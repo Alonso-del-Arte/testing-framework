@@ -431,11 +431,13 @@ public class Asserters {
         assertMinimum(0, actual, msg);
     }
 
+    /**
+     * Asserts a given number is not negative. The number may be -0.0 or 0.0 
+     * without failing the assertion.
+     * @param actual The number to be checked. For example, 10.843979291045144.
+     */
     public static void assertNotNegative(double actual) {
-        String intermediate = "Number " + actual 
-                + " expected to be at least 0.0";
-        throw new AssertionError(intermediate);
-//        assertNotNegative(actual, msg);
+        assertNotNegative(actual, "");
     }
 
     /**
@@ -449,7 +451,8 @@ public class Asserters {
     public static void assertNotNegative(double actual, String msg) {
         String intermediate = msg + ". Number " + actual 
                 + " expected to be at least 0.0";
-        assert actual >= 0.0 : intermediate;
+        String errMsg = prepMsg(intermediate);
+        assert actual >= 0.0 : errMsg;
     }
 
     // TODO: Write tests for this
