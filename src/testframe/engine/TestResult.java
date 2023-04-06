@@ -18,9 +18,8 @@ public class TestResult {
         return this.testStatus;
     }
     
-    // TODO: Write tests for this
     public boolean hasStackTrace() {
-        return true;// this.testStackTraceHolder == null;
+        return false;// this.testStackTraceHolder == null;
     }
     
     // TODO: Write tests for this
