@@ -32,6 +32,21 @@ public class TestResultTest {
         }
     }
     
+    private static void checkDoesNotHaveStackTrace() {
+        Method procedure = TestResultTest.class.getMethods()[0];
+        TestResult result = new TestResult(procedure, TestResultStatus.PASSED, 
+                null);
+        String msg = "Result should not have stack trace that was not given";
+        TestRunnerTest.check(!result.hasStackTrace(), msg);
+    }
+    
+    private static void checkHasStackTrace() {
+        System.out.println("hasStackTrace");
+        Method procedure = TestResultTest.class.getMethods()[0];
+        TestResult result = new TestResult(procedure, TestResultStatus.FAILED, 
+                null);
+    }
+    
     public static void main(String[] args) {
         try {
             checkGetProcedure();
@@ -39,6 +54,8 @@ public class TestResultTest {
             System.out.println("\"" + cnfe.getMessage() + "\"");
         }
         checkGetStatus();
+        checkDoesNotHaveStackTrace();
+//        checkHasStackTrace();
         System.out.println("All tests have PASSED");
     }
 
