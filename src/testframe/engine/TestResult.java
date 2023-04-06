@@ -11,20 +11,22 @@ public class TestResult {
     private final Throwable testStackTraceHolder;
     
     public Method getProcedure() {
-        return this.testProcedure;
+        return null; // this.testProcedure;
     }
     
+    // TODO: Write tests for this
     public TestResultStatus getStatus() {
-        return this.testStatus;
+        return TestResultStatus.SKIPPED;// this.testStatus;
     }
     
     // TODO: Write tests for this
     public boolean hasStackTrace() {
-        return this.testStackTraceHolder == null;
+        return true;// this.testStackTraceHolder == null;
     }
     
+    // TODO: Write tests for this
     public Throwable getInformation() {
-        return this.testStackTraceHolder;
+        return null;// this.testStackTraceHolder;
     }
     
     public TestResult(Method procedure, TestResultStatus status, 
