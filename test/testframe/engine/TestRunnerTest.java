@@ -17,7 +17,7 @@ import java.util.logging.LogRecord;
  */
 public class TestRunnerTest {
     
-    private static final String TEST_CLASS_NAME = "testframe.engine.ToyTests";
+    static final String TEST_CLASS_NAME = "testframe.engine.ToyTests";
 
     private static final Logger INVOCATION_LOGGER 
             = Logger.getLogger(TEST_CLASS_NAME);
@@ -40,7 +40,7 @@ public class TestRunnerTest {
      * @param condition The condition to check for.
      * @param msg The message for the AssertionError if it's thrown.
      */
-    private static void check(boolean condition, String msg) {
+    static void check(boolean condition, String msg) {
         if (!condition) {
             throw new AssertionError(msg);
         }
@@ -52,7 +52,7 @@ public class TestRunnerTest {
      * objects.
      * @param results The list of test results to check for size.
      */
-    static void checkResultSetSizeIsPositive(List<TestResult> results) {
+    private static void checkResultSetSizeIsPositive(List<TestResult> results) {
         int size = results.size();
         switch (size) {
             case 0:
@@ -72,7 +72,7 @@ public class TestRunnerTest {
     /**
      * Checks that the correct number of invoked toy tests has been logged.
      */
-    static void checkInvocationCount() {
+    private static void checkInvocationCount() {
         int actual = INVOCATION_COUNTER.testCount;
         String msg = "Expected " + NUMBER_OF_TOY_TESTS 
                 + " toy tests to be invoked, but only " + actual 
@@ -100,7 +100,7 @@ public class TestRunnerTest {
      * Checks that the test that should pass does pass and is reported as 
      * passing.
      */
-    static void checkTestActuallyPassed(List<TestResult> results) {
+    private static void checkTestActuallyPassed(List<TestResult> results) {
         String testName = "testThatShouldPass";
         TestResult result = lookForResult(testName, results);
         if (result == null) {
@@ -119,7 +119,7 @@ public class TestRunnerTest {
      * failing. And also that the TestResult object carries an AssertionError 
      * object.
      */
-    static void checkTestActuallyFailed(List<TestResult> results) {
+    private static void checkTestActuallyFailed(List<TestResult> results) {
         String testName = "testThatShouldFail";
         TestResult result = lookForResult(testName, results);
         if (result == null) {
@@ -142,7 +142,7 @@ public class TestRunnerTest {
      * caused an error. And also that the TestResult object carries an Exception 
      * object.
      */
-    static void checkTestActuallyCausedError(List<TestResult> results) {
+    private static void checkTestActuallyCausedError(List<TestResult> results) {
         String testName = "testThatShouldCauseError";
         TestResult result = lookForResult(testName, results);
         if (result == null) {
@@ -160,7 +160,7 @@ public class TestRunnerTest {
         check(info instanceof Exception, errMsg);
     }
     
-    static void checkPreAndPostWereExecuted() {
+    private static void checkPreAndPostWereExecuted() {
         int expected = 1;
         int actualPre = INVOCATION_COUNTER.beforeAllCount;
         String msg = "@BeforeAll was invoked " + actualPre 
@@ -177,7 +177,7 @@ public class TestRunnerTest {
         check(NUMBER_OF_TOY_TESTS == INVOCATION_COUNTER.afterEachCount, msg);
     }
     
-    static void checkPreAndPostWereExecutedInRightOrder() {
+    private static void checkPreAndPostWereExecutedInRightOrder() {
         String msg = "@BeforeAllTests should not have run after anything";
         if (INVOCATION_COUNTER.beforeAllAfterAnything != 0) {
             throw new AssertionError(msg);
@@ -196,7 +196,7 @@ public class TestRunnerTest {
         }
     }
     
-    public static void checkMultipleSetUpsAndTearDownsRun() {
+    private static void checkMultipleSetUpsAndTearDownsRun() {
         String extraTestClassName = TEST_CLASS_NAME.replace("ToyTests", 
                 "MoreToyTests");
         Logger extraLogger = Logger.getLogger(extraTestClassName);
