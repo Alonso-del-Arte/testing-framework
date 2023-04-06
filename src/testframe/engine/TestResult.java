@@ -19,7 +19,7 @@ public class TestResult {
     }
     
     public boolean hasStackTrace() {
-        return false;// this.testStackTraceHolder == null;
+        return this.testStackTraceHolder != null;
     }
     
     // TODO: Write tests for this
