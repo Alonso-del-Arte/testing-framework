@@ -19,13 +19,27 @@ public class TestResultTest {
         }
     }
     
+    private static void checkGetStatus() {
+        System.out.println("getStatus");
+        Method procedure = TestResultTest.class.getMethods()[0];
+        TestResultStatus[] statuses = TestResultStatus.values();
+        for (TestResultStatus expected : statuses) {
+            TestResult result = new TestResult(procedure, expected, null);
+            TestResultStatus actual = result.getStatus();
+            String msg = "Expecting " + expected.toString() + ", got " 
+                    + actual.toString();
+            TestRunnerTest.check(expected.equals(actual), msg);
+        }
+    }
+    
     public static void main(String[] args) {
         try {
             checkGetProcedure();
         } catch (ClassNotFoundException cnfe) {
             System.out.println("\"" + cnfe.getMessage() + "\"");
-        }System.out.println("Test has PASSED");
-//        System.out.println("All tests have PASSED");
+        }
+        checkGetStatus();
+        System.out.println("All tests have PASSED");
     }
 
 }
