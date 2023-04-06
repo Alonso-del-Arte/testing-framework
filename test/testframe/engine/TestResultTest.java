@@ -2,6 +2,12 @@ package testframe.engine;
 
 import java.lang.reflect.Method;
 
+/**
+ * Tests of the TestResult class. In hindsight, I should have tested this class 
+ * before TestRunner and Asserters. As a consequence of that, I wrote these 
+ * tests with the assumption that assertions are not actually turned on.
+ * @author Alonso del Arte
+ */
 public class TestResultTest {
     
     private static void checkGetProcedure() throws ClassNotFoundException {
@@ -13,7 +19,7 @@ public class TestResultTest {
             TestResult result = new TestResult(expected, 
                     TestResultStatus.PASSED, null);
             Method actual = result.getProcedure();
-            String msg = "Expecting " + expected.getName() + ", got " 
+            String msg = "Expected " + expected.getName() + ", got " 
                     + actual.getName();
             TestRunnerTest.check(expected.equals(actual), msg);
         }
@@ -26,7 +32,7 @@ public class TestResultTest {
         for (TestResultStatus expected : statuses) {
             TestResult result = new TestResult(procedure, expected, null);
             TestResultStatus actual = result.getStatus();
-            String msg = "Expecting " + expected.toString() + ", got " 
+            String msg = "Expected " + expected.toString() + ", got " 
                     + actual.toString();
             TestRunnerTest.check(expected.equals(actual), msg);
         }
@@ -61,7 +67,7 @@ public class TestResultTest {
             TestResult result = new TestResult(procedure, 
                     TestResultStatus.ERROR, expected);
             Throwable actual = result.getInformation();
-            String msg = "Expecting " + expected.toString() + ", got " + actual;
+            String msg = "Expected " + expected.toString() + ", got " + actual;
             TestRunnerTest.check(expected.equals(actual), msg);
         }
     }
