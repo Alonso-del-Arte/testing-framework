@@ -43,8 +43,11 @@ public class TestResultTest {
     private static void checkHasStackTrace() {
         System.out.println("hasStackTrace");
         Method procedure = TestResultTest.class.getMethods()[0];
+        Throwable traceHolder = new AssertionError("For testing purposes only");
         TestResult result = new TestResult(procedure, TestResultStatus.FAILED, 
-                null);
+                traceHolder);
+        String msg = "Result should have stack trace that was given";
+        TestRunnerTest.check(result.hasStackTrace(), msg);
     }
     
     public static void main(String[] args) {
@@ -55,7 +58,7 @@ public class TestResultTest {
         }
         checkGetStatus();
         checkDoesNotHaveStackTrace();
-//        checkHasStackTrace();
+        checkHasStackTrace();
         System.out.println("All tests have PASSED");
     }
 
