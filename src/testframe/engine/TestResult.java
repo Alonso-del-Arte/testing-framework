@@ -14,9 +14,8 @@ public class TestResult {
         return this.testProcedure;
     }
     
-    // TODO: Write tests for this
     public TestResultStatus getStatus() {
-        return TestResultStatus.SKIPPED;// this.testStatus;
+        return this.testStatus;
     }
     
     // TODO: Write tests for this
