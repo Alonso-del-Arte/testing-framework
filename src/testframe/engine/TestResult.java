@@ -11,7 +11,7 @@ public class TestResult {
     private final Throwable testStackTraceHolder;
     
     public Method getProcedure() {
-        return this.getClass().getMethods()[0]; // this.testProcedure;
+        return this.testProcedure;
     }
     
     // TODO: Write tests for this
