@@ -50,6 +50,22 @@ public class TestResultTest {
         TestRunnerTest.check(result.hasStackTrace(), msg);
     }
     
+    private static void checkGetInformation() {
+        System.out.println("getInformation");
+        Method procedure = TestResultTest.class.getMethods()[0];
+        Throwable expected = null;
+        try {
+            throw new RuntimeException();
+        } catch (RuntimeException re) {
+            expected = re;
+            TestResult result = new TestResult(procedure, 
+                    TestResultStatus.ERROR, expected);
+            Throwable actual = result.getInformation();
+            String msg = "Expecting " + expected.toString() + ", got " + actual;
+            TestRunnerTest.check(expected.equals(actual), msg);
+        }
+    }
+    
     public static void main(String[] args) {
         try {
             checkGetProcedure();
@@ -59,6 +75,7 @@ public class TestResultTest {
         checkGetStatus();
         checkDoesNotHaveStackTrace();
         checkHasStackTrace();
+        checkGetInformation();
         System.out.println("All tests have PASSED");
     }
 
