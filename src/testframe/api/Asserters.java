@@ -1,6 +1,8 @@
 package testframe.api;
 
 import java.time.Duration;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Static class containing procedures to simplify making assertions in tests. It 
@@ -549,6 +551,29 @@ public class Asserters {
     public static <T extends Comparable<T>> void assertInRange(T minimum, 
             T actual, T maximum, String msg) {
         //
+    }
+    
+    // TODO: Write tests for this
+    public static <E> void assertSameElements(Collection<E> expected, 
+            Collection<E> actual) {
+        assertSameElements(expected, actual, 
+                "Sorry, default message not implemented yet");
+    }
+    
+    public static <E> void assertSameElements(Collection<E> expected, 
+            Collection<E> actual, String msg) {
+        // TODO: Write tests for this
+    }
+    
+    // TODO: Write tests for this
+    public static <E> void assertSameOrder(List<E> expected, List<E> actual) {
+        assertSameElements(expected, actual, 
+                "Sorry, default message not implemented yet");
+    }
+    
+    public static <E> void assertSameOrder(List<E> expected, List<E> actual, 
+            String msg) {
+        // TODO: Write tests for this
     }
     
     // TODO: Write tests for this
