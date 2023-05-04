@@ -62,6 +62,8 @@ Javadoc tool to create the HTML pages to put in the gh-pages branch.
 
 ## Style guidelines
 
+* The main package is `testframe`. Do not rename it `org.testframe`, even though 
+in the future I might make that change if I see that it's required by Maven.
 * Access levels will be respected as much as possible. This means, for one 
 thing, that for tests to be discoverable by `TestRunner`, they must be public, 
 not package private like in JUnit 5.
@@ -82,9 +84,9 @@ line should be "`+ variance;`" (with the proper indentation, of course).
 this project is that Eclipse uses tabs by default. I tried to replace all the 
 tabs, but there might be stragglers.
 * Indentation is four spaces per scope level. When breaking a long line to 
-comply with the column width threshold, indent an additional eight spaces. For 
-example, if line 24 starts on column 9 runs to column 90, split it so the new 
-line 25 starts on column 17. 
+comply with the column width threshold, indent an additional four spaces. For 
+example, if line 24 starts on column 9 and runs to column 90, split it so the 
+new line 25 starts on column 17. 
 * There should never be a stylish name for this testing framework. It should be 
 referred to as "this testing framework" or "this framework."
 * Although this testing framework does not require test procedures to be named 
@@ -94,17 +96,18 @@ the `@Test` annotation.
 * If it doesn't have To Do comments, it should have Javadoc. Files in 
 `com.example.exercises` and `org.example.exercises` may optionally have Hint 
 comments. Any other type of comment should be removed in refactoring commits, if 
-such a comment even makes into a fail or pass commit. Only exemption for now are 
-the comments in `Asserters` explaining what that static class will not provide.
+such a comment even makes it into a fail or pass commit. Only exemption for now 
+are the comments in `Asserters` explaining what that static class will not 
+provide.
 * Each checked-in test class should provide some output that is distinct from 
 that given by `TestRunner`. If nothing else occurs to you, simply have it output 
 the names of the units being tested (like in automatically generated JUnit or 
 TestNG tests in NetBeans).
 * Given my preference for shallow inheritance hierarchies, I'm more concerned 
 with whether a unit returns a result or not. Therefore, at least in the Javadoc, 
-units that return a result will be referred to as functions and units that don't 
-return a result will be referred to as procedures. The term "method" will only 
-be used in connection to Java reflection.
+units that return a result will be referred to as "functions" and units that 
+don't return a result will be referred to as "procedures." The term "method" 
+will only be used in connection to Java reflection.
 * As much as possible, inheritance hierarchies should be limited to four levels, 
 e.g., `Object` extended by an abstract class that is extended by a concrete 
 class that maybe is extended by a concrete subclass. Interfaces should not go 
@@ -113,10 +116,17 @@ beyond one level of inheritance unless absolutely necessary.
 (JDK). That means, for example, that if we don't have a reason to extend 
 `AssertionError` (like in JUnit), we won't. Or that if you find something in the 
 JDK that does the job of `testframe.api.Procedure`, we should refactor to use 
-that instead.
+that instead, and deprecate accordingly.
+* Deprecated classes, functions and procedures should be annotated with 
+`@Deprecated`, as well as a Javadoc `@deprecated` tag explaining what to use 
+instead.
+* Do not delete anything deprecated that existed in a prior merged commit. I 
+will decide when to delete deprecated items and when.
+* However, do feel free to delete private items (including nested or inner 
+classes) if they're not necessary to pass the pertinent tests.
 * As much as possible, adhere to the principles in *Building Maintainable 
 Software: Java Edition* by Joost Visser et al, while keeping in mind that that 
-book allows for slight deviations.
+book allows for slight deviations from its guidelines.
 * Also note that the tests in `TestRunnerTest` and `AssertersTest` by necessity 
 need to be verbose, including a lot of "boilerplate" that will be rendered 
 unnecessary for other test classes once `TestRunner`, `Asserters` and the 
