@@ -55,6 +55,11 @@ a step of the TDD cycle (fail, pass, refactor). That can be a pain in the neck
 `org.example.exercises` or even `testframe.api` or `testframe.engine`. But 
 remember: one push can contain multiple commits.
 
+A note about branch management: there will be no Javadoc in HTML pages in the 
+main branch, only the Javadoc comments in the Java source. Accepted pull 
+requests will be merged to the main branch. Then, as needed, I will run the 
+Javadoc tool to create the HTML pages to put in the gh-pages branch.
+
 ## Style guidelines
 
 * Access levels will be respected as much as possible. This means, for one 
