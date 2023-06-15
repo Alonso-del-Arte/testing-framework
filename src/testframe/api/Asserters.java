@@ -99,11 +99,23 @@ public class Asserters {
          assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that two floating point numbers are equal, or very close to 
+     * equal, according to a specified variance. A default message specifying 
+     * the expected, actual and variance values will be given if the expected 
+     * and actual values diverge by more than the allowed variance.
+     * @param expected The expected value. For example, 3.14159.
+     * @param actual The actual value. For example, 3.14161.
+     * @param delta The maximum allowed variance for <code>expected</code> and 
+     * <code>actual</code> to differ and still be considered close enough to be 
+     * equal. For example, 0.00001. Ought to be at least 0.0 but is preferably 
+     * positive, though less than 1.0. Negative variances are not recommended, 
+     * and the behavior is not at all guaranteed to remain consistent from one 
+     * version of this framework to the next.
+     */
     public static void assertEquals(double expected, double actual, 
             double delta) {
-         String msg = "Sorry, default message not implemented yet";
-         assertEquals(expected, actual, delta, msg);
+         assertEquals(expected, actual, delta, "");
     }
     
     // TODO: Write tests for this
@@ -131,8 +143,8 @@ public class Asserters {
     public static void assertEquals(double expected, double actual, 
             double delta, String msg) {
         double difference = Math.abs(expected - actual);
-        String message = msg + ". Expected " + expected 
-                + " to not differ from " + actual + " by more than " + delta;
+        String message = prepMsg(msg + ". Expected " + expected 
+                + " to not differ from " + actual + " by more than " + delta);
         assert delta >= difference : message;
     }
     
