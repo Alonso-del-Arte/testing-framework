@@ -118,10 +118,19 @@ public class Asserters {
          assertEquals(expected, actual, delta, "");
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that two floating point numbers are equal, or very close to 
+     * equal, according to the default variance, {@link #DEFAULT_TEST_DELTA}.
+     * @param expected The expected value. For example, 3.14159.
+     * @param actual The actual value. For example, 3.14161.
+     * @param msg The message to put into the test failure explanation if the 
+     * test fails because of the assertion. For example, "The number should 
+     * converge to &pi;." The expected, actual and default delta values will be 
+     * appended to the test failure explanation.
+     */
     public static void assertEquals(double expected, double actual, 
             String msg) {
-//         assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
+         assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
     }
     
     /**
