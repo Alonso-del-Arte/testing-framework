@@ -200,9 +200,9 @@ public class AssertersTest {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
         }
-        String message = "Asserting " + someNumber + " is equal to " 
-                + sameNumber + " should not have failed the test";
-        assert !failOccurred : message;
+        String msg = "Asserting " + someNumber + " is equal to " + sameNumber 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     @Test
@@ -264,6 +264,32 @@ public class AssertersTest {
         }
         String msg = "Asserting " + someNumber + " does not differ from " 
                 + otherNumber + " by more than " + LOCAL_DELTA  
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNotEqualsDoubleByMoreThanDefaultVariance() {
+        double someNumber = RANDOM.nextDouble() + 0.5;
+        double otherNumber = 1.0625 * someNumber;
+        String msgStandardPart = "Expected " + someNumber 
+                + " to not differ from " + otherNumber + " by more than " 
+                + Asserters.DEFAULT_TEST_DELTA;
+        String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                + msgStandardPart;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumber, otherNumber, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + someNumber + " does not differ from " 
+                + otherNumber + " by more than " + Asserters.DEFAULT_TEST_DELTA  
                 + " should have failed the test";
         assert failOccurred : msg;
     }
