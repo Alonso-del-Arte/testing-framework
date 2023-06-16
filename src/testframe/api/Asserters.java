@@ -95,8 +95,12 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertEquals(double expected, double actual) {
-         String msg = "Sorry, default message not implemented yet";
-         assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
+        String message = "Expected " + expected 
+                + " to not differ from " + actual + " by more than " 
+                + DEFAULT_TEST_DELTA;
+        throw new AssertionError(message);
+//         String msg = "Sorry, default message not implemented yet";
+//         assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
     }
     
     /**
