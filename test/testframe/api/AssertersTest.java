@@ -510,6 +510,40 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNotEqualsIntArraySameLengthDiffNums() {
+        int length = RANDOM.nextInt(8) + 2;
+        int[] numbersA = new int[length];
+        int[] numbersB = new int[length];
+        for (int i = 0; i < length; i++) {
+            int number = RANDOM.nextInt(256) - 128;
+            numbersA[i] = number;
+            numbersB[i] = number;
+        }
+        int changeIndex = RANDOM.nextInt(length);
+        int origNum = numbersA[changeIndex];
+        int diffNum = 2 * origNum + 1;
+        numbersB[changeIndex] = diffNum;
+        String msgCustomPart = "Arrays should be the same";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(numbersA, numbersB, msgCustomPart);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = msgCustomPart 
+                    + ". Arrays first differ at index " + changeIndex 
+                    + ", expected " + origNum + " but was " + diffNum; 
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(numbersA) 
+                + " is equal to " + Arrays.toString(numbersB) 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertEquals() for arrays
     
     @Test
