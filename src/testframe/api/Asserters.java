@@ -213,6 +213,16 @@ public class Asserters {
          assertEquals(expected, actual, msg);
     }
     
+    /**
+     * Asserts the two arrays of integers are of the same length and contain the 
+     * same numbers. The contents of the arrays will be compared only if the 
+     * arrays match in length.
+     * @param expected The expected array. For example, {1, 3, 4, 7, 11, 18, 29, 
+     * 47, 76}.
+     * @param actual The actual array. Examples: {2, 1, 3, 4, 7, 11, 18, 29, 47, 
+     * 76}, {1, 3, 4, 7, 11, 12, 18, 21, 28}.
+     * @param msg A message for the test failure explanation.
+     */
     public static void assertEquals(int[] expected, int[] actual, String msg) {
         if (expected.length != actual.length) {
             String intermediate = msg 
@@ -221,6 +231,12 @@ public class Asserters {
                     + actual.length + " elements";
             String errMsg = prepMsg(intermediate);
             throw new AssertionError(errMsg);
+        }
+        for (int i = 0; i < expected.length; i++) {
+            String intermediate = msg + ". Arrays first differ at index " + i 
+                    + ", expected " + expected[i] + " but was " + actual[i];
+            String errMsg = prepMsg(intermediate);
+            assert expected[i] == actual[i] : errMsg;
         }
     }
     
