@@ -328,6 +328,28 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNotEqualsDoubleDefaultMessageDefaultVariance() {
+        double someNumber = RANDOM.nextDouble() + 0.5;
+        double otherNumber = 1.0625 * someNumber;
+        String expected = "Expected " + someNumber + " to not differ from " 
+                + otherNumber + " by more than " + Asserters.DEFAULT_TEST_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumber, otherNumber);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + someNumber + " does not differ from " 
+                + otherNumber + " by more than " + Asserters.DEFAULT_TEST_DELTA  
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotEqualsObject() {
         BigInteger someNumber = new BigInteger(72, RANDOM);
         BigInteger otherNumber = someNumber.add(someNumber).add(BigInteger.ONE);
