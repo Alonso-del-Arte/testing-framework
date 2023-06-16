@@ -269,6 +269,22 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertEqualsDoubleDefaultMessage() {
+        double someNumber = RANDOM.nextDouble();
+        double sameNumber = someNumber;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumber, sameNumber, LOCAL_DELTA);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting " + someNumber + " is equal to " + sameNumber 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotEqualsDoubleByMoreThanDefaultVariance() {
         double someNumber = RANDOM.nextDouble() + 0.5;
         double otherNumber = 1.0625 * someNumber;
