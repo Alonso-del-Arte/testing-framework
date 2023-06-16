@@ -311,6 +311,23 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertEqualsDoubleDefaultVariance() {
+        double someNumber = RANDOM.nextDouble();
+        double sameNumber = someNumber;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumber, sameNumber, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting " + someNumber + " is equal to " + sameNumber 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotEqualsObject() {
         BigInteger someNumber = new BigInteger(72, RANDOM);
         BigInteger otherNumber = someNumber.add(someNumber).add(BigInteger.ONE);
