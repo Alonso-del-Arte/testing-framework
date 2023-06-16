@@ -465,8 +465,6 @@ public class AssertersTest {
         for (int j = lengthA; j < lengthB; j++) {
             numbersB[j] = j;
         }
-        int[] someNumbers = {1, 2, 3, 4, 5};
-        int[] moreNumbers = {1, 2, 3, 4, 5, 6, 7};
         String msgCustomPart = "Arrays should be the same";
         boolean failOccurred = false;
         try {
@@ -486,6 +484,30 @@ public class AssertersTest {
                 + " is equal to " + Arrays.toString(numbersB) 
                 + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertEqualsArrayInt() {
+        int length = RANDOM.nextInt(8) + 2;
+        int[] someNumbers = new int[length];
+        int[] sameNumbers = new int[length];
+        for (int i = 0; i < length; i++) {
+            int number = RANDOM.nextInt(256) - 128;
+            someNumbers[i] = number;
+            sameNumbers[i] = number;
+        }
+        String msgCustomPart = "Arrays should be the same";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumbers, sameNumbers, msgCustomPart);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting " + Arrays.toString(someNumbers) 
+                + " is equal to " + Arrays.toString(sameNumbers) 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     // TODO: Write more tests for assertEquals() for arrays
