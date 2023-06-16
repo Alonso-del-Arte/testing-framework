@@ -93,14 +93,17 @@ public class Asserters {
         assert expected == actual : errMsg;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that two floating point numbers are equal, or very close to 
+     * equal, according to the default variance, {@link #DEFAULT_TEST_DELTA}. A 
+     * default message specifying the expected, actual and variance values will 
+     * be given if the expected and actual values diverge by more than the 
+     * default variance.
+     * @param expected The expected value. For example, 3.14159.
+     * @param actual The actual value. For example, 3.14161.
+     */
     public static void assertEquals(double expected, double actual) {
-        String message = "Expected " + expected 
-                + " to not differ from " + actual + " by more than " 
-                + DEFAULT_TEST_DELTA;
-        throw new AssertionError(message);
-//         String msg = "Sorry, default message not implemented yet";
-//         assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
+         assertEquals(expected, actual, DEFAULT_TEST_DELTA, "");
     }
     
     /**
