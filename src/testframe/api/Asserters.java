@@ -130,11 +130,7 @@ public class Asserters {
      */
     public static void assertEquals(double expected, double actual, 
             String msg) {
-        String message = prepMsg(msg + ". Expected " + expected 
-                + " to not differ from " + actual + " by more than " 
-                + DEFAULT_TEST_DELTA);
-        throw new AssertionError(message);
-//         assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
+         assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
     }
     
     /**
