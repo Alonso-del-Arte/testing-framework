@@ -214,15 +214,14 @@ public class Asserters {
     }
     
     public static void assertEquals(int[] expected, int[] actual, String msg) {
-// if (expected.length != actual.length) {
-            String errMsg = msg + ". Arrays differ in length: expected has " 
+        if (expected.length != actual.length) {
+            String intermediate = msg 
+                    + ". Arrays differ in length: expected has " 
                     + expected.length + " elements but actual has " 
                     + actual.length + " elements";
-            if (errMsg.startsWith(". ")) {
-                errMsg = errMsg.substring(2);
-            }
+            String errMsg = prepMsg(intermediate);
             throw new AssertionError(errMsg);
-// }
+        }
     }
     
     // TODO: Write tests for this
