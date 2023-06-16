@@ -453,25 +453,37 @@ public class AssertersTest {
     
     @Test
     public void testAssertNotEqualsArrayIntDiffLengths() {
+        int lengthA = RANDOM.nextInt(8) + 2;
+        int lengthB = lengthA + RANDOM.nextInt(8) + 2;
+        int[] numbersA = new int[lengthA];
+        int[] numbersB = new int[lengthB];
+        for (int i = 0; i < lengthA; i++) {
+            int number = RANDOM.nextInt(256) - 128;
+            numbersA[i] = number;
+            numbersB[i] = number;
+        }
+        for (int j = lengthA; j < lengthB; j++) {
+            numbersB[j] = j;
+        }
         int[] someNumbers = {1, 2, 3, 4, 5};
         int[] moreNumbers = {1, 2, 3, 4, 5, 6, 7};
         String msgCustomPart = "Arrays should be the same";
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(someNumbers, moreNumbers, msgCustomPart);
+            Asserters.assertEquals(numbersA, numbersB, msgCustomPart);
         } catch (AssertionError ae) {
             failOccurred = true;
             String expected = msgCustomPart 
                     + ". Arrays differ in length: expected has " 
-                    + someNumbers.length + " elements but actual has " 
-                    + moreNumbers.length + " elements";
+                    + numbersA.length + " elements but actual has " 
+                    + numbersB.length + " elements";
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
             assert expected.equals(actual) : msg;
         }
-        String msg = "Asserting " + Arrays.toString(someNumbers) 
-                + " is equal to " + Arrays.toString(moreNumbers) 
+        String msg = "Asserting " + Arrays.toString(numbersA) 
+                + " is equal to " + Arrays.toString(numbersB) 
                 + " should have failed the test";
         assert failOccurred : msg;
     }
