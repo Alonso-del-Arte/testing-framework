@@ -10,6 +10,7 @@ import testframe.api.AfterAllTests;
 import testframe.api.AfterEachTest;
 import testframe.api.BeforeAllTests;
 import testframe.api.BeforeEachTest;
+import testframe.api.Skip;
 import testframe.api.Test;
 
 /**
@@ -25,6 +26,8 @@ public class TestRunner {
     private static List<Method> befores = new ArrayList<Method>();
 
     private static List<Method> tests = new ArrayList<Method>();
+
+    private static List<Method> skips = new ArrayList<Method>();
 
     private static List<Method> afters = new ArrayList<Method>();
     
@@ -42,6 +45,15 @@ public class TestRunner {
             }
         }
         return tests;
+    }
+    
+    private static void filterOutSkips() {
+        for (Method test : tests) {
+            if (test.getAnnotation(Skip.class) != null) {
+                skips.add(test);
+            }
+        }
+        tests.removeAll(skips);
     }
 
     private static TestResult run(Method test, Object instance) {
@@ -63,6 +75,14 @@ public class TestRunner {
             throw new RuntimeException(excMsg, iae);
         }
         return new TestResult(test, status, info);
+    }
+    
+    private static List<TestResult> skip() {
+        List<TestResult> results = new ArrayList<>();
+        for (Method skip : skips) {
+            results.add(new TestResult(skip, TestResultStatus.SKIPPED, null));
+        }
+        return results;
     }
     
     private static void runSetUps(Object instance) {
@@ -131,8 +151,7 @@ public class TestRunner {
      */
     public static List<TestResult> run(String testClassName) {
         ClassLoader loader = ClassLoader.getSystemClassLoader();
-        loader.setDefaultAssertionStatus(true);
-        
+        loader.setDefaultAssertionStatus(true);    
         try {
             Class<?> type = loader.loadClass(testClassName);
             Object testClassInstance = type.newInstance();
@@ -140,11 +159,13 @@ public class TestRunner {
             setUps = filter(procedures, BeforeAllTests.class);
             befores = filter(procedures, BeforeEachTest.class);
             tests = filter(procedures, Test.class);
+            filterOutSkips();
             afters = filter(procedures, AfterEachTest.class);
             tearDowns = filter(procedures, AfterAllTests.class);
             runSetUps(testClassInstance);
             run(testClassInstance);
             runTearDowns(testClassInstance);
+            results.addAll(skip());
         } catch (ClassNotFoundException cnfe) {
             System.err.println("No tests ran");
             System.err.println("Unable to find class " + testClassName);
