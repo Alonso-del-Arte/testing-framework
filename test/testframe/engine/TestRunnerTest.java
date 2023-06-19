@@ -196,7 +196,8 @@ public class TestRunnerTest {
         check(expected == actualPost, msg);
         msg = "@BeforeEach should've been invoked " + NUMBER_OF_TOY_TESTS 
                 + " times, once for each test";
-        check(NUMBER_OF_TOY_TESTS == INVOCATION_COUNTER.beforeEachCount, msg);
+        check(NUMBER_OF_TOY_TESTS_TO_RUN == INVOCATION_COUNTER.beforeEachCount, 
+                msg);
         msg = msg.replace("Before", "After");
         check(NUMBER_OF_TOY_TESTS_TO_RUN == INVOCATION_COUNTER.afterEachCount, 
                 msg);
