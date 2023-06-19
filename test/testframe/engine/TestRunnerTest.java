@@ -198,7 +198,8 @@ public class TestRunnerTest {
                 + " times, once for each test";
         check(NUMBER_OF_TOY_TESTS == INVOCATION_COUNTER.beforeEachCount, msg);
         msg = msg.replace("Before", "After");
-        check(NUMBER_OF_TOY_TESTS == INVOCATION_COUNTER.afterEachCount, msg);
+        check(NUMBER_OF_TOY_TESTS_TO_RUN == INVOCATION_COUNTER.afterEachCount, 
+                msg);
     }
     
     private static void checkPreAndPostWereExecutedInRightOrder() {
