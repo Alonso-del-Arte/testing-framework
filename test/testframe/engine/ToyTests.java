@@ -6,6 +6,7 @@ import testframe.api.AfterAllTests;
 import testframe.api.AfterEachTest;
 import testframe.api.BeforeAllTests;
 import testframe.api.BeforeEachTest;
+import testframe.api.Skip;
 import testframe.api.Test;
 
 public class ToyTests {
@@ -40,7 +41,14 @@ public class ToyTests {
         assert false : msg;
     }
     
-    // TODO: Write test that should be skipped
+    @Skip @Test
+    public void testThatShouldBeSkipped() {
+        INVOCATION_LOGGER.entering(TEST_CLASS_NAME, "@Skip @Test");
+        String msg = "This test should be skipped";
+        System.out.println(msg);
+        assert false : msg;
+    }
+    
     
     @Test
     public void testThatShouldCauseError() {

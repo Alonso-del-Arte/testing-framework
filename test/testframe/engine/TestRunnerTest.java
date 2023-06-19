@@ -30,8 +30,12 @@ public class TestRunnerTest {
         INVOCATION_LOGGER.addHandler(INVOCATION_COUNTER);
     }
 
-    // TODO: Update to 4 after adding testThatShouldBeSkipped()
-    private static final int NUMBER_OF_TOY_TESTS = 3;
+    private static final int NUMBER_OF_TOY_TESTS = 4;
+    
+    private static final int NUMBER_OF_TOY_TESTS_TO_SKIP = 1;
+    
+    private static final int NUMBER_OF_TOY_TESTS_TO_RUN = NUMBER_OF_TOY_TESTS 
+            - NUMBER_OF_TOY_TESTS_TO_SKIP;
     
     /**
      * Checks that a condition is true, throws an AssertionError if it's not. 
@@ -74,10 +78,10 @@ public class TestRunnerTest {
      */
     private static void checkInvocationCount() {
         int actual = INVOCATION_COUNTER.testCount;
-        String msg = "Expected " + NUMBER_OF_TOY_TESTS 
+        String msg = "Expected " + NUMBER_OF_TOY_TESTS_TO_RUN 
                 + " toy tests to be invoked, but only " + actual 
                 + " toy tests were actually invoked";
-        check(actual == NUMBER_OF_TOY_TESTS, msg);
+        check(actual == NUMBER_OF_TOY_TESTS_TO_RUN, msg);
     }
     
     private static TestResult lookForResult(String testName, 
@@ -134,6 +138,26 @@ public class TestRunnerTest {
         Throwable info = result.getInformation();
         String errMsg = "Failing test result should carry AssertionError";
         check(info instanceof AssertionError, errMsg);
+    }
+    
+    /**
+     * Checks that the test that should have been skipped was not executed but a 
+     * result of "SKIPPED" was logged.
+     */
+    private static void checkTestActuallySkipped(List<TestResult> results) {
+        String testName = "testThatShouldBeSkipped";
+        TestResult result = lookForResult(testName, results);
+        if (result == null) {
+            String errMsg = "Could not find result record for " + testName;
+            throw new AssertionError(errMsg);
+        }
+        TestResultStatus expected = TestResultStatus.SKIPPED;
+        TestResultStatus actual = result.getStatus();
+        String msg = "Expected " + expected.toString() 
+                + " for test to be skipped but was " + actual.toString();
+        check(expected.equals(actual), msg);
+        String noExecMsg = "Test to be skipped should not have run";
+        check(INVOCATION_COUNTER.skipAnnotatedTestCount == 0, noExecMsg);
     }
     
     /**
@@ -235,6 +259,7 @@ public class TestRunnerTest {
         checkTestActuallyPassed(results);
         checkTestActuallyFailed(results);
         checkTestActuallyCausedError(results);
+        checkTestActuallySkipped(results);
         checkPreAndPostWereExecuted();
         checkPreAndPostWereExecutedInRightOrder();
         checkMultipleSetUpsAndTearDownsRun();
@@ -248,6 +273,7 @@ public class TestRunnerTest {
         int beforeAllCount = 0;
         int beforeEachCount = 0;
         int testCount = 0;
+        int skipAnnotatedTestCount = 0;
         int afterEachCount = 0;
         int afterAllCount = 0;
         
@@ -288,6 +314,10 @@ public class TestRunnerTest {
                     case "@Test":
                         System.out.println("Logging @Test");
                         this.testCount++;
+                        break;
+                    case "@Skip @Test":
+                        System.out.println("Logging @Skip @Test");
+                        this.skipAnnotatedTestCount++;
                         break;
                     case "@AfterEachTest":
                         System.out.println("Logging @AfterEachTest");
