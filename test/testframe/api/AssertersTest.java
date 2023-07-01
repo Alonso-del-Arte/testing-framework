@@ -544,6 +544,95 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNotEqualsArrayIntDiffLengthsDefaultMsg() {
+        int lengthA = RANDOM.nextInt(8) + 2;
+        int lengthB = lengthA + RANDOM.nextInt(8) + 2;
+        int[] numbersA = new int[lengthA];
+        int[] numbersB = new int[lengthB];
+        for (int i = 0; i < lengthA; i++) {
+            int number = RANDOM.nextInt(256) - 128;
+            numbersA[i] = number;
+            numbersB[i] = number;
+        }
+        for (int j = lengthA; j < lengthB; j++) {
+            numbersB[j] = j;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(numbersA, numbersB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Arrays differ in length: expected has "  
+                    + numbersA.length + " elements but actual has " 
+                    + numbersB.length + " elements";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(numbersA) 
+                + " is equal to " + Arrays.toString(numbersB) 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNotEqualsIntArraySameLengthDiffNumsDefaultMsg() {
+        int length = RANDOM.nextInt(8) + 2;
+        int[] numbersA = new int[length];
+        int[] numbersB = new int[length];
+        for (int i = 0; i < length; i++) {
+            int number = RANDOM.nextInt(256) - 128;
+            numbersA[i] = number;
+            numbersB[i] = number;
+        }
+        int changeIndex = RANDOM.nextInt(length);
+        int origNum = numbersA[changeIndex];
+        int diffNum = 2 * origNum + 1;
+        numbersB[changeIndex] = diffNum;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(numbersA, numbersB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Arrays first differ at index " + changeIndex  
+                    + ", expected " + origNum + " but was " + diffNum; 
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(numbersA) 
+                + " is equal to " + Arrays.toString(numbersB) 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+//  @Test
+//  public void testAssertEqualsArrayInt() {
+//      int length = RANDOM.nextInt(8) + 2;
+//      int[] someNumbers = new int[length];
+//      int[] sameNumbers = new int[length];
+//      for (int i = 0; i < length; i++) {
+//          int number = RANDOM.nextInt(256) - 128;
+//          someNumbers[i] = number;
+//          sameNumbers[i] = number;
+//      }
+//      String msgCustomPart = "Arrays should be the same";
+//      boolean failOccurred = false;
+//      try {
+//          Asserters.assertEquals(someNumbers, sameNumbers, msgCustomPart);
+//      } catch (AssertionError ae) {
+//          failOccurred = true;
+//          System.out.println("\"" + ae.getMessage() + "\"");
+//      }
+//      String msg = "Asserting " + Arrays.toString(someNumbers) 
+//              + " is equal to " + Arrays.toString(sameNumbers) 
+//              + " should not have failed the test";
+//      assert !failOccurred : msg;
+//  }
+
     // TODO: Write more tests for assertEquals() for arrays
     
     @Test
