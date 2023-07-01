@@ -211,6 +211,7 @@ public class Asserters {
     public static void assertEquals(int[] expected, int[] actual) {
          String msg = "Sorry, default message not implemented yet";
          assertEquals(expected, actual, msg);
+         throw new AssertionError("SORRY");
     }
     
     /**
