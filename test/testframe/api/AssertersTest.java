@@ -609,29 +609,28 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-//  @Test
-//  public void testAssertEqualsArrayInt() {
-//      int length = RANDOM.nextInt(8) + 2;
-//      int[] someNumbers = new int[length];
-//      int[] sameNumbers = new int[length];
-//      for (int i = 0; i < length; i++) {
-//          int number = RANDOM.nextInt(256) - 128;
-//          someNumbers[i] = number;
-//          sameNumbers[i] = number;
-//      }
-//      String msgCustomPart = "Arrays should be the same";
-//      boolean failOccurred = false;
-//      try {
-//          Asserters.assertEquals(someNumbers, sameNumbers, msgCustomPart);
-//      } catch (AssertionError ae) {
-//          failOccurred = true;
-//          System.out.println("\"" + ae.getMessage() + "\"");
-//      }
-//      String msg = "Asserting " + Arrays.toString(someNumbers) 
-//              + " is equal to " + Arrays.toString(sameNumbers) 
-//              + " should not have failed the test";
-//      assert !failOccurred : msg;
-//  }
+  @Test
+  public void testAssertEqualsArrayIntDefaultMsg() {
+      int length = RANDOM.nextInt(8) + 2;
+      int[] someNumbers = new int[length];
+      int[] sameNumbers = new int[length];
+      for (int i = 0; i < length; i++) {
+          int number = RANDOM.nextInt(256) - 128;
+          someNumbers[i] = number;
+          sameNumbers[i] = number;
+      }
+      boolean failOccurred = false;
+      try {
+          Asserters.assertEquals(someNumbers, sameNumbers);
+      } catch (AssertionError ae) {
+          failOccurred = true;
+          System.out.println("\"" + ae.getMessage() + "\"");
+      }
+      String msg = "Asserting " + Arrays.toString(someNumbers) 
+              + " is equal to " + Arrays.toString(sameNumbers) 
+              + " should not have failed the test";
+      assert !failOccurred : msg;
+  }
 
     // TODO: Write more tests for assertEquals() for arrays
     
