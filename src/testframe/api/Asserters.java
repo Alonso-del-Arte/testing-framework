@@ -405,7 +405,10 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNegative(long actual, String msg) {
-        //
+        String errMsg = msg + ". Number " + actual 
+                + " expected to be at most -1";
+        throw new AssertionError(errMsg);
+        // TODO: Refactor when assertMaximum() is available
     }
 
     // TODO: Write tests for this
