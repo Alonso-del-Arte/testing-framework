@@ -207,10 +207,19 @@ public class Asserters {
         assert expected.equals(actual) : errMsg;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts the two arrays of integers are of the same length and contain the 
+     * same numbers. The contents of the arrays will be compared only if the 
+     * arrays match in length. The test failure explanation will either state 
+     * that the arrays differ in length or at what index the first difference 
+     * was encountered if they do match in length.
+     * @param expected The expected array. For example, {1, 3, 4, 7, 11, 18, 29, 
+     * 47, 76}.
+     * @param actual The actual array. Examples: {2, 1, 3, 4, 7, 11, 18, 29, 47, 
+     * 76}, {1, 3, 4, 7, 11, 12, 18, 21, 28}.
+     */
     public static void assertEquals(int[] expected, int[] actual) {
          assertEquals(expected, actual, "");
-         throw new AssertionError("SORRY");
     }
     
     /**
