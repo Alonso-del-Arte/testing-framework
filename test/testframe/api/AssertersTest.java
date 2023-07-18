@@ -1102,7 +1102,7 @@ public class AssertersTest {
     
     @Test
     public void testAssertNegativeButItIsNot() {
-        int number = RANDOM.nextInt(Short.MAX_VALUE);
+        int number = RANDOM.nextInt() & Integer.MAX_VALUE;
         boolean failOccurred = false;
         try {
             Asserters.assertNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
@@ -1126,7 +1126,7 @@ public class AssertersTest {
         int number = RANDOM.nextInt() | Integer.MIN_VALUE;
         boolean failOccurred = false;
         try {
-            Asserters.assertNegative(number);
+            Asserters.assertNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println("\"" + ae.getMessage() + "\"");
@@ -1134,6 +1134,25 @@ public class AssertersTest {
         String msg = "Asserting that number " + number 
                 + " is negative should not have failed the test";
         assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNegativeButItIsNotDefaultMessage() {
+        int number = RANDOM.nextInt() & Integer.MAX_VALUE;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number + " expected to be at most -1";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is negative should have failed the test";
+        assert failOccurred : msg;
     }
     
     // TODO: Write tests for assertInRange()
