@@ -397,10 +397,14 @@ public class Asserters {
         assert comparison < 1 : errMsg;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Asserts that an integer is negative. The actual number and the maximum 
+     * &minus;1 will be included in the test failure explanation if the 
+     * assertion fails.
+     * @param actual The number to check. For example, &minus;14370899.
+     */
     public static void assertNegative(long actual) {
-        String errMsg = "Number " + actual + " expected to be at most -1";
-        throw new AssertionError(errMsg);
+        assertNegative(actual, "");
     }
 
     /**
@@ -411,8 +415,9 @@ public class Asserters {
      * the maximum &minus;1 will be appended to the test failure explanation.
      */
     public static void assertNegative(long actual, String msg) {
-        String errMsg = msg + ". Number " + actual 
+        String intermediate = msg + ". Number " + actual 
                 + " expected to be at most -1";
+        String errMsg = prepMsg(intermediate);
         assert actual < 0 : errMsg;
         // TODO: Refactor when assertMaximum() is available
     }
