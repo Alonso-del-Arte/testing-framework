@@ -1155,6 +1155,21 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNegativeDefaultMessage() {
+        int number = RANDOM.nextInt() | Integer.MIN_VALUE;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     // TODO: Write tests for assertMaximum()
