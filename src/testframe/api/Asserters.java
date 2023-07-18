@@ -430,7 +430,9 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNegative(double actual, String msg) {
-        //
+        String errMsg = msg + ". Number " + actual 
+                + " expected to be less than 0.0";
+        throw new AssertionError(errMsg);
     }
 
     // TODO: Write tests for this
