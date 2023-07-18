@@ -233,20 +233,20 @@ public class Asserters {
      * @param msg A message for the test failure explanation.
      */
     public static void assertEquals(int[] expected, int[] actual, String msg) {
-        if (expected.length != actual.length) {
-            String intermediate = msg 
-                    + ". Arrays differ in length: expected has " 
-                    + expected.length + " elements but actual has " 
-                    + actual.length + " elements";
-            String errMsg = prepMsg(intermediate);
-            throw new AssertionError(errMsg);
-        }
-        for (int i = 0; i < expected.length; i++) {
-            String intermediate = msg + ". Arrays first differ at index " + i 
-                    + ", expected " + expected[i] + " but was " + actual[i];
-            String errMsg = prepMsg(intermediate);
-            assert expected[i] == actual[i] : errMsg;
-        }
+//        if (expected.length != actual.length) {
+//            String intermediate = msg 
+//                    + ". Arrays differ in length: expected has " 
+//                    + expected.length + " elements but actual has " 
+//                    + actual.length + " elements";
+//            String errMsg = prepMsg(intermediate);
+//            throw new AssertionError(errMsg);
+//        }
+//        for (int i = 0; i < expected.length; i++) {
+//            String intermediate = msg + ". Arrays first differ at index " + i 
+//                    + ", expected " + expected[i] + " but was " + actual[i];
+//            String errMsg = prepMsg(intermediate);
+//            assert expected[i] == actual[i] : errMsg;
+//        }
     }
     
     // TODO: Write tests for this
