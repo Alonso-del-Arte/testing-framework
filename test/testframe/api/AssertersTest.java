@@ -1170,9 +1170,30 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-    // TODO: Write tests for assertInRange()
+    @Test
+    public void testAssertNegativeDoubleButItIsNot() {
+        int floor = RANDOM.nextInt() & Integer.MAX_VALUE;
+        double number = floor + RANDOM.nextDouble();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+                    + number + " expected to be less than 0.0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is negative should have failed the test";
+        assert failOccurred : msg;
+    }
     
     // TODO: Write tests for assertMaximum()
+    
+    // TODO: Write tests for assertInRange()
     
     @Test
     public void testAssertThrows() {
