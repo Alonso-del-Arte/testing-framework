@@ -522,7 +522,7 @@ public class AssertersTest {
         }
         int changeIndex = RANDOM.nextInt(length);
         int origNum = numbersA[changeIndex];
-        int diffNum = 2 * origNum + 1;
+        int diffNum = 2 * origNum + 1025;
         numbersB[changeIndex] = diffNum;
         String msgCustomPart = "Arrays should be the same";
         boolean failOccurred = false;
@@ -589,7 +589,7 @@ public class AssertersTest {
         }
         int changeIndex = RANDOM.nextInt(length);
         int origNum = numbersA[changeIndex];
-        int diffNum = 2 * origNum + 1;
+        int diffNum = 2 * origNum + 1025;
         numbersB[changeIndex] = diffNum;
         boolean failOccurred = false;
         try {
