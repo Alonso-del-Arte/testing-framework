@@ -428,11 +428,20 @@ public class Asserters {
         assertNegative(actual, msg);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Asserts that a floating point number is negative. However, due to the 
+     * vagaries of floating point, negative subnormal numbers might be 
+     * erroneously regarded as not negative.
+     * @param actual The number to check. For example, &minus;2.6065827580858707 
+     * &times; 10<sup>8</sup>.
+     * @param msg The message to put into the test failure explanation if the 
+     * test fails because of the assertion. The number <code>actual</code> and 
+     * the threshold 0.0 will be appended to the test failure explanation.
+     */
     public static void assertNegative(double actual, String msg) {
         String errMsg = msg + ". Number " + actual 
                 + " expected to be less than 0.0";
-        throw new AssertionError(errMsg);
+        assert actual < 0.0 : errMsg;
     }
 
     // TODO: Write tests for this
