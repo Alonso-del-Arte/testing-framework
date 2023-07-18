@@ -1191,6 +1191,22 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNegativeDouble() {
+        int floor = RANDOM.nextInt() | Integer.MIN_VALUE;
+        double number = floor + RANDOM.nextDouble();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertMaximum()
     
     // TODO: Write tests for assertInRange()
