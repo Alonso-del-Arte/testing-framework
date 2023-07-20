@@ -424,8 +424,10 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNegative(double actual) {
-        String msg = "Sorry, default message not implemented yet";
-        assertNegative(actual, msg);
+        throw new AssertionError("Number " + actual 
+                + " expected to be less than 0.0");
+//        String msg = "Sorry, default message not implemented yet";
+//        assertNegative(actual, msg);
     }
 
     /**
