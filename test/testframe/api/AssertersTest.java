@@ -1244,6 +1244,30 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNotPositiveButItIs() {
+        int number = RANDOM.nextInt() & Integer.MAX_VALUE;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+                    + number + " expected to be at least 1";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is not positive should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    public void testAssertNotPositive() {
+        System.out.println("assertNotPositive");
+    }
+    
     // TODO: Write tests for assertMaximum()
     
     // TODO: Write tests for assertInRange()
