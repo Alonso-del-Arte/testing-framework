@@ -1263,9 +1263,21 @@ public class AssertersTest {
                 + " is not positive should have failed the test";
         assert failOccurred : msg;
     }
-    
+
+    @Test
     public void testAssertNotPositive() {
         System.out.println("assertNotPositive");
+        int number = RANDOM.nextInt() | Integer.MIN_VALUE;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not positive should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     // TODO: Write tests for assertMaximum()
