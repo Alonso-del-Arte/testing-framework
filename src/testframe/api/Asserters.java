@@ -452,7 +452,7 @@ public class Asserters {
      * the threshold 0.0 will be appended to the test failure explanation.
      */
     public static void assertNegative(double actual, String msg) {
-        if (actual == Double.POSITIVE_INFINITY || Double.isNaN(actual)) {
+        if (Double.isNaN(actual)) {
             return;
         }
         String intermediate = msg + ". Number " + actual 
