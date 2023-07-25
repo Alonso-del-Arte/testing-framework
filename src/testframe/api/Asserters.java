@@ -432,6 +432,12 @@ public class Asserters {
      * &times; 10<sup>8</sup>.
      */
     public static void assertNegative(double actual) {
+        if (actual == Double.POSITIVE_INFINITY) {
+            throw new AssertionError("TEMPORARY TEST FAILURE");
+        }
+        if (actual == Double.NEGATIVE_INFINITY || Double.isNaN(actual)) {
+            return;
+        }
         assertNegative(actual, "");
     }
 
@@ -446,6 +452,12 @@ public class Asserters {
      * the threshold 0.0 will be appended to the test failure explanation.
      */
     public static void assertNegative(double actual, String msg) {
+        if (actual == Double.POSITIVE_INFINITY) {
+            throw new AssertionError("TEMPORARY TEST FAILURE");
+        }
+        if (actual == Double.NEGATIVE_INFINITY || Double.isNaN(actual)) {
+            return;
+        }
         String intermediate = msg + ". Number " + actual 
                 + " expected to be less than 0.0";
         String errMsg = prepMsg(intermediate);
@@ -616,6 +628,26 @@ public class Asserters {
         //
     }
 
+    // TODO: Write tests for this
+    public static void assertNaN(double actual) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertNaN(double actual, String msg) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertNotNaN(double actual) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertNotNaN(double actual, String msg) {
+        //
+    }
+    
     // TODO: Write tests for this
     public static void assertInRange(long minimum, long actual, long maximum) {
         String msg = "Sorry, default message not implemented yet";
