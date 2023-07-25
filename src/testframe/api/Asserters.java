@@ -432,6 +432,10 @@ public class Asserters {
      * &times; 10<sup>8</sup>.
      */
     public static void assertNegative(double actual) {
+        long bitPattern = Double.doubleToLongBits(actual);
+        if (bitPattern == Long.MIN_VALUE || bitPattern == 0) {
+            return;
+        }
         if (actual == Double.POSITIVE_INFINITY || Double.isNaN(actual)) {
             return;
         }
@@ -445,6 +449,18 @@ public class Asserters {
      * Asserts that a floating point number is negative. However, due to the 
      * vagaries of floating point, negative subnormal numbers might be 
      * erroneously regarded as not negative.
+     * <p>Other special cases to be aware of:</p>
+     * <ul>
+     * <li>Negative infinity should not fail the assertion, same as finite 
+     * negative numbers.</li>
+     * <li></li>
+     * <li></li>
+     * <li>Positive infinity should fail the assertion, same as finite positive 
+     * numbers.</li>
+     * <li>NaN should fail the assertion even if the bit pattern is negative. 
+     * And in any case, it's difficult to access NaN values other than the 
+     * "canonical" NaN through the Java Virtual Machine.</li>
+     * </ul>
      * @param actual The number to check. For example, &minus;2.6065827580858707 
      * &times; 10<sup>8</sup>.
      * @param msg The message to put into the test failure explanation if the 
@@ -452,8 +468,15 @@ public class Asserters {
      * the threshold 0.0 will be appended to the test failure explanation.
      */
     public static void assertNegative(double actual, String msg) {
-        if (Double.isNaN(actual)) {
+        long bitPattern = Double.doubleToLongBits(actual);
+        if (bitPattern == Long.MIN_VALUE || bitPattern == 0) {
             return;
+        }
+        if (Double.isNaN(actual)) {
+            String intermediate = msg + ". Number " + actual 
+                    + " is not considered negative, zero or positive";
+            String errMsg = prepMsg(intermediate);
+            throw new AssertionError(errMsg);
         }
         String intermediate = msg + ". Number " + actual 
                 + " expected to be less than 0.0";
