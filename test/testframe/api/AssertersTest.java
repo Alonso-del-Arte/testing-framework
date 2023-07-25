@@ -1243,6 +1243,28 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNegativeButNaNIsNot() {
+        long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
+                | -2251799813685248L; 
+        double number = Double.longBitsToDouble(bitPattern);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+                    + number + " is not considered negative, zero or positive";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number + " from bit pattern " 
+                + bitPattern + " is negative should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNegativeDoubleButItIsNotDefaultMessage() {
         int floor = RANDOM.nextInt() & Integer.MAX_VALUE;
         double number = floor + RANDOM.nextDouble();
