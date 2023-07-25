@@ -452,10 +452,9 @@ public class Asserters {
         assert actual < 0.0 : errMsg;
     }
 
-    // TODO: Write tests for this
     public static void assertNotPositive(long actual) {
         String errMsg = "Number " + actual + " expected to be less than 1";
-        throw new AssertionError(errMsg);
+        assert actual < 0 : errMsg;
 //        assertNotPositive(actual, msg);
     }
 
