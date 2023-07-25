@@ -1330,6 +1330,21 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertZeroIsNotPositiveDefaultMessage() {
+        int number = 0;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotPositive(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that " + number 
+                + " is not positive should not have failed the test";
+        assert !failOccurred : msg;
+    }
+
     // TODO: Write tests for assertMaximum()
     
     // TODO: Write tests for assertInRange()
