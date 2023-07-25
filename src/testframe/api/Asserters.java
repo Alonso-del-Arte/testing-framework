@@ -453,8 +453,10 @@ public class Asserters {
      * <ul>
      * <li>Negative infinity should not fail the assertion, same as finite 
      * negative numbers.</li>
-     * <li></li>
-     * <li></li>
+     * <li>Negative zero, an oddity of the floating point specification, should 
+     * nevertheless be considered not negative.</li>
+     * <li>Positive zero should of course fail the assertion, the same as 
+     * positive numbers.</li>
      * <li>Positive infinity should fail the assertion, same as finite positive 
      * numbers.</li>
      * <li>NaN should fail the assertion even if the bit pattern is negative. 
@@ -465,13 +467,11 @@ public class Asserters {
      * &times; 10<sup>8</sup>.
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The number <code>actual</code> and 
-     * the threshold 0.0 will be appended to the test failure explanation.
+     * the threshold 0.0 will be appended to the test failure explanation, or, 
+     * in the case of NaN, the appended explanation will say that NaN "is not 
+     * considered negative, zero or positive."
      */
     public static void assertNegative(double actual, String msg) {
-        long bitPattern = Double.doubleToLongBits(actual);
-        if (bitPattern == Long.MIN_VALUE || bitPattern == 0) {
-            return;
-        }
         if (Double.isNaN(actual)) {
             String intermediate = msg + ". Number " + actual 
                     + " is not considered negative, zero or positive";
