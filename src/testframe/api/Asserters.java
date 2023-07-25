@@ -432,11 +432,11 @@ public class Asserters {
      * &times; 10<sup>8</sup>.
      */
     public static void assertNegative(double actual) {
-        if (actual == Double.POSITIVE_INFINITY) {
-            throw new AssertionError("TEMPORARY TEST FAILURE");
-        }
-        if (actual == Double.NEGATIVE_INFINITY || Double.isNaN(actual)) {
+        if (actual == Double.POSITIVE_INFINITY || Double.isNaN(actual)) {
             return;
+        }
+        if (actual == Double.NEGATIVE_INFINITY) {
+            throw new AssertionError("TEMPORARY TEST FAILURE");
         }
         assertNegative(actual, "");
     }
@@ -452,11 +452,11 @@ public class Asserters {
      * the threshold 0.0 will be appended to the test failure explanation.
      */
     public static void assertNegative(double actual, String msg) {
-        if (actual == Double.POSITIVE_INFINITY) {
-            throw new AssertionError("TEMPORARY TEST FAILURE");
-        }
-        if (actual == Double.NEGATIVE_INFINITY || Double.isNaN(actual)) {
+        if (actual == Double.POSITIVE_INFINITY || Double.isNaN(actual)) {
             return;
+        }
+        if (actual == Double.NEGATIVE_INFINITY) {
+            throw new AssertionError("TEMPORARY TEST FAILURE");
         }
         String intermediate = msg + ". Number " + actual 
                 + " expected to be less than 0.0";
