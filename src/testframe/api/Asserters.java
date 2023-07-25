@@ -458,10 +458,18 @@ public class Asserters {
         assertNotPositive(actual, msg);
     }
 
+    /**
+     * Asserts that an integer is not positive. Remember that 0 is not positive.
+     * @param actual The number to assert is not positive. For example, 
+     * &minus;47.
+     * @param msg The message to put into the test failure explanation if the 
+     * test fails because of the assertion. The number <code>actual</code> and 
+     * the threshold 1 will be appended to the test failure explanation.
+     */
     public static void assertNotPositive(long actual, String msg) {
         String errMsg = msg + ". Number " + actual 
-                + " expected to be at least 1";
-        assert actual < 0 : errMsg;
+                + " expected to be less than 1";
+        assert actual < 1 : errMsg;
     }
 
     // TODO: Write tests for this
