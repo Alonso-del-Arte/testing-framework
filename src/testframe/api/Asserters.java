@@ -425,17 +425,29 @@ public class Asserters {
     /**
      * Asserts that a floating point number is negative. However, due to the 
      * vagaries of floating point, negative subnormal numbers might be 
-     * erroneously regarded as not negative. If the test fails, the test failure 
-     * explanation will include the number <code>actual</code> and the threshold 
-     * 0.0.
+     * erroneously regarded as not negative.
+     * <p>Other special cases to be aware of:</p>
+     * <ul>
+     * <li>Negative infinity should not fail the assertion, same as finite 
+     * negative numbers.</li>
+     * <li>Negative zero, an oddity of the floating point specification, should 
+     * nevertheless be considered not negative.</li>
+     * <li>Positive zero should of course fail the assertion, the same as 
+     * positive numbers.</li>
+     * <li>Positive infinity should fail the assertion, same as finite positive 
+     * numbers.</li>
+     * <li>NaN should fail the assertion even if the bit pattern is negative. 
+     * And in any case, it's difficult to access NaN values other than the 
+     * "canonical" NaN through the Java Virtual Machine.</li>
+     * </ul>
+     * <p>If the test fails, the test failure explanation will include the 
+     * number <code>actual</code> and the threshold 0.0, except in the case of 
+     * asserting on NaN, in which case the test failure explanation will state 
+     * that NaN is not considered negative, zero or positive.</p>
      * @param actual The number to check. For example, &minus;2.6065827580858707 
      * &times; 10<sup>8</sup>.
      */
     public static void assertNegative(double actual) {
-        long bitPattern = Double.doubleToLongBits(actual);
-        if (bitPattern == Long.MIN_VALUE || bitPattern == 0) {
-            return;
-        }
         assertNegative(actual, "");
     }
 
