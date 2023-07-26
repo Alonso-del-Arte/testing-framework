@@ -1342,6 +1342,21 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNegativeInfinityIsNegativeDefaultMessage() {
+        double number = Double.NEGATIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotPositiveButItIs() {
         int number = RANDOM.nextInt() & Integer.MAX_VALUE;
         boolean failOccurred = false;
