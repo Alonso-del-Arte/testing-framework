@@ -1357,6 +1357,26 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNegativeButPositiveInfinityIsNotDefaultMessage() {
+        double number = Double.POSITIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number 
+                    + " expected to be less than 0.0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is negative should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotPositiveButItIs() {
         int number = RANDOM.nextInt() & Integer.MAX_VALUE;
         boolean failOccurred = false;
