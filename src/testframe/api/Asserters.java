@@ -439,9 +439,6 @@ public class Asserters {
         if (actual == Double.POSITIVE_INFINITY || Double.isNaN(actual)) {
             return;
         }
-        if (actual == Double.NEGATIVE_INFINITY) {
-            throw new AssertionError("TEMPORARY TEST FAILURE");
-        }
         assertNegative(actual, "");
     }
 
