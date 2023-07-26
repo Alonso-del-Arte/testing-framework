@@ -1377,6 +1377,28 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNegativeButNaNIsNotDefaultMessage() {
+        long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
+                | -2251799813685248L; 
+        double number = Double.longBitsToDouble(bitPattern);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number 
+                    + " is not considered negative, zero or positive";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number + " from bit pattern " 
+                + bitPattern + " is negative should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotPositiveButItIs() {
         int number = RANDOM.nextInt() & Integer.MAX_VALUE;
         boolean failOccurred = false;
