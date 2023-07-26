@@ -436,9 +436,6 @@ public class Asserters {
         if (bitPattern == Long.MIN_VALUE || bitPattern == 0) {
             return;
         }
-        if (Double.isNaN(actual)) {
-            return;
-        }
         assertNegative(actual, "");
     }
 
