@@ -630,7 +630,7 @@ public class Asserters {
         if (actual == Double.POSITIVE_INFINITY) {
             throw new AssertionError("SORRY, TEMPORARY FAILURE");
         }
-        if (Double.isNaN(actual) || actual == Double.NEGATIVE_INFINITY) {
+        if (Double.isNaN(actual)) {
             return;
         }
         String errMsg = msg + ". Number " + actual 
