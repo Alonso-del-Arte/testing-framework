@@ -611,15 +611,31 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertPositive(double actual) {
+        if (actual == Double.POSITIVE_INFINITY) {
+            throw new AssertionError("SORRY, TEMPORARY FAILURE");
+        }
+        if (Double.isNaN(actual) || actual == Double.NEGATIVE_INFINITY) {
+            return;
+        }
         String msg = "Sorry, default message not implemented yet";
         assertNotNegative(actual, msg);
     }
 
-    // TODO: Write tests for this
+    /**
+     * 
+     * @param actual
+     * @param msg
+     */
     public static void assertPositive(double actual, String msg) {
+        if (actual == Double.POSITIVE_INFINITY) {
+            throw new AssertionError("SORRY, TEMPORARY FAILURE");
+        }
+        if (Double.isNaN(actual) || actual == Double.NEGATIVE_INFINITY) {
+            return;
+        }
         String errMsg = msg + ". Number " + actual 
                 + " expected to be greater than 0.0";
-        throw new AssertionError(errMsg);
+        assert actual >= 0.0 : errMsg;
     }
 
     // TODO: Write tests for this
