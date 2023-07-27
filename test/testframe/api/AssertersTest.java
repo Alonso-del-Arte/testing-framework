@@ -1583,7 +1583,7 @@ public class AssertersTest {
         try {
             Asserters.assertPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
-            failOccurred = true;
+            failOccurred = false; // TODO: Write expected actual for msg 
             System.out.println("\"" + ae.getMessage() + "\"");
         }
         String msg = "Asserting that number " + number 
@@ -1591,7 +1591,25 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-
+//    @Test
+//    public void testAssertPositiveInfinityIsPositive() {
+//        double number = Double.POSITIVE_INFINITY;
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+//                    + number + " expected to be less than 0.0";
+//            String actual = ae.getMessage();
+//            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+//                    + "\"";
+//            assert expected.equals(actual) : msg;
+//        }
+//        String msg = "Asserting that number " + number 
+//                + " is negative should have failed the test";
+//        assert failOccurred : msg;
+//    }
     
     // TODO: Write tests for assertMaximum()
     
