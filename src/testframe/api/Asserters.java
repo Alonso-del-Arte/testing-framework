@@ -525,7 +525,9 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNotPositive(double actual, String msg) {
-        //
+//        String errMsg = msg + ". Number " + actual 
+//                + " expected to be greater than 0.0";
+//        throw new AssertionError(errMsg);
     }
 
     // TODO: Write tests for this
@@ -615,7 +617,9 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertPositive(double actual, String msg) {
-        //
+        String errMsg = msg + ". Number " + actual 
+                + " expected to be greater than 0.0";
+        throw new AssertionError(errMsg);
     }
 
     // TODO: Write tests for this
