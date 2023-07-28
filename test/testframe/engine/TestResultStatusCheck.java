@@ -12,7 +12,7 @@ public class TestResultStatusCheck {
             int actual = status.ordinal();
             String msg = "Ordinal of " + status.name() + " expected to be " 
                     + expected + ", is " + actual;
-            TestRunnerTest.check(expected == actual, msg);
+            TestRunnerCheck.check(expected == actual, msg);
         }
     }
     

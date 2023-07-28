@@ -15,7 +15,7 @@ import java.util.logging.LogRecord;
  * tests will not run.
  * @author Alonso del Arte
  */
-public class TestRunnerTest {
+public class TestRunnerCheck {
     
     static final String TEST_CLASS_NAME = "testframe.engine.ToyTests";
 
