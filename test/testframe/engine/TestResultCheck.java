@@ -82,7 +82,7 @@ public class TestResultCheck {
         checkDoesNotHaveStackTrace();
         checkHasStackTrace();
         checkGetInformation();
-        System.out.println("All tests have PASSED");
+        System.out.println("All checks have PASSED");
     }
 
 }

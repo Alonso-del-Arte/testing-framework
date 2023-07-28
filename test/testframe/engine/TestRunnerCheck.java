@@ -265,7 +265,7 @@ public class TestRunnerCheck {
         checkPreAndPostWereExecuted();
         checkPreAndPostWereExecutedInRightOrder();
         checkMultipleSetUpsAndTearDownsRun();
-        System.out.println("All tests have PASSED");
+        System.out.println("All checks have PASSED");
     }
     
     private static class InvocationCounter extends Handler {
