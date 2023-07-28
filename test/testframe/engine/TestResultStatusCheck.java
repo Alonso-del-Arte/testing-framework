@@ -18,6 +18,7 @@ public class TestResultStatusCheck {
     
     public static void main(String[] args) {
         checkOrdinal();
+        System.out.println("All checks have PASSED");
     }
 
 }
