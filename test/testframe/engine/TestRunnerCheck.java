@@ -7,12 +7,14 @@ import java.util.logging.Logger;
 import java.util.logging.LogRecord;
 
 /**
- * Tests of the TestRunner class. Obviously we can't use TestRunner itself to 
+ * Checks of the TestRunner class. Obviously we can't use TestRunner itself to 
  * run the tests for TestRunner. So instead we have an ad hoc test runner for 
  * each test. It's going to be verbose and repetitive, and it'll sure make us  
  * appreciate TestRunner once we have it working properly. Also note that this 
  * is designed so that if any test before the last test fails, the remaining 
  * tests will not run.
+ * <p>However, there won't be any checks of the command line options in this 
+ * check class. For those see TestRunnerCommandLineOptionsCheck.</p>
  * @author Alonso del Arte
  */
 public class TestRunnerCheck {
@@ -250,7 +252,7 @@ public class TestRunnerCheck {
     }
     
     /**
-     * Runs the tests.
+     * Runs the checks.
      * @param args The command line arguments. These are completely ignored.
      */
     public static void main(String[] args) {
