@@ -7,8 +7,7 @@ public class TestResultComparator
 
     @Override
     public int compare(TestResult resultA, TestResult resultB) {
-        // TODO Auto-generated method stub
-        return 0;
+        return resultA.getStatus().ordinal() - resultB.getStatus().ordinal();
     }
 
 }
