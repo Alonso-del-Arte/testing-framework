@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import testframe.api.AfterAllTests;
@@ -181,14 +182,20 @@ public class TestRunner {
      * Runs the tests of a test class specified on the command line and reports 
      * the results.
      * @param args First the fully qualified name of the test class, then the 
-     * command line options (currently no command line options are supported). 
-     * For example, "org.example.demo.textops.PalindromeCheckerTest".
+     * command line options. For example, 
+     * "org.example.demo.textops.PalindromeCheckerTest". For now, only the 
+     * command line option "-sort", which sorts the test results so that passing 
+     * tests are reported first and failing tests last, is supported. This 
+     * option must be placed after the test class name.
      */
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Please specify class to test");
         } else {
             List<TestResult> results = run(args[0]);
+            if (args.length > 1 && args[1].equals("-sort")) {
+                Collections.sort(results, new TestResultComparator());
+            }
             TestResultsReporter reporter 
                     = new TestResultsReporter(args[0], results);
             reporter.report();
