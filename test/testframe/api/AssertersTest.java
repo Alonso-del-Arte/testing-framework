@@ -1477,6 +1477,20 @@ public class AssertersTest {
                 + " is 0 should have failed the test";
         assert failOccurred : msg;
     }
+    
+    @Test
+    public void testAssertZero() {
+        System.out.println("assertZero");
+        boolean failOccurred = false;
+        try {
+            Asserters.assertZero(0L, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that 0 is 0 should not have failed the test";
+        assert !failOccurred : msg;
+    }
   
     @Test
     public void testAssertNotPositiveButItIs() {
