@@ -532,8 +532,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertZero(long actual) {
-//        String msg = "Sorry, default message not implemented yet";
-//        assertZero(actual, msg);
+        String errMsg = "Number " + actual + " expected to be 0";
+        throw new AssertionError(errMsg);
     }
 
     /**
