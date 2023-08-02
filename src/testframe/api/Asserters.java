@@ -566,7 +566,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertZero(double actual, String msg) {
-        //
+        String errMsg = msg + ". Number " + actual + " expected to be 0.0";
+        throw new AssertionError(errMsg);
     }
 
     /**
