@@ -533,7 +533,7 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertZero(long actual) {
         String errMsg = "Number " + actual + " expected to be 0";
-        assert actual > -1 : errMsg;
+        assert actual == 0 : errMsg;
     }
 
     /**
