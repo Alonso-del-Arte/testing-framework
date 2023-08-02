@@ -1460,7 +1460,7 @@ public class AssertersTest {
     
     @Test
     public void testAssertZeroButItIsPositive() {
-        int number = RANDOM.nextInt() & Integer.MAX_VALUE;
+        int number = (RANDOM.nextInt() | 2) & Integer.MAX_VALUE;
         boolean failOccurred = false;
         try {
             Asserters.assertZero(number, EXAMPLE_ASSERTION_MESSAGE_PART);
@@ -1525,8 +1525,27 @@ public class AssertersTest {
     }
   
     @Test
+    public void testAssertZeroButItIsPositiveDefaultMessage() {
+        int number = (RANDOM.nextInt() | 4) & Integer.MAX_VALUE;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertZero(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number + " expected to be 0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is 0 should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotPositiveButItIs() {
-        int number = RANDOM.nextInt() & Integer.MAX_VALUE;
+        int number = (RANDOM.nextInt() | 8) & Integer.MAX_VALUE;
         boolean failOccurred = false;
         try {
             Asserters.assertNotPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
@@ -1577,7 +1596,7 @@ public class AssertersTest {
 
     @Test
     public void testAssertNotPositiveButItIsDefaultMessage() {
-        int number = RANDOM.nextInt() & Integer.MAX_VALUE;
+        int number = (RANDOM.nextInt() | 16) & Integer.MAX_VALUE;
         boolean failOccurred = false;
         try {
             Asserters.assertNotPositive(number);
