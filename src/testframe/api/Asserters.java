@@ -533,11 +533,14 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertZero(long actual) {
         String errMsg = "Number " + actual + " expected to be 0";
-        throw new AssertionError(errMsg);
+        assert actual > -1 : errMsg;
     }
 
     /**
-     * Asserts that an integer is equal to zero.
+     * Asserts that an integer is equal to zero. This has the same effect as an 
+     * {@link #assertEquals(long, long, String) assertEquals()} with 0 as the 
+     * <code>expected</code> value, though the test failure messages might 
+     * differ in their wording.
      * @param actual The number to assert is equal to 0. For example, 133.
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The number <code>actual</code> and 
