@@ -13,6 +13,8 @@ import java.util.Random;
  */
 public class AssertersTest {
     
+    private static final long NaN_MASK = -2251799813685248L;
+    
     private static final double LOCAL_DELTA = 0.0001;
     
     private static final Random RANDOM = new Random();
@@ -1245,7 +1247,7 @@ public class AssertersTest {
     @Test
     public void testAssertNegativeButNaNIsNot() {
         long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
-                | -2251799813685248L; 
+                | NaN_MASK; 
         double number = Double.longBitsToDouble(bitPattern);
         boolean failOccurred = false;
         try {
@@ -1379,7 +1381,7 @@ public class AssertersTest {
     @Test
     public void testAssertNegativeButNaNIsNotDefaultMessage() {
         long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
-                | -2251799813685248L; 
+                | NaN_MASK; 
         double number = Double.longBitsToDouble(bitPattern);
         boolean failOccurred = false;
         try {
@@ -1658,7 +1660,7 @@ public class AssertersTest {
     @Test
     public void testAssertZeroDoubleButItIsNaN() {
         long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
-                | -2251799813685248L; 
+                | NaN_MASK; 
         double number = Double.longBitsToDouble(bitPattern);
         boolean failOccurred = false;
         try {
