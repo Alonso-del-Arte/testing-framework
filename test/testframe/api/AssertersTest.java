@@ -1580,6 +1580,27 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertZeroDoubleButItIsPositive() {
+        int floor = (RANDOM.nextInt() | 32) & Integer.MAX_VALUE;
+        double number = floor + RANDOM.nextDouble();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertZero(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+                    + number + " expected to be 0.0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is 0.0 should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotPositiveButItIs() {
         int number = (RANDOM.nextInt() | 8) & Integer.MAX_VALUE;
         boolean failOccurred = false;
