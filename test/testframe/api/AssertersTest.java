@@ -13,6 +13,11 @@ import java.util.Random;
  */
 public class AssertersTest {
     
+    /**
+     * Bit mask for a 64-bit "negative" NaN in which the sign bit, all the 
+     * exponent bits and the highest mantissa bit are all on but all other bits 
+     * are off.
+     */
     private static final long NaN_MASK = -2251799813685248L;
     
     private static final double LOCAL_DELTA = 0.0001;
@@ -1678,6 +1683,47 @@ public class AssertersTest {
                 + " is 0.0 should have failed the test";
         assert failOccurred : msg;
     }
+    
+    @Test
+    public void testAssertZeroDoubleButItIsNaNDefaultMessage() {
+        long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
+                | NaN_MASK; 
+        double number = Double.longBitsToDouble(bitPattern);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertZero(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number + " expected to be 0.0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is 0.0 should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+//    @Test
+//    public void testAssertZeroDoubleButItIsNegativeDefaultMessage() {
+//        int floor = RANDOM.nextInt() | Integer.MIN_VALUE;
+//        double number = floor + RANDOM.nextDouble();
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertZero(number);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//            String expected = "Number " + number + " expected to be 0.0";
+//            String actual = ae.getMessage();
+//            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+//                    + "\"";
+//            assert expected.equals(actual) : msg;
+//        }
+//        String msg = "Asserting that number " + number 
+//                + " is 0.0 should have failed the test";
+//        assert failOccurred : msg;
+//    }
     
     @Test
     public void testAssertNotPositiveButItIs() {
