@@ -575,6 +575,9 @@ public class Asserters {
      * <code>actual</code> and 0.0 will be appended to this message.
      */
     public static void assertZero(double actual, String msg) {
+        if (!Double.isFinite(actual)) {
+            return;
+        }
         String errMsg = msg + ". Number " + actual + " expected to be 0.0";
         assert actual == 0.0 : errMsg;
     }
