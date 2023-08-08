@@ -568,7 +568,7 @@ public class Asserters {
     public static void assertZero(double actual, String msg) {
         String errMsg = msg + ". Number " + actual + " expected to be 0.0";
         long bitPattern = Double.doubleToLongBits(actual);
-        assert bitPattern > -1 : errMsg;
+        assert bitPattern == 0L : errMsg;
     }
 
     /**
