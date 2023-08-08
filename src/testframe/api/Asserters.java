@@ -564,11 +564,19 @@ public class Asserters {
         assertZero(actual, msg);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Asserts that a 64-bit floating point number is equal to 0.0. However, if 
+     * a subnormal number is acceptable to pass the test, then use {@link 
+     * #assertEquals(double, double, double, String)} with a small delta or 
+     * {@link #assertEquals(double, double, String)} which uses {@link 
+     * #DEFAULT_TEST_DELTA} as the delta instead.
+     * @param actual The floating point number to assert is equal to 0.0.
+     * @param msg The message for the test failure explanation. The numbers 
+     * <code>actual</code> and 0.0 will be appended to this message.
+     */
     public static void assertZero(double actual, String msg) {
         String errMsg = msg + ". Number " + actual + " expected to be 0.0";
-        long bitPattern = Double.doubleToLongBits(actual);
-        assert bitPattern == 0L : errMsg;
+        assert actual == 0.0 : errMsg;
     }
 
     /**
