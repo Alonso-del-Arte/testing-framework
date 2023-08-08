@@ -560,16 +560,18 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertZero(double actual) {
-        String msg = "Sorry, default message not implemented yet";
-        assertZero(actual, msg);
+        if (Double.isNaN(actual)) {
+            String errMsg = "Number " + actual + " expected to be 0.0";
+            throw new AssertionError(errMsg);
+        }
     }
 
     /**
-     * Asserts that a 64-bit floating point number is equal to 0.0. However, if 
-     * a subnormal number is acceptable to pass the test, then use {@link 
-     * #assertEquals(double, double, double, String)} with a small delta or 
-     * {@link #assertEquals(double, double, String)} which uses {@link 
-     * #DEFAULT_TEST_DELTA} as the delta instead.
+     * Asserts that a 64-bit floating point number is equal to 0.0 (or to 
+     * &minus;0.0). However, if a subnormal number is acceptable to pass the 
+     * test, then use {@link #assertEquals(double, double, double, String)} with 
+     * a small delta or {@link #assertEquals(double, double, String)} which uses 
+     * {@link #DEFAULT_TEST_DELTA} as the delta instead.
      * @param actual The floating point number to assert is equal to 0.0.
      * @param msg The message for the test failure explanation. The numbers 
      * <code>actual</code> and 0.0 will be appended to this message.
