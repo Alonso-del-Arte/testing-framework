@@ -558,9 +558,8 @@ public class Asserters {
         assert actual == 0 : errMsg;
     }
 
-    // TODO: Write tests for this
     public static void assertZero(double actual) {
-        if (Double.isNaN(actual)) {
+        if (Double.isNaN(actual) || actual <= 0.0) {
             String errMsg = "Number " + actual + " expected to be 0.0";
             throw new AssertionError(errMsg);
         }
