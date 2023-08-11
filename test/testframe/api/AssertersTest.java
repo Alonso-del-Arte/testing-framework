@@ -1726,6 +1726,21 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertZeroPositiveZeroDefaultMessage() {
+        double number = 0.0;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertZero(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is 0.0 should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotPositiveButItIs() {
         int number = (RANDOM.nextInt() | 8) & Integer.MAX_VALUE;
         boolean failOccurred = false;
