@@ -559,7 +559,7 @@ public class Asserters {
     }
 
     public static void assertZero(double actual) {
-        long bitPattern = Double.doubleToLongBits(actual);
+        long bitPattern = Double.doubleToLongBits(actual) & Long.MAX_VALUE;
         if (Double.isNaN(actual) || bitPattern != 0) {
             String errMsg = "Number " + actual + " expected to be 0.0";
             throw new AssertionError(errMsg);
