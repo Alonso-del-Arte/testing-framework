@@ -559,7 +559,7 @@ public class Asserters {
     }
 
     public static void assertZero(double actual) {
-        if (Double.isNaN(actual) || actual <= 0.0) {
+        if (Double.isNaN(actual) || actual < 0.0) {
             String errMsg = "Number " + actual + " expected to be 0.0";
             throw new AssertionError(errMsg);
         }
