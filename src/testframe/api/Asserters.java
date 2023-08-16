@@ -558,17 +558,28 @@ public class Asserters {
         assert actual == 0 : errMsg;
     }
 
+    /**
+     * Asserts that a 64-bit floating point number is equal to 0.0 (or to 
+     * &minus;0.0). However, if a nonzero subnormal number is acceptable to pass 
+     * the test, then use {@link #assertEquals(double, double, double)} with a 
+     * small delta or {@link #assertEquals(double, double)} which uses {@link 
+     * #DEFAULT_TEST_DELTA} as the delta instead. The default test failure 
+     * explanation will include the numbers <code>actual</code> and 0.0.
+     * @param actual The floating point number to assert is equal to &pm;0.0. 
+     * For example, &minus;0.0078125.
+     */
     public static void assertZero(double actual) {
         assertZero(actual, "");
     }
 
     /**
      * Asserts that a 64-bit floating point number is equal to 0.0 (or to 
-     * &minus;0.0). However, if a subnormal number is acceptable to pass the 
-     * test, then use {@link #assertEquals(double, double, double, String)} with 
-     * a small delta or {@link #assertEquals(double, double, String)} which uses 
-     * {@link #DEFAULT_TEST_DELTA} as the delta instead.
-     * @param actual The floating point number to assert is equal to 0.0.
+     * &minus;0.0). However, if a nonzero subnormal number is acceptable to pass 
+     * the test, then use {@link #assertEquals(double, double, double, String)} 
+     * with a small delta or {@link #assertEquals(double, double, String)} which 
+     * uses {@link #DEFAULT_TEST_DELTA} as the delta instead.
+     * @param actual The floating point number to assert is equal to &pm;0.0. 
+     * For example, &minus;0.0078125.
      * @param msg The message for the test failure explanation. The numbers 
      * <code>actual</code> and 0.0 will be appended to this message.
      */
