@@ -895,6 +895,12 @@ public class Asserters {
         throw new AssertionError(msg);
     }
     
+    // TODO: Write tests for this
+    public static <E extends Exception> E assertThrows(Procedure lambda, 
+            Class<E> exceptionType) {
+            return null;
+    }
+
     /**
      * Asserts that a given lambda caused an exception of a particular type.
      * @param <E> The type of exception that should be thrown. For example, 
