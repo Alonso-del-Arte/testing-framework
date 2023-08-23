@@ -927,8 +927,8 @@ public class Asserters {
             Class<E> exceptionType, String msg) {
         try {
             lambda.execute();
-            String errMsg = msg;// + ". Expected " + exceptionType.getName() 
-//                    + " but nothing was thrown";
+            String errMsg = msg + ". Expected " + exceptionType.getName() 
+                    + " but nothing was thrown";
             throw new AssertionError(errMsg);
         } catch (Exception e) {
             String errMsg = msg + ". Expected " + exceptionType.getName() 
@@ -961,8 +961,8 @@ public class Asserters {
         try {
             lambda.execute();
         } catch (Exception e) {
-            String errMsg = msg;// + ". No exception should have occurred but " 
-//                    + e.getClass().getName() + " did";
+            String errMsg = msg + ". No exception should have occurred but " 
+                    + e.getClass().getName() + " did";
             throw new AssertionError(errMsg, e);
         }
     }
