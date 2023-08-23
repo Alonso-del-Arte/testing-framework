@@ -898,6 +898,16 @@ public class Asserters {
     // TODO: Write tests for this
     public static <E extends Exception> E assertThrows(Procedure lambda, 
             Class<E> exceptionType) {
+        try {
+            lambda.execute();
+        } catch (Exception e) {
+            String errMsg = "Expected " + exceptionType.getName() 
+            + " but was " + e.getClass().getName();
+if (!exceptionType.isAssignableFrom(e.getClass())) {
+        throw new RuntimeException(/* errMsg, e */);
+};
+return (E) e;
+        }
             return null;
     }
 
