@@ -2016,7 +2016,11 @@ public class AssertersTest {
             }, ArithmeticException.class, msg);
         } catch (AssertionError ae) {
             failOccurred = true;
-            System.out.println("\"" + ae.getMessage() + "\"");
+            String errMsg = ae.getMessage();
+            System.out.println("\"" + errMsg + "\"");
+            String checkMsg 
+                    = "Failure should report expected exception";
+            assert errMsg.contains("ArithmeticException") : checkMsg;
         }
         assert failOccurred : msg;
     }
