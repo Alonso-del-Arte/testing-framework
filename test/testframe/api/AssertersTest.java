@@ -2003,6 +2003,7 @@ public class AssertersTest {
         ArithmeticException ae = Asserters.assertThrows(() -> {
             System.out.println("3 divided by 0 equals " + (3 / 0));
         }, ArithmeticException.class, msg);
+        assert ae != null : "Returned object should not be null";
         assert ae instanceof ArithmeticException : msg;
     }
 
@@ -2066,6 +2067,16 @@ public class AssertersTest {
         }
     }
     
+    @Test
+    public void testAssertThrowsDefaultMessage() {
+        ArithmeticException ae = Asserters.assertThrows(() -> {
+            System.out.println("5 divided by 0 equals " + (5 / 0));
+        }, ArithmeticException.class);
+        assert ae != null : "Returned object should not be null";
+        String msg = "Division by zero should cause ArithmeticException";
+        assert ae instanceof ArithmeticException : msg;
+    }
+
     @Test
     public void testAssertDoesNotThrowButDoes() {
         boolean failOccurred = false;
