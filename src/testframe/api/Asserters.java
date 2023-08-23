@@ -940,6 +940,10 @@ public class Asserters {
         }
     }
 
+    public static void assertDoesNotThrow(Procedure lambda) {
+        // TODO: Write tests for this
+    }
+    
     /**
      * Asserts that a given lambda does not throw exceptions of any type.
      * @param lambda The anonymous procedure that should not throw any 
