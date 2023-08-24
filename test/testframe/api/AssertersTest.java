@@ -1913,6 +1913,26 @@ public class AssertersTest {
                 + " is not positive should not have failed the test";
         assert !failOccurred : msg;
     }
+    
+    @Test
+    public void testAssertPositiveButItIsNegative() {
+        long number = RANDOM.nextLong() | Long.MIN_VALUE;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+                    + number + " expected to be greater than 0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is positive should have failed the test";
+        assert failOccurred : msg;
+    }
 
     @Test
     public void testAssertPositiveDoubleButItIsNot() {
