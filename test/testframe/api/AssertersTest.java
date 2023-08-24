@@ -2212,4 +2212,20 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
 
+    @Test
+    public void testAssertDoesNotThrowSavesThrownDefaultMessage() {
+        RuntimeException expected 
+                = new RuntimeException("For testing purposes");
+        try {
+            Asserters.assertDoesNotThrow(() -> {
+                throw expected;
+            });
+        } catch (AssertionError ae) {
+            Throwable actual = ae.getCause();
+            String msg = "Expected " + expected.toString() + " but got " 
+                    + actual;
+            assert expected.equals(actual) : msg;
+        }
+    }
+
 }
