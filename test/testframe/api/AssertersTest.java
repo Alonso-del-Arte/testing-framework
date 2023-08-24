@@ -2228,4 +2228,18 @@ public class AssertersTest {
         }
     }
 
+    @Test
+    public void testAssertDoesNotThrowDefaultMessage() {
+        boolean failOccurred = false;
+        String msg = "Operation should not cause any exception";
+        try {
+            Asserters.assertDoesNotThrow(() -> {
+                System.out.println("This should not cause any exception");
+            });
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        assert !failOccurred : msg;
+    }
+    
 }
