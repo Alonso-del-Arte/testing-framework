@@ -913,22 +913,9 @@ public class Asserters {
      * @throws NullPointerException If <code>lambda</code>, 
      * <code>exceptionType</code> or <code>msg</code> is null.
      */
-    @SuppressWarnings("unchecked")
     public static <E extends Exception> E assertThrows(Procedure lambda, 
             Class<E> exceptionType) {
-        try {
-            lambda.execute();
-            String errMsg = "Expected " + exceptionType.getName() 
-                    + " but nothing was thrown";
-            throw new AssertionError(errMsg);
-        } catch (Exception e) {
-            String errMsg = "Expected " + exceptionType.getName() 
-            + " but was " + e.getClass().getName();
-if (!exceptionType.isAssignableFrom(e.getClass())) {
-        throw new AssertionError(errMsg, e);
-};
-return (E) e;
-        }
+        return assertThrows(lambda, exceptionType, "");
     }
 
     /**
@@ -957,12 +944,14 @@ return (E) e;
             Class<E> exceptionType, String msg) {
         try {
             lambda.execute();
-            String errMsg = msg + ". Expected " + exceptionType.getName() 
+            String intermediate = msg + ". Expected " + exceptionType.getName() 
                     + " but nothing was thrown";
+            String errMsg = prepMsg(intermediate);
             throw new AssertionError(errMsg);
         } catch (Exception e) {
-            String errMsg = msg + ". Expected " + exceptionType.getName() 
-                    + " but was " + e.getClass().getName();
+            String intermediate = msg + ". Expected " + exceptionType.getName() 
+                    + " but was " + e.getClass().getName(); 
+            String errMsg = prepMsg(intermediate);
             if (!exceptionType.isAssignableFrom(e.getClass())) {
                 throw new AssertionError(errMsg, e);
             };
