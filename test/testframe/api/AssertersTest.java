@@ -2091,16 +2091,11 @@ public class AssertersTest {
             Asserters.assertPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
-                    + number + " expected to be greater than 0.0";
-            String actual = ae.getMessage();
-            String msg = "Expected \"" + expected + "\" but was \"" + actual 
-                    + "\"";
-            assert expected.equals(actual) : msg;
+            System.out.println("\"" + ae.getMessage() + "\"");
         }
         String msg = "Asserting that number " + number 
                 + " is positive should not have failed the test";
-        assert failOccurred : msg;
+        assert !failOccurred : msg;
     }
     
     // TODO: Write tests for assertMaximum()
