@@ -961,6 +961,7 @@ public class Asserters {
 
     public static void assertDoesNotThrow(Procedure lambda) {
         // TODO: Write tests for this
+        throw new AssertionError("Should not have thrown RuntimeException");
     }
     
     /**
