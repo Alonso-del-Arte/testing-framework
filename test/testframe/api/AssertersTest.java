@@ -2078,6 +2078,27 @@ public class AssertersTest {
     }
 
     @Test
+    public void testAssertThrowsButDoesNotThrowAnyDefaultMessage() {
+        boolean failOccurred = false;
+        String msg = "Assertion should fail if no exception throws";
+        try {
+            Asserters.assertThrows(() -> {
+                System.out.println(msg);
+            }, ArithmeticException.class);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String errMsg = ae.getMessage();
+            assert errMsg != null : "Error message should not be null";
+            assert !errMsg.isEmpty() : "Error message should not be empty";
+            System.out.println("\"" + errMsg + "\"");
+            String checkMsg 
+                    = "Failure should report expected exception";
+            assert errMsg.contains("ArithmeticException") : checkMsg;
+        }
+        assert failOccurred : msg;
+    }
+
+    @Test
     public void testAssertDoesNotThrowButDoes() {
         boolean failOccurred = false;
         String msg = "Assertion should fail if exception thrown";
