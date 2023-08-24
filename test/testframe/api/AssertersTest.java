@@ -1991,6 +1991,21 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertPositiveDefaultMessage() {
+        long number = RANDOM.nextLong() & Long.MAX_VALUE;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertPositive(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is positive should not have failed the test";
+        assert !failOccurred : msg;
+    }
+
+    @Test
     public void testAssertPositiveDoubleButItIsNot() {
         int floor = RANDOM.nextInt() | Integer.MIN_VALUE;
         double number = floor + RANDOM.nextDouble();
