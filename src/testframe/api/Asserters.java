@@ -960,8 +960,13 @@ public class Asserters {
     }
 
     public static void assertDoesNotThrow(Procedure lambda) {
-        // TODO: Write tests for this
-        throw new AssertionError("Should not have thrown RuntimeException");
+        Exception cause = null;
+        try {
+            lambda.execute();
+        } catch (Exception e) {
+            cause = e;
+        }String msg = "Should not have thrown " + cause;
+        throw new AssertionError(msg, cause);
     }
     
     /**
