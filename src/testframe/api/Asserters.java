@@ -638,10 +638,16 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertPositive(long actual) {
-        String msg = "Sorry, default message not implemented yet";
-        assertNotNegative(actual, msg);
+        String errMsg = "Number " + actual + " expected to be greater than 0";
+        throw new AssertionError(errMsg);
     }
 
+    /**
+     * Asserts that an integer is positive. The number must be 1 or greater to 
+     * pass the assertion.
+     * @param actual The number to assert is positive. For example, &minus;347.
+     * @param msg The message for the test failure explanation.
+     */
     public static void assertPositive(long actual, String msg) {
         String errMsg = msg + ". Number " + actual 
                 + " expected to be greater than 0";
