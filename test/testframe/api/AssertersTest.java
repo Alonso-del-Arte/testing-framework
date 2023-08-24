@@ -2192,4 +2192,24 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDoesNotThrowButDoesDefaultMessage() {
+        boolean failOccurred = false;
+        String msg = "Assertion should fail if exception thrown";
+        try {
+            Asserters.assertDoesNotThrow(() -> {
+                throw new RuntimeException("Sorry");
+            });
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String errMsg = ae.getMessage();
+            assert errMsg != null : "Error message should not be null";
+            assert !errMsg.isEmpty() : "Error message should not be empty";
+            System.out.println("\"" + errMsg + "\"");
+            String checkMsg = "Failure should report unexpected exception";
+            assert errMsg.contains("RuntimeException") : checkMsg;
+        }
+        assert failOccurred : msg;
+    }
+
 }
