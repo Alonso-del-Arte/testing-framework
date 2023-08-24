@@ -2099,6 +2099,30 @@ public class AssertersTest {
     }
 
     @Test
+    public void testAssertThrowsButThrowsWrongTypeDefaultMessage() {
+        boolean failOccurred = false;
+        String msg = "Assertion should fail if wrong exception type thrown";
+        try {
+            RuntimeException re = Asserters.assertThrows(() -> {
+                throw new RuntimeException("Sorry, wrong type exception");
+            }, ArithmeticException.class);
+            System.out.println("Thrown exception is of type " 
+                    + re.getClass().getName());
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String errMsg = ae.getMessage();
+            assert errMsg != null : "Error message should not be null";
+            assert !errMsg.isEmpty() : "Error message should not be empty";
+            System.out.println("\"" + errMsg + "\"");
+            String checkMsg 
+                    = "Failure should report expected, unexpected exceptions";
+            assert errMsg.contains("ArithmeticException") : checkMsg;
+            assert errMsg.contains("RuntimeException") : checkMsg;
+        }
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertDoesNotThrowButDoes() {
         boolean failOccurred = false;
         String msg = "Assertion should fail if exception thrown";
