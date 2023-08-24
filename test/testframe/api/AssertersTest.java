@@ -1933,6 +1933,22 @@ public class AssertersTest {
                 + " is positive should have failed the test";
         assert failOccurred : msg;
     }
+    
+    @Test
+    public void testAssertPositive() {
+        System.out.println("assertPositive");
+        long number = RANDOM.nextLong() & Long.MAX_VALUE;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is positive should not have failed the test";
+        assert !failOccurred : msg;
+    }
 
     @Test
     public void testAssertPositiveDoubleButItIsNot() {
