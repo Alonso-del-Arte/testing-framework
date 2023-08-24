@@ -642,11 +642,10 @@ public class Asserters {
         assertNotNegative(actual, msg);
     }
 
-    // TODO: Write tests for this
     public static void assertPositive(long actual, String msg) {
         String errMsg = msg + ". Number " + actual 
                 + " expected to be greater than 0";
-        throw new AssertionError(errMsg);
+        assert actual > -1 : errMsg;
     }
 
     // TODO: Write tests for this
