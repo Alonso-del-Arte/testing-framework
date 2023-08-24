@@ -895,7 +895,25 @@ public class Asserters {
         throw new AssertionError(msg);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that a given lambda caused an exception of a particular type. If 
+     * the test fails because no exception was thrown or an exception of the 
+     * wrong type was thrown, a default message to that effect will be provided.
+     * @param <E> The type of exception that should be thrown. For example, 
+     * <code>ArithmeticException</code>.
+     * @param lambda The anonymous procedure that should throw the exception of 
+     * the specified type. For example, <code>() -> { Fraction badResult = 
+     * oneHalf.divides(zero); }</code>. It would be very similar in Scala.
+     * @param exceptionType A <code>Class</code> object for the expected 
+     * exception type. For example, <code>ArithmeticException.class</code>. Note 
+     * that in Scala this would be <code>classOf[ArithmeticException]</code>.
+     * @return An exception of the specified type. However, this is not 
+     * guaranteed if assertions are not enabled. Then again, this whole class is 
+     * useless if assertions are not enabled. 
+     * @throws NullPointerException If <code>lambda</code>, 
+     * <code>exceptionType</code> or <code>msg</code> is null.
+     */
+    @SuppressWarnings("unchecked")
     public static <E extends Exception> E assertThrows(Procedure lambda, 
             Class<E> exceptionType) {
         try {
@@ -907,7 +925,7 @@ public class Asserters {
             String errMsg = "Expected " + exceptionType.getName() 
             + " but was " + e.getClass().getName();
 if (!exceptionType.isAssignableFrom(e.getClass())) {
-        throw new AssertionError(errMsg/* , e */);
+        throw new AssertionError(errMsg, e);
 };
 return (E) e;
         }
