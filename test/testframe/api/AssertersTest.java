@@ -2123,6 +2123,27 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertThrowsSavesWrongExceptionThrownDefaultMessage() {
+        boolean failOccurred = false;
+        RuntimeException expected 
+                = new RuntimeException("For testing purposes");
+        try {
+            IllegalArgumentException iae = Asserters.assertThrows(() -> {
+                throw expected;
+            }, IllegalArgumentException.class);
+            System.out.println("Thrown exception is of type " 
+                    + iae.getClass().getName());
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            Throwable actual = ae.getCause();
+            String msg = "Expected " + expected.toString() + " but got " 
+                    + actual;
+            assert expected.equals(actual) : msg;
+        }
+        assert failOccurred : "Wrong type should've failed test";
+    }
+    
+    @Test
     public void testAssertDoesNotThrowButDoes() {
         boolean failOccurred = false;
         String msg = "Assertion should fail if exception thrown";
