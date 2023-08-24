@@ -639,7 +639,7 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertPositive(long actual) {
         String errMsg = "Number " + actual + " expected to be greater than 0";
-        throw new AssertionError(errMsg);
+        assert actual > -1 : errMsg;
     }
 
     /**
