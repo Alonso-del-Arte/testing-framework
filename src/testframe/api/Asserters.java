@@ -636,10 +636,14 @@ public class Asserters {
         assert actual >= 0.0 : errMsg;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Asserts that an integer is positive. The number must be 1 or greater to 
+     * pass the assertion.
+     * @param actual The number to assert is positive. For example, &minus;347.
+     */
     public static void assertPositive(long actual) {
         String errMsg = "Number " + actual + " expected to be greater than 0";
-        assert actual > -1 : errMsg;
+        assert actual > 0 : errMsg;
     }
 
     /**
