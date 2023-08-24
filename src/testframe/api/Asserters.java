@@ -959,13 +959,17 @@ public class Asserters {
         }
     }
 
+    /**
+     * Asserts that a given lambda does not throw exceptions of any type. A test 
+     * failure explanation will be provided if any exception arises.
+     * @param lambda The anonymous procedure that should not throw any 
+     * exceptions. For example, <code>() -> { arrayBackedList.expandCapacity; 
+     * }</code>.
+     * @throws NullPointerException If <code>lambda</code> or <code>msg</code> 
+     * is null.
+     */
     public static void assertDoesNotThrow(Procedure lambda) {
-        try {
-            lambda.execute();
-        } catch (Exception e) {
-            String msg = "Should not have thrown " + e;
-            throw new AssertionError(msg, e);
-        }
+        assertDoesNotThrow(lambda, "");
     }
     
     /**
@@ -985,8 +989,10 @@ public class Asserters {
         try {
             lambda.execute();
         } catch (Exception e) {
-            String errMsg = msg + ". No exception should have occurred but " 
+            String intermediate = msg 
+                    + ". No exception should have occurred but " 
                     + e.getClass().getName() + " did";
+            String errMsg = prepMsg(intermediate);
             throw new AssertionError(errMsg, e);
         }
     }
