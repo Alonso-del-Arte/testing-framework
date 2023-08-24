@@ -642,8 +642,7 @@ public class Asserters {
      * @param actual The number to assert is positive. For example, &minus;347.
      */
     public static void assertPositive(long actual) {
-        String errMsg = "Number " + actual + " expected to be greater than 0";
-        assert actual > 0 : errMsg;
+        assertPositive(actual, "");
     }
 
     /**
@@ -653,8 +652,9 @@ public class Asserters {
      * @param msg The message for the test failure explanation.
      */
     public static void assertPositive(long actual, String msg) {
-        String errMsg = msg + ". Number " + actual 
+        String intermediate = msg + ". Number " + actual 
                 + " expected to be greater than 0";
+        String errMsg = prepMsg(intermediate);
         assert actual > 0 : errMsg;
     }
 
