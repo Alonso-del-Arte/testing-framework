@@ -900,6 +900,9 @@ public class Asserters {
             Class<E> exceptionType) {
         try {
             lambda.execute();
+            String errMsg = "Expected " + exceptionType.getName() 
+                    + " but nothing was thrown";
+            throw new AssertionError(errMsg);
         } catch (Exception e) {
             String errMsg = "Expected " + exceptionType.getName() 
             + " but was " + e.getClass().getName();
@@ -908,7 +911,6 @@ if (!exceptionType.isAssignableFrom(e.getClass())) {
 };
 return (E) e;
         }
-            return null;
     }
 
     /**
