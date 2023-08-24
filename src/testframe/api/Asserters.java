@@ -907,7 +907,7 @@ public class Asserters {
             String errMsg = "Expected " + exceptionType.getName() 
             + " but was " + e.getClass().getName();
 if (!exceptionType.isAssignableFrom(e.getClass())) {
-        throw new RuntimeException(/* errMsg, e */);
+        throw new AssertionError(/* errMsg, e */);
 };
 return (E) e;
         }
