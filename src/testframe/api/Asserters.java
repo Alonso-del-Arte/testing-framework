@@ -524,7 +524,7 @@ public class Asserters {
     }
 
     public static void assertNotPositive(double actual, String msg) {
-        if (actual == Double.NEGATIVE_INFINITY || Double.isNaN(actual)) {
+        if (Double.isNaN(actual)) {
             throw new AssertionError("TEMPORARY TEST FAIL");
         }
         if (actual == Double.POSITIVE_INFINITY) {
