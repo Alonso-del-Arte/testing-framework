@@ -527,9 +527,6 @@ public class Asserters {
         if (Double.isNaN(actual)) {
             throw new AssertionError("TEMPORARY TEST FAIL");
         }
-        if (actual == Double.POSITIVE_INFINITY) {
-            return; // TEMP TEST FAIL
-        }
         String errMsg = msg + ". Number " + actual 
                 + " expected to not be positive";
         assert actual <= 0.0 : errMsg;
