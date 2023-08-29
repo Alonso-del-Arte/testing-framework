@@ -532,7 +532,7 @@ public class Asserters {
         }
         String errMsg = msg + ". Number " + actual 
                 + " expected to not be positive";
-        assert actual < 0.0 : errMsg;
+        assert actual <= 0.0 : errMsg;
     }
 
     /**
@@ -682,7 +682,7 @@ public class Asserters {
      */
     public static void assertPositive(double actual, String msg) {
         if (Double.isNaN(actual)) {
-            return;
+            return; // TODO: REMOVE TEMP TEST FAIL
         }
         String errMsg = msg + ". Number " + actual 
                 + " expected to be greater than 0.0";
