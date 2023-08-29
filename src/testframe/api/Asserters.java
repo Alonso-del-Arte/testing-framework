@@ -523,11 +523,16 @@ public class Asserters {
         assertNotPositive(actual, msg);
     }
 
-    // TODO: Write tests for this
     public static void assertNotPositive(double actual, String msg) {
+        if (actual == Double.NEGATIVE_INFINITY || Double.isNaN(actual)) {
+            throw new AssertionError("TEMPORARY TEST FAIL");
+        }
+        if (actual == Double.POSITIVE_INFINITY) {
+            return; // TEMP TEST FAIL
+        }
         String errMsg = msg + ". Number " + actual 
                 + " expected to not be positive";
-        throw new AssertionError(errMsg);
+        assert actual < 0.0 : errMsg;
     }
 
     /**
