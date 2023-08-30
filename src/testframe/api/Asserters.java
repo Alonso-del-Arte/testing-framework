@@ -523,9 +523,19 @@ public class Asserters {
         assertNotPositive(actual, msg);
     }
 
+    /**
+     * Asserts a given number is not positive. The number may be &minus;0.0 or 
+     * 0.0 without failing the assertion. It may also be NaN and not fail the 
+     * assertion, and obviously &minus;&infin; won't either. However, +&infin; 
+     * will fail the assertion.
+     * @param actual The number to be checked. For example, 10.843979291045144.
+     * @param msg The message to put into the test failure explanation if the 
+     * test fails because of the assertion. The actual value will be included in 
+     * the test failure explanation.
+     */
     public static void assertNotPositive(double actual, String msg) {
         if (Double.isNaN(actual)) {
-            throw new AssertionError("TEMPORARY TEST FAIL");
+            return;
         }
         String errMsg = msg + ". Number " + actual 
                 + " expected to not be positive";
@@ -624,11 +634,11 @@ public class Asserters {
     }
 
     /**
-     * Asserts a given number is not negative. The number may be -0.0 or 0.0 
-     * without failing the assertion.
+     * Asserts a given number is not negative. The number may be &minus;0.0 or 
+     * 0.0 without failing the assertion.
      * @param actual The number to be checked. For example, 10.843979291045144.
      * @param msg The message to put into the test failure explanation if the 
-     * test fails because of the assertion. The actual value will be appended to 
+     * test fails because of the assertion. The actual value will be included in 
      * the test failure explanation.
      */
     public static void assertNotNegative(double actual, String msg) {
