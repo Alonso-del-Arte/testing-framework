@@ -2240,6 +2240,23 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNotPositiveButNaNIsIndeedNotPositiveDefaultMessage() {
+        long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
+                | NaN_MASK; 
+        double number = Double.longBitsToDouble(bitPattern);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotPositive(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not positive should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertPositiveButItIsNegative() {
         long number = RANDOM.nextLong() | Long.MIN_VALUE;
         boolean failOccurred = false;
