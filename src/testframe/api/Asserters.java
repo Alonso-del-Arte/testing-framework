@@ -642,6 +642,9 @@ public class Asserters {
      * the test failure explanation.
      */
     public static void assertNotNegative(double actual, String msg) {
+        if (Double.isNaN(actual)) {
+            return;
+        }
         String intermediate = msg + ". Number " + actual 
                 + " expected to be at least 0.0";
         String errMsg = prepMsg(intermediate);
