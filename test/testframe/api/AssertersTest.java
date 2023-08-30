@@ -1043,6 +1043,23 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNotNegativeButNaNIsIndeedNotNegative() {
+        long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
+                | NaN_MASK; 
+        double number = Double.longBitsToDouble(bitPattern);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotNegativeWhenDoubleIsDefaultMessage() {
         double number = -RANDOM.nextDouble() - Double.MIN_NORMAL;
         boolean failOccurred = false;
