@@ -2017,7 +2017,7 @@ public class AssertersTest {
     }
     
     @Test
-    public void testAssertNaNIsNotPositive() {
+    public void testAssertNotPositiveButNaNIsIndeedNotPositive() {
         long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
                 | NaN_MASK; 
         double number = Double.longBitsToDouble(bitPattern);
@@ -2026,12 +2026,7 @@ public class AssertersTest {
             Asserters.assertNotPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
-                    + number + " expected to not be positive";
-            String actual = ae.getMessage();
-            String msg = "Expected \"" + expected + "\" but was \"" + actual 
-                    + "\"";
-            assert expected.equals(actual) : msg;
+            System.out.println("\"" + ae.getMessage() + "\"");
         }
         String msg = "Asserting that number " + number 
                 + " is not positive should not have failed the test";
