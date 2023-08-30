@@ -642,11 +642,6 @@ public class Asserters {
      * the test failure explanation.
      */
     public static void assertNotNegative(double actual, String msg) {
-        if (actual == Double.POSITIVE_INFINITY) {
-            throw new AssertionError("TEMP TEST FAIL");
-        }
-        if (actual == Double.NEGATIVE_INFINITY) {return;
-        }
         if (Double.isNaN(actual)) {
             return;
         }
