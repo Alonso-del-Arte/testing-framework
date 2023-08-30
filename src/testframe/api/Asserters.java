@@ -517,19 +517,26 @@ public class Asserters {
         assert actual < 1 : errMsg;
     }
 
+    /**
+     * Asserts a given number is not positive. The number may be &minus;0.0 or 
+     * 0.0 without failing the assertion. It may also be NaN and not fail the 
+     * assertion (remember that NaN is neither positive nor negative even though 
+     * the bit pattern may be negative, zero or positive), and obviously 
+     * &minus;&infin; won't either. However, +&infin; will fail the assertion.
+     * @param actual The number to be checked. For example, 10.843979291045144. 
+     * This number will be included in the test failure explanation if the test 
+     * fails because of this assertion.
+     */
     public static void assertNotPositive(double actual) {
-        if (Double.isNaN(actual)) {
-            return;
-        }
-        String errMsg = "Number " + actual + " expected to not be positive";
-        assert actual <= 0.0 : errMsg;
+        assertNotPositive(actual, "");
     }
 
     /**
      * Asserts a given number is not positive. The number may be &minus;0.0 or 
      * 0.0 without failing the assertion. It may also be NaN and not fail the 
-     * assertion, and obviously &minus;&infin; won't either. However, +&infin; 
-     * will fail the assertion.
+     * assertion (remember that NaN is neither positive nor negative even though 
+     * the bit pattern may be negative, zero or positive), and obviously 
+     * &minus;&infin; won't either. However, +&infin; will fail the assertion.
      * @param actual The number to be checked. For example, 10.843979291045144.
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The actual value will be included in 
@@ -539,8 +546,9 @@ public class Asserters {
         if (Double.isNaN(actual)) {
             return;
         }
-        String errMsg = msg + ". Number " + actual 
+        String intermediate = msg + ". Number " + actual 
                 + " expected to not be positive";
+        String errMsg = prepMsg(intermediate);
         assert actual <= 0.0 : errMsg;
     }
 
