@@ -1060,6 +1060,41 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNotNegativeButNegativeInfinityIs() {
+        double number = Double.NEGATIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+                    + number + " expected to be at least 0.0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNotNegativeButPositiveInfinityIsIndeedNotNegative() {
+        double number = Double.POSITIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNotNegativeWhenDoubleIsDefaultMessage() {
         double number = -RANDOM.nextDouble() - Double.MIN_NORMAL;
         boolean failOccurred = false;
@@ -1112,6 +1147,41 @@ public class AssertersTest {
     @Test
     public void testAssertNotNegativeDoubleDefaultMessage() {
         double number = RANDOM.nextDouble() + Double.MIN_NORMAL;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNotNegativeButNegativeInfinityIsDefaultMessage() {
+        double number = Double.NEGATIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNegative(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number 
+                    + " expected to be at least 0.0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that number " + number 
+                + " is not negative should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNotNegativeButInfinityIsNotNegativeDefaultMessage() {
+        double number = Double.POSITIVE_INFINITY;
         boolean failOccurred = false;
         try {
             Asserters.assertNotNegative(number);
