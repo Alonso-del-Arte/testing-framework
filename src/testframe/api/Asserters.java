@@ -523,7 +523,7 @@ public class Asserters {
             throw new AssertionError("TEMP TEST FAIL");
         }
         String errMsg = "Number " + actual + " expected to not be positive";
-        assert actual < 0.0 : errMsg;
+        assert actual <= 0.0 : errMsg;
     }
 
     /**
