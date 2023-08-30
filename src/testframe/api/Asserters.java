@@ -519,8 +519,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNotPositive(double actual) {
-        String msg = "Sorry, default message not implemented yet";
-        assertNotPositive(actual, msg);
+        String msg = "Number " + actual + " expected to not be positive";
+        throw new AssertionError(msg);
     }
 
     /**
