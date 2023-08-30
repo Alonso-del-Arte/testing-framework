@@ -2159,6 +2159,22 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNotPositiveDoubleDefaultMessage() {
+        int floor = RANDOM.nextInt() | Integer.MIN_VALUE;
+        double number = floor + RANDOM.nextDouble();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotPositive(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is not positive should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertPositiveButItIsNegative() {
         long number = RANDOM.nextLong() | Long.MIN_VALUE;
         boolean failOccurred = false;
