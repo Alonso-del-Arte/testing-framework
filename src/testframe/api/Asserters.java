@@ -518,8 +518,7 @@ public class Asserters {
     }
 
     public static void assertNotPositive(double actual) {
-        if (actual == Double.POSITIVE_INFINITY) return;
-        if (Double.isNaN(actual) || actual == Double.NEGATIVE_INFINITY) {
+        if (Double.isNaN(actual)) {
             throw new AssertionError("TEMP TEST FAIL");
         }
         String errMsg = "Number " + actual + " expected to not be positive";
