@@ -630,6 +630,9 @@ public class Asserters {
      * @param actual The number to be checked. For example, 10.843979291045144.
      */
     public static void assertNotNegative(double actual) {
+        if (Double.isNaN(actual)) {
+            throw new AssertionError("TEMP TEST FAIL");
+        }
         assertNotNegative(actual, "");
     }
 
