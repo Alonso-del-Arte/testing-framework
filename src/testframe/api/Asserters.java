@@ -696,13 +696,35 @@ public class Asserters {
     }
 
     /**
-     * 
-     * @param actual
-     * @param msg
+     * Asserts that a floating point number is positive. However, due to the 
+     * vagaries of floating point, positive subnormal numbers might be 
+     * erroneously regarded as not positive.
+     * <p>Other special cases to be aware of:</p>
+     * <ul>
+     * <li>Positive infinity should not fail the assertion, same as finite 
+     * positive numbers.</li>
+     * <li>Negative zero, an oddity of the floating point specification, should 
+     * nevertheless be considered not positive.</li>
+     * <li>Positive zero should of course fail the assertion.</li>
+     * <li>Negative infinity should fail the assertion, same as finite negative 
+     * numbers.</li>
+     * <li>NaN should fail the assertion even if the bit pattern is positive. 
+     * And in any case, it's difficult to access NaN values other than the 
+     * "canonical" NaN through the Java Virtual Machine.</li>
+     * </ul>
+     * @param actual The number to check. For example, &minus;2.6065827580858707 
+     * &times; 10<sup>8</sup>.
+     * @param msg The message to put into the test failure explanation if the 
+     * test fails because of the assertion. The number <code>actual</code> and 
+     * the threshold 0.0 will be appended to the test failure explanation, or, 
+     * in the case of NaN, the appended explanation will say that NaN "is not 
+     * considered negative, zero or positive."
      */
     public static void assertPositive(double actual, String msg) {
         if (Double.isNaN(actual)) {
-            return; // TODO: REMOVE TEMP TEST FAIL
+            String errMsg = msg + ". Number " + actual 
+                    + " is not considered negative, zero or positive";
+            throw new AssertionError(errMsg);
         }
         String errMsg = msg + ". Number " + actual 
                 + " expected to be greater than 0.0";
