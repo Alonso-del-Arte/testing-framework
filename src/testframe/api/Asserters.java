@@ -691,8 +691,8 @@ public class Asserters {
         if (Double.isNaN(actual) || actual == Double.NEGATIVE_INFINITY) {
             return;
         }
-        String msg = "Sorry, default message not implemented yet";
-        assertNotNegative(actual, msg);
+        String errMsg = "Number " + actual + " expected to be greater than 0.0";
+        throw new AssertionError(errMsg);
     }
 
     /**
