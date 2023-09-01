@@ -2405,29 +2405,6 @@ public class AssertersTest {
     }
     
     @Test
-    public void testAssertPositiveButItIsNaN() {
-        long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
-                | NaN_MASK; 
-        double number = Double.longBitsToDouble(bitPattern);
-        boolean failOccurred = false;
-        try {
-            Asserters.assertPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
-        } catch (AssertionError ae) {
-            failOccurred = true; 
-            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
-                    + number + " is not considered negative, zero or positive";
-            String actual = ae.getMessage();
-            String msg = "Expected \"" + expected + "\" but was \"" + actual 
-                    + "\"";
-            assert expected.equals(actual) : msg;
-            System.out.println("\"" + actual + "\"");
-        }
-        String msg = "Asserting that number " + number 
-                + " is positive should have failed the test";
-        assert failOccurred : msg;
-    }
-    
-    @Test
     public void testAssertPositiveInfinityIsPositive() {
         double number = Double.POSITIVE_INFINITY;
         boolean failOccurred = false;
@@ -2457,6 +2434,50 @@ public class AssertersTest {
                     + "\"";
             assert expected.equals(actual) : msg;
             System.out.println("\"" + actual + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is positive should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertPositiveButItIsNaN() {
+        long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
+                | NaN_MASK; 
+        double number = Double.longBitsToDouble(bitPattern);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertPositive(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true; 
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+                    + number + " is not considered negative, zero or positive";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+            System.out.println("\"" + actual + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is positive should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertPositiveDoubleButItIsNotDefaultMessage() {
+        int floor = RANDOM.nextInt() | Integer.MIN_VALUE;
+        double number = floor + RANDOM.nextDouble();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertPositive(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " 
+                    + number + " expected to be greater than 0.0";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
         }
         String msg = "Asserting that number " + number 
                 + " is positive should have failed the test";
