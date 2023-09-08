@@ -684,7 +684,7 @@ public class Asserters {
     }
 
     public static void assertPositive(double actual) {
-        if (Double.isNaN(actual) || actual == Double.NEGATIVE_INFINITY) {
+        if (Double.isNaN(actual)) {
             return;
         }
         String errMsg = "Number " + actual + " expected to be greater than 0.0";
