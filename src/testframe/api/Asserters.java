@@ -685,7 +685,9 @@ public class Asserters {
 
     public static void assertPositive(double actual) {
         if (Double.isNaN(actual)) {
-            return;
+            String errMsg = "Number " + actual 
+                    + " is not considered negative, zero or positive";
+            throw new AssertionError(errMsg);
         }
         String errMsg = "Number " + actual + " expected to be greater than 0.0";
         assert actual >= 0.0 : errMsg;
