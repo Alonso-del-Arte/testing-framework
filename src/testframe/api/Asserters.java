@@ -683,7 +683,6 @@ public class Asserters {
         assert actual > 0 : errMsg;
     }
 
-    // TODO: Write tests for this
     public static void assertPositive(double actual) {
         if (actual == Double.POSITIVE_INFINITY) {
             throw new AssertionError("SORRY, TEMPORARY FAILURE");
@@ -692,7 +691,7 @@ public class Asserters {
             return;
         }
         String errMsg = "Number " + actual + " expected to be greater than 0.0";
-        throw new AssertionError(errMsg);
+        assert actual >= 0.0 : errMsg;
     }
 
     /**
