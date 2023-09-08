@@ -699,7 +699,7 @@ public class Asserters {
      * erroneously regarded as not positive.
      * <p>Other special cases to be aware of:</p>
      * <ul>
-     * <li>Positive infinity should not fail the assertion, same as finite 
+     * <li>Positive infinity should not fail the assertion, same as most finite 
      * positive numbers.</li>
      * <li>Negative zero, an oddity of the floating point specification, should 
      * nevertheless be considered not positive.</li>
@@ -726,7 +726,7 @@ public class Asserters {
         }
         String errMsg = msg + ". Number " + actual 
                 + " expected to be greater than 0.0";
-        assert actual >= 0.0 : errMsg;
+        assert actual > 0.0 : errMsg;
     }
 
     // TODO: Write tests for this
