@@ -2500,6 +2500,21 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertPositiveInfinityIsPositiveDefaultMessage() {
+        double number = Double.POSITIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertPositive(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is positive should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertMaximum()
     
     // TODO: Write tests for assertInRange()
