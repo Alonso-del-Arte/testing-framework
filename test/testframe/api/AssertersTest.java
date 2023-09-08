@@ -2536,6 +2536,29 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertPositiveButItIsNaNDefaultMessage() {
+        long bitPattern = (((long) (RANDOM.nextInt()) << 32) + RANDOM.nextInt()) 
+                | NaN_MASK; 
+        double number = Double.longBitsToDouble(bitPattern);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertPositive(number);
+        } catch (AssertionError ae) {
+            failOccurred = true; 
+            String expected = "Number " + number 
+                    + " is not considered negative, zero or positive";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+            System.out.println("\"" + actual + "\"");
+        }
+        String msg = "Asserting that number " + number 
+                + " is positive should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertMaximum()
     
     // TODO: Write tests for assertInRange()
