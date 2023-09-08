@@ -704,13 +704,7 @@ public class Asserters {
      * &times; 10<sup>8</sup>.
      */
     public static void assertPositive(double actual) {
-        if (Double.isNaN(actual)) {
-            String errMsg = "Number " + actual 
-                    + " is not considered negative, zero or positive";
-            throw new AssertionError(errMsg);
-        }
-        String errMsg = "Number " + actual + " expected to be greater than 0.0";
-        assert actual > 0.0 : errMsg;
+        assertPositive(actual, "");
     }
 
     /**
@@ -740,12 +734,14 @@ public class Asserters {
      */
     public static void assertPositive(double actual, String msg) {
         if (Double.isNaN(actual)) {
-            String errMsg = msg + ". Number " + actual 
+            String intermediate = msg + ". Number " + actual 
                     + " is not considered negative, zero or positive";
+            String errMsg = prepMsg(intermediate);
             throw new AssertionError(errMsg);
         }
-        String errMsg = msg + ". Number " + actual 
+        String intermediate = msg + ". Number " + actual 
                 + " expected to be greater than 0.0";
+        String errMsg = prepMsg(intermediate);
         assert actual > 0.0 : errMsg;
     }
 
