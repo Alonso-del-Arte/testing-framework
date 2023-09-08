@@ -683,6 +683,26 @@ public class Asserters {
         assert actual > 0 : errMsg;
     }
 
+    /**
+     * Asserts that a floating point number is positive. If the test fails, the 
+     * actual number and the threshold 0.0 will be included in the test failure 
+     * explanation, or, in the case of NaN, the explanation will say that NaN 
+     * "is not considered negative, zero or positive."
+     * <p>Due to the vagaries of floating point, positive subnormal numbers 
+     * might be erroneously regarded as not positive.</p>
+     * <p>Other special cases to be aware of:</p>
+     * <ul>
+     * <li>Positive infinity should not fail the assertion, same as most finite 
+     * positive numbers.</li>
+     * <li>Negative zero, an oddity of the floating point specification, should 
+     * nevertheless be considered not positive.</li>
+     * <li>Positive zero should of course fail the assertion.</li>
+     * <li>Negative infinity should fail the assertion, same as finite negative 
+     * numbers.</li>
+     * </ul>
+     * @param actual The number to check. For example, &minus;2.6065827580858707 
+     * &times; 10<sup>8</sup>.
+     */
     public static void assertPositive(double actual) {
         if (Double.isNaN(actual)) {
             String errMsg = "Number " + actual 
@@ -690,7 +710,7 @@ public class Asserters {
             throw new AssertionError(errMsg);
         }
         String errMsg = "Number " + actual + " expected to be greater than 0.0";
-        assert actual >= 0.0 : errMsg;
+        assert actual > 0.0 : errMsg;
     }
 
     /**
