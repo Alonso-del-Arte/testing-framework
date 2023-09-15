@@ -1,5 +1,6 @@
 package testframe.api.random;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -59,8 +60,19 @@ public class Pseudorandom {
     }
     
     // TODO: Write tests for this
-    public static Object nextObject(Object[] array) {
+    public static <E> E nextObject(E[] array) {
         return null;
     }
 
+    // TODO: Write tests for this
+    public static <E> E nextObject(List<E> list) {
+        return list.get(0);
+    }
+
+    // TODO: Write tests for this
+    public static <E> E nextObject(Set<E> set) {
+        Iterator<E> iterator = set.iterator();
+        return iterator.next();
+    }
+    
 }
