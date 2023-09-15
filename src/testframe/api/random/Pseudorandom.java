@@ -1,6 +1,8 @@
 package testframe.api.random;
 
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 // TODO: Write static wrappers for Pseudorandomness's functions
 public class Pseudorandom {
@@ -54,6 +56,11 @@ public class Pseudorandom {
     // TODO: Write tests for this
     public static int nextPowerOfTwo() {
         return -3;
+    }
+    
+    // TODO: Write tests for this
+    public static Object nextObject(Object[] array) {
+        return null;
     }
 
 }
