@@ -60,9 +60,14 @@ public class Pseudorandom {
         return 0;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Gives a pseudorandomly chosen integer up to a given bound.
+     * @param bound The bound to go up to. For example, 100.
+     * @return An integer equal to at least 0 but not equal to 
+     * <code>bound</code> but not greater than that. For example, 22.
+     */
     public static int nextInt(int bound) {
-        return Integer.MIN_VALUE;// RANDOM.nextInt(bound);
+        return RANDOM.nextInt(bound);
     }
 
     // TODO: Write tests for this
