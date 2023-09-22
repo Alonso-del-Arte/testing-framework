@@ -102,12 +102,22 @@ public class PseudorandomTest {
                 + " distinct";
         assert expected <= actual : msg;
     }
+    
+    private void assertNextASCIICharSeqOnlyGivesASCIIChars(String s) {
+        char[] characters = s.toCharArray();
+        for (char ch : characters) {
+            String msg = "Character '" + ch 
+                    + "' should be at least ' ' (32) and at most '~' (127)";
+            assert ' ' <= ch && ch <= '~' : msg;
+        }
+    }
 
     @Test
     public void testNextASCIICharSeqOneParamGivesRightLength() {
         for (int expected = 2; expected < 80; expected++) {
             String s = Pseudorandom.nextASCIICharSeq(expected);
             int actual = s.length();
+            assertNextASCIICharSeqOnlyGivesASCIIChars(s);
             String msg = "Pseudorandom String \"" + s
                     + "\" should be of length " + expected;
             assertEquals(expected, actual, msg);
@@ -121,7 +131,9 @@ public class PseudorandomTest {
         int capacity = RANDOM.nextInt(128) + 32;
         Set<String> strings = new HashSet<String>(capacity);
         for (int i = 0; i < capacity; i++) {
-            strings.add(Pseudorandom.nextASCIICharSeq(length));
+            String s = Pseudorandom.nextASCIICharSeq(length);
+            assertNextASCIICharSeqOnlyGivesASCIIChars(s);
+            strings.add(s);
         }
         int tolerance = capacity / (length - 6);
         int expected = capacity - tolerance;
