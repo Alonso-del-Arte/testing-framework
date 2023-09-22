@@ -59,9 +59,19 @@ public class Pseudorandom {
         return -3;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Chooses an element of an array pseudorandomly.
+     * @param <E> The type of the elements in the array. For example, 
+     * <code>java.time.DayOfWeek</code>.
+     * @param array An array of objects of type <code>E</code>. For example, 
+     * <code>MONDAY</code>, <code>TUESDAY</code>, <code>WEDNESDAY</code>, 
+     * <code>THURSDAY</code>, <code>FRIDAY</code>.
+     * @return One element of the array, chosen pseudorandomly. For example, 
+     * <code>TUESDAY</code>.
+     */
     public static <E> E nextObject(E[] array) {
-        return null;
+        int index = RANDOM.nextInt(array.length);
+        return array[index];
     }
 
     // TODO: Write tests for this
