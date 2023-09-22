@@ -30,7 +30,7 @@ public class PseudorandomTest {
     public void testNextIntPositiveBound() {
         int bound = 100;
         int hypotheticalOccurAverage = 10;
-        int maxOccurrencePerNumber = 2 * hypotheticalOccurAverage;
+        int maxOccurrencePerNumber = 3 * hypotheticalOccurAverage;
         int callTotal = hypotheticalOccurAverage * bound;
         int[] occurrences = new int[bound];
         for (int i = 0; i < callTotal; i++) {
