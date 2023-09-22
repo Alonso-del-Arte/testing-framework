@@ -62,7 +62,7 @@ public class Pseudorandom {
 
     // TODO: Write tests for this
     public static int nextInt(int bound) {
-        return RANDOM.nextInt(bound);
+        return Integer.MIN_VALUE;// RANDOM.nextInt(bound);
     }
 
     // TODO: Write tests for this
