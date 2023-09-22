@@ -31,17 +31,28 @@ public class Pseudorandom {
         return (char) (' ' + RANDOM.nextInt(PRINTABLE_ASCII_SPAN));
     }
 
+    /**
+     * Comes up with a <code>String</code> instance consisting of ASCII printing 
+     * characters. This means the <code>String</code> won't contain any ASCII 
+     * control characters like Data Link Escape (U+0010) or Delete (U+007F).
+     * @param length How long to make the <code>String</code>. For example, 12.
+     * @return A <code>String</code> instance of ASCII printing characters. Note 
+     * that the straight single and double quote can occur in the results. 
+     * Examples for <code>length</code> being 12: "]Vv36l"o'eVA", 
+     * "KYY>xld?J[Zw", "aWG[Q B:_3aY" and "gk|0++euub&v".
+     * @throws NegativeArraySizeException If <code>length</code> is negative.
+     */
     public static String nextASCIICharSeq(int length) {
         char[] characters = new char[length];
         for (int i = 0; i < length; i++) {
-            characters[i] = 'a';
+            characters[i] = (char) (32 + RANDOM.nextInt(95));
         }
         return new String(characters);
     }
 
     // TODO: Write tests for this
     public static String nextASCIICharSeq(int minLength, int maxLength) {
-        return "NOT IMPLEMENTED YET";
+        return "NOT IMPLEMENTED YET?";
     }
 
     // TODO: Write tests for this
