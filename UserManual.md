@@ -6,7 +6,8 @@ testing framework is a lot like using JUnit or TestNG.
 
 Most of the examples will be drawn from 
 `org.example.exercises.arithmetic.Fraction` and 
-`org.example.exercises.arithmetic.FractionTest`.
+`org.example.exercises.arithmetic.FractionTest` (these were split off to a 
+separate repository, Examples for Testing Framework).
 
 ## Starting to write the class to be tested
 
