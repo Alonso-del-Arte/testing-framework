@@ -47,6 +47,20 @@ public class PseudorandomTest {
             assert occurCount <= maxOccurrencePerNumber : occurMsg;
         }
     }
+    
+    @Test
+    public void testNextPowerOfTwo() {
+        System.out.println("nextPowerOfTwo");
+        int expected = Integer.MAX_VALUE;
+        int actual = 0;
+        int numberOfCalls = 128 * Integer.BYTES;
+        for (int i = 0; i < numberOfCalls; i++) {
+            int power = Pseudorandom.nextPowerOfTwo();
+            assertEquals(Integer.highestOneBit(power), power);
+            actual |= power;
+        }
+        assertEquals(expected, actual);
+    }
 
     // TODO: Uncomment out next test. The skip test annotation is not available
     // yet.
