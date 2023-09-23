@@ -70,9 +70,9 @@ public class Pseudorandom {
         return RANDOM.nextInt(bound);
     }
 
-    // TODO: Write tests for this
     public static int nextPowerOfTwo() {
-        return -3;
+        int shift = RANDOM.nextInt(31);
+        return 1 << shift;
     }
     
     /**
