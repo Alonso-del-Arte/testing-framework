@@ -70,6 +70,11 @@ public class Pseudorandom {
         return RANDOM.nextInt(bound);
     }
 
+    /**
+     * Gives a pseudorandomly chosen power of two.
+     * @return A power of 2, at least 1, at most 1073741824. For example, 
+     * 524288.
+     */
     public static int nextPowerOfTwo() {
         int shift = RANDOM.nextInt(31);
         return 1 << shift;
