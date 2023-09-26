@@ -1,6 +1,7 @@
 package testframe.api.random;
 
 import java.math.BigInteger;
+import java.sql.Date;
 import java.sql.RowId;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -216,6 +217,19 @@ public class PseudorandomTest {
             RowId badID = Pseudorandom.nextObject(array);
             System.out.println("Calling nextObject() on empty array gave " 
                     + badID.toString());
+        }, NoSuchElementException.class);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
+    public void testNextObjectFromEmptyListThrowsException() {
+        List<Date> list = new ArrayList<Date>();
+        Throwable t = assertThrows(() -> {
+            Date badDate = Pseudorandom.nextObject(list);
+            System.out.println("Calling nextObject() on empty list gave " 
+                    + badDate.toString());
         }, NoSuchElementException.class);
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
