@@ -1,7 +1,10 @@
 package testframe.api.random;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -21,6 +24,8 @@ public class PseudorandomTest {
 
     private static final int PRINTABLE_ASCII_SPAN = PRINTABLE_ASCII_SPAN_END
             - PRINTABLE_ASCII_SPAN_BEGIN + 1;
+    
+    private static final int CAPACITY_MULTIPLIER = 20;
 
     private static final long RANDOM_SEED
             = Double.doubleToLongBits(Math.random());
@@ -66,6 +71,7 @@ public class PseudorandomTest {
     @Skip
     @Test
     public void testFlipCoin() {
+        System.out.println("flipCoin");
         final int tries = 1000;
         final int minimumExpectation = 3 * tries / 10;
         final int maximumExpectation = 7 * tries / 10;
@@ -172,12 +178,31 @@ public class PseudorandomTest {
             expected.add(curr);
         }
         Set<LocalDateTime> actual = new HashSet<>(capacity);
-        int numberOfCalls = 20 * capacity;
+        int numberOfCalls = CAPACITY_MULTIPLIER * capacity;
         for (int j = 0; j < numberOfCalls; j++) {
             actual.add(Pseudorandom.nextObject(array));
         }
         String msg = "After " + numberOfCalls
                 + " nextObject() calls for array with " + capacity
+                + " elements, all elements should have been given";
+        assertEquals(expected, actual, msg);
+    }
+    
+    @Test
+    public void testNextObjectFromList() {
+        int capacity = RANDOM.nextInt(32) + 8;
+        List<BigInteger> list = new ArrayList<BigInteger>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            list.add(new BigInteger(64 + i, RANDOM));
+        }
+        Set<BigInteger> expected = new HashSet<>(list);
+        Set<BigInteger> actual = new HashSet<>();
+        int numberOfCalls = CAPACITY_MULTIPLIER * capacity;
+        for (int j = 0; j < numberOfCalls; j++) {
+            actual.add(Pseudorandom.nextObject(list));
+        }
+        String msg = "After " + numberOfCalls
+                + " nextObject() calls for list with " + capacity
                 + " elements, all elements should have been given";
         assertEquals(expected, actual, msg);
     }
