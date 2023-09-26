@@ -1,10 +1,12 @@
 package testframe.api.random;
 
 import java.math.BigInteger;
+import java.sql.RowId;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
 
@@ -205,6 +207,19 @@ public class PseudorandomTest {
                 + " nextObject() calls for list with " + capacity
                 + " elements, all elements should have been given";
         assertEquals(expected, actual, msg);
+    }
+    
+    @Test
+    public void testNextObjectFromEmptyArrayThrowsException() {
+        RowId[] array = {};
+        Throwable t = assertThrows(() -> {
+            RowId badID = Pseudorandom.nextObject(array);
+            System.out.println("Calling nextObject() on empty array gave " 
+                    + badID.toString());
+        }, NoSuchElementException.class);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
     
 }
