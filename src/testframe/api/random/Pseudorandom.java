@@ -71,9 +71,10 @@ public class Pseudorandom {
     }
 
     /**
-     * Gives a pseudorandomly chosen power of two.
-     * @return A power of 2, at least 1, at most 1073741824. For example, 
-     * 524288.
+     * Gives a pseudorandomly chosen power of two. The number is always 
+     * positive, it's never <code>Integer.MIN_VALUE</code>.
+     * @return A power of 2, at least 1, at most 1073741824, which is 
+     * 2<sup>30</sup>. For example, 524288, which is 2<sup>19</sup>.
      */
     public static int nextPowerOfTwo() {
         int shift = RANDOM.nextInt(31);
@@ -81,23 +82,40 @@ public class Pseudorandom {
     }
     
     /**
-     * Chooses an element of an array pseudorandomly.
+     * Chooses an element of an array pseudorandomly. With enough calls, every 
+     * element of the array should be given at least once.
      * @param <E> The type of the elements in the array. For example, 
      * <code>java.time.DayOfWeek</code>.
      * @param array An array of objects of type <code>E</code>. For example, 
      * <code>MONDAY</code>, <code>TUESDAY</code>, <code>WEDNESDAY</code>, 
-     * <code>THURSDAY</code>, <code>FRIDAY</code>.
+     * <code>THURSDAY</code>, <code>FRIDAY</code> and two nulls, corresponding 
+     * to the <code>DayOfWeek.values()</code> array with <code>SUNDAY</code> and 
+     * <code>SATURDAY</code> changed to null.
      * @return One element of the array, chosen pseudorandomly. For example, 
-     * <code>TUESDAY</code>.
+     * <code>WEDNESDAY</code>. May be null, since an array can contain nulls.
      */
     public static <E> E nextObject(E[] array) {
         int index = RANDOM.nextInt(array.length);
         return array[index];
     }
 
-    // TODO: Write tests for this
+    /**
+     * Chooses an element of a list pseudorandomly. With enough calls, every 
+     * element of the array should be given at least once.
+     * @param <E> The type of the elements in the list. For example, 
+     * <code>java.time.DayOfWeek</code>.
+     * @param list A list of objects of type <code>E</code>. For example,  
+     * <code>TUESDAY</code>, <code>SUNDAY</code>, <code>FRIDAY</code>, 
+     * <code>WEDNESDAY</code>, <code>MONDAY</code>, <code>SATURDAY</code>, 
+     * <code>THURSDAY</code>, <code>TUESDAY</code>, etc. (these are the days of 
+     * the day of the week of February 29 in the leap years since the start of 
+     * Unix time).
+     * @return One element of the list, chosen pseudorandomly. For example, 
+     * <code>SATURDAY</code>. May be null, since a list can contain nulls.
+     */
     public static <E> E nextObject(List<E> list) {
-        return list.get(0);
+        int index = RANDOM.nextInt(list.size());
+        return list.get(index);
     }
 
     // TODO: Write tests for this
