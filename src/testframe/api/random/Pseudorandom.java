@@ -119,8 +119,14 @@ public class Pseudorandom {
      * Unix time).
      * @return One element of the list, chosen pseudorandomly. For example, 
      * <code>SATURDAY</code>. May be null, since a list can contain nulls.
+     * @throws NoSuchElementException If the array has no elements.
      */
     public static <E> E nextObject(List<E> list) {
+        int len = list.size();
+        if (len == 0) {
+            String excMsg = "List should have at least one element";
+            throw new NoSuchElementException(excMsg);
+        }
         int index = RANDOM.nextInt(list.size());
         return list.get(index);
     }
