@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import testframe.api.Skip;
 import testframe.api.Test;
 import static testframe.api.Asserters.*;
 
@@ -62,9 +63,8 @@ public class PseudorandomTest {
         assertEquals(expected, actual);
     }
 
-    // TODO: Uncomment out next test. The skip test annotation is not available
-    // yet.
-//    @Test
+    @Skip
+    @Test
     public void testFlipCoin() {
         final int tries = 1000;
         final int minimumExpectation = 3 * tries / 10;
