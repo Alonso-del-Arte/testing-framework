@@ -2,6 +2,7 @@ package testframe.api.random;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
 
@@ -93,9 +94,15 @@ public class Pseudorandom {
      * <code>SATURDAY</code> changed to null.
      * @return One element of the array, chosen pseudorandomly. For example, 
      * <code>WEDNESDAY</code>. May be null, since an array can contain nulls.
+     * @throws NoSuchElementException If the array has no elements.
      */
     public static <E> E nextObject(E[] array) {
-        int index = RANDOM.nextInt(array.length);
+        int len = array.length;
+        if (len == 0) {
+            String excMsg = "Array should have at least one element";
+            throw new NoSuchElementException(excMsg);
+        }
+        int index = RANDOM.nextInt(len);
         return array[index];
     }
 
