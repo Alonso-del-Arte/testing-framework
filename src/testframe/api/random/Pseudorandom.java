@@ -134,7 +134,7 @@ public class Pseudorandom {
     // TODO: Write tests for this
     public static <E> E nextObject(Set<E> set) {
         Iterator<E> iterator = set.iterator();
-        return iterator.next();
+        return null;// iterator.next();
     }
     
 }
