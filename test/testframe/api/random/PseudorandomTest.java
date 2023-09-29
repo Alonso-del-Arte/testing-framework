@@ -1,6 +1,7 @@
 package testframe.api.random;
 
 import java.math.BigInteger;
+import java.sql.Clob;
 import java.sql.Date;
 import java.sql.RowId;
 import java.time.LocalDateTime;
@@ -230,6 +231,19 @@ public class PseudorandomTest {
             Date badDate = Pseudorandom.nextObject(list);
             System.out.println("Calling nextObject() on empty list gave " 
                     + badDate.toString());
+        }, NoSuchElementException.class);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
+    public void testNextObjectFromEmptySetThrowsException() {
+        Set<Clob> set = new HashSet<>();
+        Throwable t = assertThrows(() -> {
+            Clob badClob = Pseudorandom.nextObject(set);
+            System.out.println("Calling nextObject() on empty set gave " 
+                    + badClob.toString());
         }, NoSuchElementException.class);
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
