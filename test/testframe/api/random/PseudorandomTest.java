@@ -195,7 +195,7 @@ public class PseudorandomTest {
     @Test
     public void testNextObjectFromList() {
         int capacity = RANDOM.nextInt(32) + 8;
-        List<BigInteger> list = new ArrayList<BigInteger>(capacity);
+        List<BigInteger> list = new ArrayList<>(capacity);
         for (int i = 0; i < capacity; i++) {
             list.add(new BigInteger(64 + i, RANDOM));
         }
@@ -207,6 +207,24 @@ public class PseudorandomTest {
         }
         String msg = "After " + numberOfCalls
                 + " nextObject() calls for list with " + capacity
+                + " elements, all elements should have been given";
+        assertEquals(expected, actual, msg);
+    }
+    
+    @Test
+    public void testNextObjectFromSet() {
+        int capacity = RANDOM.nextInt(32) + 8;
+        Set<String> expected = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            expected.add(new BigInteger(64 + i, RANDOM).toString());
+        }
+        Set<String> actual = new HashSet<>();
+        int numberOfCalls = CAPACITY_MULTIPLIER * capacity;
+        for (int j = 0; j < numberOfCalls; j++) {
+            actual.add(Pseudorandom.nextObject(expected));
+        }
+        String msg = "After " + numberOfCalls
+                + " nextObject() calls for set with " + capacity
                 + " elements, all elements should have been given";
         assertEquals(expected, actual, msg);
     }
