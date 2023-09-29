@@ -3,6 +3,7 @@ package testframe.api;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Static class containing procedures to simplify making assertions in tests. It 
@@ -949,6 +950,27 @@ public class Asserters {
     
     public static void assertDifferent(Object[] some, Object[] other, 
             String msg) {
+        // TODO: Write tests for this
+    }
+    
+    public static <E> void assertContains(E expected, E[] actual) {
+        // TODO: Write tests for this
+    }
+    
+    public static <E> void assertContains(E expected, List<E> actual) {
+        // TODO: Write tests for this
+    }
+    
+    public static <E> void assertContains(E expected, Set<E> actual) {
+        // TODO: Write tests for this
+    }
+    
+    public static <E> void assertContainsSame(List<E> expected, 
+            List<E> actual) {
+        // TODO: Write tests for this
+    }
+    
+    public static <E> void assertContainsSame(Set<E> expected, Set<E> actual) {
         // TODO: Write tests for this
     }
     
