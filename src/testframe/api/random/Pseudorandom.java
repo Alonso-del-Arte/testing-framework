@@ -1,5 +1,6 @@
 package testframe.api.random;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -108,7 +109,7 @@ public class Pseudorandom {
 
     /**
      * Chooses an element of a list pseudorandomly. With enough calls, every 
-     * element of the array should be given at least once.
+     * element of the list should be given at least once.
      * @param <E> The type of the elements in the list. For example, 
      * <code>java.time.DayOfWeek</code>.
      * @param list A list of objects of type <code>E</code>. For example,  
@@ -116,10 +117,10 @@ public class Pseudorandom {
      * <code>WEDNESDAY</code>, <code>MONDAY</code>, <code>SATURDAY</code>, 
      * <code>THURSDAY</code>, <code>TUESDAY</code>, etc. (these are the days of 
      * the day of the week of February 29 in the leap years since the start of 
-     * Unix time).
+     * Unix time on through the year 2024).
      * @return One element of the list, chosen pseudorandomly. For example, 
      * <code>SATURDAY</code>. May be null, since a list can contain nulls.
-     * @throws NoSuchElementException If the array has no elements.
+     * @throws NoSuchElementException If the list has no elements.
      */
     public static <E> E nextObject(List<E> list) {
         int len = list.size();
@@ -131,14 +132,24 @@ public class Pseudorandom {
         return list.get(index);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Chooses an element of a set pseudorandomly. With enough calls, every 
+     * element of the set should be given at least once.
+     * @param <E> The type of the elements in the list. For example, 
+     * <code>java.lang.Integer</code>.
+     * @param list A list of objects of type <code>E</code>. For example, {0, 1,
+     * 4, 9, 16, 25, 6, 19, 21, 10, 24, 15} (these are the squares modulo 30).
+     * @return One element of the set, chosen pseudorandomly. For example, 19. 
+     * May be null, since a set in Java is allowed to have one null.
+     * @throws NoSuchElementException If the set has no elements.
+     */
     public static <E> E nextObject(Set<E> set) {
         if (set.size() == 0) {
             String excMsg = "Set should have at least one element";
             throw new NoSuchElementException(excMsg);
         }
-        Iterator<E> iterator = set.iterator();
-        return iterator.next();
+        List<E> list = new ArrayList<E>(set);
+        return nextObject(list);
     }
     
 }
