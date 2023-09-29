@@ -1,7 +1,6 @@
 package testframe.api.random;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -144,10 +143,6 @@ public class Pseudorandom {
      * @throws NoSuchElementException If the set has no elements.
      */
     public static <E> E nextObject(Set<E> set) {
-        if (set.size() == 0) {
-            String excMsg = "Set should have at least one element";
-            throw new NoSuchElementException(excMsg);
-        }
         List<E> list = new ArrayList<E>(set);
         return nextObject(list);
     }
