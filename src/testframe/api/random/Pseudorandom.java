@@ -133,8 +133,12 @@ public class Pseudorandom {
 
     // TODO: Write tests for this
     public static <E> E nextObject(Set<E> set) {
+        if (set.size() == 0) {
+            String excMsg = "Set should have at least one element";
+            throw new NoSuchElementException(excMsg);
+        }
         Iterator<E> iterator = set.iterator();
-        return null;// iterator.next();
+        return iterator.next();
     }
     
 }
