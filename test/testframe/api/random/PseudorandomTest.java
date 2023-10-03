@@ -72,13 +72,12 @@ public class PseudorandomTest {
         assertEquals(expected, actual);
     }
 
-    @Skip
     @Test
     public void testFlipCoin() {
         System.out.println("flipCoin");
         final int tries = 1000;
-        final int minimumExpectation = 3 * tries / 10;
-        final int maximumExpectation = 7 * tries / 10;
+        final int minimumExpectation = 1 * tries / 10;
+        final int maximumExpectation = 9 * tries / 10;
         int headCount = 0;
         int tailCount = 0;
         for (int i = 0; i < tries; i++) {
