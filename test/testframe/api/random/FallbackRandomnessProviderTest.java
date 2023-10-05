@@ -3,6 +3,7 @@ package testframe.api.random;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import testframe.api.BeforeAllTests;
 import testframe.api.Test;
@@ -15,8 +16,15 @@ import static testframe.api.Asserters.*;
 public class FallbackRandomnessProviderTest {
     
     @Test
-    public void test() {
-        fail("HAVEN'T WRITTEN TESTS YET");
+    public void testFallbackTriesPrimaryFirst() {
+        MockRandomnessProvider mock = new MockRandomnessProvider();
+        mock.activate();
+        Logger logger = Logger.getLogger("Tests");
+        FallbackRandomnessProvider provider 
+                = new FallbackRandomnessProvider(mock, logger);
+        provider.giveNumbers(10, 0, 9);
+        String msg = "Mock provider should've been called at least once";
+        assert mock.callCount > 0 : msg;
     }
     
     private class MockRandomnessProvider extends ExternalRandomnessProvider {
@@ -36,12 +44,12 @@ public class FallbackRandomnessProviderTest {
         @Override
         public int[] giveNumbers(int amount, int minimum, int maximum) 
                 throws IOException {
-            this.callCount++;
             if (this.active) {
+                this.callCount++;
                 int diff = maximum - minimum;
                 int[] numbers = new int[amount];
                 for (int i = 0; i < amount; i++) {
-                    numbers[i] = (i % diff) + minimum;
+                    numbers[i] = minimum + (i % diff);
                 }
                 return numbers;
             } else {
