@@ -27,6 +27,19 @@ public class FallbackRandomnessProviderTest {
         assert mock.callCount > 0 : msg;
     }
     
+    @Test
+    public void testFallbackUsesFallbackIfPrimaryUnavailable() {
+        MockRandomnessProvider mock = new MockRandomnessProvider();
+        Logger logger = Logger.getLogger("Tests");
+        FallbackRandomnessProvider provider 
+                = new FallbackRandomnessProvider(mock, logger);
+        mock.deactivate();
+        String msg = "With primary deactivated, fallback should be called";
+        assertDoesNotThrow(() -> {
+            provider.giveNumbers(100, 0, 99);
+        }, msg);
+    }
+    
     private class MockRandomnessProvider extends ExternalRandomnessProvider {
         
         private boolean active = true;
