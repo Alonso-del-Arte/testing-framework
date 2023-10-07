@@ -2,11 +2,13 @@ package testframe.api.random;
 
 import java.io.IOException;
 import java.util.Random;
-import java.util.logging.Logger;;
+import java.util.logging.Logger;
 
 public class FallbackRandomnessProvider extends ExternalRandomnessProvider {
     
     final ExternalRandomnessProvider primaryProvider;
+    
+    private final Random fallbackRandom = new Random();
     
     final Logger errorLogger;
     
@@ -18,7 +20,8 @@ public class FallbackRandomnessProvider extends ExternalRandomnessProvider {
         try {
             return this.primaryProvider.giveNumbers(amount, minimum, maximum);
         } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
+            int[] numbers = new int[amount];
+            return numbers;
         }
     }
 
