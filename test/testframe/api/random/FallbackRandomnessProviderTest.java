@@ -40,9 +40,23 @@ public class FallbackRandomnessProviderTest {
         }, msg);
     }
     
+    @Test
+    public void testHaveNotExceededQuota() {
+        System.out.println("haveNotExceededQuota");
+        MockRandomnessProvider mock = new MockRandomnessProvider();
+        Logger logger = Logger.getLogger("Tests");
+        FallbackRandomnessProvider provider 
+                = new FallbackRandomnessProvider(mock, logger);
+        mock.quotaExceeded = true;
+        String msg = "Fallback quota should not exceed even if primary does";
+        assert !provider.haveNotExceededQuota() : msg;
+    }
+    
     private class MockRandomnessProvider extends ExternalRandomnessProvider {
         
         private boolean active = true;
+        
+        boolean quotaExceeded = false;
         
         int callCount = 0;
         
@@ -73,7 +87,7 @@ public class FallbackRandomnessProviderTest {
 
         @Override
         public boolean haveNotExceededQuota() {
-            return false;
+            return this.quotaExceeded;
         }
         
     }
