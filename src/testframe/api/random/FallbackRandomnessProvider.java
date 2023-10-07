@@ -8,8 +8,6 @@ public class FallbackRandomnessProvider extends ExternalRandomnessProvider {
     
     final ExternalRandomnessProvider primaryProvider;
     
-    private final Random fallbackRandom = new Random();
-    
     final Logger errorLogger;
     
     final Random fallback = new Random(System.currentTimeMillis());
