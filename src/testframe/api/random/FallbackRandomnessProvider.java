@@ -25,10 +25,14 @@ public class FallbackRandomnessProvider extends ExternalRandomnessProvider {
         }
     }
 
-    // TODO: Write tests for this
+    /**
+     * Tells whether or not the quota has been exceeded.
+     * @return False always. Even if the primary's quota has been exceeded, the
+     * quota for the fallback should never be exceeded.
+     */
     @Override
     public boolean haveNotExceededQuota() {
-        return true;
+        return false;
     }
     
     // TODO: Write tests for this
