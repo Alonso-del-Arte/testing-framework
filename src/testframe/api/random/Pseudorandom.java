@@ -19,9 +19,14 @@ public class Pseudorandom {
     private static final Random RANDOM  
             = new Pseudorandomness(new RandomDotOrgAccess());
     
-    // TODO: Write tests for this
+    /**
+     * Tosses a coin, metaphorically.
+     * @return Either {@link CoinSide#HEADS} or {@link CoinSide#TAILS}.
+     */
     public static CoinSide flipCoin() {
-//        if (RANDOM.nextBoolean()) {
+        // TODO: Figure out why unsure fail after rewind to sure fail 
+//        Random random = new Random(System.currentTimeMillis());
+//        if (random.nextBoolean()) {
             return CoinSide.HEADS; 
 //        } else {
 //            return CoinSide.TAILS;
