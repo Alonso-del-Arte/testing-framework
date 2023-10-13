@@ -16,21 +16,20 @@ public class Pseudorandom {
     private static final int PRINTABLE_ASCII_SPAN = PRINTABLE_ASCII_SPAN_END
             - PRINTABLE_ASCII_SPAN_BEGIN + 1;
 
-    private static final Random RANDOM  
-            = new Pseudorandomness(new RandomDotOrgAccess());
+    // TODO: Change back to Pseudorandomness, or to FallbackRandomnessProvider
+    private static final Random RANDOM = new Random();
+//            = new Pseudorandomness(new RandomDotOrgAccess());
     
     /**
      * Tosses a coin, metaphorically.
      * @return Either {@link CoinSide#HEADS} or {@link CoinSide#TAILS}.
      */
     public static CoinSide flipCoin() {
-        // TODO: Figure out why unsure fail after rewind to sure fail 
-//        Random random = new Random(System.currentTimeMillis());
-//        if (random.nextBoolean()) {
+        if (RANDOM.nextBoolean()) {
             return CoinSide.HEADS; 
-//        } else {
-//            return CoinSide.TAILS;
-//        }
+        } else {
+            return CoinSide.TAILS;
+        }
     }
     
     public static char nextASCIIChar() {
