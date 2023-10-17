@@ -2649,7 +2649,7 @@ public class AssertersTest {
         BigInteger aboveMaximum = maximum.add(BigInteger.ONE);
         boolean failOccurred = false;
         try {
-            Asserters.assertMaximum(maximum, aboveMaximum, 
+            Asserters.assertMaximum(aboveMaximum, maximum, 
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
