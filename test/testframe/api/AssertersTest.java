@@ -2643,7 +2643,33 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-    // TODO: Write tests for assertMaximum()
+    @Test
+    public void testAssertMaximumComparableButItIsMore() {
+        BigInteger maximum = new BigInteger(84, RANDOM);
+        BigInteger aboveMaximum = maximum.add(BigInteger.ONE);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMaximum(maximum, aboveMaximum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String msgStandardPart = "Value " + aboveMaximum.toString() 
+                    + " expected to be at most " + maximum.toString();
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                    + msgStandardPart;
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + aboveMaximum.toString() 
+                + " is equal to or less than " + maximum.toString() 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    // TODO: Write more tests for assertMaximum()
     
     // TODO: Write tests for assertInRange()
     
