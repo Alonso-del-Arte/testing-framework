@@ -779,7 +779,9 @@ public class Asserters {
     // TODO: Write tests for this
     public static <T extends Comparable<T>> void assertMaximum(T actual, 
             T maximum, String msg) {
-        //
+        String errMsg = msg + ". Value " + actual.toString() 
+                + " expected to be at most " + maximum.toString();
+        throw new AssertionError(errMsg);
     }
 
     // TODO: Write tests for this
