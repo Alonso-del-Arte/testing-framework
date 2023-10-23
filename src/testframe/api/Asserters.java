@@ -293,7 +293,10 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertNull(Object object) {
-        assertNull(object, "SORRY, NOT IMPLEMENTED YET");
+        String objID = object == null ? "null" : object.toString();
+        String errMsg = "Expected null object but found " + objID;
+        throw new AssertionError(errMsg);
+//        assertNull(object, "SORRY, NOT IMPLEMENTED YET");
     }
     
     public static void assertNull(Object object, String msg) {
