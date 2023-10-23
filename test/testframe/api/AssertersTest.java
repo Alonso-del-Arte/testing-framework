@@ -664,6 +664,19 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNull() {
+        System.out.println("assertNull");
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNull(null, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting null is null should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertBelowMinimumLong() {
         int halfIntMax = -(Integer.MIN_VALUE / 2);
         long minimum = ((long) Integer.MAX_VALUE) + RANDOM.nextInt(halfIntMax);
