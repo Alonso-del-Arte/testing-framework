@@ -643,7 +643,7 @@ public class AssertersTest {
 
     @Test
     public void testAssertNullButItIsNot() {
-        LocalDateTime object = LocalDateTime.now();
+        Object object = LocalDateTime.now();
         boolean failOccurred = false;
         try {
             Asserters.assertNull(object, EXAMPLE_ASSERTION_MESSAGE_PART);
@@ -675,6 +675,39 @@ public class AssertersTest {
         String msg = "Asserting null is null should not have failed the test";
         assert !failOccurred : msg;
     }
+    
+    @Test
+    public void testAssertNullButItIsNotDefaultMessage() {
+        Object object = new BigInteger(96, RANDOM);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNull(object);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected null object but found " 
+                    + object.toString();
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + object.toString() 
+                + " is null should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+//    @Test
+//    public void testAssertNull() {
+//        System.out.println("assertNull");
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertNull(null, EXAMPLE_ASSERTION_MESSAGE_PART);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//        }
+//        String msg = "Asserting null is null should not have failed the test";
+//        assert !failOccurred : msg;
+//    }
     
     @Test
     public void testAssertBelowMinimumLong() {
