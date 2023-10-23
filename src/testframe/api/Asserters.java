@@ -291,19 +291,32 @@ public class Asserters {
     
     // No assertFalse will be provided. Use plain Java assert.
     
+    /**
+     * Asserts that an object is null. If the object is not null, the test 
+     * failure explanation will include the object's <code>toString()</code>.
+     * <p>To assert that an object is <em>not</em> null, use a plain Java assert 
+     * with an appropriate message.</p>
+     * @param object The object to assert is null. For example, a field that is 
+     * not supposed to be initialized at construction time.
+     */
     public static void assertNull(Object object) {
-        if (object != null) {
-            String errMsg = "Expected null object but found " 
-                    + object.toString();
-            throw new AssertionError(errMsg);
-        }
-//        assertNull(object, "SORRY, NOT IMPLEMENTED YET");
+        assertNull(object, "");
     }
     
+    /**
+     * Asserts that an object is null. To assert that an object is <em>not</em> 
+     * null, use a plain Java assert with an appropriate message.
+     * @param object The object to assert is null. For example, a field that is 
+     * not supposed to be initialized at construction time.
+     * @param msg A message for the test failure explanation, to which will be 
+     * appended a message saying a null object was expected but instead a 
+     * non-null object was found, if the test fails.
+     */
     public static void assertNull(Object object, String msg) {
         if (object != null) {
-            String errMsg = msg + ". Expected null object but found " 
+            String intermediate = msg + ". Expected null object but found " 
                     + object.toString();
+            String errMsg = prepMsg(intermediate);
             throw new AssertionError(errMsg);
         }
     }
