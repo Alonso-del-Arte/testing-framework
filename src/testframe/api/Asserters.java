@@ -291,7 +291,16 @@ public class Asserters {
     
     // No assertFalse will be provided. Use plain Java assert.
     
-    // No assertNull will provided. Use plain Java assert.
+    // TODO: Write tests for this
+    public static void assertNull(Object object) {
+        assertNull(object, "SORRY, NOT IMPLEMENTED YET");
+    }
+    
+    public static void assertNull(Object object, String msg) {
+        // TODO: Write tests for this
+    }
+    
+    // No assertNotNull will provided. Use plain Java assert.
     
     /**
      * Asserts that an integer is greater than or equal to a specified minimum. 
