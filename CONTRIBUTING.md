@@ -1,6 +1,7 @@
-This project will probably be open to Hacktoberfest 2023.
+This project won't be open to Hacktoberfest 2023, might be open to Hacktoberfest 
+2024.
 
-# Guidelines for Hacktoberfest 2023 Contributors
+# Guidelines for Hacktoberfest 2024 Contributors
 
 I will definitely consider pull requests associated with an issue and maybe 
 consider pull requests associated with a TODO (considered an Action Item in 
@@ -38,16 +39,22 @@ can go ahead and use it to write new test classes. But if not, maybe you can
 develop the assertions you need.
 
 But remember that this framework will not provide `assertTrue()`, 
-`assertFalse()`, `assertNull()` or `assertNotNull()`. Use a plain Java `assert` 
-for those, or import a specialized assertions library like AssertJ (but don't 
-pull request to add any dependencies to this project besides the JDK).
+`assertFalse()`, ~~`assertNull()`~~ or `assertNotNull()`. Use a plain Java 
+`assert` for those, or import a specialized assertions library like AssertJ (but 
+don't pull request to add any dependencies to this project besides the JDK).
+
+(UPDATE, October 23, 2023: I decided this framework will provide `assertNull()` 
+but still won't provide `assertNotNull()`. I decided that `assertNull()` can 
+provide a useful default message but `assertNotNull()` can't. The latter would 
+just be "Object should not be null," which is not very helpful.)
 
 As for `assertArrayEquals()`, that will be provided as overloads of 
 `assertEquals()`, much like in TestNG.
 
 Except for `org.example.demo`, everything in `com.example` and `org.example` is 
 meant to be exercises. Finished classes in those packages are not meant to be 
-checked in. This will eventually be enforced by the Git Ignore.
+checked in. ~~This will eventually be enforced by the Git Ignore.~~ (UPDATE, 
+September 21, 2023: The examples have been moved to a separate repository.)
 
 As much as possible, commits to the demonstration packages should be one each to 
 a step of the TDD cycle (fail, pass, refactor). That can be a pain in the neck 
