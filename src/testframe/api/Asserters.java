@@ -297,7 +297,9 @@ public class Asserters {
     }
     
     public static void assertNull(Object object, String msg) {
-        // TODO: Write tests for this
+        String objID = object == null ? "null" : object.toString();
+        String errMsg = msg + ". Expected null object but found " + objID;
+        throw new AssertionError(errMsg);
     }
     
     // No assertNotNull will provided. Use plain Java assert.
