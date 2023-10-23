@@ -291,11 +291,12 @@ public class Asserters {
     
     // No assertFalse will be provided. Use plain Java assert.
     
-    // TODO: Write tests for this
     public static void assertNull(Object object) {
-        String objID = object == null ? "null" : object.toString();
-        String errMsg = "Expected null object but found " + objID;
-        throw new AssertionError(errMsg);
+        if (object != null) {
+            String errMsg = "Expected null object but found " 
+                    + object.toString();
+            throw new AssertionError(errMsg);
+        }
 //        assertNull(object, "SORRY, NOT IMPLEMENTED YET");
     }
     
@@ -303,7 +304,8 @@ public class Asserters {
         if (object != null) {
             String errMsg = msg + ". Expected null object but found " 
                     + object.toString();
-            throw new AssertionError(errMsg);}
+            throw new AssertionError(errMsg);
+        }
     }
     
     // No assertNotNull will provided. Use plain Java assert.
