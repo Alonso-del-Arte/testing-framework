@@ -640,6 +640,28 @@ public class AssertersTest {
   }
 
     // TODO: Write more tests for assertEquals() for arrays
+
+    @Test
+    public void testAssertNullButItIsNot() {
+        LocalDateTime object = LocalDateTime.now();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNull(object, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String msgStandardPart = "Expected null object but found " 
+                    + object.toString();
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                    + msgStandardPart;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + object.toString() 
+                + " is null should have failed the test";
+        assert failOccurred : msg;
+    }
     
     @Test
     public void testAssertBelowMinimumLong() {
