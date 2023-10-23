@@ -116,6 +116,30 @@ In this example I would prefer a test that comes up with a pseudorandom integer
 for the numerator, and maybe some prime number for the denominator, but this is 
 good enough for the example.
 
+#### Testing for objects that are supposed to be null
+
+At first I had decided that this testing framework would not provide 
+`assertNull()` because that can easily be tested with a plain Java assert. 
+
+However, I found myself often writing a custom message along the lines of 
+"`"Expected null object but found " + example.toString()`". Eventually I 
+realized this testing framework should provide `assertNull()`.
+
+So I wrote it. You can use it something like this:
+
+```
+        assertNull(account.getBeneficiary(), 
+               "Account should not have beneficiary at construction");
+```
+
+You may also omit the message, in which case the default message will be 
+"Expected null object but found" followed by the supposedly null object's 
+`toString()`.
+
+I stand by my decision to leave out `assertNotNull()`, mostly because the 
+default message would have to be something like "Expected object to not be null 
+but it was." I don't think that's very helpful. 
+
 #### Testing for exceptions
 
 A test that causes an exception is considered neither passing nor failing by 
@@ -231,7 +255,7 @@ given kind of call causes no exceptions.
     }
 ```
 
-(finish writing)
+(FINISH WRITING)
 
 ### Designating test class set-up, tear-down
 
@@ -239,11 +263,11 @@ As much as it is practical to do so, we should write immutable classes with pure
 functions. Mutable classes are still have their time and place in Java, and to 
 test them it's sometimes necessary to 
 
-(finish writing)
+(FINISH WRITING)
 
 ### Designating test set-up, tear-down
 
-(finish writing)
+(FINISH WRITING)
 
 ### Designating a test to be skipped
 
@@ -253,29 +277,29 @@ test is to comment out or delete its `@Test` annotation.
 
 ## Running the tests
 
-(finish writing)
+(FINISH WRITING)
 
 > Test results for org.example.exercises.arithmetic.FractionTest
 testToString FAILED Expected = 1/2. Actual = org.example.exercises.arithmetic.Fraction@135fbaa4
 
-(finish writing)
-(finish writing)
-(finish writing)
-(finish writing)
-(finish writing)
+(FINISH WRITING)
+(FINISH WRITING)
+(FINISH WRITING)
+(FINISH WRITING)
+(FINISH WRITING)
 
 > Passed: 2. Failed: 1. Skipped: 0. Caused an error: 0
 Total: 3
 
-(finish writing)
-(finish writing)
-(finish writing)
-(finish writing)
-(finish writing)
+(FINISH WRITING)
+(FINISH WRITING)
+(FINISH WRITING)
+(FINISH WRITING)
+(FINISH WRITING)
 
 ## Using this testing framework with Scala, Kotlin
 
-(finish writing)
+(FINISH WRITING)
 
 If you want to use `assertThrows()` or `assertDoesNotThrow()` in Scala, note 
 that the syntax has some important differences that go beyond the much-maligned 
@@ -300,4 +324,4 @@ Scala (e.g., the more generally available type inference) or are purely
 superficial (e.g., the preference for two spaces instead of four for the 
 indentation interval).
  
-A consequence of semicolon inference (finish writing) operators 
+A consequence of semicolon inference (FINISH WRITING) operators 
