@@ -22,6 +22,10 @@ public class AssertersTest {
     
     private static final double LOCAL_DELTA = 0.0001;
     
+    private static final double HALF_LOCAL_DELTA = LOCAL_DELTA / 2;
+    
+    private static final double TWICE_LOCAL_DELTA = LOCAL_DELTA * 2;
+    
     private static final Random RANDOM = new Random();
     
     private static final String EXAMPLE_ASSERTION_MESSAGE_PART 
@@ -616,29 +620,64 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-  @Test
-  public void testAssertEqualsArrayIntDefaultMsg() {
-      int length = RANDOM.nextInt(8) + 2;
-      int[] someNumbers = new int[length];
-      int[] sameNumbers = new int[length];
-      for (int i = 0; i < length; i++) {
-          int number = RANDOM.nextInt(256) - 128;
-          someNumbers[i] = number;
-          sameNumbers[i] = number;
-      }
-      boolean failOccurred = false;
-      try {
-          Asserters.assertEquals(someNumbers, sameNumbers);
-      } catch (AssertionError ae) {
-          failOccurred = true;
-          System.out.println("\"" + ae.getMessage() + "\"");
-      }
-      String msg = "Asserting " + Arrays.toString(someNumbers) 
-              + " is equal to " + Arrays.toString(sameNumbers) 
-              + " should not have failed the test";
-      assert !failOccurred : msg;
-  }
+    @Test
+    public void testAssertEqualsArrayIntDefaultMsg() {
+        int length = RANDOM.nextInt(8) + 2;
+        int[] someNumbers = new int[length];
+        int[] sameNumbers = new int[length];
+        for (int i = 0; i < length; i++) {
+            int number = RANDOM.nextInt(256) - 128;
+            someNumbers[i] = number;
+            sameNumbers[i] = number;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumbers, sameNumbers);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting " + Arrays.toString(someNumbers) 
+                + " is equal to " + Arrays.toString(sameNumbers) 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
 
+//    @Test
+    public void testAssertEqualsButIsNotArrayDoubleDiffLengths() {
+        int lengthA = RANDOM.nextInt(8) + 2;
+        int lengthB = lengthA + RANDOM.nextInt(8) + 2;
+        double[] numbersA = new double[lengthA];
+        double[] numbersB = new double[lengthB];
+        for (int i = 0; i < lengthA; i++) {
+            double number = RANDOM.nextDouble() + i;
+            numbersA[i] = number;
+            numbersB[i] = number;
+        }
+        for (int j = lengthA; j < lengthB; j++) {
+            numbersB[j] = RANDOM.nextDouble() + j;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(numbersA, numbersB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Arrays differ in length: expected has " 
+                    + numbersA.length + " elements but actual has " 
+                    + numbersB.length + " elements";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(numbersA) 
+                + " is equal to " + Arrays.toString(numbersB) 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+  
     // TODO: Write more tests for assertEquals() for arrays
 
     @Test
@@ -2756,6 +2795,28 @@ public class AssertersTest {
     }
     
     // TODO: Write more tests for assertMaximum()
+    
+    @Test
+    public void testAssertNaNButItIsNot() {
+        double number = Math.random();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNaN(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String msgStandardPart = "Number " + number + " expected to be NaN";
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                    + msgStandardPart;
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + number 
+                + " is NaN should have failed the test";
+        assert failOccurred : msg;
+    }
     
     // TODO: Write tests for assertInRange()
     
