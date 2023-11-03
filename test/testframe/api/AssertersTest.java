@@ -2854,6 +2854,21 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNaNDefaultMessage() {
+        long bitPattern = NaN_MASK | RANDOM.nextLong();
+        double number = Double.longBitsToDouble(bitPattern);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNaN(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + number 
+                + " is NaN should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
