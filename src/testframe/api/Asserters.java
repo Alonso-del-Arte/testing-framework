@@ -832,10 +832,16 @@ public class Asserters {
         //
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that a 64-bit floating point number is NaN (not a number).
+     * @param actual The number to assert is NaN. For example, positive 
+     * infinity.
+     * @param msg The message to put into the test failure explanation if the 
+     * test fails because of the assertion.
+     */
     public static void assertNaN(double actual, String msg) {
         String errMsg = msg + ". Number " + actual + " expected to be NaN";
-        throw new AssertionError(errMsg);
+        assert Double.isNaN(actual) : errMsg;
     }
     
     // TODO: Write tests for this
