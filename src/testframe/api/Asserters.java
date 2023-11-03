@@ -829,7 +829,8 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertNaN(double actual) {
-        //
+        String errMsg = "Number " + actual + " expected to be NaN";
+        throw new AssertionError(errMsg);
     }
     
     /**
