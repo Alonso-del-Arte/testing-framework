@@ -827,10 +827,15 @@ public class Asserters {
         assert maximum.compareTo(actual) >= 0 : errMsg;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Asserts that a 64-bit floating point number is NaN (not a number). The 
+     * test failure explanation will include NaN and the actual number if the 
+     * test fails.
+     * @param actual The number to assert is NaN. For example, negative 
+     * infinity.
+     */
     public static void assertNaN(double actual) {
-        String errMsg = "Number " + actual + " expected to be NaN";
-        assert Double.isNaN(actual) : errMsg;
+        assertNaN(actual, "");
     }
     
     /**
@@ -841,7 +846,9 @@ public class Asserters {
      * test fails because of the assertion.
      */
     public static void assertNaN(double actual, String msg) {
-        String errMsg = msg + ". Number " + actual + " expected to be NaN";
+        String intermediate = msg + ". Number " + actual 
+                + " expected to be NaN";
+        String errMsg = prepMsg(intermediate);
         assert Double.isNaN(actual) : errMsg;
     }
     
