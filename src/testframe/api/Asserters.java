@@ -835,7 +835,8 @@ public class Asserters {
      * infinity.
      */
     public static void assertNaN(double actual) {
-        assertNaN(actual, "");
+        throw new AssertionError("SORRY");
+//        assertNaN(actual, "");
     }
     
     /**
@@ -846,10 +847,11 @@ public class Asserters {
      * test fails because of the assertion.
      */
     public static void assertNaN(double actual, String msg) {
-        String intermediate = msg + ". Number " + actual 
-                + " expected to be NaN";
-        String errMsg = prepMsg(intermediate);
-        assert Double.isNaN(actual) : errMsg;
+        throw new AssertionError("SORRY");
+//        String intermediate = msg + ". Number " + actual 
+//                + " expected to be NaN";
+//        String errMsg = prepMsg(intermediate);
+//        assert Double.isNaN(actual) : errMsg;
     }
     
     // TODO: Write tests for this
