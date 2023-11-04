@@ -2953,6 +2953,27 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNotNaNButItIs() {
+        double number = Double.NaN;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNaN(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
+                    + number + " expected to not be NaN";
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + number 
+                + " is not NaN should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
