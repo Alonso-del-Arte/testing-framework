@@ -851,14 +851,10 @@ public class Asserters {
      * test fails because of the assertion.
      */
     public static void assertNaN(double actual, String msg) {
-        long mask = 0x7FF0000000000000L;
-        long bitPattern = Double.doubleToLongBits(actual);
-        long masked = bitPattern & mask;
         String intermediate = msg + ". Number " + actual 
                 + " expected to be NaN";
         String errMsg = prepMsg(intermediate);
-        assert mask == masked : errMsg;
-//        assert Double.isNaN(actual) : errMsg;
+        assert Double.isNaN(actual) : errMsg;
     }
     
     // TODO: Write tests for this
