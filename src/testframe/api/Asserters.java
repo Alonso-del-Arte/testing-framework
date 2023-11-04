@@ -835,9 +835,7 @@ public class Asserters {
      * infinity.
      */
     public static void assertNaN(double actual) {
-        String errMsg = "Number " + actual + " expected to be NaN";
-        assert Double.isNaN(actual) : errMsg;
-//        assertNaN(actual, "");
+        assertNaN(actual, "");
     }
     
     /**
