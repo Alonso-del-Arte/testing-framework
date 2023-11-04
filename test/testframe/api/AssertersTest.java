@@ -2835,6 +2835,50 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNaNButItIsNegativeInfinity() {
+        double number = Double.NEGATIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNaN(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String msgStandardPart = "Number " + number + " expected to be NaN";
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                    + msgStandardPart;
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + number 
+                + " is NaN should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNaNButItIsPositiveInfinity() {
+        double number = Double.POSITIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNaN(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String msgStandardPart = "Number " + number + " expected to be NaN";
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
+                    + msgStandardPart;
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + number 
+                + " is NaN should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertNaNButItIsNotDefaultMessage() {
         double number = Math.random();
         boolean failOccurred = false;
