@@ -835,7 +835,11 @@ public class Asserters {
      * infinity.
      */
     public static void assertNaN(double actual) {
-        throw new AssertionError("SORRY");
+        long mask = 0x7FF0000000000000L;
+        long bitPattern = Double.doubleToLongBits(actual);
+        long masked = bitPattern & mask;
+        String errMsg = "Number " + actual + " expected to be NaN";
+        assert mask == masked : errMsg;
 //        assertNaN(actual, "");
     }
     
@@ -847,10 +851,13 @@ public class Asserters {
      * test fails because of the assertion.
      */
     public static void assertNaN(double actual, String msg) {
-        throw new AssertionError("SORRY");
-//        String intermediate = msg + ". Number " + actual 
-//                + " expected to be NaN";
-//        String errMsg = prepMsg(intermediate);
+        long mask = 0x7FF0000000000000L;
+        long bitPattern = Double.doubleToLongBits(actual);
+        long masked = bitPattern & mask;
+        String intermediate = msg + ". Number " + actual 
+                + " expected to be NaN";
+        String errMsg = prepMsg(intermediate);
+        assert mask == masked : errMsg;
 //        assert Double.isNaN(actual) : errMsg;
     }
     
