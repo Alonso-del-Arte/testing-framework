@@ -2913,6 +2913,46 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNaNButItIsNegativeInfinityDefaultMessage() {
+        double number = Double.NEGATIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNaN(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number + " expected to be NaN";
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + number 
+                + " is NaN should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertNaNButItIsPositiveInfinityDefaultMessage() {
+        double number = Double.POSITIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNaN(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number + " expected to be NaN";
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + number 
+                + " is NaN should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
