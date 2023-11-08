@@ -1,9 +1,14 @@
 package testframe.api;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * Static class containing procedures to simplify making assertions in tests. It 
@@ -1032,6 +1037,18 @@ public class Asserters {
     
     public static <E> void assertContainsSame(Set<E> expected, Set<E> actual) {
         // TODO: Write tests for this
+    }
+    
+    // TODO: Write tests for this
+    public static String assertPrintOut(Predicate<String> predicate, 
+            Procedure lambda) {
+        return "SORRY NOT IMPLEMENTED YET";
+    }
+    
+    // TODO: Write tests for this
+    public static String assertPrintOut(Predicate<String> predicate, 
+            Procedure lambda, String msg) {
+        return "SORRY NOT IMPLEMENTED YET";
     }
     
     /**
