@@ -2977,6 +2977,38 @@ public class AssertersTest {
     // TODO: Write tests for assertInRange()
     
     @Test
+    public void testAssertContainsButDoesNot() {
+        int size = RANDOM.nextInt(16) + 4;
+        BigInteger[] array = new BigInteger[size];
+        BigInteger number = new BigInteger(84, RANDOM);
+        for (int i = 0; i < size; i++) {
+            number = number.add(BigInteger.valueOf(i));
+            array[i] = number;
+        }
+        BigInteger notPresent = number.negate();
+        boolean failOccurred = false;
+        String arrayStr = Arrays.toString(array);
+        String absentStr = notPresent.toString();
+        try {
+            Asserters.assertContains(notPresent, array, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Expected element " + absentStr + " to be in " 
+                    + arrayStr;
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + notPresent.toString() + " is in " 
+                + arrayStr + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
         String msg = "Division by zero should cause ArithmeticException";
