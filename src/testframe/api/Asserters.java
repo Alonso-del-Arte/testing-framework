@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -1023,7 +1024,9 @@ public class Asserters {
     }
     
     public static <E> void assertContains(E expected, E[] actual, String msg) {
-        // TODO: Write tests for this
+        String errMsg = msg + ". Expected element " + expected.toString() 
+                + " to be in " + Arrays.toString(actual);
+        throw new AssertionError(errMsg);
     }
     
     public static <E> void assertContains(E expected, List<E> actual) {
