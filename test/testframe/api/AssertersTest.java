@@ -1,6 +1,7 @@
 package testframe.api;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Random;
@@ -3006,6 +3007,31 @@ public class AssertersTest {
         String msg = "Asserting that " + notPresent.toString() + " is in " 
                 + arrayStr + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertContains() {
+        System.out.println("assertContains");
+        int size = RANDOM.nextInt(8) + 2;
+        LocalDate[] array = new LocalDate[size];
+        LocalDate date = LocalDate.now();
+        int powerOfNegativeOne = -1;
+        for (int i = 0; i < size; i++) {
+            powerOfNegativeOne *= -1;
+            date = date.plusDays(i * powerOfNegativeOne);
+            array[i] = date;
+        }
+        LocalDate present = array[RANDOM.nextInt(size)];
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContains(present, array, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + present.toString() + " is in " 
+                + Arrays.toString(array) + " should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     @Test
