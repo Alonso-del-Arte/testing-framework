@@ -1041,12 +1041,6 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static String assertPrintOut(Predicate<String> predicate, 
-            Procedure lambda) {
-        return "SORRY NOT IMPLEMENTED YET";
-    }
-    
-    // TODO: Write tests for this
-    public static String assertPrintOut(Predicate<String> predicate, 
             Procedure lambda, String msg) {
         return "SORRY NOT IMPLEMENTED YET";
     }
