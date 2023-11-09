@@ -1022,11 +1022,25 @@ public class Asserters {
         // TODO: Write tests for this
     }
     
+    public static <E> void assertContains(E expected, E[] actual, String msg) {
+        // TODO: Write tests for this
+    }
+    
     public static <E> void assertContains(E expected, List<E> actual) {
         // TODO: Write tests for this
     }
     
+    public static <E> void assertContains(E expected, List<E> actual, 
+            String msg) {
+        // TODO: Write tests for this
+    }
+    
     public static <E> void assertContains(E expected, Set<E> actual) {
+        // TODO: Write tests for this
+    }
+    
+    public static <E> void assertContains(E expected, Set<E> actual, 
+            String msg) {
         // TODO: Write tests for this
     }
     
@@ -1035,7 +1049,17 @@ public class Asserters {
         // TODO: Write tests for this
     }
     
+    public static <E> void assertContainsSame(List<E> expected, 
+            List<E> actual, String msg) {
+        // TODO: Write tests for this
+    }
+    
     public static <E> void assertContainsSame(Set<E> expected, Set<E> actual) {
+        // TODO: Write tests for this
+    }
+    
+    public static <E> void assertContainsSame(Set<E> expected, Set<E> actual, 
+            String msg) {
         // TODO: Write tests for this
     }
     
