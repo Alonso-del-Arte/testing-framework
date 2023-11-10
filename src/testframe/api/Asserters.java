@@ -865,7 +865,8 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertNotNaN(double actual, String msg) {
-        //
+        String errMsg = msg + ". Number " + actual + " expected to not be NaN";
+        throw new AssertionError(errMsg);
     }
     
     // TODO: Write tests for this
