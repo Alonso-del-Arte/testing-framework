@@ -2989,6 +2989,20 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNotNaNPositiveInfinity() {
+        double number = Double.POSITIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNaN(number, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + number 
+                + " is not NaN should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
