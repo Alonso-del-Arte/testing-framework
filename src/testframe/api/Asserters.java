@@ -864,7 +864,7 @@ public class Asserters {
     }
     
     public static void assertNotNaN(double actual, String msg) {
-        if (actual == Double.NEGATIVE_INFINITY) {
+        if (Double.isInfinite(actual)) {
             return;
         }
         String errMsg = msg + ". Number " + actual + " expected to not be NaN";
