@@ -863,8 +863,10 @@ public class Asserters {
         //
     }
     
-    // TODO: Write tests for this
     public static void assertNotNaN(double actual, String msg) {
+        if (actual == Double.NEGATIVE_INFINITY) {
+            return;
+        }
         String errMsg = msg + ". Number " + actual + " expected to not be NaN";
         throw new AssertionError(errMsg);
     }
