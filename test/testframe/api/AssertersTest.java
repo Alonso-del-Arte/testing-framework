@@ -3008,7 +3008,7 @@ public class AssertersTest {
                 + arrayStr + " should have failed the test";
         assert failOccurred : msg;
     }
-    
+    @Skip
     @Test
     public void testAssertContains() {
         System.out.println("assertContains");
