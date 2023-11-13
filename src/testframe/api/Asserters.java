@@ -845,7 +845,9 @@ public class Asserters {
     }
     
     /**
-     * Asserts that a 64-bit floating point number is NaN (not a number).
+     * Asserts that a 64-bit floating point number is NaN (not a number). Note 
+     * that if the number to be checked is indeed NaN, it will almost certainly 
+     * be the "canonical" NaN.
      * @param actual The number to assert is NaN. For example, positive 
      * infinity.
      * @param msg The message to put into the test failure explanation if the 
@@ -863,12 +865,24 @@ public class Asserters {
         //
     }
     
+    /**
+     * Asserts that a 64-bit floating point number is not NaN (not a number).
+     * @param actual The number to assert is not NaN. For example, 
+     * <code>Math.PI</code>.
+     * @param msg The message to be included in the test failure explanation if 
+     * the number is indeed NaN.
+     */
     public static void assertNotNaN(double actual, String msg) {
         if (Double.isInfinite(actual)) {
             return;
         }
-        String errMsg = msg + ". Number " + actual + " expected to not be NaN";
-        throw new AssertionError(errMsg);
+        long nanMask = Double.doubleToLongBits(Double.POSITIVE_INFINITY);
+        long bitPattern = Double.doubleToLongBits(actual);
+        if ((bitPattern & nanMask) == nanMask) {
+            String errMsg = msg + ". Number " + actual 
+                    + " expected to not be NaN";
+            throw new AssertionError(errMsg);
+        }
     }
     
     // TODO: Write tests for this
