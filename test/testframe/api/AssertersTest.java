@@ -3018,6 +3018,68 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertNotNaNButItIsDefaultMessage() {
+        double number = Double.NaN;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNaN(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Number " + number + " expected to not be NaN";
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + number 
+                + " is not NaN should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+//    @Test
+//    public void testAssertNotNaNNegativeInfinity() {
+//        double number = Double.NEGATIVE_INFINITY;
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertNotNaN(number);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//        }
+//        String msg = "Asserting that " + number 
+//                + " is not NaN should not have failed the test";
+//        assert !failOccurred : msg;
+//    }
+//    
+//    @Test
+//    public void testAssertNotNaNPositiveInfinity() {
+//        double number = Double.POSITIVE_INFINITY;
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertNotNaN(number);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//        }
+//        String msg = "Asserting that " + number 
+//                + " is not NaN should not have failed the test";
+//        assert !failOccurred : msg;
+//    }
+//    
+//    @Test
+//    public void testAssertNotNaN() {
+//        double number = RANDOM.nextDouble() + RANDOM.nextInt();
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertNotNaN(number);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//        }
+//        String msg = "Asserting that " + number 
+//                + " is not NaN should not have failed the test";
+//        assert !failOccurred : msg;
+//    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
