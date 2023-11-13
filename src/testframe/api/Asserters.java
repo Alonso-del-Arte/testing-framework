@@ -873,16 +873,8 @@ public class Asserters {
      * the number is indeed NaN.
      */
     public static void assertNotNaN(double actual, String msg) {
-        if (Double.isInfinite(actual)) {
-            return;
-        }
-        long nanMask = Double.doubleToLongBits(Double.POSITIVE_INFINITY);
-        long bitPattern = Double.doubleToLongBits(actual);
-        if ((bitPattern & nanMask) == nanMask) {
-            String errMsg = msg + ". Number " + actual 
-                    + " expected to not be NaN";
-            throw new AssertionError(errMsg);
-        }
+        String errMsg = msg + ". Number " + actual + " expected to not be NaN";
+        assert !Double.isNaN(actual) : errMsg;
     }
     
     // TODO: Write tests for this
