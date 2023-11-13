@@ -862,7 +862,7 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertNotNaN(double actual) {
-        //
+        throw new AssertionError("Number NaN expected to not be NaN");
     }
     
     /**
