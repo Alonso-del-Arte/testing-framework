@@ -3038,20 +3038,20 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-//    @Test
-//    public void testAssertNotNaNNegativeInfinity() {
-//        double number = Double.NEGATIVE_INFINITY;
-//        boolean failOccurred = false;
-//        try {
-//            Asserters.assertNotNaN(number);
-//        } catch (AssertionError ae) {
-//            failOccurred = true;
-//        }
-//        String msg = "Asserting that " + number 
-//                + " is not NaN should not have failed the test";
-//        assert !failOccurred : msg;
-//    }
-//    
+    @Test
+    public void testAssertNotNaNNegativeInfinityDefaultMessage() {
+        double number = Double.NEGATIVE_INFINITY;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertNotNaN(number);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + number 
+                + " is not NaN should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
 //    @Test
 //    public void testAssertNotNaNPositiveInfinity() {
 //        double number = Double.POSITIVE_INFINITY;
