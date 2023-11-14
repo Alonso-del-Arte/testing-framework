@@ -106,6 +106,8 @@ public class Asserters {
      * default message specifying the expected, actual and variance values will 
      * be given if the expected and actual values diverge by more than the 
      * default variance.
+     * <p>Note however that the test will fail if both of the floating point 
+     * values are NaN, regardless of their bit patterns.</p>
      * @param expected The expected value. For example, 3.14159.
      * @param actual The actual value. For example, 3.14161.
      */
@@ -118,6 +120,8 @@ public class Asserters {
      * equal, according to a specified variance. A default message specifying 
      * the expected, actual and variance values will be given if the expected 
      * and actual values diverge by more than the allowed variance.
+     * <p>Note however that the test will fail if both of the floating point 
+     * values are NaN, regardless of their bit patterns.</p>
      * @param expected The expected value. For example, 3.14159.
      * @param actual The actual value. For example, 3.14161.
      * @param delta The maximum allowed variance for <code>expected</code> and 
@@ -135,6 +139,8 @@ public class Asserters {
     /**
      * Asserts that two floating point numbers are equal, or very close to 
      * equal, according to the default variance, {@link #DEFAULT_TEST_DELTA}.
+     * <p>Note however that the test will fail if both of the floating point 
+     * values are NaN, regardless of their bit patterns.</p>
      * @param expected The expected value. For example, 3.14159.
      * @param actual The actual value. For example, 3.14161.
      * @param msg The message to put into the test failure explanation if the 
@@ -150,6 +156,8 @@ public class Asserters {
     /**
      * Asserts that two floating point numbers are equal, or very close to 
      * equal, according to a specified variance.
+     * <p>Note however that the test will fail if both of the floating point 
+     * values are NaN, regardless of their bit patterns.</p>
      * @param expected The expected value. For example, 3.14159.
      * @param actual The actual value. For example, 3.14161.
      * @param delta The maximum allowed variance for <code>expected</code> and 
@@ -834,9 +842,10 @@ public class Asserters {
     }
 
     /**
-     * Asserts that a 64-bit floating point number is NaN (not a number). The 
-     * test failure explanation will include NaN and the actual number if the 
-     * test fails.
+     * Asserts that a 64-bit floating point number is NaN (not a number). Don't 
+     * use {@link #assertEquals(double, double) assertEquals()} because NaN is 
+     * never equal to itself. The test failure explanation will include NaN and 
+     * the actual number if the test fails.
      * @param actual The number to assert is NaN. For example, negative 
      * infinity.
      */
@@ -847,7 +856,9 @@ public class Asserters {
     /**
      * Asserts that a 64-bit floating point number is NaN (not a number). Note 
      * that if the number to be checked is indeed NaN, it will almost certainly 
-     * be the "canonical" NaN.
+     * be the "canonical" NaN. Don't use {@link #assertEquals(double, double, 
+     * String) assertEquals()} because no NaN is ever equal to itself, not even 
+     * canonical NaN.
      * @param actual The number to assert is NaN. For example, positive 
      * infinity.
      * @param msg The message to put into the test failure explanation if the 
@@ -860,9 +871,15 @@ public class Asserters {
         assert Double.isNaN(actual) : errMsg;
     }
     
+    /**
+     * Asserts that a 64-bit floating point number is not NaN (not a number). 
+     * The test failure explanation will state that the number is expected to 
+     * not be NaN.
+     * @param actual The number to assert is not NaN. For example, 
+     * <code>Math.PI</code>.
+     */
     public static void assertNotNaN(double actual) {
-        if (!Double.isNaN(actual)) return;
-        throw new AssertionError("Number NaN expected to not be NaN");
+        assertNotNaN(actual, "");
     }
     
     /**
@@ -873,7 +890,9 @@ public class Asserters {
      * the number is indeed NaN.
      */
     public static void assertNotNaN(double actual, String msg) {
-        String errMsg = msg + ". Number " + actual + " expected to not be NaN";
+        String intermediate = msg + ". Number " + actual 
+                + " expected to not be NaN";
+        String errMsg = prepMsg(intermediate);
         assert !Double.isNaN(actual) : errMsg;
     }
     
