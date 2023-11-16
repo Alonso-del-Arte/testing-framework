@@ -9,7 +9,7 @@ public class PlainTextProcessor {
     
     // TODO: Write tests for this
     public static boolean equalsWithWhitespaceCollapsed(String s1, String s2) {
-        return false;
+        return true;
     }
 
 }
