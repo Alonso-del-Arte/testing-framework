@@ -34,12 +34,32 @@ public class PlainTextProcessorTest {
         assert PlainTextProcessor.equalsWithWhitespaceCollapsed(s1, s2) : msg;
     }
     
+    @Test
     public void testCollapseWhitespace() {
         System.out.println("collapseWhitespace");
-//        
-//        
-//        
-//        
+        StringBuilder toBeExpected = new StringBuilder();
+        StringBuilder toBeProcessed = new StringBuilder();
+        for (char c = 'a'; c <= 'z'; c++) {
+            toBeExpected.append(c);
+            toBeExpected.append(' ');
+            toBeProcessed.append(c);
+            toBeProcessed.append(randomWhitespace());
+        }
+        String s = toBeProcessed.toString();
+        String expected = toBeExpected.toString();
+        String actual = PlainTextProcessor.collapseWhitespace(s);
+        String msg = "Attempting to collapse whitespace in \"" + s + "\"";
+        assertEquals(expected, actual, msg);
     }
 
+    public void testDoesNotEqualWithWhitespaceCollapsed() {
+        String numStrA = Integer.toString(RANDOM.nextInt());
+        String numStrB = Integer.toString(RANDOM.nextInt());
+        String s1 = numStrA + ' ' + numStrB;
+        String s2 = numStrA + '_' + numStrB;
+        String msg = "\"" + s1 + "\" should not equal \"" + s2 
+                + "\" with whitespace collapsed";
+        assert !PlainTextProcessor.equalsWithWhitespaceCollapsed(s1, s2) : msg;
+    }
+    
 }
