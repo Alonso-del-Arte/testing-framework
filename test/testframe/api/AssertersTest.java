@@ -3170,6 +3170,29 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertContainsDefaultMessage() {
+        int size = RANDOM.nextInt(8) + 2;
+        LocalDate[] array = new LocalDate[size];
+        LocalDate date = LocalDate.now();
+        int powerOfNegativeOne = -1;
+        for (int i = 0; i < size; i++) {
+            powerOfNegativeOne *= -1;
+            date = date.plusDays(i * powerOfNegativeOne);
+            array[i] = date;
+        }
+        LocalDate present = array[RANDOM.nextInt(size)];
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContains(present, array);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + present.toString() + " is in " 
+                + Arrays.toString(array) + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+
+    @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
         String msg = "Division by zero should cause ArithmeticException";
