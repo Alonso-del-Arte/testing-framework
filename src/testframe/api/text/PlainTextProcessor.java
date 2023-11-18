@@ -17,20 +17,20 @@ public class PlainTextProcessor {
         int len = characters.length;
         char[] processed = new char[len];
         int curr = 0;
-        boolean prevCharNotSpaceOrTab = true;
+        boolean prevCharNotWhitespace = true;
         for (int i = 0; i < len; i++) {
             char currChar = characters[i];
-            boolean currCharNotSpaceOrTab = currChar != ' ' && currChar != '\t';
-            if (currCharNotSpaceOrTab) {
+            boolean currCharNotWhitespace = !Character.isWhitespace(currChar);
+            if (currCharNotWhitespace) {
                 processed[curr] = characters[i];
                 curr++;
             } else {
-                if (prevCharNotSpaceOrTab) {
+                if (prevCharNotWhitespace) {
                     processed[curr] = ' ';
                     curr++;
                 }
             }
-            prevCharNotSpaceOrTab = currCharNotSpaceOrTab;
+            prevCharNotWhitespace = currCharNotWhitespace;
         }
         return new String(processed, 0, curr);
     }
