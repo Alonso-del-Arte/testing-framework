@@ -1048,7 +1048,9 @@ public class Asserters {
     }
     
     public static <E> void assertContains(E expected, E[] actual) {
-        // TODO: Write tests for this
+        String errMsg = "Expected element " + expected.toString() + " to be in " 
+                + Arrays.toString(actual);
+        throw new AssertionError(errMsg);
     }
     
     public static <E> void assertContains(E expected, E[] actual, String msg) {
