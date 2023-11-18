@@ -9,6 +9,12 @@ public class PlainTextProcessorTest {
     
     private static final Random RANDOM = new Random();
     
+    private static final char[] WHITESPACE_CHARS = {' ', '\t', '\n', '\u000B', 
+            '\f', '\r', '\u001C', '\u001D', '\u001E', '\u001F'};
+    
+    private static final int NUMBER_OF_WHITESPACE_CHARS 
+            = WHITESPACE_CHARS.length;
+    
     private static String randomSpacesAndTabs() {
         int len = RANDOM.nextInt(8) + 2;
         char[] array = new char[len];
@@ -22,7 +28,15 @@ public class PlainTextProcessorTest {
         return new String(array);
     }
     
-    // TODO: Write randomWhitespace() function
+    private static String randomWhitespace() {
+        int len = RANDOM.nextInt(4) + 1;
+        char[] array = new char[len];
+        for (int i = 0; i < len; i++) {
+            array[i] = WHITESPACE_CHARS[RANDOM
+                                        .nextInt(NUMBER_OF_WHITESPACE_CHARS)];
+        }
+        return new String(array);
+    }
     
     @Test
     public void testEqualsWithWhitespaceCollapsed() {
@@ -60,15 +74,16 @@ public class PlainTextProcessorTest {
         assertEquals(expected, actual, msg);
     }
 
+    @Test
     public void testCollapseWhitespace() {
         System.out.println("collapseWhitespace");
         StringBuilder toBeExpected = new StringBuilder();
         StringBuilder toBeProcessed = new StringBuilder();
-        for (char c = 'a'; c <= 'z'; c++) {
+        for (char c = '0'; c <= '9'; c++) {
             toBeExpected.append(c);
             toBeExpected.append(' ');
             toBeProcessed.append(c);
-            toBeProcessed.append(randomSpacesAndTabs());
+            toBeProcessed.append(randomWhitespace());
         }
         String s = toBeProcessed.toString();
         String expected = toBeExpected.toString();
