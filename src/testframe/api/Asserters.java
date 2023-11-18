@@ -1052,9 +1052,16 @@ public class Asserters {
     }
     
     public static <E> void assertContains(E expected, E[] actual, String msg) {
+        boolean found = false;
+        int index = 0;
+        int len = actual.length;
+        while (!found && index < len) {
+            found = expected.equals(actual[index]);
+            index++;
+        }
         String errMsg = msg + ". Expected element " + expected.toString() 
                 + " to be in " + Arrays.toString(actual);
-        throw new AssertionError(errMsg);
+        assert found : errMsg;
     }
     
     public static <E> void assertContains(E expected, List<E> actual) {
