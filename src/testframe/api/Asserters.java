@@ -1093,15 +1093,20 @@ public class Asserters {
     }
     
     /**
-     * 
-     * @param <E>
-     * @param expected
-     * @param actual
+     * Asserts that a list contains a specified element. The test failure 
+     * explanation will include the expected element and the elements contained 
+     * in the list if the test fails because of the assertion.
+     * @param <E> The type of elements in the list. For example, 
+     * <code>DayOfWeek</code>.
+     * @param expected The element expected to be in the list of type 
+     * <code>E</code>. For example, Wednesday.
+     * @param actual The list of type <code>E</code>. For example, the days 
+     * Monday, Tuesday, Wednesday, Thursday and Friday.
      */
     public static <E> void assertContains(E expected, List<E> actual) {
         String errMsg = "Expected element " + expected.toString() + " to be in " 
                 + actual.toString();
-        throw new AssertionError(errMsg);
+        assert actual.contains(expected) : errMsg;
     }
     
     /**
