@@ -1,11 +1,14 @@
 package testframe.api;
 
 import java.math.BigInteger;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -3223,6 +3226,26 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
 
+    @Test
+    public void testAssertListContains() {
+        DayOfWeek[] days = DayOfWeek.values();
+        List<DayOfWeek> list = Arrays.asList(days);
+        Locale locale = Locale.getDefault();
+        for (DayOfWeek day : days) {
+            boolean failOccurred = false;
+            try {
+                Asserters.assertContains(day, list, 
+                        EXAMPLE_ASSERTION_MESSAGE_PART);
+            } catch (AssertionError ae) {
+                failOccurred = true;
+            }
+            String msg = "Asserting that list of days contains " 
+                    + day.getDisplayName(TextStyle.FULL, locale) 
+                    + " should not have failed the test";
+            assert !failOccurred : msg;
+        }
+    }
+    
     @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
