@@ -1104,9 +1104,7 @@ public class Asserters {
      * Monday, Tuesday, Wednesday, Thursday and Friday.
      */
     public static <E> void assertContains(E expected, List<E> actual) {
-        String errMsg = "Expected element " + expected.toString() + " to be in " 
-                + actual.toString();
-        assert actual.contains(expected) : errMsg;
+        assertContains(expected, actual, "");
     }
     
     /**
@@ -1125,8 +1123,9 @@ public class Asserters {
      */
     public static <E> void assertContains(E expected, List<E> actual, 
             String msg) {
-        String errMsg = msg + ". Expected element " + expected.toString() 
+        String intermediate = msg + ". Expected element " + expected.toString() 
                 + " to be in " + actual.toString();
+        String errMsg = prepMsg(intermediate);
         assert actual.contains(expected) : errMsg;
     }
     
