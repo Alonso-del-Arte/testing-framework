@@ -3205,11 +3205,13 @@ public class AssertersTest {
                 + " from list of Unicode scripts");
         boolean failOccurred = false;
         try {
-            Asserters.assertContains(removed, list);
+            Asserters.assertContains(removed, list, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Expected element " + removed.toString() 
-                    + " to be in " + list.toString();
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Expected element " + removed.toString() + " to be in " 
+                    + list.toString();
             String actual = ae.getMessage();
             System.out.println("\"" + actual + "\"");
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
