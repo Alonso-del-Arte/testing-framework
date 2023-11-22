@@ -3274,6 +3274,25 @@ public class AssertersTest {
     }
 
     @Test
+    public void testAssertListContainsDefaultMessage() {
+        DayOfWeek[] days = DayOfWeek.values();
+        List<DayOfWeek> list = Arrays.asList(days);
+        Locale locale = Locale.getDefault();
+        for (DayOfWeek day : days) {
+            boolean failOccurred = false;
+            try {
+                Asserters.assertContains(day, list);
+            } catch (AssertionError ae) {
+                failOccurred = true;
+            }
+            String msg = "Asserting that list of days contains " 
+                    + day.getDisplayName(TextStyle.FULL, locale) 
+                    + " should not have failed the test";
+            assert !failOccurred : msg;
+        }
+    }
+    
+    @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
         String msg = "Division by zero should cause ArithmeticException";
