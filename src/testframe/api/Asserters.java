@@ -1047,10 +1047,23 @@ public class Asserters {
         // TODO: Write tests for this
     }
     
+    /**
+     * 
+     * @param <E>
+     * @param expected
+     * @param actual
+     */
     public static <E> void assertContains(E expected, E[] actual) {
         assertContains(expected, actual, "");
     }
     
+    /**
+     * Asserts that an array contains a specified element.
+     * @param <E> The type of elements in the array.
+     * @param expected
+     * @param actual
+     * @param msg
+     */
     public static <E> void assertContains(E expected, E[] actual, String msg) {
         boolean found = false;
         int index = 0;
@@ -1071,7 +1084,9 @@ public class Asserters {
     
     public static <E> void assertContains(E expected, List<E> actual, 
             String msg) {
-        // TODO: Write tests for this
+        String errMsg = msg + ". Expected element " + expected.toString() 
+                + " to be in " + actual.toString();
+        throw new AssertionError(errMsg);
     }
     
     public static <E> void assertContains(E expected, Set<E> actual) {
