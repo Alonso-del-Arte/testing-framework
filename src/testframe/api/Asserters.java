@@ -1075,6 +1075,8 @@ public class Asserters {
      * Monday, Tuesday, Wednesday, Thursday and Friday.
      * @param msg A message to append to the test failure explanation if the 
      * test fails because of the assertion.
+     * @throws NullPointerException If <code>expected</code> is null and 
+     * <code>actual</code> is not an empty array.
      */
     public static <E> void assertContains(E expected, E[] actual, String msg) {
         boolean found = false;
@@ -1097,7 +1099,9 @@ public class Asserters {
      * @param actual
      */
     public static <E> void assertContains(E expected, List<E> actual) {
-        // TODO: Write tests for this
+        String errMsg = "Expected element " + expected.toString() + " to be in " 
+                + actual.toString();
+        throw new AssertionError(errMsg);
     }
     
     /**
