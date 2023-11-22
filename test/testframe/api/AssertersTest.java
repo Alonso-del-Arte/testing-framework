@@ -3,7 +3,9 @@ package testframe.api;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -3190,6 +3192,33 @@ public class AssertersTest {
         String msg = "Asserting that " + present.toString() + " is in " 
                 + Arrays.toString(array) + " should not have failed the test";
         assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertListContainsButDoesNot() {
+        Character.UnicodeScript[] array = Character.UnicodeScript.values();
+        List<Character.UnicodeScript> intermediate = Arrays.asList(array);
+        List<Character.UnicodeScript> list = new ArrayList<>(intermediate); 
+        int removalIndex = RANDOM.nextInt(list.size());
+        Character.UnicodeScript removed = list.remove(removalIndex);
+        System.out.println("Successfully removed " + removed.toString() 
+                + " from list of Unicode scripts");
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContains(removed, list);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected element " + removed.toString() 
+                    + " to be in " + list.toString();
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + removed.toString() + " is in " 
+                + list.toString() + " should have failed the test";
+        assert failOccurred : msg;
     }
 
     @Test
