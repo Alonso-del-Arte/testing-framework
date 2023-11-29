@@ -3318,7 +3318,8 @@ public class AssertersTest {
                         EXAMPLE_ASSERTION_MESSAGE_PART);
             } catch (AssertionError ae) {
                 failOccurred = true;
-                String expected = "Expected element " + historical.toString() 
+                String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                        + ". Expected element " + historical.toString() 
                         + " to be in " + currencies.toString();
                 String actual = ae.getMessage();
                 System.out.println("\"" + actual + "\"");
