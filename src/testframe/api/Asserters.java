@@ -1135,7 +1135,9 @@ public class Asserters {
     
     public static <E> void assertContains(E expected, Set<E> actual, 
             String msg) {
-        // TODO: Write tests for this
+        String errMsg = msg + ". Expected element " + expected.toString() 
+                + " to be in " + actual.toString();
+        throw new AssertionError(errMsg);
     }
     
     public static <E> void assertContainsSame(List<E> expected, 
