@@ -7,9 +7,12 @@ import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Tests of the Asserters class. These are more elegant than the tests of 
@@ -3290,6 +3293,46 @@ public class AssertersTest {
                     + " should not have failed the test";
             assert !failOccurred : msg;
         }
+    }
+    
+    private static Set<Currency> pickOutHistoricals(Set<Currency> currencies) {
+        Set<Currency> historicals = new HashSet<Currency>();
+        for (Currency currency : currencies) {
+            String displayName = currency.getDisplayName();
+            if (displayName.contains("19") || displayName.contains("20")) {
+                historicals.add(currency);
+            }
+        }
+        return historicals;
+    }
+    
+    @Test
+    public void testAssertSetContainsButDoesNot() {
+        Set<Currency> currencies = Currency.getAvailableCurrencies();
+        Set<Currency> historicals = pickOutHistoricals(currencies);
+        currencies.removeAll(historicals);
+        for (Currency historical : historicals) {
+            boolean failOccurred = false;
+            try {
+                Asserters.assertContains(historical, currencies, 
+                        EXAMPLE_ASSERTION_MESSAGE_PART);
+            } catch (AssertionError ae) {
+                failOccurred = true;
+                String expected = "Expected element " + historical.toString() 
+                        + " to be in " + currencies.toString();
+                String actual = ae.getMessage();
+                System.out.println("\"" + actual + "\"");
+                String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                        + "\"";
+                assert expected.equals(actual) : msg;
+            }
+            String msg = "Asserting that set contains " 
+                    + historical.getDisplayName() + " (" 
+                    + historical.getCurrencyCode() 
+                    + ") after it was removed should've failed the test";
+            assert failOccurred : msg;
+        }
+        throw new AssertionError("RESUME WORK HERE");
     }
     
     @Test
