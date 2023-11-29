@@ -3333,7 +3333,6 @@ public class AssertersTest {
                     + ") after it was removed should've failed the test";
             assert failOccurred : msg;
         }
-        throw new AssertionError("RESUME WORK HERE");
     }
     
     @Test
