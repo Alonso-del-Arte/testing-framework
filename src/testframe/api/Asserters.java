@@ -1129,10 +1129,21 @@ public class Asserters {
         assert actual.contains(expected) : errMsg;
     }
     
+    /**
+     * Asserts that a set contains a specified element. The test failure 
+     * explanation will include the expected element and the elements contained 
+     * in the set if the test fails because of the assertion.
+     * @param <E> The type of elements in the set. For example, 
+     * <code>Month</code>.
+     * @param expected The element expected to be in the set of type 
+     * <code>E</code>. For example, November.
+     * @param actual The set of type <code>E</code>. For example, the months 
+     * February, April, June, September and November.
+     */
     public static <E> void assertContains(E expected, Set<E> actual) {
         String errMsg = "Expected element " + expected.toString() + " to be in " 
                 + actual.toString();
-        throw new AssertionError(errMsg);
+        assert actual.contains(expected) : errMsg;
     }
     
     /**
