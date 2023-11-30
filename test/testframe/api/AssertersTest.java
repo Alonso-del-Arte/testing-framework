@@ -1,5 +1,6 @@
 package testframe.api;
 
+import java.awt.Color;
 import java.math.BigInteger;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -3332,6 +3333,30 @@ public class AssertersTest {
                     + historical.getCurrencyCode() 
                     + ") after it was removed should've failed the test";
             assert failOccurred : msg;
+        }
+    }
+
+    @Test
+    public void testAssertSetContains() {
+        Set<Color> set = new HashSet<>();
+        Color prevColor = Color.BLACK;
+        Color nextColor = new Color(RANDOM.nextInt());
+        do {
+            set.add(nextColor);
+            prevColor = nextColor;
+            nextColor = nextColor.brighter();
+        } while (!prevColor.equals(nextColor));
+        for (Color color : set) {
+            boolean failOccurred = false;
+            try {
+                Asserters.assertContains(color, set, 
+                        EXAMPLE_ASSERTION_MESSAGE_PART);
+            } catch (AssertionError ae) {
+                failOccurred = true;
+            }
+            String msg = "Asserting that " + color.toString() + " is in " 
+                    + set.toString() + " should not have failed the test";
+            assert !failOccurred : msg;
         }
     }
     
