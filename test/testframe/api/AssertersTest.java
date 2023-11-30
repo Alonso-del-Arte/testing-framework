@@ -3388,6 +3388,29 @@ public class AssertersTest {
     }
 
     @Test
+    public void testAssertSetContainsDefaultMessage() {
+        Set<Color> set = new HashSet<>();
+        Color prevColor = Color.WHITE;
+        Color nextColor = new Color(RANDOM.nextInt());
+        do {
+            set.add(nextColor);
+            prevColor = nextColor;
+            nextColor = nextColor.darker();
+        } while (!prevColor.equals(nextColor));
+        for (Color color : set) {
+            boolean failOccurred = false;
+            try {
+                Asserters.assertContains(color, set);
+            } catch (AssertionError ae) {
+                failOccurred = true;
+            }
+            String msg = "Asserting that " + color.toString() + " is in " 
+                    + set.toString() + " should not have failed the test";
+            assert !failOccurred : msg;
+        }
+    }
+    
+    @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
         String msg = "Division by zero should cause ArithmeticException";
