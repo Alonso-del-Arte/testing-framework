@@ -13,3 +13,6 @@ Packages and Test Packages started).
 For instructions on how to use this testing framework, see 
 [How to Use This Framework](UserManual.md). For instructions on how to 
 contribute to this project, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Note that although we've upgraded to Java 21, the releases 0.9 and 1.0 will most 
+likely be for Java 8.
