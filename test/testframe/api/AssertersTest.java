@@ -3361,6 +3361,33 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertSetContainsButDoesNotDefaultMessage() {
+        Set<Currency> currencies = Currency.getAvailableCurrencies();
+        Set<Currency> historicals = pickOutHistoricals(currencies);
+        currencies.removeAll(historicals);
+        for (Currency historical : historicals) {
+            boolean failOccurred = false;
+            try {
+                Asserters.assertContains(historical, currencies);
+            } catch (AssertionError ae) {
+                failOccurred = true;
+                String expected = "Expected element " + historical.toString() 
+                        + " to be in " + currencies.toString();
+                String actual = ae.getMessage();
+                System.out.println("\"" + actual + "\"");
+                String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                        + "\"";
+                assert expected.equals(actual) : msg;
+            }
+            String msg = "Asserting that set contains " 
+                    + historical.getDisplayName() + " (" 
+                    + historical.getCurrencyCode() 
+                    + ") after it was removed should've failed the test";
+            assert failOccurred : msg;
+        }
+    }
+
+    @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
         String msg = "Division by zero should cause ArithmeticException";
