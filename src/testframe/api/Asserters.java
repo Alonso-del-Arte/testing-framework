@@ -1130,7 +1130,9 @@ public class Asserters {
     }
     
     public static <E> void assertContains(E expected, Set<E> actual) {
-        // TODO: Write tests for this
+        String errMsg = "Expected element " + expected.toString() + " to be in " 
+                + actual.toString();
+        throw new AssertionError(errMsg);
     }
     
     /**
