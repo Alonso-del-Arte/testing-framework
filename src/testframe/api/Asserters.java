@@ -1057,6 +1057,8 @@ public class Asserters {
      * <code>E</code>. For example, Wednesday.
      * @param actual The array of type <code>E</code>. For example, the days 
      * Monday, Tuesday, Wednesday, Thursday and Friday.
+     * @throws NullPointerException If <code>expected</code> is null and 
+     * <code>actual</code> is not an empty array.
      */
     public static <E> void assertContains(E expected, E[] actual) {
         assertContains(expected, actual, "");
@@ -1102,6 +1104,10 @@ public class Asserters {
      * <code>E</code>. For example, Wednesday.
      * @param actual The list of type <code>E</code>. For example, the days 
      * Monday, Tuesday, Wednesday, Thursday and Friday.
+     * @throws NullPointerException If <code>expected</code> is null, regardless 
+     * of whether or not <code>actual</code> is an empty list. Depending on user 
+     * feedback, this behavior might be changed so that a null 
+     * <code>expected</code> does not cause this exception.
      */
     public static <E> void assertContains(E expected, List<E> actual) {
         assertContains(expected, actual, "");
@@ -1120,6 +1126,10 @@ public class Asserters {
      * Monday, Tuesday, Wednesday, Thursday and Friday.
      * @param msg A message to append to the test failure explanation if the 
      * test fails because of the assertion.
+     * @throws NullPointerException If <code>expected</code> is null, regardless 
+     * of whether or not <code>actual</code> is an empty list. Depending on user 
+     * feedback, this behavior might be changed so that a null 
+     * <code>expected</code> does not cause this exception.
      */
     public static <E> void assertContains(E expected, List<E> actual, 
             String msg) {
@@ -1139,11 +1149,13 @@ public class Asserters {
      * <code>E</code>. For example, November.
      * @param actual The set of type <code>E</code>. For example, the months 
      * February, April, June, September and November.
+     * @throws NullPointerException If <code>expected</code> is null, regardless 
+     * of whether or not <code>actual</code> is an empty set. Depending on user 
+     * feedback, this behavior might be changed so that a null 
+     * <code>expected</code> does not cause this exception.
      */
     public static <E> void assertContains(E expected, Set<E> actual) {
-        String errMsg = "Expected element " + expected.toString() + " to be in " 
-                + actual.toString();
-        assert actual.contains(expected) : errMsg;
+        assertContains(expected, actual, "");
     }
     
     /**
@@ -1159,11 +1171,16 @@ public class Asserters {
      * January, March, May, July, August, October and December.
      * @param msg A message to append to the test failure explanation if the 
      * test fails because of the assertion.
+     * @throws NullPointerException If <code>expected</code> is null, regardless 
+     * of whether or not <code>actual</code> is an empty set. Depending on user 
+     * feedback, this behavior might be changed so that a null 
+     * <code>expected</code> does not cause this exception.
      */
     public static <E> void assertContains(E expected, Set<E> actual, 
             String msg) {
-        String errMsg = msg + ". Expected element " + expected.toString() 
+        String intermediate = msg + ". Expected element " + expected.toString() 
                 + " to be in " + actual.toString();
+        String errMsg = prepMsg(intermediate);
         assert actual.contains(expected) : errMsg;
     }
     
