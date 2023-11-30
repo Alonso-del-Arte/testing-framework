@@ -1184,6 +1184,15 @@ public class Asserters {
         assert actual.contains(expected) : errMsg;
     }
     
+    public static <E> void assertContainsSame(E[] expected, E[] actual) {
+        // TODO: Write tests for this
+    }
+    
+    public static <E> void assertContainsSame(E[] expected, E[] actual, 
+            String msg) {
+        // TODO: Write tests for this
+    }
+    
     public static <E> void assertContainsSame(List<E> expected, 
             List<E> actual) {
         // TODO: Write tests for this
@@ -1191,15 +1200,6 @@ public class Asserters {
     
     public static <E> void assertContainsSame(List<E> expected, 
             List<E> actual, String msg) {
-        // TODO: Write tests for this
-    }
-    
-    public static <E> void assertContainsSame(Set<E> expected, Set<E> actual) {
-        // TODO: Write tests for this
-    }
-    
-    public static <E> void assertContainsSame(Set<E> expected, Set<E> actual, 
-            String msg) {
         // TODO: Write tests for this
     }
     
