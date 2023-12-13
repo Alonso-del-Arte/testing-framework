@@ -1323,9 +1323,10 @@ public class Asserters {
         }
     }
     
-    public static void assertTimeout(Procedure lambda, Duration allottedTime, 
-            String msg) {
-        // TODO: Write tests for this
-    }
+    // We've decided assertTimeout()  won't be in the 0.9 release
+//    public static void assertTimeout(Procedure lambda, Duration allottedTime, 
+//            String msg) {
+        // TODO: Write tests for assertTimeout()
+//    }
 
 }
