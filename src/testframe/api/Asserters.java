@@ -299,7 +299,7 @@ public class Asserters {
         String errMsg = msg + ". Arrays differ in length: expected has " 
                 + expected.length + " elements but actual has " + actual.length 
                 + " elements";
-        throw new AssertionError(errMsg);
+        assert expected.length == actual.length : errMsg;
     }
     
     // No assertArrayEquals will be provided. Use assertEquals.
