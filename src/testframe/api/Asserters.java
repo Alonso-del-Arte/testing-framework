@@ -290,8 +290,13 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertEquals(Object[] expected, Object[] actual) {
-         String msg = "Sorry, default message not implemented yet";
-         assertEquals(expected, actual, msg);
+        int expLen = expected.length;
+        int actLen = actual.length;
+        String diffLenMsg = "Arrays differ in length: expected has " + expLen 
+                + " elements but actual has " + actLen + " elements";
+        throw new AssertionError(diffLenMsg);
+//        String msg = "Sorry, default message not implemented yet";
+//        assertEquals(expected, actual, msg);
     }
     
     /**
