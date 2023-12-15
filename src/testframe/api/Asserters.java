@@ -296,10 +296,22 @@ public class Asserters {
     
     public static void assertEquals(Object[] expected, Object[] actual, 
             String msg) {
-        String errMsg = msg + ". Arrays differ in length: expected has " 
+        int len = expected.length;
+        if (len != actual.length) {
+            String errMsg = msg + ". Arrays differ in length: expected has " 
                 + expected.length + " elements but actual has " + actual.length 
                 + " elements";
-        assert expected.length == actual.length : errMsg;
+            assert expected.length == actual.length : errMsg;
+        }
+        int index = 0;
+        boolean equalSoFar = true;
+        while (index < len && equalSoFar) {
+            equalSoFar = expected[index].equals(actual[index]);
+            index++;
+        }
+        String errMsg = msg + ". Expected " + Arrays.toString(expected) 
+                + " but was " + Arrays.toString(actual);
+        assert equalSoFar : errMsg;
     }
     
     // No assertArrayEquals will be provided. Use assertEquals.
