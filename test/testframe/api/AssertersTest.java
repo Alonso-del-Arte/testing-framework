@@ -1,6 +1,7 @@
 package testframe.api;
 
 import java.awt.Color;
+import java.awt.font.NumericShaper;
 import java.math.BigInteger;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -617,7 +618,7 @@ public class AssertersTest {
             Asserters.assertEquals(numbersA, numbersB);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Arrays first differ at index " + changeIndex  
+            String expected = "Arrays first differ at index " + changeIndex 
                     + ", expected " + origNum + " but was " + diffNum; 
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
@@ -687,6 +688,40 @@ public class AssertersTest {
                 + " should have failed the test";
         assert failOccurred : msg;
     }
+    
+    @Test
+    public void testAssertEqualsObjectArrayButLengthsDiffer() {
+        int lengthA = RANDOM.nextInt(16) + 4;
+        int lengthB = lengthA + 1;
+        LocalDate[] datesA = new LocalDate[lengthA];
+        LocalDate[] datesB = new LocalDate[lengthB];
+        LocalDate today = LocalDate.now();
+        for (int i = 0; i < lengthA; i++) {
+            LocalDate date = today.plusDays(i);
+            datesA[i] = date;
+            datesB[i] = date;
+        }
+        datesB[lengthA] = today.plusDays(lengthA);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(datesA, datesB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Arrays differ in length: expected has " + datesA.length 
+                    + " elements but actual has " + datesB.length + " elements";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(datesA) + " is equal to " 
+                + Arrays.toString(datesB) + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    // TODO: Test in which two Object[] same length but all nulls
   
     // TODO: Write more tests for assertEquals() for arrays
 
@@ -3408,6 +3443,31 @@ public class AssertersTest {
                     + set.toString() + " should not have failed the test";
             assert !failOccurred : msg;
         }
+    }
+    
+    // TODO: Write tests for assertContainsSame(arrays)
+    
+//    @Test
+    public void testAssertListContainsSameButDoesNot() {
+        List<NumericShaper.Range> listA 
+                = Arrays.asList(NumericShaper.Range.values());
+        List<NumericShaper.Range> listB = new ArrayList<>(listA);
+        listB.remove(0);
+        String listAStr = listA.toString();
+        String listBStr = listB.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(listA, listB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + listAStr;
+        }
+        String msg = "Asserting that " + listAStr 
+                + " contains the same elements as " + listBStr 
+                + " should have failed the test";
+        assert failOccurred : msg;
     }
     
     @Test
