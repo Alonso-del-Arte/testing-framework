@@ -296,7 +296,10 @@ public class Asserters {
     
     public static void assertEquals(Object[] expected, Object[] actual, 
             String msg) {
-        // TODO: Write tests for this
+        String errMsg = msg + ". Arrays differ in length: expected has " 
+                + expected.length + " elements but actual has " + actual.length 
+                + " elements";
+        throw new AssertionError(errMsg);
     }
     
     // No assertArrayEquals will be provided. Use assertEquals.
