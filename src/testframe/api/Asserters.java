@@ -294,18 +294,26 @@ public class Asserters {
          assertEquals(expected, actual, msg);
     }
     
+    /**
+     * Asserts that two arrays of <code>Object</code> instances are equal. The 
+     * elements are the same and in the same order. 
+     * @param expected The expected array. For example, the colors cyan, 
+     * magenta, yellow and black.
+     * @param actual The actual array. For example, the colors cyan, black, 
+     * yellow and magenta.
+     * @param msg A message to include in the test failure explanation if the 
+     * test fails.
+     */
     public static void assertEquals(Object[] expected, Object[] actual, 
             String msg) {
-        int len = expected.length;
-        if (len != actual.length) {
-            String errMsg = msg + ". Arrays differ in length: expected has " 
-                + expected.length + " elements but actual has " + actual.length 
-                + " elements";
-            assert expected.length == actual.length : errMsg;
-        }
+        int expLen = expected.length;
+        int actLen = actual.length;
+        String diffLenMsg = msg + ". Arrays differ in length: expected has " 
+                + expLen + " elements but actual has " + actLen + " elements";
+        assert expLen == actLen : diffLenMsg;
         int index = 0;
         boolean equalSoFar = true;
-        while (index < len && equalSoFar) {
+        while (index < expLen && equalSoFar) {
             equalSoFar = expected[index].equals(actual[index]);
             index++;
         }
