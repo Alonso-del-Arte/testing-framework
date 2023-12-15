@@ -774,6 +774,37 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertEqualsObjectArrayButLengthsDifferDefaultMessage() {
+        int lengthA = RANDOM.nextInt(16) + 4;
+        int lengthB = lengthA + 1;
+        LocalDate[] datesA = new LocalDate[lengthA];
+        LocalDate[] datesB = new LocalDate[lengthB];
+        LocalDate today = LocalDate.now();
+        for (int i = 0; i < lengthA; i++) {
+            LocalDate date = today.plusDays(i);
+            datesA[i] = date;
+            datesB[i] = date;
+        }
+        datesB[lengthA] = today.plusDays(lengthA);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(datesA, datesB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Arrays differ in length: expected has " 
+                    + datesA.length + " elements but actual has " 
+                    + datesB.length + " elements";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(datesA) + " is equal to " 
+                + Arrays.toString(datesB) + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Test in which two Object[] same length but all nulls
   
     // TODO: Write more tests for assertEquals() for arrays
