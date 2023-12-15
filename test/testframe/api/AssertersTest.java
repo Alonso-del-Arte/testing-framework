@@ -744,6 +744,36 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertEqualsObjectArraysSameLengthDiffOrder() {
+        int len = RANDOM.nextInt(8) + 2;
+        Color[] arrayA = new Color[len];
+        Color[] arrayB = new Color[len];
+        for (int i = 0; i < len; i++) {
+            Color color = new Color(RANDOM.nextInt());
+            arrayA[i] = color;
+            arrayB[len - i - 1] = color;
+        }
+        String arrayAStr = Arrays.toString(arrayA);
+        String arrayBStr = Arrays.toString(arrayB);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(arrayA, arrayB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + arrayAStr + " but was " + arrayBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + arrayAStr + " is equal to " + arrayBStr 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Test in which two Object[] same length but all nulls
   
     // TODO: Write more tests for assertEquals() for arrays
