@@ -721,6 +721,29 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertEqualsObjectArray() {
+        int len = RANDOM.nextInt(8) + 2;
+        BigInteger[] someArray = new BigInteger[len];
+        BigInteger[] sameArray = new BigInteger[len];
+        for (int i = 0; i < len; i++) {
+            BigInteger number = new BigInteger(64 + i, RANDOM);
+            someArray[i] = number;
+            sameArray[i] = number;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someArray, sameArray, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + Arrays.toString(someArray) 
+                + " is equal to " + Arrays.toString(sameArray) 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Test in which two Object[] same length but all nulls
   
     // TODO: Write more tests for assertEquals() for arrays
