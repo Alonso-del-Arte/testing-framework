@@ -294,7 +294,7 @@ public class Asserters {
         int actLen = actual.length;
         String diffLenMsg = "Arrays differ in length: expected has " + expLen 
                 + " elements but actual has " + actLen + " elements";
-        throw new AssertionError(diffLenMsg);
+        assert expLen == actLen : diffLenMsg;
 //        String msg = "Sorry, default message not implemented yet";
 //        assertEquals(expected, actual, msg);
     }
