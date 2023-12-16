@@ -844,7 +844,7 @@ public class AssertersTest {
             Asserters.assertEquals(arrayA, arrayB);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+            String expected = "Expected " 
                     + arrayAStr + " but was " + arrayBStr;
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
