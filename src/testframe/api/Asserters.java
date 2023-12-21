@@ -288,15 +288,21 @@ public class Asserters {
         // TODO: Write tests for this
     }
     
-    // TODO: Write tests for this
     public static void assertEquals(Object[] expected, Object[] actual) {
-        int expLen = expected.length;
-        int actLen = actual.length;
-        String diffLenMsg = "Arrays differ in length: expected has " + expLen 
-                + " elements but actual has " + actLen + " elements";
-        assert expLen == actLen : diffLenMsg;
-//        String msg = "Sorry, default message not implemented yet";
-//        assertEquals(expected, actual, msg);
+//        int expLen = expected.length;
+//        int actLen = actual.length;
+//        String diffLenMsg = "Arrays differ in length: expected has " + expLen 
+//                + " elements but actual has " + actLen + " elements";
+//        assert expLen == actLen : diffLenMsg;
+//        int index = 0;
+//        boolean equalSoFar = true;
+//        while (index < expLen && equalSoFar) {
+//            equalSoFar = expected[index].equals(actual[index]);
+//            index++;
+//        }
+//        String errMsg = "Expected " + Arrays.toString(expected) 
+//                + " but was " + Arrays.toString(actual);
+//        assert equalSoFar : errMsg;
     }
     
     /**
