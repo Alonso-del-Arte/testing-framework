@@ -290,27 +290,16 @@ public class Asserters {
     
     /**
      * Asserts that two arrays of <code>Object</code> instances are equal. The 
-     * elements are the same and in the same order.
+     * elements are the same and in the same order. A test failure explanation 
+     * will be given if the test fails for the arrays being of different lengths 
+     * or for having a different element.
      * @param expected The expected array. For example, the colors cyan, 
      * magenta, yellow and black.
      * @param actual The actual array. For example, the colors cyan, black, 
      * yellow and magenta.
      */
     public static void assertEquals(Object[] expected, Object[] actual) {
-        int expLen = expected.length;
-        int actLen = actual.length;
-        String diffLenMsg = "Arrays differ in length: expected has " + expLen 
-                + " elements but actual has " + actLen + " elements";
-        assert expLen == actLen : diffLenMsg;
-        int index = 0;
-        boolean equalSoFar = true;
-        while (index < expLen && equalSoFar) {
-            equalSoFar = expected[index].equals(actual[index]);
-            index++;
-        }
-        String errMsg = "Expected " + Arrays.toString(expected) 
-                + " but was " + Arrays.toString(actual);
-        assert equalSoFar : errMsg;
+        assertEquals(expected, actual, "");
     }
     
     /**
@@ -327,8 +316,10 @@ public class Asserters {
             String msg) {
         int expLen = expected.length;
         int actLen = actual.length;
-        String diffLenMsg = msg + ". Arrays differ in length: expected has " 
-                + expLen + " elements but actual has " + actLen + " elements";
+        String diffLenMsgIntermediate = msg 
+                + ". Arrays differ in length: expected has " + expLen 
+                + " elements but actual has " + actLen + " elements";
+        String diffLenMsg = prepMsg(diffLenMsgIntermediate);
         assert expLen == actLen : diffLenMsg;
         int index = 0;
         boolean equalSoFar = true;
@@ -336,8 +327,9 @@ public class Asserters {
             equalSoFar = expected[index].equals(actual[index]);
             index++;
         }
-        String errMsg = msg + ". Expected " + Arrays.toString(expected) 
+        String intermediate = msg + ". Expected " + Arrays.toString(expected) 
                 + " but was " + Arrays.toString(actual);
+        String errMsg = prepMsg(intermediate);
         assert equalSoFar : errMsg;
     }
     
