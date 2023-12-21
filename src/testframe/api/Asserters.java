@@ -969,29 +969,6 @@ public class Asserters {
     }
     
     // TODO: Write tests for this
-    public static <E> void assertSameElements(Collection<E> expected, 
-            Collection<E> actual) {
-        assertSameElements(expected, actual, 
-                "Sorry, default message not implemented yet");
-    }
-    
-    public static <E> void assertSameElements(Collection<E> expected, 
-            Collection<E> actual, String msg) {
-        // TODO: Write tests for this
-    }
-    
-    // TODO: Write tests for this
-    public static <E> void assertSameOrder(List<E> expected, List<E> actual) {
-        assertSameElements(expected, actual, 
-                "Sorry, default message not implemented yet");
-    }
-    
-    public static <E> void assertSameOrder(List<E> expected, List<E> actual, 
-            String msg) {
-        // TODO: Write tests for this
-    }
-    
-    // TODO: Write tests for this
     public static void assertDifferent(int some, int other) {
          String msg = "Sorry, default message not implemented yet";
          assertDifferent(some, other, msg);
