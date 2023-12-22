@@ -968,10 +968,17 @@ public class Asserters {
         //
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that an integer value is different from some other integer value. 
+     * The test failure explanation will include the number that was supposed to 
+     * be different if the assertion fails.
+     * @param some The integer the other integer should not be. For example, 
+     * 5777096943112551843.
+     * @param other The other integer. For example, &minus;6892550187484447930.
+     */
     public static void assertDifferent(long some, long other) {
         String errMsg = "Expected " + some + " to be different from " + other;
-        throw new AssertionError(errMsg);
+        assert some != other : errMsg;
     }
     
     /**
