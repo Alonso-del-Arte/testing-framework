@@ -969,7 +969,7 @@ public class Asserters {
     }
     
     // TODO: Write tests for this
-    public static void assertDifferent(int some, int other) {
+    public static void assertDifferent(long some, long other) {
          String msg = "Sorry, default message not implemented yet";
          assertDifferent(some, other, msg);
     }
