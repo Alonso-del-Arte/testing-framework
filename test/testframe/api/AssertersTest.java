@@ -3317,6 +3317,21 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentDefaultMessage() {
+        long some = RANDOM.nextLong() | 1L;
+        long other = some << 1;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + some + " is different from " + other 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
