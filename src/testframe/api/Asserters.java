@@ -977,8 +977,7 @@ public class Asserters {
      * @param other The other integer. For example, &minus;6892550187484447930.
      */
     public static void assertDifferent(long some, long other) {
-        String errMsg = "Expected " + some + " to be different from " + other;
-        assert some != other : errMsg;
+        assertDifferent(some, other, "");
     }
     
     /**
@@ -991,8 +990,9 @@ public class Asserters {
      * different.
      */
     public static void assertDifferent(long some, long other, String msg) {
-        String errMsg = msg + ". Expected " + some + " to be different from " 
-                + other;
+        String intermediate = msg + ". Expected " + some 
+                + " to be different from " + other;
+        String errMsg = prepMsg(intermediate);
         assert some != other : errMsg;
     }
     
