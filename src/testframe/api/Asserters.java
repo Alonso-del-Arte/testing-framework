@@ -970,8 +970,8 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertDifferent(long some, long other) {
-         String msg = "Sorry, default message not implemented yet";
-         assertDifferent(some, other, msg);
+        String errMsg = "Expected " + some + " to be different from " + other;
+        throw new AssertionError(errMsg);
     }
     
     /**
