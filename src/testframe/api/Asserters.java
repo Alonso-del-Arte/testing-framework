@@ -974,7 +974,7 @@ public class Asserters {
          assertDifferent(some, other, msg);
     }
     
-    public static void assertDifferent(int some, int other, String msg) {
+    public static void assertDifferent(long some, long other, String msg) {
         // TODO: Write tests for this
     }
     
