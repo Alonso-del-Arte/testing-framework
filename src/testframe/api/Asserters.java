@@ -975,7 +975,9 @@ public class Asserters {
     }
     
     public static void assertDifferent(long some, long other, String msg) {
-        // TODO: Write tests for this
+        String errMsg = msg + ". Expected " + some + " to be different from " 
+                + other;
+        throw new AssertionError(errMsg);
     }
     
     // TODO: Write tests for this
