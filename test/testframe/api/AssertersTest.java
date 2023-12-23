@@ -37,6 +37,12 @@ public class AssertersTest {
     
     private static final double TWICE_LOCAL_DELTA = LOCAL_DELTA * 2;
     
+    private static final double HALF_DEFAULT_DELTA 
+            = Asserters.DEFAULT_TEST_DELTA / 2;
+    
+    private static final double TWICE_DEFAULT_DELTA 
+            = Asserters.DEFAULT_TEST_DELTA * 2;
+    
     private static final Random RANDOM = new Random();
     
     private static final String EXAMPLE_ASSERTION_MESSAGE_PART 
@@ -3371,6 +3377,31 @@ public class AssertersTest {
                 + " by more than " + LOCAL_DELTA 
                 + " should not have failed the test";
         assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertDifferentDoubleButIsWithinDefaultVariance() {
+        double some = RANDOM.nextDouble();
+        double other = some + HALF_DEFAULT_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + some + " to differ from " + other + " by at least " 
+                    + Asserters.DEFAULT_TEST_DELTA + ", values differ by " 
+                    + HALF_DEFAULT_DELTA;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + some + " differs from " + other 
+                + " by more than " + Asserters.DEFAULT_TEST_DELTA 
+                + " should have failed the test";
+        assert failOccurred : msg;
     }
     
     // TODO: Write tests for assertInRange()
