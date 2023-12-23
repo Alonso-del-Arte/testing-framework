@@ -1017,7 +1017,10 @@ public class Asserters {
     
     public static void assertDifferent(double some, double other, 
             double delta, String msg) {
-        // TODO: Write tests for this
+        double difference = Math.abs(some - other);
+        String errMsg = msg + ". Expected " + some + " to differ from " + other 
+                + " by at least " + delta + ", values differ by " + difference;
+        throw new AssertionError(errMsg);
     }
     
     // TODO: Write tests for this
