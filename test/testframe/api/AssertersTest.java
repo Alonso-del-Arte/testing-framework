@@ -3443,6 +3443,22 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentDoubleDefaultMessage() {
+        double some = RANDOM.nextDouble();
+        double other = some + TWICE_LOCAL_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other, LOCAL_DELTA);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + some + " differs from " + other 
+                + " by more than " + LOCAL_DELTA 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
