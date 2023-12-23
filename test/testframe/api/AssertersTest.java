@@ -31,7 +31,7 @@ public class AssertersTest {
      */
     private static final long NaN_MASK = -2251799813685248L;
     
-    private static final double LOCAL_DELTA = 0.0001;
+    private static final double LOCAL_DELTA = 1.0 / 32;
     
     private static final double HALF_LOCAL_DELTA = LOCAL_DELTA / 2;
     
@@ -3330,6 +3330,30 @@ public class AssertersTest {
         String msg = "Asserting that " + some + " is different from " + other 
                 + " should not have failed the test";
         assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertDifferentDoubleButIsWithinVariance() {
+        double some = RANDOM.nextDouble();
+        double other = some + HALF_LOCAL_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other, LOCAL_DELTA, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + some + " to differ from " + other + " by at least " 
+                    + LOCAL_DELTA + ", values differ by " + HALF_LOCAL_DELTA;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + some + " differs from " + other 
+                + " by more than " + LOCAL_DELTA 
+                + " should have failed the test";
+        assert failOccurred : msg;
     }
     
     // TODO: Write tests for assertInRange()
