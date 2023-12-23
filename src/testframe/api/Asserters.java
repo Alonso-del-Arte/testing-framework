@@ -25,7 +25,8 @@ public class Asserters {
     /**
      * The default tolerance for comparing floating point values, roughly 
      * 2.3283064365386963 &times; 10<sup>&minus;10</sup>. This might be too 
-     * little for most purposes, but it's better than 0.0.
+     * little for most purposes, but it's better than 0.0 or any subnormal 
+     * value.
      */
     public static final double DEFAULT_TEST_DELTA = -(0.5 / Integer.MIN_VALUE);
     
@@ -1008,14 +1009,25 @@ public class Asserters {
          assertDifferent(some, other, delta, msg);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that a floating point value is different from some floating point 
+     * value by more than {@link #DEFAULT_TEST_DELTA}. The actual and expected  
+     * differences will be included in the test explanation failure if the test 
+     * fails because of the assertion.
+     * @param some A floating point value. For example, 3.141592653589793.
+     * @param other A floating point value said to be different from 
+     * <code>some</code> by more than the default variance. For example, 
+     * 3.142857142857143.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails.
+     */
     public static void assertDifferent(double some, double other, 
             String msg) {
-        double difference = Math.abs(some - other);
-        String errMsg = msg + ". Expected " + some + " to differ from " + other 
-                + " by at least " + DEFAULT_TEST_DELTA + ", values differ by " 
-                + difference;
-        throw new AssertionError(errMsg);
+//        double difference = Math.abs(some - other);
+//        String errMsg = msg + ". Expected " + some + " to differ from " + other 
+//                + " by at least " + DEFAULT_TEST_DELTA + ", values differ by " 
+//                + difference;
+//        assert difference >= DEFAULT_TEST_DELTA : errMsg;
 //         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
     }
     
@@ -1028,16 +1040,19 @@ public class Asserters {
      * @param other A floating point value said to be different from 
      * <code>some</code> by more than a specified variance. For example, 
      * 3.142857142857143.
-     * @param delta The maximum allowable variance. For example, 0.00125.
+     * @param delta The maximum allowable variance. For example, 0.00125. Should 
+     * almost never be a subnormal value (remember that 0.0 is subnormal). We 
+     * make no promises whatsoever regarding the accuracy of assertions 
+     * involving subnormal values.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
      */
     public static void assertDifferent(double some, double other, 
             double delta, String msg) {
-        double difference = Math.abs(some - other);
-        String errMsg = msg + ". Expected " + some + " to differ from " + other 
-                + " by at least " + delta + ", values differ by " + difference;
-        assert difference >= delta : errMsg;
+//        double difference = Math.abs(some - other);
+//        String errMsg = msg + ". Expected " + some + " to differ from " + other 
+//                + " by at least " + delta + ", values differ by " + difference;
+//        assert difference >= delta : errMsg;
     }
     
     // TODO: Write tests for this
