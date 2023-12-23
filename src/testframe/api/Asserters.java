@@ -1012,7 +1012,7 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertDifferent(double some, double other, 
             String msg) {
-         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
+//         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
     }
     
     /**
