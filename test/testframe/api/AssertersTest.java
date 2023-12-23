@@ -3421,6 +3421,29 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentDoubleButIsWithinVarianceDefaultMessage() {
+        double some = RANDOM.nextDouble();
+        double other = some + HALF_LOCAL_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other, LOCAL_DELTA);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + some + " to differ from " + other + " by at least " 
+                    + LOCAL_DELTA + ", values differ by ";
+            String actual = ae.getMessage();
+            String msg = "Expected message to start with \"" + expected 
+                    + "\", was \"" + actual + "\"";
+            assert actual.startsWith(expected) : msg;
+        }
+        String msg = "Asserting that " + some + " differs from " + other 
+                + " by more than " + LOCAL_DELTA 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
