@@ -1008,8 +1008,7 @@ public class Asserters {
         double difference = Math.abs(some - other);
         String errMsg = "Expected " + some + " to differ from " + other 
                 + " by at least " + delta + ", values differ by " + difference;
-        throw new AssertionError(errMsg);
-//        assert difference >= DEFAULT_TEST_DELTA : errMsg;
+        assert difference >= delta : errMsg;
 //         assertDifferent(some, other, delta, msg);
     }
     
