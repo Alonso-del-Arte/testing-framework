@@ -996,14 +996,22 @@ public class Asserters {
         assert some != other : errMsg;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that a floating point value is different from some floating point 
+     * value by more than {@link #DEFAULT_TEST_DELTA}. The actual and expected  
+     * differences will be included in the test explanation failure if the test 
+     * fails because of the assertion.
+     * @param some A floating point value. For example, 3.141592653589793.
+     * @param other A floating point value said to be different from 
+     * <code>some</code> by more than the default variance. For example, 
+     * 3.142857142857143.
+     */
     public static void assertDifferent(double some, double other) {
         double difference = Math.abs(some - other);
         String errMsg = "Expected " + some + " to differ from " + other 
                 + " by at least " + DEFAULT_TEST_DELTA + ", values differ by " 
                 + difference;
-        throw new AssertionError(errMsg);
-//        assert difference >= DEFAULT_TEST_DELTA : errMsg;
+        assert difference >= DEFAULT_TEST_DELTA : errMsg;
 //         assertDifferent(some, other, delta, msg);
     }
     
