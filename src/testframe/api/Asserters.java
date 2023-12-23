@@ -24,11 +24,10 @@ public class Asserters {
     
     /**
      * The default tolerance for comparing floating point values, roughly 
-     * 2.225073858507202 &times; 10<sup>&minus;308</sup>. This might be too 
+     * 2.3283064365386963 &times; 10<sup>&minus;10</sup>. This might be too 
      * little for most purposes, but it's better than 0.0.
      */
-    public static final double DEFAULT_TEST_DELTA 
-            = Double.longBitsToDouble(4503599627370497L);
+    public static final double DEFAULT_TEST_DELTA = -(0.5 / Integer.MIN_VALUE);
     
     private static String prepMsg(String intermediate) {
         if (intermediate.startsWith(". ")) {
@@ -1012,6 +1011,11 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertDifferent(double some, double other, 
             String msg) {
+//        double difference = Math.abs(some - other);
+//        String errMsg = msg + ". Expected " + some + " to differ from " + other 
+//                + " by at least " + DEFAULT_TEST_DELTA + ", values differ by " 
+//                + difference;
+//        throw new AssertionError(errMsg);
 //         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
     }
     
