@@ -3430,9 +3430,8 @@ public class AssertersTest {
             Asserters.assertDifferent(some, other, LOCAL_DELTA);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
-                    + some + " to differ from " + other + " by at least " 
-                    + LOCAL_DELTA + ", values differ by ";
+            String expected = "Expected " + some + " to differ from " + other 
+                    + " by at least " + LOCAL_DELTA + ", values differ by ";
             String actual = ae.getMessage();
             String msg = "Expected message to start with \"" + expected 
                     + "\", was \"" + actual + "\"";
