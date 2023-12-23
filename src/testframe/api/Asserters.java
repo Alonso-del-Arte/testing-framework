@@ -1007,12 +1007,7 @@ public class Asserters {
      * 3.142857142857143.
      */
     public static void assertDifferent(double some, double other) {
-        double difference = Math.abs(some - other);
-        String errMsg = "Expected " + some + " to differ from " + other 
-                + " by at least " + DEFAULT_TEST_DELTA + ", values differ by " 
-                + difference;
-        assert difference >= DEFAULT_TEST_DELTA : errMsg;
-//         assertDifferent(some, other, delta, msg);
+         assertDifferent(some, other, DEFAULT_TEST_DELTA, "");
     }
     
     /**
@@ -1031,11 +1026,7 @@ public class Asserters {
      */
     public static void assertDifferent(double some, double other, 
             double delta) {
-        double difference = Math.abs(some - other);
-        String errMsg = "Expected " + some + " to differ from " + other 
-                + " by at least " + delta + ", values differ by " + difference;
-        assert difference >= delta : errMsg;
-//         assertDifferent(some, other, delta, msg);
+         assertDifferent(some, other, delta, "");
     }
     
     /**
@@ -1052,12 +1043,7 @@ public class Asserters {
      */
     public static void assertDifferent(double some, double other, 
             String msg) {
-        double difference = Math.abs(some - other);
-        String errMsg = msg + ". Expected " + some + " to differ from " + other 
-                + " by at least " + DEFAULT_TEST_DELTA + ", values differ by " 
-                + difference;
-        assert difference >= DEFAULT_TEST_DELTA : errMsg;
-//         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
+         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
     }
     
     /**
@@ -1079,8 +1065,10 @@ public class Asserters {
     public static void assertDifferent(double some, double other, 
             double delta, String msg) {
         double difference = Math.abs(some - other);
-        String errMsg = msg + ". Expected " + some + " to differ from " + other 
-                + " by at least " + delta + ", values differ by " + difference;
+        String intermediate = msg + ". Expected " + some + " to differ from " 
+                + other + " by at least " + delta + ", values differ by " 
+                + difference;
+        String errMsg = prepMsg(intermediate);
         assert difference >= delta : errMsg;
     }
     
