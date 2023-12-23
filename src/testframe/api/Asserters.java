@@ -1023,11 +1023,11 @@ public class Asserters {
      */
     public static void assertDifferent(double some, double other, 
             String msg) {
-//        double difference = Math.abs(some - other);
-//        String errMsg = msg + ". Expected " + some + " to differ from " + other 
-//                + " by at least " + DEFAULT_TEST_DELTA + ", values differ by " 
-//                + difference;
-//        assert difference >= DEFAULT_TEST_DELTA : errMsg;
+        double difference = Math.abs(some - other);
+        String errMsg = msg + ". Expected " + some + " to differ from " + other 
+                + " by at least " + DEFAULT_TEST_DELTA + ", values differ by " 
+                + difference;
+        assert difference >= DEFAULT_TEST_DELTA : errMsg;
 //         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
     }
     
@@ -1049,10 +1049,10 @@ public class Asserters {
      */
     public static void assertDifferent(double some, double other, 
             double delta, String msg) {
-//        double difference = Math.abs(some - other);
-//        String errMsg = msg + ". Expected " + some + " to differ from " + other 
-//                + " by at least " + delta + ", values differ by " + difference;
-//        assert difference >= delta : errMsg;
+        double difference = Math.abs(some - other);
+        String errMsg = msg + ". Expected " + some + " to differ from " + other 
+                + " by at least " + delta + ", values differ by " + difference;
+        assert difference >= delta : errMsg;
     }
     
     // TODO: Write tests for this
