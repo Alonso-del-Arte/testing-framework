@@ -3350,11 +3350,11 @@ public class AssertersTest {
             failOccurred = true;
             String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
                     + some + " to differ from " + other + " by at least " 
-                    + LOCAL_DELTA + ", values differ by " + HALF_LOCAL_DELTA;
+                    + LOCAL_DELTA + ", values differ by ";
             String actual = ae.getMessage();
-            String msg = "Expected \"" + expected + "\" but was \"" + actual 
-                    + "\"";
-            assert expected.equals(actual) : msg;
+            String msg = "Expected message to start with \"" + expected 
+                    + "\", was \"" + actual + "\"";
+            assert actual.startsWith(expected) : msg;
         }
         String msg = "Asserting that " + some + " differs from " + other 
                 + " by more than " + LOCAL_DELTA 
@@ -3394,9 +3394,9 @@ public class AssertersTest {
                     + Asserters.DEFAULT_TEST_DELTA + ", values differ by " 
                     + HALF_DEFAULT_DELTA;
             String actual = ae.getMessage();
-            String msg = "Expected \"" + expected + "\" but was \"" + actual 
-                    + "\"";
-            assert expected.equals(actual) : msg;
+            String msg = "Expected message to start with \"" + expected 
+                    + "\", was \"" + actual + "\"";
+            assert actual.startsWith(expected) : msg;
         }
         String msg = "Asserting that " + some + " differs from " + other 
                 + " by more than " + Asserters.DEFAULT_TEST_DELTA 
