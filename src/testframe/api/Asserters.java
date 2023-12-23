@@ -1005,8 +1005,12 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertDifferent(double some, double other, 
             double delta) {
-         String msg = "Sorry, default message not implemented yet";
-         assertDifferent(some, other, delta, msg);
+        double difference = Math.abs(some - other);
+        String errMsg = "Expected " + some + " to differ from " + other 
+                + " by at least " + delta + ", values differ by " + difference;
+        throw new AssertionError(errMsg);
+//        assert difference >= DEFAULT_TEST_DELTA : errMsg;
+//         assertDifferent(some, other, delta, msg);
     }
     
     /**
