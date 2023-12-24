@@ -3520,6 +3520,24 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testDifferentObject() {
+        int r = RANDOM.nextInt(128);
+        int g = RANDOM.nextInt(128);
+        int b = RANDOM.nextInt(128);
+        Color some = new Color(r, g, b);
+        Color other = some.brighter();boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + some.toString() + " is different from " 
+                + other.toString() + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
