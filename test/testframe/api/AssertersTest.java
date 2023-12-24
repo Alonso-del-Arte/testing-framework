@@ -3506,8 +3506,9 @@ public class AssertersTest {
                 EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Expected " + number.toString() 
-                    + " to be different from " + number.toString();
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + number.toString() + " to be different from " 
+                    + number.toString();
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
