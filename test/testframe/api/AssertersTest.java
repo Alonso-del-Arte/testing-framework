@@ -3498,6 +3498,27 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentObjectButIsSame() {
+        BigInteger number = new BigInteger(72, RANDOM);
+        boolean failOccurred = false;
+        try {Asserters.assertDifferent(number, number, 
+                EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected " + number.toString() 
+                    + " to be different from " + number.toString();
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + number.toString() 
+                + " is different from " + number.toString() 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
