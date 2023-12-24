@@ -1074,8 +1074,9 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertDifferent(Object some, Object other) {
-         String msg = "Sorry, default message not implemented yet";
-         assertDifferent(some, other, msg);
+        String errMsg = "Expected " + some.toString() + " to be different from " 
+                + other.toString();
+        throw new AssertionError(errMsg);
     }
     
     public static void assertDifferent(Object some, Object other, 
