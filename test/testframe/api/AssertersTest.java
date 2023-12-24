@@ -3538,6 +3538,26 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentObjectButIsSameDefaultMessage() {
+        LocalDate date = LocalDate.now();
+        boolean failOccurred = false;
+        try {Asserters.assertDifferent(date, date);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected "  + date.toString() 
+                    + " to be different from " + date.toString();
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + date.toString() 
+                + " is different from " + date.toString() 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write tests for assertInRange()
     
     @Test
