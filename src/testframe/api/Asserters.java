@@ -1082,7 +1082,7 @@ public class Asserters {
             String msg) {
         String errMsg = msg + ". Expected " + some.toString() 
                 + " to be different from " + other.toString();
-        throw new AssertionError(errMsg);
+        assert !some.equals(other) : errMsg;
     }
     
     // TODO: Uncomment. Write tests for this
