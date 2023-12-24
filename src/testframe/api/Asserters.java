@@ -1080,7 +1080,9 @@ public class Asserters {
     
     public static void assertDifferent(Object some, Object other, 
             String msg) {
-        // TODO: Write tests for this
+        String errMsg = msg + ". Expected " + some.toString() 
+                + " to be different from " + other.toString();
+        throw new AssertionError(errMsg);
     }
     
     // TODO: Uncomment. Write tests for this
