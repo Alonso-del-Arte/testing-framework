@@ -1087,9 +1087,7 @@ public class Asserters {
      * <code>other</code> is null.
      */
     public static void assertDifferent(Object some, Object other) {
-        String errMsg = "Expected " + some.toString() + " to be different from " 
-                + other.toString();
-        assert !some.equals(other) : errMsg;
+        assertDifferent(some, other, "");
     }
     
     /**
@@ -1109,8 +1107,9 @@ public class Asserters {
      */
     public static void assertDifferent(Object some, Object other, 
             String msg) {
-        String errMsg = msg + ". Expected " + some.toString() 
+        String intermediate = msg + ". Expected " + some.toString() 
                 + " to be different from " + other.toString();
+        String errMsg = prepMsg(intermediate);
         assert !some.equals(other) : errMsg;
     }
     
