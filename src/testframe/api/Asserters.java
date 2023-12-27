@@ -1072,13 +1072,41 @@ public class Asserters {
         assert difference >= delta : errMsg;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that two objects are different. Difference is determined by 
+     * <code>equals()</code> returning false. The test failure explanation will 
+     * include the object's <code>toString()</code> if the assertion fails.
+     * @param some An object to test for difference to another object. For 
+     * example, a <code>LocalDate</code> object for today's date. It is this 
+     * parameter's <code>equals()</code> function that will be called, but we 
+     * reserve the right to change this in a later version.
+     * @param other An object to assert is not the same as <code>some</code>. 
+     * Preferably of the same runtime type as <code>some</code>. For example, a 
+     * <code>LocalDate</code> object for tomorrow's date.
+     * @throws NullPointerException If either <code>some</code> or 
+     * <code>other</code> is null.
+     */
     public static void assertDifferent(Object some, Object other) {
         String errMsg = "Expected " + some.toString() + " to be different from " 
                 + other.toString();
-        throw new AssertionError(errMsg);
+        assert !some.equals(other) : errMsg;
     }
     
+    /**
+     * Asserts that two objects are different. Difference is determined by 
+     * <code>equals()</code> returning false.
+     * @param some An object to test for difference to another object. For 
+     * example, a <code>LocalDate</code> object for today's date. It is this 
+     * parameter's <code>equals()</code> function that will be called, but we 
+     * reserve the right to change this in a later version.
+     * @param other An object to assert is not the same as <code>some</code>. 
+     * Preferably of the same runtime type as <code>some</code>. For example, a 
+     * <code>LocalDate</code> object for tomorrow's date.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails.
+     * @throws NullPointerException If either <code>some</code> or 
+     * <code>other</code> is null.
+     */
     public static void assertDifferent(Object some, Object other, 
             String msg) {
         String errMsg = msg + ". Expected " + some.toString() 
