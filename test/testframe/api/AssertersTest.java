@@ -660,7 +660,7 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
 
-//    @Test
+    @Test
     public void testAssertEqualsButIsNotArrayDoubleDiffLengths() {
         int lengthA = RANDOM.nextInt(8) + 2;
         int lengthB = lengthA + RANDOM.nextInt(8) + 2;
@@ -676,7 +676,7 @@ public class AssertersTest {
         }
         boolean failOccurred = false;
         try {
-            Asserters.assertEquals(numbersA, numbersB, 
+            Asserters.assertEquals(numbersA, numbersB, LOCAL_DELTA,
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
