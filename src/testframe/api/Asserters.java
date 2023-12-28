@@ -280,7 +280,11 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertEquals(double[] expected, double[] actual, 
             String msg) {
-         assertEquals(expected, actual, Math.PI, "msg");
+        int expLen = expected.length;
+        int actLen = actual.length;
+        String lenMsg = msg + ". Arrays differ in length: expected has " 
+                + expLen + " elements but actual has " + actLen + " elements";
+        assert expLen == actLen : lenMsg;
     }
     
     /**
