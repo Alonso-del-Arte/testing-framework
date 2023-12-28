@@ -280,7 +280,7 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertEquals(double[] expected, double[] actual, 
             String msg) {
-         assertEquals(expected, actual, Math.PI, msg);
+         assertEquals(expected, actual, Math.PI, "msg");
     }
     
     /**
