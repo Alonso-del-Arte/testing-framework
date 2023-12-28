@@ -793,6 +793,30 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertEqualsArrayDoubleDefaultVariance() {
+        int length = RANDOM.nextInt(8) + 2;
+        double[] someNumbers = new double[length];
+        double[] sameNumbers = new double[length];
+        for (int i = 0; i < length; i++) {
+            double number = RANDOM.nextDouble() + i;
+            someNumbers[i] = number;
+            sameNumbers[i] = number + HALF_LOCAL_DELTA;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumbers, sameNumbers, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting " + Arrays.toString(someNumbers) 
+                + " is equal to " + Arrays.toString(sameNumbers) 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertEqualsObjectArrayButLengthsDiffer() {
         int lengthA = RANDOM.nextInt(16) + 4;
         int lengthB = lengthA + 1;
