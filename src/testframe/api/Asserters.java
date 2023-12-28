@@ -280,12 +280,15 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertEquals(double[] expected, double[] actual, 
             String msg) {
-         assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
+         assertEquals(expected, actual, Math.PI, msg);
     }
     
     public static void assertEquals(double[] expected, double[] actual, 
             double delta, String msg) {
-        // TODO: Write tests for this
+        String errMsg = msg + ". Arrays differ in length: expected has " 
+                + expected.length + " elements but actual has " + actual.length 
+                + " elements";
+        throw new AssertionError(errMsg);
     }
     
     /**
