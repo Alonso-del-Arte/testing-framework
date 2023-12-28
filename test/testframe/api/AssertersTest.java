@@ -703,7 +703,7 @@ public class AssertersTest {
         for (int i = 0; i < length; i++) {
             double number = RANDOM.nextDouble() + i;
             someNumbers[i] = number;
-            sameNumbers[i] = number;
+            sameNumbers[i] = number + HALF_LOCAL_DELTA;
         }
         boolean failOccurred = false;
         try {
