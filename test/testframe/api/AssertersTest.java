@@ -758,6 +758,41 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertEqualsButIsNotArrayDoubleDiffLengthsDefVar() {
+        int lengthA = RANDOM.nextInt(8) + 2;
+        int lengthB = lengthA + RANDOM.nextInt(8) + 2;
+        double[] numbersA = new double[lengthA];
+        double[] numbersB = new double[lengthB];
+        for (int i = 0; i < lengthA; i++) {
+            double number = RANDOM.nextDouble() + i;
+            numbersA[i] = number;
+            numbersB[i] = number;
+        }
+        for (int j = lengthA; j < lengthB; j++) {
+            numbersB[j] = RANDOM.nextDouble() + j;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(numbersA, numbersB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Arrays differ in length: expected has " 
+                    + numbersA.length + " elements but actual has " 
+                    + numbersB.length + " elements";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(numbersA) 
+                + " is equal to " + Arrays.toString(numbersB) 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertEqualsObjectArrayButLengthsDiffer() {
         int lengthA = RANDOM.nextInt(16) + 4;
         int lengthB = lengthA + 1;
