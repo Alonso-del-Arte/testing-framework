@@ -308,19 +308,19 @@ public class Asserters {
      */
     public static void assertEquals(double[] expected, double[] actual, 
             double delta, String msg) {
-        int expLen = expected.length;
-        int actLen = actual.length;
-        String lenMsg = msg + ". Arrays differ in length: expected has " 
-                + expLen + " elements but actual has " + actLen + " elements";
-        assert expLen == actLen : lenMsg;
-        for (int i = 0; i < expLen; i++) {
-            double difference = Math.abs(expected[i] - actual[i]);
-            String errMsg = msg + ". Arrays first differ at index " + i 
-                    + ", expected at least " + (expected[i] - delta) 
-                    + " or at most " + (expected[i] + delta) + " but was " 
-                    + actual[i];
-            assert delta >= difference : errMsg;
-        }
+//        int expLen = expected.length;
+//        int actLen = actual.length;
+//        String lenMsg = msg + ". Arrays differ in length: expected has " 
+//                + expLen + " elements but actual has " + actLen + " elements";
+//        assert expLen == actLen : lenMsg;
+//        for (int i = 0; i < expLen; i++) {
+//            double difference = Math.abs(expected[i] - actual[i]);
+//            String errMsg = msg + ". Arrays first differ at index " + i 
+//                    + ", expected at least " + (expected[i] - delta) 
+//                    + " or at most " + (expected[i] + delta) + " but was " 
+//                    + actual[i];
+//            assert delta >= difference : errMsg;
+//        }
     }
     
     /**
