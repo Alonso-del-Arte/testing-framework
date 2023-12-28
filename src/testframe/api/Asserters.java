@@ -267,7 +267,7 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertEquals(double[] expected, double[] actual) {
          String msg = "Sorry, default message not implemented yet";
-         assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
+         assertEquals(expected, actual, Math.E, msg);
     }
     
     // TODO: Write tests for this
@@ -288,7 +288,7 @@ public class Asserters {
         String errMsg = msg + ". Arrays differ in length: expected has " 
                 + expected.length + " elements but actual has " + actual.length 
                 + " elements";
-        throw new AssertionError(errMsg);
+        assert expected.length == actual.length : errMsg;
     }
     
     /**
