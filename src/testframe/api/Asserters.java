@@ -283,6 +283,15 @@ public class Asserters {
         String lenMsg = msg + ". Arrays differ in length: expected has " 
                 + expLen + " elements but actual has " + actLen + " elements";
         assert expLen == actLen : lenMsg;
+        for (int i = 0; i < expLen; i++) {
+            double difference = Math.abs(expected[i] - actual[i]);
+            String errMsg = msg + ". Arrays first differ at index " + i 
+                    + ", expected at least " + (expected[i] 
+                            - DEFAULT_TEST_DELTA) 
+                    + " or at most " + (expected[i] + DEFAULT_TEST_DELTA) 
+                    + " but was " + actual[i];
+            assert DEFAULT_TEST_DELTA >= difference : errMsg;
+        }
     }
     
     /**
