@@ -715,6 +715,7 @@ public class AssertersTest {
         }
         String msg = "Asserting " + Arrays.toString(someNumbers) 
                 + " is equal to " + Arrays.toString(sameNumbers) 
+                + " within variance " + LOCAL_DELTA 
                 + " should not have failed the test";
         assert !failOccurred : msg;
     }
@@ -812,6 +813,7 @@ public class AssertersTest {
         }
         String msg = "Asserting " + Arrays.toString(someNumbers) 
                 + " is equal to " + Arrays.toString(sameNumbers) 
+                + " within variance " + Asserters.DEFAULT_TEST_DELTA
                 + " should not have failed the test";
         assert !failOccurred : msg;
     }
@@ -885,6 +887,30 @@ public class AssertersTest {
                 + " is equal to " + Arrays.toString(numbersB) 
                 + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertEqualsArrayDoubleDefaultMessage() {
+        int length = RANDOM.nextInt(8) + 2;
+        double[] someNumbers = new double[length];
+        double[] sameNumbers = new double[length];
+        for (int i = 0; i < length; i++) {
+            double number = RANDOM.nextDouble() + i;
+            someNumbers[i] = number;
+            sameNumbers[i] = number + HALF_LOCAL_DELTA;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(someNumbers, sameNumbers, LOCAL_DELTA);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting " + Arrays.toString(someNumbers) 
+                + " is equal to " + Arrays.toString(sameNumbers) 
+                + " within variance " + LOCAL_DELTA 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     @Test
