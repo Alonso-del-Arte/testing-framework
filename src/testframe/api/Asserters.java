@@ -269,7 +269,8 @@ public class Asserters {
         int actLen = actual.length;
         String lenMsg = "Arrays differ in length: expected has " + expLen 
                 + " elements but actual has " + actLen + " elements";
-        assert expLen == actLen : lenMsg;
+        throw new AssertionError(lenMsg);
+//        assert expLen == actLen : lenMsg;
     }
     
     /**
