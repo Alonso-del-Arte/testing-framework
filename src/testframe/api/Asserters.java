@@ -910,8 +910,9 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertMaximum(long actual, long maximum) {
-//        String msg = "Sorry, default message not implemented yet";
-//        assertMaximum(actual, maximum, msg);
+        String errMsg = "Value " + actual +  " expected to be at most " 
+                + maximum;
+        throw new AssertionError(errMsg);
     }
     
     /**
