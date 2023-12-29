@@ -3307,6 +3307,66 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertMaximum() {
+        System.out.println("assertMaximum");
+        long maximum = RANDOM.nextInt();
+        long atOrBelowMaximum = maximum - RANDOM.nextInt(128);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMaximum(atOrBelowMaximum, maximum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that " + atOrBelowMaximum 
+                + " is equal to or less than " + maximum 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertMaximumButItGoesOverDefaultMessage() {
+        long maximum = RANDOM.nextInt();
+        long aboveMaximum = maximum + 1;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMaximum(aboveMaximum, maximum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Value " + aboveMaximum 
+                    + " expected to be at most " + maximum;
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + aboveMaximum 
+                + " is equal to or less than " + maximum 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+//    @Test
+//    public void testAssertMaximum() {
+//        long maximum = RANDOM.nextInt();
+//        long atOrBelowMaximum = maximum - RANDOM.nextInt(128);
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertMaximum(atOrBelowMaximum, maximum, 
+//                    EXAMPLE_ASSERTION_MESSAGE_PART);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//            System.out.println("\"" + ae.getMessage() + "\"");
+//        }
+//        String msg = "Asserting that " + atOrBelowMaximum 
+//                + " is equal to or less than " + maximum 
+//                + " should not have failed the test";
+//        assert !failOccurred : msg;
+//    }
+    
+    @Test
     public void testAssertMaximumComparableButItIsMore() {
         BigInteger maximum = new BigInteger(84, RANDOM);
         BigInteger aboveMaximum = maximum.add(BigInteger.ONE);
@@ -3330,25 +3390,6 @@ public class AssertersTest {
                 + " is equal to or less than " + maximum.toString() 
                 + " should have failed the test";
         assert failOccurred : msg;
-    }
-    
-    @Test
-    public void testAssertMaximum() {
-        System.out.println("assertMaximum");
-        long maximum = RANDOM.nextInt();
-        long atOrBelowMaximum = maximum - RANDOM.nextInt(128);
-        boolean failOccurred = false;
-        try {
-            Asserters.assertMaximum(atOrBelowMaximum, maximum, 
-                    EXAMPLE_ASSERTION_MESSAGE_PART);
-        } catch (AssertionError ae) {
-            failOccurred = true;
-            System.out.println("\"" + ae.getMessage() + "\"");
-        }
-        String msg = "Asserting that " + atOrBelowMaximum 
-                + " is equal to or less than " + maximum 
-                + " should not have failed the test";
-        assert !failOccurred : msg;
     }
     
     @Test
