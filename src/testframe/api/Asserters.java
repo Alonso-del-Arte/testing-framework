@@ -276,22 +276,25 @@ public class Asserters {
          assertEquals(expected, actual, delta, msg);
     }
     
+    /**
+     * Asserts that two arrays of 64-bit floating point values have the same 
+     * numbers in the same order within {@link #DEFAULT_TEST_DELTA}. This 
+     * procedure stops at the first evidence of failure. First, it checks that 
+     * the arrays are of the same length. If they are, it proceeds to compare 
+     * the numbers index by index, stopping on finding a difference in excess of 
+     * the variance even if there are more numbers to compare. 
+     * <p>Note however that the test will fail if both of the floating point 
+     * values at a given index are NaN, regardless of their bit patterns.</p>
+     * @param expected The array of expected values. For example, an array 
+     * containing 4.0, 3.0, 3.25, 3.16 in that order.
+     * @param actual The array of actual values. For example, an array  
+     * containing 4.0, 3.0, 3.2507, 3.15999 in that order.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails. For example, "Numbers should converge to &pi;."
+     */
     public static void assertEquals(double[] expected, double[] actual, 
             String msg) {
-        int expLen = expected.length;
-        int actLen = actual.length;
-        String lenMsg = msg + ". Arrays differ in length: expected has " 
-                + expLen + " elements but actual has " + actLen + " elements";
-        assert expLen == actLen : lenMsg;
-        for (int i = 0; i < expLen; i++) {
-            double difference = Math.abs(expected[i] - actual[i]);
-            String errMsg = msg + ". Arrays first differ at index " + i 
-                    + ", expected at least " + (expected[i] 
-                            - DEFAULT_TEST_DELTA) 
-                    + " or at most " + (expected[i] + DEFAULT_TEST_DELTA) 
-                    + " but was " + actual[i];
-            assert DEFAULT_TEST_DELTA >= difference : errMsg;
-        }
+        assertEquals(expected, actual, DEFAULT_TEST_DELTA, msg);
     }
     
     /**
@@ -299,8 +302,8 @@ public class Asserters {
      * numbers in the same order within a specified variance. This procedure 
      * stops at the first evidence of failure. First, it checks that the arrays 
      * are of the same length. If they are, it proceeds to compare the numbers 
-     * index by index, stopping on finding a difference even if there are more 
-     * numbers in the array. 
+     * index by index, stopping on finding a difference in excess of the 
+     * variance even if there are more numbers to compare. 
      * <p>Note however that the test will fail if both of the floating point 
      * values at a given index are NaN, regardless of their bit patterns.</p>
      * @param expected The array of expected values. For example, an array 
