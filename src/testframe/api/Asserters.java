@@ -915,12 +915,10 @@ public class Asserters {
      * @param actual The number to test for not going over the maximum. For 
      * example, 1000.
      * @param maximum The maximum that <code>actual</code> can be without 
-     * failing the assertion.
+     * failing the assertion. For example, 973.
      */
     public static void assertMaximum(long actual, long maximum) {
-        String errMsg = "Value " + actual +  " expected to be at most " 
-                + maximum;
-        assert maximum >= actual : errMsg;
+        assertMaximum(actual, maximum, "");
     }
     
     /**
@@ -928,13 +926,14 @@ public class Asserters {
      * @param actual The number to test for not going over the maximum. For 
      * example, 1000.
      * @param maximum The maximum that <code>actual</code> can be without 
-     * failing the assertion.
+     * failing the assertion. For example, 973.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
      */
     public static void assertMaximum(long actual, long maximum, String msg) {
-        String errMsg = msg + ". Value " + actual +  " expected to be at most " 
-                + maximum;
+        String intermediate = msg + ". Value " + actual 
+                + " expected to be at most " + maximum;
+        String errMsg = prepMsg(intermediate);
         assert maximum >= actual : errMsg;
     }
     
