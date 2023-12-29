@@ -269,21 +269,31 @@ public class Asserters {
          assertEquals(expected, actual, Math.E, msg);
     }
     
+    /**
+     * Asserts that two arrays of 64-bit floating point values have the same 
+     * numbers in the same order within a specified variance. This procedure 
+     * stops at the first evidence of failure. First, it checks that the arrays 
+     * are of the same length. If they are, it proceeds to compare the numbers 
+     * index by index, stopping on finding a difference in excess of the 
+     * variance even if there are more numbers to compare. The test failure 
+     * explanation will depend on how far along the process came along.
+     * <p>Note however that the test will fail if both of the floating point 
+     * values at a given index are NaN, regardless of their bit patterns.</p>
+     * @param expected The array of expected values. For example, an array 
+     * containing 4.0, 3.0, 3.25, 3.16 in that order.
+     * @param actual The array of actual values. For example, an array  
+     * containing 4.0, 3.0, 3.2507, 3.15999 in that order.
+     * @param delta The maximum allowed variance for the numbers in 
+     * <code>expected</code> and <code>actual</code> to differ and still be 
+     * considered close enough to be equal. For example, 0.00001. Ought to be at 
+     * least 0.0 but is preferably positive and not subnormal, though less than 
+     * 1.0. Negative variances are not recommended, and the behavior is not at 
+     * all guaranteed to remain consistent from one version of this framework to 
+     * the next.
+     */
     public static void assertEquals(double[] expected, double[] actual, 
             double delta) {
-        int expLen = expected.length;
-        int actLen = actual.length;
-        String lenMsg = "Arrays differ in length: expected has " + expLen 
-                + " elements but actual has " + actLen + " elements";
-        assert expLen == actLen : lenMsg;
-        for (int i = 0; i < expLen; i++) {
-            double difference = Math.abs(expected[i] - actual[i]);
-            String errMsg = "Arrays first differ at index " + i 
-                    + ", expected at least " + (expected[i] - delta) 
-                    + " or at most " + (expected[i] + delta) + " but was " 
-                    + actual[i];
-            assert delta >= difference : errMsg;
-        }
+        assertEquals(expected, actual, delta, "");
     }
     
     /**
@@ -336,13 +346,15 @@ public class Asserters {
         int actLen = actual.length;
         String lenMsg = msg + ". Arrays differ in length: expected has " 
                 + expLen + " elements but actual has " + actLen + " elements";
-        assert expLen == actLen : lenMsg;
+        String intermediateLenMsg = prepMsg(lenMsg);
+        assert expLen == actLen : intermediateLenMsg;
         for (int i = 0; i < expLen; i++) {
             double difference = Math.abs(expected[i] - actual[i]);
-            String errMsg = msg + ". Arrays first differ at index " + i 
+            String intermediate = msg + ". Arrays first differ at index " + i 
                     + ", expected at least " + (expected[i] - delta) 
                     + " or at most " + (expected[i] + delta) + " but was " 
                     + actual[i];
+            String errMsg = prepMsg(intermediate);
             assert delta >= difference : errMsg;
         }
     }
