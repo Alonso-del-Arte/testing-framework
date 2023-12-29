@@ -269,14 +269,13 @@ public class Asserters {
          assertEquals(expected, actual, Math.E, msg);
     }
     
-    // TODO: Write tests for this
     public static void assertEquals(double[] expected, double[] actual, 
             double delta) {
         int expLen = expected.length;
         int actLen = actual.length;
         String lenMsg = "Arrays differ in length: expected has " + expLen 
                 + " elements but actual has " + actLen + " elements";
-        throw new AssertionError(lenMsg);
+        assert expLen == actLen : lenMsg;
     }
     
     /**
