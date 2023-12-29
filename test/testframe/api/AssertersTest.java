@@ -1007,6 +1007,42 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertNotEqualsDoubleArraySameLengthDiffNumsDefVarDefMsg() {
+        int length = RANDOM.nextInt(3) + 2;
+        double[] numbersA = new double[length];
+        double[] numbersB = new double[length];
+        for (int i = 0; i < length; i++) {
+            double number = RANDOM.nextDouble() - i;
+            numbersA[i] = number;
+            numbersB[i] = number;
+        }
+        int changeIndex = RANDOM.nextInt(length);
+        double origNum = numbersA[changeIndex];
+        double diffNum = origNum + THOUSAND_TIMES_DEFAULT_DELTA;
+        numbersB[changeIndex] = diffNum;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertEquals(numbersA, numbersB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            double minusDelta = origNum - Asserters.DEFAULT_TEST_DELTA;
+            double plusDelta = origNum + Asserters.DEFAULT_TEST_DELTA;
+            String expected = "Arrays first differ at index " + changeIndex 
+                    + ", expected at least " + minusDelta + " or at most " 
+                    + plusDelta + " but was " + diffNum;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(numbersA) 
+                + " is equal to " + Arrays.toString(numbersB) 
+                + " within variance " + Asserters.DEFAULT_TEST_DELTA 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertEqualsObjectArrayButLengthsDiffer() {
         int lengthA = RANDOM.nextInt(16) + 4;
         int lengthB = lengthA + 1;
