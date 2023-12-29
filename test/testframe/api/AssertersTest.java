@@ -3348,23 +3348,22 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-//    @Test
-//    public void testAssertMaximum() {
-//        long maximum = RANDOM.nextInt();
-//        long atOrBelowMaximum = maximum - RANDOM.nextInt(128);
-//        boolean failOccurred = false;
-//        try {
-//            Asserters.assertMaximum(atOrBelowMaximum, maximum, 
-//                    EXAMPLE_ASSERTION_MESSAGE_PART);
-//        } catch (AssertionError ae) {
-//            failOccurred = true;
-//            System.out.println("\"" + ae.getMessage() + "\"");
-//        }
-//        String msg = "Asserting that " + atOrBelowMaximum 
-//                + " is equal to or less than " + maximum 
-//                + " should not have failed the test";
-//        assert !failOccurred : msg;
-//    }
+    @Test
+    public void testAssertMaximumDefaultMessage() {
+        long maximum = RANDOM.nextInt();
+        long atOrBelowMaximum = maximum - RANDOM.nextInt(128);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMaximum(atOrBelowMaximum, maximum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that " + atOrBelowMaximum 
+                + " is equal to or less than " + maximum 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
     
     @Test
     public void testAssertMaximumComparableButItIsMore() {
