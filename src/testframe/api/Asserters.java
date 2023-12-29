@@ -263,6 +263,21 @@ public class Asserters {
         }
     }
     
+    /**
+     * Asserts that two arrays of 64-bit floating point values have the same 
+     * numbers in the same order within {@link #DEFAULT_TEST_DELTA}. This 
+     * procedure stops at the first evidence of failure. First, it checks that 
+     * the arrays are of the same length. If they are, it proceeds to compare 
+     * the numbers index by index, stopping on finding a difference in excess of 
+     * the variance even if there are more numbers to compare. The test failure 
+     * explanation will depend on how far along the process came along.
+     * <p>Note however that the test will fail if both of the floating point 
+     * values at a given index are NaN, regardless of their bit patterns.</p>
+     * @param expected The array of expected values. For example, an array 
+     * containing 4.0, 3.0, 3.25, 3.16 in that order.
+     * @param actual The array of actual values. For example, an array  
+     * containing 4.0, 3.0, 3.2507, 3.15999 in that order.
+     */
     public static void assertEquals(double[] expected, double[] actual) {
         assertEquals(expected, actual, DEFAULT_TEST_DELTA, "");
     }
@@ -895,13 +910,15 @@ public class Asserters {
 
     // TODO: Write tests for this
     public static void assertMaximum(long actual, long maximum) {
-        String msg = "Sorry, default message not implemented yet";
-        assertMaximum(actual, maximum, msg);
+//        String msg = "Sorry, default message not implemented yet";
+//        assertMaximum(actual, maximum, msg);
     }
     
     // TODO: Write tests for this
     public static void assertMaximum(long actual, long maximum, String msg) {
-        //
+        String errMsg = msg + ". Value " + actual +  " expected to be at most " 
+                + maximum;
+        throw new AssertionError(errMsg);
     }
     
     // TODO: Write tests for this
