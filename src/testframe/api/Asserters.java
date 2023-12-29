@@ -24,11 +24,10 @@ public class Asserters {
     
     /**
      * The default tolerance for comparing floating point values, roughly 
-     * 2.3283064365386963 &times; 10<sup>&minus;10</sup>. This might be too 
-     * little for most purposes, but it's better than 0.0 or any subnormal 
-     * value.
+     * 1.52587890625 &times; 10<sup>&minus;5</sup>. This might be too little for  
+     * most purposes, but it's better than 0.0 or any subnormal value.
      */
-    public static final double DEFAULT_TEST_DELTA = -(0.5 / Integer.MIN_VALUE);
+    public static final double DEFAULT_TEST_DELTA = -(0.5 / Short.MIN_VALUE);
     
     private static String prepMsg(String intermediate) {
         if (intermediate.startsWith(". ")) {
@@ -279,11 +278,11 @@ public class Asserters {
     
     public static void assertEquals(double[] expected, double[] actual, 
             String msg) {
-//        int expLen = expected.length;
-//        int actLen = actual.length;
-//        String lenMsg = msg + ". Arrays differ in length: expected has " 
-//                + expLen + " elements but actual has " + actLen + " elements";
-//        assert expLen == actLen : lenMsg;
+        int expLen = expected.length;
+        int actLen = actual.length;
+        String lenMsg = msg + ". Arrays differ in length: expected has " 
+                + expLen + " elements but actual has " + actLen + " elements";
+        assert expLen == actLen : lenMsg;
     }
     
     /**
