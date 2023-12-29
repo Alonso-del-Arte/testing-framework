@@ -914,11 +914,19 @@ public class Asserters {
 //        assertMaximum(actual, maximum, msg);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts an integer is not greater than a specified maximum.
+     * @param actual The number to test for not going over the maximum. For 
+     * example, 1000.
+     * @param maximum The maximum that <code>actual</code> can be without 
+     * failing the assertion.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails.
+     */
     public static void assertMaximum(long actual, long maximum, String msg) {
         String errMsg = msg + ". Value " + actual +  " expected to be at most " 
                 + maximum;
-        throw new AssertionError(errMsg);
+        assert maximum >= actual : errMsg;
     }
     
     // TODO: Write tests for this
