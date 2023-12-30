@@ -3439,6 +3439,25 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertMaximumDoubleDefaultMessage() {
+        double multiplier = RANDOM.nextInt(256) - 128;
+        double unitIntervalNumber = RANDOM.nextDouble();
+        double maximum = multiplier * unitIntervalNumber;
+        double atOrBelowMaximum = maximum - unitIntervalNumber;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMaximum(atOrBelowMaximum, maximum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that " + atOrBelowMaximum 
+                + " is equal to or less than " + maximum 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertMaximumComparableButItIsMore() {
         BigInteger maximum = new BigInteger(84, RANDOM);
         BigInteger aboveMaximum = maximum.add(BigInteger.ONE);
