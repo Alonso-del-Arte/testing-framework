@@ -968,12 +968,23 @@ public class Asserters {
         assert maximum >= actual : errMsg;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Asserts that the value held by a <code>Comparable</code> object is 
+     * less than or equal to a specified maximum. The test failure explanation 
+     * will include the actual value and the maximum if the assertion fails.
+     * @param <T> The type of the <code>maximum</code> and <code>actual</code> 
+     * parameters. Must implement <code>Comparable&lt;T&gt;</code>. For example, 
+     * <code>Fraction implements Comparable&lt;Fraction&gt;</code>.
+     * @param minimum The maximum permissible value. For example, 
+     * <sup>3</sup>&frasl;<sub>2</sub>.
+     * @param actual The value to compare against the specified maximum. For 
+     * example, <sup>25</sup>&frasl;<sub>16</sub>.
+     */
     public static <T extends Comparable<T>> void assertMaximum(T actual, 
             T maximum) {
         String errMsg = "Value " + actual.toString() 
                 + " expected to be at most " + maximum.toString();
-        throw new AssertionError(errMsg);
+        assert maximum.compareTo(actual) >= 0 : errMsg;
 //        assertMaximum(actual, maximum, msg);
     }
 
