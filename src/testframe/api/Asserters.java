@@ -1,15 +1,15 @@
 package testframe.api;
 
-//import java.io.ByteArrayOutputStream;
-//import java.io.IOException;
-//import java.io.OutputStream;
-//import java.io.PrintStream;
-//import java.time.Duration;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.time.Duration;
 import java.util.Arrays;
-//import java.util.Collection;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-//import java.util.function.Predicate;
+import java.util.function.Predicate;
 
 /**
  * Static class containing procedures to simplify making assertions in tests. It 
@@ -1427,30 +1427,30 @@ public class Asserters {
         assert actual.contains(expected) : errMsg;
     }
     
-//    public static <E> void assertContainsSame(E[] expected, E[] actual) {
-//        // TODO: Uncomment. Write tests for this
-//    }
+    public static <E> void assertContainsSame(E[] expected, E[] actual) {
+        // TODO: Write tests for this
+    }
     
-//    public static <E> void assertContainsSame(E[] expected, E[] actual, 
-//            String msg) {
-//        // TODO: Uncomment. Write tests for this
-//    }
+    public static <E> void assertContainsSame(E[] expected, E[] actual, 
+            String msg) {
+        // TODO: Write tests for this
+    }
     
-//    public static <E> void assertContainsSame(List<E> expected, 
-//            List<E> actual) {
-//        // TODO: Uncomment. Write tests for this
-//    }
+    public static <E> void assertContainsSame(List<E> expected, 
+            List<E> actual) {
+        // TODO: Write tests for this
+    }
     
-//    public static <E> void assertContainsSame(List<E> expected, 
-//            List<E> actual, String msg) {
-//        // TODO: Uncomment. Write tests for this
-//    }
+    public static <E> void assertContainsSame(List<E> expected, 
+            List<E> actual, String msg) {
+        // TODO: Write tests for this
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static String assertPrintOut(Predicate<String> predicate, 
-//            Procedure lambda, String msg) {
-//        return "SORRY NOT IMPLEMENTED YET";
-//    }
+//     TODO: Write tests for this
+    public static String assertPrintOut(Predicate<String> predicate, 
+            Procedure lambda, String msg) {
+        return "SORRY NOT IMPLEMENTED YET";
+    }
     
     /**
      * Fails a test regardless of anything else. Hence it generally makes sense 
