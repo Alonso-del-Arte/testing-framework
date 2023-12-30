@@ -937,11 +937,19 @@ public class Asserters {
         assert maximum >= actual : errMsg;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts a floating point number is less than or equal to a specified 
+     * maximum. The maximum and the actual number will be included in the test 
+     * failure explanation if the assertion fails.
+     * @param actual The number to assert is less than a given maximum. For 
+     * example, 99.890773.
+     * @param maximum The number <code>actual</code> is said to be less than or 
+     * equal to. For example, 100.0.
+     */
     public static void assertMaximum(double actual, double maximum) {
         String errMsg = "Value " + actual + " expected to be at most " 
                 + maximum;
-        throw new AssertionError(errMsg);
+        assert maximum >= actual : errMsg;
 //        assertMaximum(actual, maximum, msg);
     }
 
