@@ -982,10 +982,7 @@ public class Asserters {
      */
     public static <T extends Comparable<T>> void assertMaximum(T actual, 
             T maximum) {
-        String errMsg = "Value " + actual.toString() 
-                + " expected to be at most " + maximum.toString();
-        assert maximum.compareTo(actual) >= 0 : errMsg;
-//        assertMaximum(actual, maximum, msg);
+        assertMaximum(actual, maximum, "");
     }
 
     /**
@@ -1004,8 +1001,9 @@ public class Asserters {
      */
     public static <T extends Comparable<T>> void assertMaximum(T actual, 
             T maximum, String msg) {
-        String errMsg = msg + ". Value " + actual.toString() 
+        String intermediate = msg + ". Value " + actual.toString() 
                 + " expected to be at most " + maximum.toString();
+        String errMsg = prepMsg(intermediate);
         assert maximum.compareTo(actual) >= 0 : errMsg;
     }
 
