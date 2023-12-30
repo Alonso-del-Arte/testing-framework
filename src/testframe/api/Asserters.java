@@ -943,14 +943,11 @@ public class Asserters {
      * failure explanation if the assertion fails.
      * @param actual The number to assert is less than a given maximum. For 
      * example, 99.890773.
-     * @param maximum The number <code>actual</code> is said to be less than or 
-     * equal to. For example, 100.0.
+     * @param maximum The number <code>actual</code> is expected to be less than 
+     * or equal to. For example, 100.0.
      */
     public static void assertMaximum(double actual, double maximum) {
-        String errMsg = "Value " + actual + " expected to be at most " 
-                + maximum;
-        assert maximum >= actual : errMsg;
-//        assertMaximum(actual, maximum, msg);
+        assertMaximum(actual, maximum, "");
     }
 
     /**
@@ -958,15 +955,16 @@ public class Asserters {
      * maximum.
      * @param actual The number to assert is less than a given maximum. For 
      * example, 99.890773.
-     * @param maximum The number <code>actual</code> is said to be less than or 
-     * equal to. For example, 100.0.
+     * @param maximum The number <code>actual</code> is expected to be less than 
+     * or equal to. For example, 100.0.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
      */
     public static void assertMaximum(double actual, double maximum,  
             String msg) {
-        String errMsg = msg + ". Value " + actual + " expected to be at most " 
-                + maximum;
+        String intermediate = msg + ". Value " + actual 
+                + " expected to be at most " + maximum;
+        String errMsg = prepMsg(intermediate);
         assert maximum >= actual : errMsg;
     }
 
