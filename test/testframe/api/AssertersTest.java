@@ -3414,6 +3414,31 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertAboveMaximumDoubleDefaultMessage() {
+        double multiplier = RANDOM.nextInt(256) - 128;
+        double unitIntervalNumber = RANDOM.nextDouble();
+        double maximum = multiplier * unitIntervalNumber;
+        double aboveMaximum = maximum + unitIntervalNumber;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMaximum(aboveMaximum, maximum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Value " + aboveMaximum 
+                    + " expected to be at most " + maximum;
+            String actual = ae.getMessage();
+            System.out.println("\"" + actual + "\"");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + aboveMaximum 
+                + " is equal to or less than " + maximum 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertMaximumComparableButItIsMore() {
         BigInteger maximum = new BigInteger(84, RANDOM);
         BigInteger aboveMaximum = maximum.add(BigInteger.ONE);
