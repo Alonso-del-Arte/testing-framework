@@ -971,8 +971,10 @@ public class Asserters {
     // TODO: Write tests for this
     public static <T extends Comparable<T>> void assertMaximum(T actual, 
             T maximum) {
-        String msg = "Sorry, default message not implemented yet";
-        assertMaximum(actual, maximum, msg);
+        String errMsg = "Value " + actual.toString() 
+                + " expected to be at most " + maximum.toString();
+        throw new AssertionError(errMsg);
+//        assertMaximum(actual, maximum, msg);
     }
 
     /**
