@@ -946,7 +946,9 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertMaximum(double actual, double maximum,  
             String msg) {
-        //
+        String errMsg = msg + ". Value " + actual + " expected to be at most " 
+                + maximum;
+        throw new AssertionError(errMsg);
     }
 
     // TODO: Write tests for this
