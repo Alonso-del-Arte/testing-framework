@@ -3525,8 +3525,24 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-    // TODO: Write more tests for assertMaximum()
-    
+    @Test
+    public void testAssertMaximumComparableDefaultMessage() {
+        BigInteger maximum = new BigInteger(84, RANDOM);
+        BigInteger atOrBelowMaximum 
+                = maximum.subtract(BigInteger.valueOf(RANDOM.nextInt(128)));
+        boolean failOccurred = false;
+        try {
+            Asserters.assertMaximum(atOrBelowMaximum, maximum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Asserting that " + atOrBelowMaximum.toString() 
+                + " is equal to or less than " + maximum.toString() 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+        
     @Test
     public void testAssertNaNButItIsNot() {
         double number = Math.random();
