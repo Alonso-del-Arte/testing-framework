@@ -4476,7 +4476,7 @@ public class AssertersTest {
         } catch (AssertionError ae) {
             failOccurred = true;
             String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
-                    + ". Expected list to contasin " + listAStr 
+                    + ". Expected list to contain " + listAStr 
                     + " but actually contained " + listBStr;
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
