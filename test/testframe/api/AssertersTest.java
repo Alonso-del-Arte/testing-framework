@@ -4461,7 +4461,7 @@ public class AssertersTest {
     
     // TODO: Write tests for assertContainsSame(arrays)
     
-//    @Test
+    @Test
     public void testAssertListContainsSameButDoesNot() {
         List<NumericShaper.Range> listA 
                 = Arrays.asList(NumericShaper.Range.values());
@@ -4475,8 +4475,13 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
-                    + listAStr;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Expected list to contasin " + listAStr 
+                    + " but actually contained " + listBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
         }
         String msg = "Asserting that " + listAStr 
                 + " contains the same elements as " + listBStr 
