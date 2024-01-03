@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.List;
@@ -4487,6 +4488,27 @@ public class AssertersTest {
                 + " contains the same elements as " + listBStr 
                 + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertListContainsSame() {
+        DayOfWeek[] days = DayOfWeek.values();
+        List<DayOfWeek> listA = Arrays.asList(days);
+        List<DayOfWeek> listB = new ArrayList<DayOfWeek>(listA);
+        Collections.shuffle(listB, RANDOM);
+        listB.add(LocalDate.now().getDayOfWeek());
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(listA, listB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println(ae.getMessage());
+        }
+        String msg = "Asserting that " + listA.toString() + " and " 
+                + listB.toString() 
+                + " contain the same elements should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     @Test
