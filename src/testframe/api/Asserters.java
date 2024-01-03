@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -1441,12 +1442,29 @@ public class Asserters {
         // TODO: Write tests for this
     }
     
+    /**
+     * Asserts that two lists contain the same elements, though not necessarily 
+     * in the same order or the same quantities. The two lists may be different 
+     * implementations of <code>java.util.List</code>
+     * @param <E> The type of the elements in the two lists. Remember that this 
+     * is not checked at runtime. For example, <code>java.time.Month</code>.
+     * @param expected The list with the elements the other list is supposed to 
+     * contain. For example, <code>MARCH</code>, <code>APRIL</code>, 
+     * <code>MAY</code> and <code>JUNE</code>.
+     * @param actual The list to check against <code>expected</code>. For 
+     * example, <code>APRIL</code>, <code>APRIL</code>, <code>JUNE</code>, 
+     * <code>MARCH</code>, <code>MAY</code> and <code>MAY</code>.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails.
+     */
     public static <E> void assertContainsSame(List<E> expected, 
             List<E> actual, String msg) {
+        Set<E> expSet = new HashSet<>(expected);
+        Set<E> actSet = new HashSet<>(actual);
         String errMsg = msg + ". Expected list to contain " 
                 + expected.toString() + " but actually contained " 
                 + actual.toString();
-        throw new AssertionError(errMsg);
+        assert expSet.equals(actSet) : errMsg;
     }
     
 //     TODO: Write tests for this
