@@ -1443,7 +1443,10 @@ public class Asserters {
     
     public static <E> void assertContainsSame(List<E> expected, 
             List<E> actual, String msg) {
-        // TODO: Write tests for this
+        String errMsg = msg + ". Expected list to contain " 
+                + expected.toString() + " but actually contained " 
+                + actual.toString();
+        throw new AssertionError(errMsg);
     }
     
 //     TODO: Write tests for this
