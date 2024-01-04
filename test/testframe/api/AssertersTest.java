@@ -4512,6 +4512,32 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertListContainsSameButDoesNotDefaultMessage() {
+        List<NumericShaper.Range> listA 
+                = Arrays.asList(NumericShaper.Range.values());
+        List<NumericShaper.Range> listB = new ArrayList<>(listA);
+        listB.remove(1);
+        String listAStr = listA.toString();
+        String listBStr = listB.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(listA, listB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected list to contain " + listAStr 
+                    + " but actually contained " + listBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + listAStr 
+                + " contains the same elements as " + listBStr 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
         String msg = "Division by zero should cause ArithmeticException";
