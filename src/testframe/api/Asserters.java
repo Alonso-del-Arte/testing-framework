@@ -1439,10 +1439,12 @@ public class Asserters {
     
     public static <E> void assertContainsSame(List<E> expected, 
             List<E> actual) {
+        Set<E> expSet = new HashSet<>(expected);
+        Set<E> actSet = new HashSet<>(actual);
         String errMsg = "Expected list to contain " 
                 + expected.toString() + " but actually contained " 
                 + actual.toString();
-        throw new AssertionError(errMsg);
+        assert expSet.equals(actSet) : errMsg;
     }
     
     /**
