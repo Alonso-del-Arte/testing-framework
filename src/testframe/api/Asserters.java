@@ -1437,20 +1437,32 @@ public class Asserters {
         // TODO: Write tests for this
     }
     
+    /**
+     * Asserts that two lists contain the same elements, though not necessarily 
+     * in the same order or the same quantities. The two lists may be different 
+     * implementations of <code>java.util.List</code>. One list may have fewer 
+     * elements than the other, but the assertion won't fail as long as every 
+     * element that appears in one list appears at least once in the other list.
+     * @param <E> The type of the elements in the two lists. Remember that this 
+     * is not checked at runtime. For example, <code>java.time.Month</code>.
+     * @param expected The list with the elements the other list is supposed to 
+     * contain. For example, <code>MARCH</code>, <code>APRIL</code>, 
+     * <code>MAY</code> and <code>JUNE</code>.
+     * @param actual The list to check against <code>expected</code>. For 
+     * example, <code>APRIL</code>, <code>APRIL</code>, <code>JUNE</code>, 
+     * <code>MARCH</code>, <code>MAY</code> and <code>MAY</code>.
+     */
     public static <E> void assertContainsSame(List<E> expected, 
             List<E> actual) {
-        Set<E> expSet = new HashSet<>(expected);
-        Set<E> actSet = new HashSet<>(actual);
-        String errMsg = "Expected list to contain " 
-                + expected.toString() + " but actually contained " 
-                + actual.toString();
-        assert expSet.equals(actSet) : errMsg;
+        assertContainsSame(expected, actual, "");
     }
     
     /**
      * Asserts that two lists contain the same elements, though not necessarily 
      * in the same order or the same quantities. The two lists may be different 
-     * implementations of <code>java.util.List</code>
+     * implementations of <code>java.util.List</code>. One list may have fewer 
+     * elements than the other, but the assertion won't fail as long as every 
+     * element that appears in one list appears at least once in the other list.
      * @param <E> The type of the elements in the two lists. Remember that this 
      * is not checked at runtime. For example, <code>java.time.Month</code>.
      * @param expected The list with the elements the other list is supposed to 
@@ -1466,9 +1478,10 @@ public class Asserters {
             List<E> actual, String msg) {
         Set<E> expSet = new HashSet<>(expected);
         Set<E> actSet = new HashSet<>(actual);
-        String errMsg = msg + ". Expected list to contain " 
+        String intermediate = msg + ". Expected list to contain " 
                 + expected.toString() + " but actually contained " 
                 + actual.toString();
+        String errMsg = prepMsg(intermediate);
         assert expSet.equals(actSet) : errMsg;
     }
     
