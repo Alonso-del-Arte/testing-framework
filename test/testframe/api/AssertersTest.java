@@ -4538,6 +4538,26 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertListContainsSameDefaultMessage() {
+        DayOfWeek[] days = DayOfWeek.values();
+        List<DayOfWeek> listA = Arrays.asList(days);
+        List<DayOfWeek> listB = new ArrayList<DayOfWeek>(listA);
+        Collections.shuffle(listB, RANDOM);
+        listB.add(LocalDate.now().getDayOfWeek());
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(listA, listB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println(ae.getMessage());
+        }
+        String msg = "Asserting that " + listA.toString() + " and " 
+                + listB.toString() 
+                + " contain the same elements should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
         String msg = "Division by zero should cause ArithmeticException";
