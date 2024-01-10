@@ -4524,6 +4524,31 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertArrayContainsSameButDoesNotDefaultMessage() {
+        Thread.State[] arrayA = Thread.State.values();
+        Thread.State[] arrayB = new Thread.State[arrayA.length];
+        System.arraycopy(arrayA, 1, arrayB, 0, arrayA.length - 1);
+        String arrayAStr = Arrays.toString(arrayA);
+        String arrayBStr = Arrays.toString(arrayB);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(arrayA, arrayB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected array to contain " + arrayAStr 
+                    + " but actually contained " + arrayBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + arrayAStr 
+                + " contains the same elements as " + arrayBStr 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertListContainsSameButDoesNot() {
         List<NumericShaper.Range> listA 
                 = Arrays.asList(NumericShaper.Range.values());
