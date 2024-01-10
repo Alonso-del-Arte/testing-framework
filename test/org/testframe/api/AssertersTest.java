@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Currency;
 import java.util.HashSet;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -4460,7 +4461,6 @@ public class AssertersTest {
         }
     }
     
-    // TODO: Write tests for assertContainsSame(arrays)
     @Test
     public void testAssertArrayContainsSameButDoesNot() {
         Thread.State[] arrayA = Thread.State.values();
@@ -4488,7 +4488,40 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-    // TODO: Resume testing work here
+    private static IntSummaryStatistics makeRandomSummary(int n) {
+        IntSummaryStatistics summary = new IntSummaryStatistics();
+        for (int i = 0; i < n; i++) {
+            summary.accept(RANDOM.nextInt());
+        }
+        return summary;
+    }
+    
+    @Test
+    public void testAssertContainsSame() {
+        int size = RANDOM.nextInt(3) + 2;
+        IntSummaryStatistics[] arrayA = new IntSummaryStatistics[size];
+        IntSummaryStatistics[] arrayB = new IntSummaryStatistics[size + 1];
+        for (int i = 0; i < size; i++) {
+            int n = i + RANDOM.nextInt(16) + 4;
+            IntSummaryStatistics summary = makeRandomSummary(n);
+            arrayA[i] = summary;
+            arrayB[size - i - 1] = summary;
+        }
+        arrayB[size] = arrayA[size - 1];
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(arrayA, arrayB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println(ae.getMessage());
+        }
+        String arrAStr = Arrays.toString(arrayA);
+        String arrBStr = Arrays.toString(arrayB);
+        String msg = "Asserting that " + arrAStr + " and " + arrBStr 
+                + " contain the same elements should not have failed the test";
+        assert !failOccurred : msg;
+    }
     
     @Test
     public void testAssertListContainsSameButDoesNot() {
