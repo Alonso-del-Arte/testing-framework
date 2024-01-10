@@ -1429,7 +1429,9 @@ public class Asserters {
     }
     
     public static <E> void assertContainsSame(E[] expected, E[] actual) {
-        // TODO: Write tests for this
+        String errMsg = "Expected array to contain " + Arrays.toString(expected) 
+                + " but actually contained " + Arrays.toString(actual);
+        throw new AssertionError(errMsg);
     }
     
     public static <E> void assertContainsSame(E[] expected, E[] actual, 
