@@ -1429,9 +1429,13 @@ public class Asserters {
     }
     
     public static <E> void assertContainsSame(E[] expected, E[] actual) {
+        Set<E> expSet = new HashSet<>(expected.length);
+        for (E expElem : expected) expSet.add(expElem);
+        Set<E> actSet = new HashSet<>(actual.length);
+        for (E actElem : actual) actSet.add(actElem);
         String errMsg = "Expected array to contain " + Arrays.toString(expected) 
                 + " but actually contained " + Arrays.toString(actual);
-        throw new AssertionError(errMsg);
+        assert expSet.equals(actSet) : errMsg;
     }
     
     public static <E> void assertContainsSame(E[] expected, E[] actual, 
