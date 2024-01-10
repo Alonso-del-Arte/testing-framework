@@ -1428,25 +1428,52 @@ public class Asserters {
         assert actual.contains(expected) : errMsg;
     }
     
+    /**
+     * Asserts that two arrays contain the same elements, though not necessarily 
+     * in the same order or the same quantities. One array may have fewer 
+     * elements than the other, but the assertion won't fail as long as every 
+     * element that appears in one array appears at least once in the other 
+     * array.
+     * @param <E> The type of the elements in the two arrays. Remember that this 
+     * is not checked at runtime. For example, <code>java.time.Month</code>.
+     * @param expected The array with the elements the other array is supposed  
+     * to contain. For example, <code>MARCH</code>, <code>APRIL</code>, 
+     * <code>MAY</code> and <code>JUNE</code>.
+     * @param actual The array to check against <code>expected</code>. For 
+     * example, <code>APRIL</code>, <code>APRIL</code>, <code>JUNE</code>, 
+     * <code>MARCH</code>, <code>MAY</code> and <code>MAY</code>.
+     */
     public static <E> void assertContainsSame(E[] expected, E[] actual) {
-        Set<E> expSet = new HashSet<>(expected.length);
-        for (E expElem : expected) expSet.add(expElem);
-        Set<E> actSet = new HashSet<>(actual.length);
-        for (E actElem : actual) actSet.add(actElem);
-        String errMsg = "Expected array to contain " + Arrays.toString(expected) 
-                + " but actually contained " + Arrays.toString(actual);
-        assert expSet.equals(actSet) : errMsg;
+        assertContainsSame(expected, actual, "");
     }
     
+    /**
+     * Asserts that two arrays contain the same elements, though not necessarily 
+     * in the same order or the same quantities. One array may have fewer 
+     * elements than the other, but the assertion won't fail as long as every 
+     * element that appears in one array appears at least once in the other 
+     * array.
+     * @param <E> The type of the elements in the two arrays. Remember that this 
+     * is not checked at runtime. For example, <code>java.time.Month</code>.
+     * @param expected The array with the elements the other array is supposed  
+     * to contain. For example, <code>MARCH</code>, <code>APRIL</code>, 
+     * <code>MAY</code> and <code>JUNE</code>.
+     * @param actual The array to check against <code>expected</code>. For 
+     * example, <code>APRIL</code>, <code>APRIL</code>, <code>JUNE</code>, 
+     * <code>MARCH</code>, <code>MAY</code> and <code>MAY</code>.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails.
+     */
     public static <E> void assertContainsSame(E[] expected, E[] actual, 
             String msg) {
         Set<E> expSet = new HashSet<>(expected.length);
         for (E expElem : expected) expSet.add(expElem);
         Set<E> actSet = new HashSet<>(actual.length);
         for (E actElem : actual) actSet.add(actElem);
-        String errMsg = msg + ". Expected array to contain " 
+        String intermediate = msg + ". Expected array to contain " 
                 + Arrays.toString(expected) + " but actually contained "
                 + Arrays.toString(actual);
+        String errMsg = prepMsg(intermediate);
         assert expSet.equals(actSet) : errMsg;
     }
     
