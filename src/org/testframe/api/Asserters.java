@@ -1063,43 +1063,43 @@ public class Asserters {
         assert !Double.isNaN(actual) : errMsg;
     }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertInRange(long minimum, long actual, long maximum) {
-//        String msg = "Sorry, default message not implemented yet";
-//        assertInRange(minimum, actual, maximum, msg);
-//    }
+    // TODO: Write tests for this
+    public static void assertInRange(long minimum, long actual, long maximum) {
+        String msg = "Sorry, default message not implemented yet";
+        assertInRange(minimum, actual, maximum, msg);
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertInRange(long minimum, long actual, long maximum, 
-//            String msg) {
-//        //
-//    }
+    // TODO: Write tests for this
+    public static void assertInRange(long minimum, long actual, long maximum, 
+            String msg) {
+        //
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertInRange(double minimum, double actual, 
-//            double maximum) {
-//        String msg = "Sorry, default message not implemented yet";
-//        assertInRange(minimum, actual, maximum, msg);
-//    }
+    // TODO: Write tests for this
+    public static void assertInRange(double minimum, double actual, 
+            double maximum) {
+        String msg = "Sorry, default message not implemented yet";
+        assertInRange(minimum, actual, maximum, msg);
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertInRange(double minimum, double actual, 
-//            double maximum, String msg) {
-//        //
-//    }
+    // TODO: Write tests for this
+    public static void assertInRange(double minimum, double actual, 
+            double maximum, String msg) {
+        //
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static <T extends Comparable<T>> void assertInRange(T minimum, 
-//            T actual, T maximum) {
-//        String msg = "Sorry, default message not implemented yet";
-//        assertInRange(minimum, actual, maximum, msg);
-//    }
+    // TODO: Write tests for this
+    public static <T extends Comparable<T>> void assertInRange(T minimum, 
+            T actual, T maximum) {
+        String msg = "Sorry, default message not implemented yet";
+        assertInRange(minimum, actual, maximum, msg);
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static <T extends Comparable<T>> void assertInRange(T minimum, 
-//            T actual, T maximum, String msg) {
-//        //
-//    }
+    // TODO: Write tests for this
+    public static <T extends Comparable<T>> void assertInRange(T minimum, 
+            T actual, T maximum, String msg) {
+        //
+    }
     
     /**
      * Asserts that an integer value is different from some other integer value. 
@@ -1246,50 +1246,50 @@ public class Asserters {
         assert !some.equals(other) : errMsg;
     }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertDifferent(int[] some, int[] other) {
-//         String msg = "Sorry, default message not implemented yet";
-//         assertDifferent(some, other, msg);
-//    }
+    // TODO: Write tests for this
+    public static void assertDifferent(int[] some, int[] other) {
+         String msg = "Sorry, default message not implemented yet";
+         assertDifferent(some, other, msg);
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertDifferent(int[] some, int[] other, String msg) {
-//    }
+    // TODO: Write tests for this
+    public static void assertDifferent(int[] some, int[] other, String msg) {
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertDifferent(double[] some, double[] other) {
-//         String msg = "Sorry, default message not implemented yet";
-//         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
-//    }
+    // TODO: Write tests for this
+    public static void assertDifferent(double[] some, double[] other) {
+         String msg = "Sorry, default message not implemented yet";
+         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertDifferent(double[] some, double[] other, 
-//            double delta) {
-//         String msg = "Sorry, default message not implemented yet";
-//         assertDifferent(some, other, delta, msg);
-//    }
+    // TODO: Write tests for this
+    public static void assertDifferent(double[] some, double[] other, 
+            double delta) {
+         String msg = "Sorry, default message not implemented yet";
+         assertDifferent(some, other, delta, msg);
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertDifferent(double[] some, double[] other, 
-//            String msg) {
-//         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
-//    }
+    // TODO: Write tests for this
+    public static void assertDifferent(double[] some, double[] other, 
+            String msg) {
+         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertDifferent(double[] some, double[] other, 
-//            double delta, String msg) {
-//    }
+    // TODO: Write tests for this
+    public static void assertDifferent(double[] some, double[] other, 
+            double delta, String msg) {
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertDifferent(Object[] some, Object[] other) {
-//         String msg = "Sorry, default message not implemented yet";
-//         assertDifferent(some, other, msg);
-//    }
+    // TODO: Write tests for this
+    public static void assertDifferent(Object[] some, Object[] other) {
+         String msg = "Sorry, default message not implemented yet";
+         assertDifferent(some, other, msg);
+    }
     
-    // TODO: Uncomment. Write tests for this
-//    public static void assertDifferent(Object[] some, Object[] other, 
-//            String msg) {
-//    }
+    // TODO: Write tests for this
+    public static void assertDifferent(Object[] some, Object[] other, 
+            String msg) {
+    }
     
     /**
      * Asserts the array contains the specified element. The test failure 
@@ -1645,10 +1645,9 @@ public class Asserters {
         }
     }
     
-    // We've decided assertTimeout()  won't be in the 0.9 release
-//    public static void assertTimeout(Procedure lambda, Duration allottedTime, 
-//            String msg) {
+    public static void assertTimeout(Procedure lambda, Duration allottedTime, 
+            String msg) {
         // TODO: Write tests for assertTimeout()
-//    }
+    }
 
 }
