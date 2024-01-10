@@ -1,4 +1,4 @@
-testframe.api
-testframe.api.random
-testframe.api.text
-testframe.engine
+org.testframe.api
+org.testframe.api.random
+org.testframe.api.text
+org.testframe.engine
