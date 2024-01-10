@@ -4498,6 +4498,7 @@ public class AssertersTest {
     
     @Test
     public void testAssertContainsSame() {
+        System.out.println("assertContainsSame");
         int size = RANDOM.nextInt(3) + 2;
         IntSummaryStatistics[] arrayA = new IntSummaryStatistics[size];
         IntSummaryStatistics[] arrayB = new IntSummaryStatistics[size + 1];
@@ -4546,6 +4547,32 @@ public class AssertersTest {
                 + " contains the same elements as " + arrayBStr 
                 + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertContainsSameDefaultMessage() {
+        int size = RANDOM.nextInt(3) + 2;
+        IntSummaryStatistics[] arrayA = new IntSummaryStatistics[size];
+        IntSummaryStatistics[] arrayB = new IntSummaryStatistics[size + 1];
+        for (int i = 0; i < size; i++) {
+            int n = i + RANDOM.nextInt(16) + 4;
+            IntSummaryStatistics summary = makeRandomSummary(n);
+            arrayA[i] = summary;
+            arrayB[size - i - 1] = summary;
+        }
+        arrayB[size] = arrayA[size - 1];
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(arrayA, arrayB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println(ae.getMessage());
+        }
+        String arrAStr = Arrays.toString(arrayA);
+        String arrBStr = Arrays.toString(arrayB);
+        String msg = "Asserting that " + arrAStr + " and " + arrBStr 
+                + " contain the same elements should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     @Test
