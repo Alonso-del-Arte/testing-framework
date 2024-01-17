@@ -3831,7 +3831,7 @@ public class AssertersTest {
     @Test
     public void testAssertInRangeButIsBelow() {
         int minimum = RANDOM.nextInt(Short.MAX_VALUE);
-        int maximum = minimum + RANDOM.nextInt(Short.MAX_VALUE);
+        int maximum = minimum + RANDOM.nextInt(Short.MAX_VALUE) + 1;
         int belowRange = minimum - RANDOM.nextInt(Short.MAX_VALUE) - 1;
         boolean failOccurred = false;
         try {
@@ -3853,9 +3853,30 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertInRange() {
+        System.out.println("assertInRange");
+        int minimum = RANDOM.nextInt(Short.MAX_VALUE);
+        int maximum = minimum + RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        for (int actual = minimum; actual <= maximum; actual++) {
+            boolean failOccurred = false;
+            try {
+                Asserters.assertInRange(minimum, actual, maximum, 
+                        EXAMPLE_ASSERTION_MESSAGE_PART);
+            } catch (AssertionError ae) {
+                failOccurred = true;
+                System.out.println("\"" + ae.getMessage() + "\"");
+            }
+            String msg = "Asserting that " + actual + " is in the range from " 
+                    + minimum + " to " + maximum 
+                    + " should not have failed the test";
+            assert !failOccurred : msg;
+        }
+    }
+    
+    @Test
     public void testAssertInRangeButIsAbove() {
         int minimum = RANDOM.nextInt(Short.MAX_VALUE);
-        int maximum = minimum + RANDOM.nextInt(Short.MAX_VALUE);
+        int maximum = minimum + RANDOM.nextInt(Short.MAX_VALUE) + 1;
         int aboveRange = maximum + RANDOM.nextInt(Short.MAX_VALUE) + 1;
         boolean failOccurred = false;
         try {
