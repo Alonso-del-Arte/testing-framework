@@ -1065,15 +1065,38 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertInRange(long minimum, long actual, long maximum) {
-        String msg = "Sorry, default message not implemented yet";
+        String msg = "SORRY";
         assertInRange(minimum, actual, maximum, msg);
     }
     
+    /**
+     * Asserts that an integer is in a given range. Using this assertion is 
+     * similar to combining {@link #assertMinimum(long, long, String)} and 
+     * {@link #assertMaximum(long, long, String)} in a single test, but with  
+     * this assertion, if the assertion fails, the test failure explanation will 
+     * include both the minimum and the maximum regardless of whether or not the 
+     * failure was for the actual number being too low or too high.
+     * @param minimum The lowest number that <code>actual</code> can be without 
+     * failing the test. For example, &minus;163. If this parameter is 0 or 1 
+     * and <code>maximum</code> is <code>Long.MAX_VALUE</code>, then it might be 
+     * better to use {@link #assertNotNegative(long, String)} or {@link 
+     * #assertPositive(long, String)} instead. 
+     * @param actual The actual number. For example, &minus;1. This number may 
+     * be equal to either <code>minimum</code> or <code>maximum</code> and still 
+     * not cause the assertion to fail.
+     * @param maximum The highest number that <code>actual</code> can be without 
+     * failing the test. For example, 73. This parameter is allowed to be equal 
+     * to <code>minimum</code>, but generally it makes more sense to use {@link 
+     * #assertEquals(long, long, String)} in that case.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails.
+     */
     public static void assertInRange(long minimum, long actual, long maximum, 
             String msg) {
         String errMsg = msg + ". Expected " + actual + " to be in range from " 
                 + minimum + " to " + maximum;
-        throw new AssertionError(errMsg); 
+        boolean inRange = minimum <= actual && actual <= maximum;
+        assert inRange : errMsg;
     }
     
     // TODO: Write tests for this
