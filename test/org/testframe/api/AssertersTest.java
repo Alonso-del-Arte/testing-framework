@@ -3829,6 +3829,54 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertInRangeButIsBelow() {
+        int minimum = RANDOM.nextInt(Short.MAX_VALUE);
+        int maximum = minimum + RANDOM.nextInt(Short.MAX_VALUE);
+        int belowRange = minimum - RANDOM.nextInt(Short.MAX_VALUE) - 1;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, belowRange, maximum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + belowRange + " to be in range from " + minimum + " to " 
+                    + maximum;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + belowRange + " is in the range from " 
+                + minimum + " to " + maximum + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertInRangeButIsAbove() {
+        int minimum = RANDOM.nextInt(Short.MAX_VALUE);
+        int maximum = minimum + RANDOM.nextInt(Short.MAX_VALUE);
+        int aboveRange = maximum + RANDOM.nextInt(Short.MAX_VALUE) + 1;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, aboveRange, maximum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + aboveRange + " to be in range from " + minimum + " to " 
+                    + maximum;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + aboveRange + " is in the range from " 
+                + minimum + " to " + maximum + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertDifferentButIsSame() {
         int number = RANDOM.nextInt();
         boolean failOccurred = false;
