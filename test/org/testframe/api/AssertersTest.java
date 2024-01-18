@@ -3945,6 +3945,25 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertInRangeDefaultMessage() {
+        int minimum = RANDOM.nextInt(Short.MAX_VALUE);
+        int maximum = minimum + RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        for (int actual = minimum; actual <= maximum; actual++) {
+            boolean failOccurred = false;
+            try {
+                Asserters.assertInRange(minimum, actual, maximum);
+            } catch (AssertionError ae) {
+                failOccurred = true;
+                System.out.println("\"" + ae.getMessage() + "\"");
+            }
+            String msg = "Asserting that " + actual + " is in the range from " 
+                    + minimum + " to " + maximum 
+                    + " should not have failed the test";
+            assert !failOccurred : msg;
+        }
+    }
+    
+    @Test
     public void testAssertDifferentButIsSame() {
         int number = RANDOM.nextInt();
         boolean failOccurred = false;
