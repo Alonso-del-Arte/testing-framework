@@ -3964,6 +3964,28 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertInRangeButIsAboveDefaultMessage() {
+        int minimum = RANDOM.nextInt(Short.MAX_VALUE);
+        int maximum = minimum + RANDOM.nextInt(Short.MAX_VALUE) + 1;
+        int aboveRange = maximum + RANDOM.nextInt(Short.MAX_VALUE) + 1;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, aboveRange, maximum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected " + aboveRange + " to be in range from " 
+                    + minimum + " to " + maximum;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + aboveRange + " is in the range from " 
+                + minimum + " to " + maximum + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertDifferentButIsSame() {
         int number = RANDOM.nextInt();
         boolean failOccurred = false;
