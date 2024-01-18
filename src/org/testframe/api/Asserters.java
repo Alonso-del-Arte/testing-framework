@@ -1065,8 +1065,9 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertInRange(long minimum, long actual, long maximum) {
-        String msg = "SORRY";
-        assertInRange(minimum, actual, maximum, msg);
+        String errMsg = "Expected " + actual + " to be in range from " + minimum 
+                + " to " + maximum;
+        throw new AssertionError(errMsg);
     }
     
     /**
