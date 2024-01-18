@@ -3986,6 +3986,30 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertInRangeRejectsBadMinMaxCombinationDefaultMessage() {
+        int minimum = RANDOM.nextInt(Short.MAX_VALUE);
+        int maximum = minimum - 1;
+        int number = RANDOM.nextInt();
+        boolean exceptionOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, number, maximum);
+        } catch (IllegalArgumentException iae) {
+            exceptionOccurred = true;
+            String expected = "Combination of minimum " + minimum 
+                    + " and maximum " + maximum + " is invalid";
+            String actual = iae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        } catch (AssertionError ae) {
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Using minimum " + minimum + " and maximum " + maximum 
+                + " should have caused an exception";
+        assert exceptionOccurred : msg;
+    }
+    
+    @Test
     public void testAssertDifferentButIsSame() {
         int number = RANDOM.nextInt();
         boolean failOccurred = false;
