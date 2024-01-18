@@ -1064,6 +1064,11 @@ public class Asserters {
     }
     
     public static void assertInRange(long minimum, long actual, long maximum) {
+        if (minimum > maximum) {
+            String excMsg = "Combination of minimum " + minimum 
+                    + " and maximum " + maximum + " is invalid";
+            throw new IllegalArgumentException(excMsg);
+        }
         String errMsg = "Expected " + actual + " to be in range from " + minimum 
                 + " to " + maximum;
         assert minimum <= actual && actual <= maximum : errMsg;
