@@ -1063,11 +1063,10 @@ public class Asserters {
         assert !Double.isNaN(actual) : errMsg;
     }
     
-    // TODO: Write tests for this
     public static void assertInRange(long minimum, long actual, long maximum) {
         String errMsg = "Expected " + actual + " to be in range from " + minimum 
                 + " to " + maximum;
-        throw new AssertionError(errMsg);
+        assert minimum <= actual : errMsg;
     }
     
     /**
