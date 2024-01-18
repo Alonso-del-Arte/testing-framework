@@ -1066,7 +1066,7 @@ public class Asserters {
     public static void assertInRange(long minimum, long actual, long maximum) {
         String errMsg = "Expected " + actual + " to be in range from " + minimum 
                 + " to " + maximum;
-        assert minimum <= actual : errMsg;
+        assert minimum <= actual && actual <= maximum : errMsg;
     }
     
     /**
