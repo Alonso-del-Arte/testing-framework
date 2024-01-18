@@ -1080,19 +1080,31 @@ public class Asserters {
      * failing the test. For example, &minus;163. If this parameter is 0 or 1 
      * and <code>maximum</code> is <code>Long.MAX_VALUE</code>, then it might be 
      * better to use {@link #assertNotNegative(long, String)} or {@link 
-     * #assertPositive(long, String)} instead. 
-     * @param actual The actual number. For example, &minus;1. This number may 
-     * be equal to either <code>minimum</code> or <code>maximum</code> and still 
-     * not cause the assertion to fail.
+     * #assertPositive(long, String)} instead. This parameter may be equal to 
+     * <code>maximum</code>, but must not be greater.
+     * @param actual The number said to be between <code>minimum</code> and 
+     * <code>maximum</code>. For example, &minus;1. This number may be equal to 
+     * either <code>minimum</code> or <code>maximum</code> and still not cause 
+     * the assertion to fail.
      * @param maximum The highest number that <code>actual</code> can be without 
      * failing the test. For example, 73. This parameter is allowed to be equal 
      * to <code>minimum</code>, but generally it makes more sense to use {@link 
-     * #assertEquals(long, long, String)} in that case.
+     * #assertEquals(long, long, String)} in that case. This parameter must not 
+     * be less than <code>minimum</code>.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
+     * @throws IllegalArgumentException If <code>minimum</code> is greater than 
+     * <code>maximum</code>, without regard for what <code>actual</code> is. The 
+     * exception message will include <code>minimum</code> and 
+     * <code>maximum</code> but not <code>actual</code>.
      */
     public static void assertInRange(long minimum, long actual, long maximum, 
             String msg) {
+        if (minimum > maximum) {
+            String excMsg = "Combination of minimum " + minimum 
+                    + " and maximum " + maximum + " is invalid";
+            throw new IllegalArgumentException(excMsg);
+        }
         String errMsg = msg + ". Expected " + actual + " to be in range from " 
                 + minimum + " to " + maximum;
         boolean inRange = minimum <= actual && actual <= maximum;
