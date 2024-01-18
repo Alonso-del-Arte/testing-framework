@@ -1063,15 +1063,35 @@ public class Asserters {
         assert !Double.isNaN(actual) : errMsg;
     }
     
+    /**
+     * Asserts that an integer is in a given range. Using this assertion is 
+     * similar to combining {@link #assertMinimum(long, long)} and {@link 
+     * #assertMaximum(long, long)} in a single test, but with this assertion, if 
+     * the assertion fails, the test failure explanation will include both the 
+     * minimum and the maximum regardless of whether or not the failure was for 
+     * the actual number being too low or too high.
+     * @param minimum The lowest number that <code>actual</code> can be without 
+     * failing the test. For example, &minus;163. If this parameter is 0 or 1 
+     * and <code>maximum</code> is <code>Long.MAX_VALUE</code>, then it might be 
+     * better to use {@link #assertNotNegative(long)} or {@link 
+     * #assertPositive(long)} instead. This parameter may be equal to 
+     * <code>maximum</code>, but must not be greater.
+     * @param actual The number said to be between <code>minimum</code> and 
+     * <code>maximum</code>. For example, &minus;1. This number may be equal to 
+     * either <code>minimum</code> or <code>maximum</code> and still not cause 
+     * the assertion to fail.
+     * @param maximum The highest number that <code>actual</code> can be without 
+     * failing the test. For example, 73. This parameter is allowed to be equal 
+     * to <code>minimum</code>, but generally it makes more sense to use {@link 
+     * #assertEquals(long, long)} in that case. This parameter must not be less 
+     * than <code>minimum</code>.
+     * @throws IllegalArgumentException If <code>minimum</code> is greater than 
+     * <code>maximum</code>, without regard for what <code>actual</code> is. The 
+     * exception message will include <code>minimum</code> and 
+     * <code>maximum</code> but not <code>actual</code>.
+     */
     public static void assertInRange(long minimum, long actual, long maximum) {
-        if (minimum > maximum) {
-            String excMsg = "Combination of minimum " + minimum 
-                    + " and maximum " + maximum + " is invalid";
-            throw new IllegalArgumentException(excMsg);
-        }
-        String errMsg = "Expected " + actual + " to be in range from " + minimum 
-                + " to " + maximum;
-        assert minimum <= actual && actual <= maximum : errMsg;
+        assertInRange(minimum, actual, maximum, "");
     }
     
     /**
@@ -1110,8 +1130,9 @@ public class Asserters {
                     + " and maximum " + maximum + " is invalid";
             throw new IllegalArgumentException(excMsg);
         }
-        String errMsg = msg + ". Expected " + actual + " to be in range from " 
-                + minimum + " to " + maximum;
+        String intermediate = msg + ". Expected " + actual 
+                + " to be in range from " + minimum + " to " + maximum;
+        String errMsg = prepMsg(intermediate);
         boolean inRange = minimum <= actual && actual <= maximum;
         assert inRange : errMsg;
     }
