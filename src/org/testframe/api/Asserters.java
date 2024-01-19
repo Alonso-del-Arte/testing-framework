@@ -1146,7 +1146,20 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertInRange(double minimum, double actual, 
+            double maximum, double delta) {
+        String msg = "Sorry, default message not implemented yet";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    // TODO: Write tests for this
+    public static void assertInRange(double minimum, double actual, 
             double maximum, String msg) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static void assertInRange(double minimum, double actual, 
+            double maximum, double delta, String msg) {
         //
     }
     
