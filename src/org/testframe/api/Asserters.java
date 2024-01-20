@@ -1176,7 +1176,7 @@ public class Asserters {
         String errMsg = "Expected " + actual.toString() 
                 + " to be in range from " + minimum.toString() + " to " 
                 + maximum.toString();
-        throw new AssertionError(errMsg);
+        assert actual.compareTo(minimum) >= 0 : errMsg;
     }
     
     /**
