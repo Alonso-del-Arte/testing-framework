@@ -1173,7 +1173,10 @@ public class Asserters {
     // TODO: Write tests for this
     public static <T extends Comparable<T>> void assertInRange(T minimum, 
             T actual, T maximum, String msg) {
-        //
+        String errMsg = "Expected " + actual.toString() 
+                + " to be in range from " + minimum.toString() + " to " 
+                + maximum.toString();
+        throw new AssertionError(errMsg);
     }
     
     /**
