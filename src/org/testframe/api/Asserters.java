@@ -1187,9 +1187,17 @@ public class Asserters {
      * pass the assertion. For example, Friday.  
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails. For example, "Assigned day expected to be a weekday."
+     * @throws IllegalArgumentException If <code>minimum</code> is greater than 
+     * <code>maximum</code>.
      */
     public static <T extends Comparable<T>> void assertInRange(T minimum, 
             T actual, T maximum, String msg) {
+        if (minimum.compareTo(maximum) > 0) {
+            String excMsg = msg + ". Combination of minimum " 
+                    + minimum.toString() + " and maximum " + maximum.toString() 
+                    + " is invalid";
+            throw new IllegalArgumentException(excMsg);
+        }
         String errMsg = "Expected " + actual.toString() 
                 + " to be in range from " + minimum.toString() + " to " 
                 + maximum.toString();
