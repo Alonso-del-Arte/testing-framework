@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.font.NumericShaper;
 import java.math.BigInteger;
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
@@ -4090,6 +4091,34 @@ public class AssertersTest {
                 + " is in the range from " + minimum.toString() + " to " 
                 + maximum.toString() + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertInRangeComparableRejectsBadMinMaxCombination() {
+        int hours = RANDOM.nextInt(Short.MAX_VALUE) + 1;
+        Duration minimum = Duration.ofHours(hours); 
+        Duration maximum = minimum.minusHours(1);
+        Duration number = Duration.ofSeconds(3600 * hours 
+                + RANDOM.nextInt(Short.MAX_VALUE));
+        boolean exceptionOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, number, maximum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (IllegalArgumentException iae) {
+            exceptionOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Combination of minimum " + minimum + " and maximum " 
+                    + maximum + " is invalid";
+            String actual = iae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        } catch (AssertionError ae) {
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Using minimum " + minimum + " and maximum " + maximum 
+                + " should have caused an exception";
+        assert exceptionOccurred : msg;
     }
     
     @Test
