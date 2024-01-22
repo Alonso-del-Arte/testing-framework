@@ -4148,6 +4148,32 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertInRangeComparableDefaultMessage() {
+        int radix = 36;
+        int size = RANDOM.nextInt(32) + 8;
+        String[] strings = new String[size];
+        for (int i = 0; i < size; i++) {
+            int num = RANDOM.nextInt() + i;
+            strings[i] = Integer.toString(num, radix);
+        }
+        Arrays.sort(strings);
+        String minimum = strings[0];
+        String maximum = strings[size - 1];
+        for (String actual : strings) {
+            boolean failOccurred = false;
+            try {
+                Asserters.assertInRange(minimum, actual, maximum);
+            } catch (AssertionError ae) {
+                failOccurred = true;
+            }
+            String msg = "Asserting that \"" + actual 
+                    + "\" is in the range from \"" + minimum + "\" to \"" 
+                    + maximum + "\" should not have failed the test";
+            assert !failOccurred : msg;
+        }
+    }
+    
+    @Test
     public void testAssertDifferentButIsSame() {
         int number = RANDOM.nextInt();
         boolean failOccurred = false;
