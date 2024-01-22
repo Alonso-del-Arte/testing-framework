@@ -1163,19 +1163,27 @@ public class Asserters {
         //
     }
     
+    /**
+     * Asserts that an object is in a given range. Using this assertion is 
+     * similar to combining {@link #assertMinimum(Comparable, Comparable)} and 
+     * {@link #assertMaximum(Comparable, Comparable)} in a single test. But if 
+     * this assertion fails, the test failure explanation will include both the 
+     * minimum and the maximum, regardless of whether it's because the actual 
+     * value was too low or too high. The actual value will be included as well.
+     * @param <T> The type for <code>minimum</code>, <code>actual</code> and 
+     * <code>maximum</code>. Must implement <code>Comparable&lt;T&gt;</code>. 
+     * For example, <code>DayOfWeek</code>.    
+     * @param minimum The lowest value <code>actual</code> can be and still pass 
+     * the assertion. For example, Monday.
+     * @param actual The actual value. For example, Tuesday.
+     * @param maximum The highest value <code>actual</code> can be and still 
+     * pass the assertion. For example, Friday.
+     * @throws IllegalArgumentException If <code>minimum</code> is greater than 
+     * <code>maximum</code>.
+     */
     public static <T extends Comparable<T>> void assertInRange(T minimum, 
             T actual, T maximum) {
-        if (minimum.compareTo(maximum) > 0) {
-            String excMsg = "Combination of minimum " + minimum.toString() 
-                    + " and maximum " + maximum.toString() + " is invalid";
-            throw new IllegalArgumentException(excMsg);
-        }
-        String errMsg = "Expected " + actual.toString() 
-                + " to be in range from " + minimum.toString() + " to " 
-                + maximum.toString();
-        assert actual.compareTo(minimum) >= 0 : errMsg;
-        assert actual.compareTo(maximum) <= 0 : errMsg;
-//        assertInRange(minimum, actual, maximum, "");
+        assertInRange(minimum, actual, maximum, "");
     }
     
     /**
@@ -1184,7 +1192,8 @@ public class Asserters {
      * String)} and {@link #assertMaximum(Comparable, Comparable, String)} in a 
      * single test. But if this assertion fails, the test failure explanation 
      * will include both the minimum and the maximum, regardless of whether it's 
-     * because the actual value was too low or too high.
+     * because the actual value was too low or too high. The actual value will 
+     * be included as well.
      * @param <T> The type for <code>minimum</code>, <code>actual</code> and 
      * <code>maximum</code>. Must implement <code>Comparable&lt;T&gt;</code>. 
      * For example, <code>DayOfWeek</code>.    
@@ -1205,9 +1214,10 @@ public class Asserters {
                     + " and maximum " + maximum.toString() + " is invalid";
             throw new IllegalArgumentException(excMsg);
         }
-        String errMsg = msg + ". Expected " + actual.toString() 
+        String intermediate = msg + ". Expected " + actual.toString() 
                 + " to be in range from " + minimum.toString() + " to " 
                 + maximum.toString();
+        String errMsg = prepMsg(intermediate);
         assert actual.compareTo(minimum) >= 0 : errMsg;
         assert actual.compareTo(maximum) <= 0 : errMsg;
     }
