@@ -4026,9 +4026,9 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Expected " + belowRange.toString() 
-                    + " to be in range from " + minimum.toString() + " to " 
-                    + maximum.toString();
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + belowRange.toString() + " to be in range from " 
+                    + minimum.toString() + " to " + maximum.toString();
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
@@ -4079,9 +4079,9 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Expected " + aboveRange.toString() 
-                    + " to be in range from " + minimum.toString() + " to " 
-                    + maximum.toString();
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + aboveRange.toString() + " to be in range from " 
+                    + minimum.toString() + " to " + maximum.toString();
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
@@ -4120,6 +4120,33 @@ public class AssertersTest {
                 + " should have caused an exception";
         assert exceptionOccurred : msg;
     }
+    
+//    @Test
+//    public void testAssertInRangeComparableButIsBelowDefaultMessage() {
+//        LocalDate today = LocalDate.now();
+//        int numberOfYears = 10;
+//        LocalDate minimum = today.minusYears(numberOfYears);
+//        LocalDate maximum = today.plusYears(numberOfYears);
+//        LocalDate belowRange = minimum.minusYears(numberOfYears 
+//                * numberOfYears);
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertInRange(minimum, belowRange, maximum);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//            String expected = "Expected " + belowRange.toString() 
+//                    + " to be in range from " + minimum.toString() + " to " 
+//                    + maximum.toString();
+//            String actual = ae.getMessage();
+//            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+//                    + "\"";
+//            assert expected.equals(actual) : msg;
+//        }
+//        String msg = "Asserting that " + belowRange.toString() 
+//                + " is in the range from " + minimum.toString() + " to " 
+//                + maximum.toString() + " should have failed the test";
+//        assert failOccurred : msg;
+//    }
     
     @Test
     public void testAssertDifferentButIsSame() {
