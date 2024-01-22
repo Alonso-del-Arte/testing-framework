@@ -1169,6 +1169,7 @@ public class Asserters {
                 + " to be in range from " + minimum.toString() + " to " 
                 + maximum.toString();
         assert actual.compareTo(minimum) >= 0 : errMsg;
+        assert actual.compareTo(maximum) <= 0 : errMsg;
 //        assertInRange(minimum, actual, maximum, "");
     }
     
