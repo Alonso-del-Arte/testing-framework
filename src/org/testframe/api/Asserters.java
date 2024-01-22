@@ -1165,6 +1165,11 @@ public class Asserters {
     
     public static <T extends Comparable<T>> void assertInRange(T minimum, 
             T actual, T maximum) {
+        if (minimum.compareTo(maximum) > 0) {
+            String excMsg = "Combination of minimum " + minimum.toString() 
+                    + " and maximum " + maximum.toString() + " is invalid";
+            throw new IllegalArgumentException(excMsg);
+        }
         String errMsg = "Expected " + actual.toString() 
                 + " to be in range from " + minimum.toString() + " to " 
                 + maximum.toString();
