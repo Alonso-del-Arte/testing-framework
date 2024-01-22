@@ -4106,8 +4106,8 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (IllegalArgumentException iae) {
             exceptionOccurred = true;
-            String expected = "Combination of minimum " + minimum 
-                    + " and maximum " + maximum + " is invalid";
+            String expected = "Combination of minimum " + minimum.toString() 
+                    + " and maximum " + maximum.toString() + " is invalid";
             String actual = iae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
@@ -4115,8 +4115,8 @@ public class AssertersTest {
         } catch (AssertionError ae) {
             System.out.println("\"" + ae.getMessage() + "\"");
         }
-        String msg = "Using minimum " + minimum + " and maximum " + maximum 
-                + " should have caused an exception";
+        String msg = "Using minimum " + minimum.toString() + " and maximum " 
+                + maximum.toString() + " should have caused an exception";
         assert exceptionOccurred : msg;
     }
     
@@ -4196,6 +4196,32 @@ public class AssertersTest {
                 + " is in the range from " + minimum.toString() + " to " 
                 + maximum.toString() + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertInRangeComparableRejectsBadMinMaxComboDefMsg() {
+        int hours = RANDOM.nextInt(Short.MAX_VALUE) + 1;
+        Duration minimum = Duration.ofHours(hours); 
+        Duration maximum = minimum.minusHours(1);
+        Duration number = Duration.ofSeconds(3600 * hours 
+                + RANDOM.nextInt(Short.MAX_VALUE));
+        boolean exceptionOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, number, maximum);
+        } catch (IllegalArgumentException iae) {
+            exceptionOccurred = true;
+            String expected = "Combination of minimum " + minimum.toString() 
+                    + " and maximum " + maximum.toString() + " is invalid";
+            String actual = iae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        } catch (AssertionError ae) {
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Using minimum " + minimum.toString() + " and maximum " 
+                + maximum.toString() + " should have caused an exception";
+        assert exceptionOccurred : msg;
     }
     
     @Test
