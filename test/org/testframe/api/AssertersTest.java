@@ -4106,9 +4106,8 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (IllegalArgumentException iae) {
             exceptionOccurred = true;
-            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
-                    + ". Combination of minimum " + minimum + " and maximum " 
-                    + maximum + " is invalid";
+            String expected = "Combination of minimum " + minimum 
+                    + " and maximum " + maximum + " is invalid";
             String actual = iae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
