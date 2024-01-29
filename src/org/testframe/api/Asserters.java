@@ -1160,7 +1160,10 @@ public class Asserters {
     // TODO: Write tests for this
     public static void assertInRange(double minimum, double actual, 
             double maximum, double delta, String msg) {
-        //
+        if (Double.isNaN(minimum)) {
+            String excMsg = "Minimum, maximum must both not be NaN";
+            throw new IllegalArgumentException(excMsg);
+        }
     }
     
     /**
