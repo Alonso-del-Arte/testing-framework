@@ -4010,7 +4010,30 @@ public class AssertersTest {
         assert exceptionOccurred : msg;
     }
     
-    // TODO: Write tests for assertInRange involving double
+    @Test
+    public void testNaNNotAllowedForAssertDoubleInRangeMinimum() {
+        double minimum = Double.NaN;
+        double maximum = 1.0 + RANDOM.nextDouble();
+        double number = RANDOM.nextDouble();
+        boolean exceptionOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, number, maximum, LOCAL_DELTA, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (IllegalArgumentException iae) {
+            exceptionOccurred = true;
+            String expected = "Minimum, maximum must both not be NaN";
+            String actual = iae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        } catch (AssertionError ae) {
+            System.out.println("\"" + ae.getMessage() + "\"");
+        }
+        String msg = "Using NaN for minimum should have caused exception";
+        assert exceptionOccurred : msg;
+    }
+    
+    // TODO: Write more tests for assertInRange involving double
     
     @Test
     public void testAssertInRangeComparableButIsBelow() {
