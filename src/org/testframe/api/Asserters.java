@@ -1157,10 +1157,19 @@ public class Asserters {
         //
     }
     
-    // TODO: Write tests for this
+    /**
+     * 
+     * @param minimum
+     * @param actual
+     * @param maximum
+     * @param delta
+     * @param msg
+     * @throws IllegalArgumentException If either <code>minimum</code> or 
+     * <code>maximum</code> is NaN.
+     */
     public static void assertInRange(double minimum, double actual, 
             double maximum, double delta, String msg) {
-        if (Double.isNaN(minimum)) {
+        if (Double.isNaN(minimum) || Double.isNaN(maximum)) {
             String excMsg = "Minimum, maximum must both not be NaN";
             throw new IllegalArgumentException(excMsg);
         }
