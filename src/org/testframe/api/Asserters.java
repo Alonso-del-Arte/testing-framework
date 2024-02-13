@@ -1159,7 +1159,8 @@ public class Asserters {
     
     /**
      * 
-     * @param minimum
+     * @param minimum The lowest number that <code>actual</code> can be without 
+     * failing the test. For example, &minus;0.5.
      * @param actual
      * @param maximum
      * @param delta
@@ -1173,9 +1174,11 @@ public class Asserters {
             String excMsg = "Minimum, maximum must both not be NaN";
             throw new IllegalArgumentException(excMsg);
         }
-        String errMsg = "Expected " + actual + " to be in range from " + minimum 
-                + " to " + maximum;
-        throw new AssertionError(errMsg);
+        if (actual < minimum) {
+            String errMsg = "Expected " + actual + " to be in range from " 
+                    + minimum + " to " + maximum;
+            throw new AssertionError(errMsg);
+        }
     }
     
     /**
