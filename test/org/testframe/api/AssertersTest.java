@@ -4128,12 +4128,30 @@ public class AssertersTest {
         double slightlyBelowRange = minimum - HALF_LOCAL_DELTA;
         boolean failOccurred = false;
         try {
-            Asserters.assertInRange(minimum, slightlyBelowRange, maximum, LOCAL_DELTA, 
-                    EXAMPLE_ASSERTION_MESSAGE_PART);
+            Asserters.assertInRange(minimum, slightlyBelowRange, maximum, 
+                    LOCAL_DELTA, EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
         }
         String msg = "The number " + slightlyBelowRange 
+                + " should be said to be in range " + minimum + " to " + maximum 
+                + " due to variance " + LOCAL_DELTA;
+        assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testDoubleAboveButInRangeDueToVariance() {
+        double minimum = -1.0 + RANDOM.nextDouble();
+        double maximum = 1.0 + RANDOM.nextDouble();
+        double slightlyAboveRange = maximum + HALF_LOCAL_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, slightlyAboveRange, maximum, 
+                    LOCAL_DELTA, EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "The number " + slightlyAboveRange 
                 + " should be said to be in range " + minimum + " to " + maximum 
                 + " due to variance " + LOCAL_DELTA;
         assert !failOccurred : msg;
