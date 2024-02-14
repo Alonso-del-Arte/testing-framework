@@ -4056,7 +4056,7 @@ public class AssertersTest {
         assert exceptionOccurred : msg;
     }
     
-//    @Test
+    @Test
     public void testNaNNotAllowedForAssertDoubleInRangeDelta() {
         double minimum = -1.0 + RANDOM.nextDouble();
         double maximum = 1.0 - RANDOM.nextDouble();
@@ -4075,7 +4075,7 @@ public class AssertersTest {
         } catch (AssertionError ae) {
             System.out.println("\"" + ae.getMessage() + "\"");
         }
-        String msg = "Using NaN for maximum should have caused exception";
+        String msg = "Using NaN for delta should have caused exception";
         assert exceptionOccurred : msg;
     }
     
