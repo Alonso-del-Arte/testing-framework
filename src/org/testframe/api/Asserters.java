@@ -1175,7 +1175,8 @@ public class Asserters {
             throw new IllegalArgumentException(excMsg);
         }
         double adjustedMininum = minimum - delta;
-        if (actual < adjustedMininum || maximum < actual) {
+        double adjustedMaxinum = maximum + delta;
+        if (actual < adjustedMininum || adjustedMaxinum < actual) {
             String errMsg = "Expected " + actual + " to be in range from " 
                     + minimum + " to " + maximum;
             throw new AssertionError(errMsg);
