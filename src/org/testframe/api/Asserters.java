@@ -1174,7 +1174,8 @@ public class Asserters {
             String excMsg = "Minimum, maximum must both not be NaN";
             throw new IllegalArgumentException(excMsg);
         }
-        if (actual < minimum || maximum < actual) {
+        double adjustedMininum = minimum - delta;
+        if (actual < adjustedMininum || maximum < actual) {
             String errMsg = "Expected " + actual + " to be in range from " 
                     + minimum + " to " + maximum;
             throw new AssertionError(errMsg);
