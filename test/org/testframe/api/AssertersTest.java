@@ -4097,6 +4097,30 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertInRangeDoubleButIsAbove() {
+        double minimum = -1.0 + RANDOM.nextDouble();
+        double maximum = 1.0 + RANDOM.nextDouble();
+        double aboveRange = 2.0 + RANDOM.nextDouble() + LOCAL_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, aboveRange, maximum, LOCAL_DELTA, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected " + aboveRange + " to be in range from " 
+                    + minimum + " to " + maximum;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "The number " + aboveRange 
+                + " should not be said to be in range " + minimum + " to " 
+                + maximum;
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertInRange involving double
     
     @Test
