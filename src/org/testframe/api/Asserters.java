@@ -1171,7 +1171,7 @@ public class Asserters {
     public static void assertInRange(double minimum, double actual, 
             double maximum, double delta, String msg) {
         if (Double.isNaN(minimum) || Double.isNaN(maximum)) {
-            String excMsg = "Minimum, maximum must both not be NaN";
+            String excMsg = "Minimum, maximum, delta should not be NaN";
             throw new IllegalArgumentException(excMsg);
         }
         double adjustedMininum = minimum - delta;
