@@ -4279,6 +4279,23 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertInRangeDoubleDefaultDelta() {
+        double minimum = -1.0 + RANDOM.nextDouble();
+        double maximum = 1.0 + RANDOM.nextDouble();
+        double number = RANDOM.nextDouble();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, number, maximum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting " + number + " is in range " + minimum + " to " 
+                + maximum + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertInRange involving double
     
     @Test
