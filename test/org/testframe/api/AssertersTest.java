@@ -4296,6 +4296,32 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertInRangeDoubleButIsAboveDefaultDelta() {
+        double minimum = -1.0 + RANDOM.nextDouble();
+        double maximum = 1.0 + RANDOM.nextDouble();
+        double aboveRange = 2.0 + RANDOM.nextDouble() 
+                + Asserters.DEFAULT_TEST_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, aboveRange, maximum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected " + aboveRange + " to be in range from " 
+                    + minimum + " to " + maximum + " with variance " 
+                    + Asserters.DEFAULT_TEST_DELTA;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "The number " + aboveRange 
+                + " should not be said to be in range " + minimum + " to " 
+                + maximum;
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertInRange involving double
     
     @Test
