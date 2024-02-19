@@ -1171,23 +1171,7 @@ public class Asserters {
      */
     public static void assertInRange(double minimum, double actual, 
             double maximum, String msg) {
-        if (Double.isNaN(minimum) || Double.isNaN(maximum)) {
-            String excMsg = "Minimum, maximum, delta should not be NaN";
-            throw new IllegalArgumentException(excMsg);
-        }
-        if (minimum > maximum) {
-            String excMsg = "Combination of minimum " + minimum 
-                    + " and maximum " + maximum + " is invalid";
-            throw new IllegalArgumentException(excMsg);
-        }
-        double adjustedMinimum = minimum - DEFAULT_TEST_DELTA;
-        double adjustedMaximum = maximum + DEFAULT_TEST_DELTA;
-        if (actual < adjustedMinimum || actual > adjustedMaximum) {
-            String errMsg = "Expected " + actual + " to be in range from " 
-                    + minimum + " to " + maximum + " with variance " 
-                    + DEFAULT_TEST_DELTA;
-            throw new AssertionError(errMsg);
-        }
+        assertInRange(minimum, actual, maximum, DEFAULT_TEST_DELTA, msg);
     }
     
     /**
