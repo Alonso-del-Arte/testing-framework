@@ -4339,6 +4339,23 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testDoubleAboveButInRangeDueToVarianceDefaultVariance() {
+        double minimum = -1.0 + RANDOM.nextDouble();
+        double maximum = 1.0 + RANDOM.nextDouble();
+        double slightlyAboveRange = maximum + HALF_DEFAULT_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertInRange(minimum, slightlyAboveRange, maximum);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "The number " + slightlyAboveRange 
+                + " should be said to be in range " + minimum + " to " + maximum 
+                + " due to variance " + Asserters.DEFAULT_TEST_DELTA;
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertInRange involving double
     
     @Test
