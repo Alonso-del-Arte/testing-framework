@@ -1144,7 +1144,8 @@ public class Asserters {
     
     public static void assertInRange(double minimum, double actual, 
             double maximum, double delta) {
-        if (Double.isNaN(minimum) || Double.isNaN(maximum)) {
+        if (Double.isNaN(minimum) || Double.isNaN(maximum) 
+                || Double.isNaN(delta)) {
             String excMsg = "Minimum, maximum, delta should not be NaN";
             throw new IllegalArgumentException(excMsg);
         }
