@@ -1167,7 +1167,6 @@ public class Asserters {
      */
     public static void assertInRange(double minimum, double actual, 
             double maximum, String msg) {
-        if (minimum > maximum) return;
         assertInRange(minimum, actual, maximum, DEFAULT_TEST_DELTA, msg);
     }
     
