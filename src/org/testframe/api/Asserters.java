@@ -1143,9 +1143,12 @@ public class Asserters {
             String excMsg = "Minimum, maximum, delta should not be NaN";
             throw new IllegalArgumentException(excMsg);
         }
-        String errMsg = "Expected " + actual + " to be in range from " + minimum 
-                + " to " + maximum + " with variance " + DEFAULT_TEST_DELTA;
-        throw new AssertionError(errMsg);
+        if (actual < minimum) {
+            String errMsg = "Expected " + actual + " to be in range from " 
+                    + minimum + " to " + maximum + " with variance " 
+                    + DEFAULT_TEST_DELTA;
+            throw new AssertionError(errMsg);
+        }
     }
     
     /**
