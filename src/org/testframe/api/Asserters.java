@@ -1137,10 +1137,31 @@ public class Asserters {
         assert inRange : errMsg;
     }
     
+    /**
+     * Asserts that a floating point number is in a given range. In most cases, 
+     * the test failure explanation will include the minimum and the maximum.
+     * @param minimum The lowest number that <code>actual</code> can be without 
+     * failing the test. For example, &minus;0.5. Negative infinity may be used, 
+     * but in that case it might make more sense to use {@link 
+     * #assertMaximum(double, double, String) assertMaximum()} instead.
+     * @param actual The actual number. For example, 0.0.
+     * @param maximum The highest number that <code>actual</code> can be without 
+     * failing the test. For example, 0.5. Positive infinity may be used, but in 
+     * that case it might make more sense to use {@link #assertMinimum(double, 
+     * double, String) assertMinimum()} instead.
+     * @throws IllegalArgumentException If either <code>minimum</code> or 
+     * <code>maximum</code> is NaN, or if <code>minimum</code> is greater than 
+     * <code>maximum</code>, without regard for the variance.
+     */
     public static void assertInRange(double minimum, double actual, 
             double maximum) {
         if (Double.isNaN(minimum) || Double.isNaN(maximum)) {
             String excMsg = "Minimum, maximum, delta should not be NaN";
+            throw new IllegalArgumentException(excMsg);
+        }
+        if (minimum > maximum) {
+            String excMsg = "Combination of minimum " + minimum 
+                    + " and maximum " + maximum + " is invalid";
             throw new IllegalArgumentException(excMsg);
         }
         double adjustedMinimum = minimum - DEFAULT_TEST_DELTA;
