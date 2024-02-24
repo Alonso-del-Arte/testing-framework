@@ -4322,20 +4322,15 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-    // TODO: Figure out why there was a failure with the following pseudorandom
-    // numbers: The number 1.8392061317121364 should be said to be in range 
-    // -0.03399755977524621 to 1.8391985023176052 due to variance 
-    // 1.52587890625E-5. Also: The number -0.8234158117544721 should be said to 
-    // be in range -0.8234081823599408 to 1.3855026406046678 due to variance 
-    // 1.52587890625E-5
-    @Skip@Test
+    @Test
     public void testDoubleBelowButInRangeDueToVarianceDefaultDelta() {
         double minimum = -1.0 + RANDOM.nextDouble();
         double maximum = 1.0 + RANDOM.nextDouble();
         double slightlyBelowRange = minimum - HALF_DEFAULT_DELTA;
         boolean failOccurred = false;
         try {
-            Asserters.assertInRange(minimum, slightlyBelowRange, maximum);
+            Asserters.assertInRange(minimum, slightlyBelowRange, maximum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
         }
@@ -4345,20 +4340,15 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-    // TODO: Figure out why there was a failure with the following pseudorandom
-    // numbers: The number 1.8392061317121364 should be said to be in range 
-    // -0.03399755977524621 to 1.8391985023176052 due to variance 
-    // 1.52587890625E-5. Also: The number -0.8234158117544721 should be said to 
-    // be in range -0.8234081823599408 to 1.3855026406046678 due to variance 
-    // 1.52587890625E-5
-    @Skip@Test
+    @Test
     public void testDoubleAboveButInRangeDueToVarianceDefaultVariance() {
         double minimum = -1.0 + RANDOM.nextDouble();
         double maximum = 1.0 + RANDOM.nextDouble();
         double slightlyAboveRange = maximum + HALF_DEFAULT_DELTA;
         boolean failOccurred = false;
         try {
-            Asserters.assertInRange(minimum, slightlyAboveRange, maximum);
+            Asserters.assertInRange(minimum, slightlyAboveRange, maximum, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
         }
