@@ -1486,14 +1486,13 @@ public class Asserters {
     }
     
     // TODO: Write tests for this
-    public static void assertDifferent(Object[] some, Object[] other) {
+    public static <E> void assertDifferent(E[] some, E[] other) {
          String msg = "Sorry, default message not implemented yet";
          assertDifferent(some, other, msg);
     }
     
     // TODO: Write tests for this
-    public static void assertDifferent(Object[] some, Object[] other, 
-            String msg) {
+    public static <E> void assertDifferent(E[] some, E[] other, String msg) {
     }
     
     /**
