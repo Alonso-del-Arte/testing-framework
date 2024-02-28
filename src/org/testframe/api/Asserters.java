@@ -1491,11 +1491,22 @@ public class Asserters {
          assertDifferent(some, other, msg);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts that two arrays of objects are different in some way.
+     * @param <E> The type of the two arrays. For example, <code>Pattern</code>. 
+     * Remember that this is only checked at compile time.
+     * @param some An array. For example, an array with a regular expression for 
+     * e-mail addresses, a regular expression for Roman numerals, a regular 
+     * expression for floating point numbers, and a null.
+     * @param other
+     * @param msg
+     */
     public static <E> void assertDifferent(E[] some, E[] other, String msg) {
-        String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
-                + Arrays.toString(other) + " are not different as asserted";
-        throw new AssertionError(errMsg);
+        if (some.length == other.length) {
+            String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
+                    + Arrays.toString(other) + " are not different as asserted";
+            throw new AssertionError(errMsg);
+        }
     }
     
     /**
