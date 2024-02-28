@@ -5265,7 +5265,61 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-    // TODO: Write tests for assertInRange()
+    @Test
+    public void testAssertDifferentObjectArraysButAreSame() {
+        int length = RANDOM.nextInt(8) + 2;
+        Color[] arrayA = new Color[length];
+        Color[] arrayB = new Color[length];
+        for (int i = 0; i < length; i++) {
+            Color color = new Color(RANDOM.nextInt());
+            arrayA[i] = color;
+            arrayB[i] = color;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(arrayA, arrayB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Arrays " + Arrays.toString(arrayA) + " and " 
+                    + Arrays.toString(arrayB) 
+                    + " are not different as asserted";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(arrayA) + " and " 
+                + Arrays.toString(arrayB) 
+                + " are different should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+  //    @Test
+    public void testAssertDifferentObjectArraysDifferInLength() {
+        int lenA = RANDOM.nextInt(8) + 2;
+        int lenB = lenA + RANDOM.nextInt(4) + 1;
+        LocalDateTime[] arrayA = new LocalDateTime[lenA];
+        LocalDateTime[] arrayB = new LocalDateTime[lenB];
+        for (int i = 0; i < lenA; i++) {
+            LocalDateTime time = LocalDateTime.now().plusMinutes(i);
+            arrayA[i] = time;
+            arrayB[i] = time;
+        }
+        for (int j = lenA; j < lenB; j++) {
+            LocalDateTime time = LocalDateTime.now().minusMinutes(j);
+            arrayB[j] = time;
+        }
+        boolean failOccurred = false;
+        try {
+            //
+        } catch (AssertionError ae) {
+            //
+        }
+        throw new AssertionError("RESUME WORKING HERE");
+    }
+    
+    // TODO: Write more tests for assertDifferent() on arrays
     
     @Test
     public void testAssertContainsButDoesNot() {
