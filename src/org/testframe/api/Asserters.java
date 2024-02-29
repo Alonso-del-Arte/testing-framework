@@ -1508,6 +1508,8 @@ public class Asserters {
      * numbers, and a null. 
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
+     * @throws NullPointerException If <code>some</code> or <code>other</code> 
+     * is null, but not if either array contains nulls.
      */
     public static <E> void assertDifferent(E[] some, E[] other, String msg) {
         int len = some.length;
@@ -1515,8 +1517,12 @@ public class Asserters {
             boolean noDifferenceFound = true;
             int index = 0;
             while (noDifferenceFound && index < len) {
-                noDifferenceFound = some[index].equals(other[index]);
-                index++;
+                if (some[index] == null) {
+                    noDifferenceFound = other[index] == null;
+                } else {
+                    noDifferenceFound = some[index].equals(other[index]);
+                    index++;
+                }
             }
             if (noDifferenceFound) {
                 String errMsg = msg + ". Arrays " + Arrays.toString(some) 
