@@ -5409,6 +5409,33 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentObjectArraysDifferInLengthDefaultMessage() {
+        int lenA = RANDOM.nextInt(8) + 2;
+        int lenB = lenA + RANDOM.nextInt(4) + 1;
+        LocalDateTime[] some = new LocalDateTime[lenA];
+        LocalDateTime[] other = new LocalDateTime[lenB];
+        for (int i = 0; i < lenA; i++) {
+            LocalDateTime time = LocalDateTime.now().plusMinutes(i);
+            some[i] = time;
+            other[i] = time;
+        }
+        for (int j = lenA; j < lenB; j++) {
+            LocalDateTime time = LocalDateTime.now().minusMinutes(j);
+            other[j] = time;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting " + Arrays.toString(some) + " and " 
+                + Arrays.toString(other) 
+                + " are different should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertDifferent() on arrays
     
     @Test
