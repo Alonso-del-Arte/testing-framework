@@ -1509,7 +1509,11 @@ public class Asserters {
         boolean differenceFound = false;
         int index = 0;
         while (!differenceFound && index < len) {
-            differenceFound = !some[index].equals(other[index]);
+            if (some[index] == null) {
+                differenceFound = other[index] != null;
+            } else {
+                differenceFound = !some[index].equals(other[index]);
+            }
             index++;
         }
         if (differenceFound) return;
