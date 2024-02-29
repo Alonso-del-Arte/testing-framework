@@ -5380,6 +5380,35 @@ public class AssertersTest {
         assert !failOccurred : msgB;
     }
     
+    @Test
+    public void testAssertDifferentObjectArraysButAreSameDefaultMessage() {
+        int length = RANDOM.nextInt(8) + 2;
+        Color[] arrayA = new Color[length];
+        Color[] arrayB = new Color[length];
+        for (int i = 0; i < length; i++) {
+            Color color = new Color(RANDOM.nextInt());
+            arrayA[i] = color;
+            arrayB[i] = color;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(arrayA, arrayB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Arrays " + Arrays.toString(arrayA) + " and " 
+                    + Arrays.toString(arrayB) 
+                    + " are not different as asserted";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(arrayA) + " and " 
+                + Arrays.toString(arrayB) 
+                + " are different should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertDifferent() on arrays
     
     @Test
