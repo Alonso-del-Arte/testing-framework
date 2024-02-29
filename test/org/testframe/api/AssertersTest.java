@@ -5460,6 +5460,36 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentObjectArrayNoNPEForNullsDefaultMessage() {
+        int length = RANDOM.nextInt(3) + 2;
+        BigInteger[] arrayA = new BigInteger[length];
+        BigInteger[] arrayB = new BigInteger[length];
+        for (int i = 0; i < length; i++) {
+            BigInteger number = new BigInteger(72 + i, RANDOM);
+            arrayA[i] = number;
+            arrayB[i] = number;
+        }
+        int changeIndex = RANDOM.nextInt(length);
+        arrayA[changeIndex] = null;
+        boolean npeOccurred = false;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(arrayA, arrayB);
+        } catch (NullPointerException npe) {
+            npeOccurred = true;
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msgA = "The null in " + Arrays.toString(arrayA) 
+                + " should not have caused NPE";
+        assert !npeOccurred : msgA;
+        String msgB = "Given that " + Arrays.toString(arrayA) + " and " 
+                + Arrays.toString(arrayB) + " differ at index " + changeIndex 
+                + ", asserting that they're different should not have failed";
+        assert !failOccurred : msgB;
+    }
+    
     // TODO: Write more tests for assertDifferent() on arrays
     
     @Test
