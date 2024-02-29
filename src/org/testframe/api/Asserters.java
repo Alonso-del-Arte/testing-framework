@@ -1485,8 +1485,8 @@ public class Asserters {
             double delta, String msg) {
     }
     
-    // TODO: Write tests for this
     public static <E> void assertDifferent(E[] some, E[] other) {
+        if (some.length != other.length) return;
         String errMsg = "Arrays " + Arrays.toString(some) + " and " 
                 + Arrays.toString(other) + " are not different as asserted";
         throw new AssertionError(errMsg);
