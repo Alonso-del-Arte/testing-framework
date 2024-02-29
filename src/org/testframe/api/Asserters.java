@@ -1512,15 +1512,11 @@ public class Asserters {
      * is null, but not if either array contains nulls.
      */
     public static <E> void assertDifferent(E[] some, E[] other, String msg) {
-        int len = some.length;
-        if (len == other.length) {
-            boolean noDifferenceFound = Arrays.equals(some, other);
-            if (noDifferenceFound) {
-                String errMsg = msg + ". Arrays " + Arrays.toString(some) 
-                        + " and " + Arrays.toString(other) 
-                        + " are not different as asserted";
-                throw new AssertionError(errMsg);
-            }
+        boolean noDifferenceFound = Arrays.equals(some, other);
+        if (noDifferenceFound) {
+            String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
+                    + Arrays.toString(other) + " are not different as asserted";
+            throw new AssertionError(errMsg);
         }
     }
     
