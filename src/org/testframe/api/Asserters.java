@@ -1485,8 +1485,34 @@ public class Asserters {
             double delta, String msg) {
     }
     
+    /**
+     * Asserts that two arrays of objects are different in some way, such as 
+     * that they contain different elements, contain the same elements in a 
+     * different order, or differ in length. The arrays may differ in that they 
+     * have different memory addresses, but that does not matter for this 
+     * assertion. 
+     * @param <E> The type of the two arrays. For example, <code>Pattern</code>. 
+     * Remember that this is only checked at compile time.
+     * @param some An array. For example, an array with a regular expression for 
+     * e-mail addresses, a regular expression for Roman numerals, a regular 
+     * expression for floating point numbers, and a null.
+     * @param other An array said to be different from <code>some</code>. For 
+     * example, an array with a regular expression for Roman numerals, a regular 
+     * expression for e-mail addresses, a regular expression for Social Security 
+     * numbers, and a null. 
+     * @throws NullPointerException If <code>some</code> or <code>other</code> 
+     * is null, but not if either array contains nulls.
+     */
     public static <E> void assertDifferent(E[] some, E[] other) {
-        if (some.length != other.length) return;
+        int len = some.length;
+        if (len != other.length) return;
+        boolean differenceFound = false;
+        int index = 0;
+        while (!differenceFound && index < len) {
+            differenceFound = !some[index].equals(other[index]);
+            index++;
+        }
+        if (differenceFound) return;
         String errMsg = "Arrays " + Arrays.toString(some) + " and " 
                 + Arrays.toString(other) + " are not different as asserted";
         throw new AssertionError(errMsg);
