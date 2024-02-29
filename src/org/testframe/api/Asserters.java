@@ -1514,16 +1514,7 @@ public class Asserters {
     public static <E> void assertDifferent(E[] some, E[] other, String msg) {
         int len = some.length;
         if (len == other.length) {
-            boolean noDifferenceFound = true;
-            int index = 0;
-            while (noDifferenceFound && index < len) {
-                if (some[index] == null) {
-                    noDifferenceFound = other[index] == null;
-                } else {
-                    noDifferenceFound = some[index].equals(other[index]);
-                    index++;
-                }
-            }
+            boolean noDifferenceFound = Arrays.equals(some, other);
             if (noDifferenceFound) {
                 String errMsg = msg + ". Arrays " + Arrays.toString(some) 
                         + " and " + Arrays.toString(other) 
