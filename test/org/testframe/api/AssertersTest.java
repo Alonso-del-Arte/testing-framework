@@ -5436,6 +5436,30 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentObjectArrayDespiteSameLengthDefMsg() {
+        int length = RANDOM.nextInt(8) + 2;
+        BigInteger[] arrayA = new BigInteger[length];
+        BigInteger[] arrayB = new BigInteger[length];
+        for (int i = 0; i < length; i++) {
+            BigInteger number = new BigInteger(64 + i, RANDOM);
+            arrayA[i] = number;
+            arrayB[i] = number;
+        }
+        int changeIndex = RANDOM.nextInt(length);
+        arrayA[changeIndex] = arrayB[changeIndex].add(BigInteger.ONE);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(arrayA, arrayB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Given that " + Arrays.toString(arrayA) + " and " 
+                + Arrays.toString(arrayB) + " differ at index " + changeIndex 
+                + ", asserting that they're different should not have failed";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertDifferent() on arrays
     
     @Test
