@@ -5296,6 +5296,34 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentIntArraysDifferInLength() {
+        int lenA = RANDOM.nextInt(8) + 2;
+        int lenB = lenA + RANDOM.nextInt(4) + 1;
+        int[] some = new int[lenA];
+        int[] other = new int[lenB];
+        for (int i = 0; i < lenA; i++) {
+            int number = RANDOM.nextInt() + i;
+            some[i] = number;
+            other[i] = number;
+        }
+        for (int j = lenA; j < lenB; j++) {
+            int number = RANDOM.nextInt() * j;
+            other[j] = number;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting " + Arrays.toString(some) + " and " 
+                + Arrays.toString(other) 
+                + " are different should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertDifferent() on arrays
     
     @Test
