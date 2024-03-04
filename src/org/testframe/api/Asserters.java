@@ -1504,12 +1504,7 @@ public class Asserters {
      * is null, but not if either array contains nulls.
      */
     public static <E> void assertDifferent(E[] some, E[] other) {
-        boolean noDifferenceFound = Arrays.equals(some, other);
-        if (noDifferenceFound) {
-            String errMsg = "Arrays " + Arrays.toString(some) + " and " 
-                    + Arrays.toString(other) + " are not different as asserted";
-            throw new AssertionError(errMsg);
-        }
+        assertDifferent(some, other, "");
     }
     
     /**
@@ -1535,8 +1530,10 @@ public class Asserters {
     public static <E> void assertDifferent(E[] some, E[] other, String msg) {
         boolean noDifferenceFound = Arrays.equals(some, other);
         if (noDifferenceFound) {
-            String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
-                    + Arrays.toString(other) + " are not different as asserted";
+            String intermediate = msg + ". Arrays " + Arrays.toString(some) 
+                    + " and " + Arrays.toString(other) 
+                    + " are not different as asserted";
+            String errMsg = prepMsg(intermediate);
             throw new AssertionError(errMsg);
         }
     }
