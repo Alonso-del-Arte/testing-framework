@@ -1457,11 +1457,18 @@ public class Asserters {
          assertDifferent(some, other, msg);
     }
     
-    // TODO: Write tests for this
+    /**
+     * 
+     * @param some
+     * @param other
+     * @param msg
+     */
     public static void assertDifferent(int[] some, int[] other, String msg) {
-        String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
-                + Arrays.toString(other) + " are not different as asserted";
-        throw new AssertionError(errMsg);
+        if (some.length == other.length) {
+            String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
+                    + Arrays.toString(other) + " are not different as asserted";
+            throw new AssertionError(errMsg);
+        }
     }
     
     // TODO: Write tests for this
