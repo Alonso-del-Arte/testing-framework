@@ -1459,6 +1459,9 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertDifferent(int[] some, int[] other, String msg) {
+        String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
+                + Arrays.toString(other) + " are not different as asserted";
+        throw new AssertionError(errMsg);
     }
     
     // TODO: Write tests for this
