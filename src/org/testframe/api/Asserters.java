@@ -1451,19 +1451,17 @@ public class Asserters {
         assert !some.equals(other) : errMsg;
     }
     
+    /**
+     * Asserts that two arrays of integers are different, in at least one of the 
+     * elements if not in length. If the assertion fails, the test failure 
+     * explanation will quote both arrays.
+     * @param some One of the arrays to assert is different from the other. For 
+     * example, {1, 0, &minus;1, &minus;1, &minus;2}.
+     * @param other An array to assert is different from some array. For 
+     * For example, {1, 0, &minus;1, 0, &minus;1}.
+     */
     public static void assertDifferent(int[] some, int[] other) {
-        int len = some.length;
-        if (len == other.length) {
-            int diffCount = 0;
-            for (int i = 0; i < len; i++) {
-                if (some[i] != other[i]) {
-                    diffCount++;
-                }
-            }
-            String errMsg = "Arrays " + Arrays.toString(some) + " and " 
-                    + Arrays.toString(other) + " are not different as asserted";
-            assert diffCount > 0 : errMsg;
-        }
+        assertDifferent(some, other, "");
     }
     
     /**
@@ -1471,8 +1469,8 @@ public class Asserters {
      * elements if not in length.
      * @param some One of the arrays to assert is different from the other. For 
      * example, {1, 0, &minus;1, &minus;1, &minus;2}.
-     * @param other An array to assert is different from some array. 
-     * For example, {1, 0, &minus;1, 0, &minus;1}.
+     * @param other An array to assert is different from some array. For 
+     * example, {1, 0, &minus;1, 0, &minus;1}.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
      */
@@ -1485,8 +1483,10 @@ public class Asserters {
                     diffCount++;
                 }
             }
-            String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
-                    + Arrays.toString(other) + " are not different as asserted";
+            String intermediate = msg + ". Arrays " + Arrays.toString(some) 
+                    + " and " + Arrays.toString(other) 
+                    + " are not different as asserted";
+            String errMsg = prepMsg(intermediate);
             assert diffCount > 0 : errMsg;
         }
     }
