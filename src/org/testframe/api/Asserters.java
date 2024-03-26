@@ -1458,16 +1458,27 @@ public class Asserters {
     }
     
     /**
-     * 
-     * @param some
-     * @param other
-     * @param msg
+     * Asserts that two arrays of integers are different, in at least one of the 
+     * elements if not in length.
+     * @param some One of the arrays to assert is different from the other. For 
+     * example, {1, 0, &minus;1, &minus;1, &minus;2}.
+     * @param other An array to assert is different from some array. 
+     * For example, {1, 0, &minus;1, 0, &minus;1}.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails.
      */
     public static void assertDifferent(int[] some, int[] other, String msg) {
-        if (some.length == other.length) {
+        int len = some.length;
+        if (len == other.length) {
+            int diffCount = 0;
+            for (int i = 0; i < len; i++) {
+                if (some[i] != other[i]) {
+                    diffCount++;
+                }
+            }
             String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
                     + Arrays.toString(other) + " are not different as asserted";
-            throw new AssertionError(errMsg);
+            assert diffCount > 0 : errMsg;
         }
     }
     
