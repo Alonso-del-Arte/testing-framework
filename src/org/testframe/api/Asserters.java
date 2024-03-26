@@ -1451,11 +1451,12 @@ public class Asserters {
         assert !some.equals(other) : errMsg;
     }
     
-    // TODO: Write tests for this
     public static void assertDifferent(int[] some, int[] other) {
-        String errMsg = "Arrays " + Arrays.toString(some) + " and " 
-                + Arrays.toString(other) + " are not different as asserted";
-        throw new AssertionError(errMsg);
+        if (some.length == other.length) {
+            String errMsg = "Arrays " + Arrays.toString(some) + " and " 
+                    + Arrays.toString(other) + " are not different as asserted";
+            throw new AssertionError(errMsg);
+        }
     }
     
     /**
