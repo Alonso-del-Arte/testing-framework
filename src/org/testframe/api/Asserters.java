@@ -1510,13 +1510,14 @@ public class Asserters {
          assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
     }
     
-    // TODO: Write tests for this
     public static void assertDifferent(double[] some, double[] other, 
             double delta, String msg) {
-        String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
+        if (some.length == other.length) {
+            String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and "  
                 + Arrays.toString(other) + " are not different beyond variance " 
                 + delta + " as asserted";
-        throw new AssertionError(errMsg);
+            throw new AssertionError(errMsg);
+        }
     }
     
     /**
