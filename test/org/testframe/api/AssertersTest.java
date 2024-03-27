@@ -5517,6 +5517,37 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentDoubleArraysButAreSameDefaultMessage() {
+        int length = RANDOM.nextInt(8) + 2;
+        double[] arrayA = new double[length];
+        double[] arrayB = new double[length];
+        for (int i = 0; i < length; i++) {
+            double number = RANDOM.nextDouble() + i;
+            arrayA[i] = number;
+            arrayB[i] = number + HALF_LOCAL_DELTA;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(arrayA, arrayB, LOCAL_DELTA);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Arrays " + Arrays.toString(arrayA) + " and " 
+                    + Arrays.toString(arrayB) 
+                    + " are not different beyond variance " + LOCAL_DELTA 
+                    + " as asserted";
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting " + Arrays.toString(arrayA) + " and " 
+                + Arrays.toString(arrayB) 
+                + " are different beyond variance " + LOCAL_DELTA 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertDifferent() on arrays
     
     @Test
