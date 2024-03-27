@@ -5462,6 +5462,60 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentDoubleArraysDifferInLength() {
+        int lenA = RANDOM.nextInt(8) + 2;
+        int lenB = lenA + RANDOM.nextInt(4) + 1;
+        double[] some = new double[lenA];
+        double[] other = new double[lenB];
+        for (int i = 0; i < lenA; i++) {
+            double number = RANDOM.nextDouble() + i;
+            some[i] = number;
+            other[i] = number + HALF_LOCAL_DELTA;
+        }
+        for (int j = lenA; j < lenB; j++) {
+            double number = RANDOM.nextDouble() * j;
+            other[j] = number;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other, LOCAL_DELTA,  
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting " + Arrays.toString(some) + " and " 
+                + Arrays.toString(other) 
+                + " are different beyond variance " + LOCAL_DELTA 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+//    @Test
+//    public void testAssertDifferentIntArraysSameLengthDifferInOneElement() {
+//        int length = RANDOM.nextInt(8) + 2;
+//        int[] some = new int[length];
+//        int[] other = new int[length];
+//        for (int i = 0; i < length; i++) {
+//            int number = RANDOM.nextInt() + i;
+//            some[i] = number;
+//            other[i] = number;
+//        }
+//        int changeIndex = RANDOM.nextInt(length);
+//        other[changeIndex]++;
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertDifferent(some, other, 
+//                    EXAMPLE_ASSERTION_MESSAGE_PART);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//        }
+//        String msg = "Asserting " + Arrays.toString(some) + " and " 
+//                + Arrays.toString(other) 
+//                + " are different should not have failed the test";
+//        assert !failOccurred : msg;
+//    }
+    
     // TODO: Write more tests for assertDifferent() on arrays
     
     @Test
