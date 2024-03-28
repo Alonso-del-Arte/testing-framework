@@ -1502,7 +1502,16 @@ public class Asserters {
     
     public static void assertDifferent(double[] some, double[] other, 
             String msg) {
-        if (some.length == other.length) {
+        int len = some.length;
+        if (len == other.length) {
+            int index = 0;
+            while (index < len) {
+                double diff = Math.abs(some[index] - other[index]);
+                if (diff > DEFAULT_TEST_DELTA) {
+                    return;
+                }
+                index++;
+            }
             String errMsg = msg + ". Arrays " + Arrays.toString(some) + " and " 
                     + Arrays.toString(other) 
                     + " are not different beyond variance " + DEFAULT_TEST_DELTA 
