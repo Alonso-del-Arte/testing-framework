@@ -1493,8 +1493,10 @@ public class Asserters {
     
     // TODO: Write tests for this
     public static void assertDifferent(double[] some, double[] other) {
-         String msg = "Sorry, default message not implemented yet";
-         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
+        String errMsg = "Arrays " + Arrays.toString(some) + " and " 
+                + Arrays.toString(other) + " are not different beyond variance " 
+                + DEFAULT_TEST_DELTA + " as asserted";
+        throw new AssertionError(errMsg);
     }
     
     public static void assertDifferent(double[] some, double[] other, 
