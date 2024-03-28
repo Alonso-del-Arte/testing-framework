@@ -5629,6 +5629,34 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertDifferentDoubleArraysDifferInLengthDefVarDefMsg() {
+        int lenA = RANDOM.nextInt(8) + 2;
+        int lenB = lenA + RANDOM.nextInt(4) + 1;
+        double[] some = new double[lenA];
+        double[] other = new double[lenB];
+        for (int i = 0; i < lenA; i++) {
+            double number = RANDOM.nextDouble() + i;
+            some[i] = number;
+            other[i] = number + HALF_DEFAULT_DELTA;
+        }
+        for (int j = lenA; j < lenB; j++) {
+            double number = RANDOM.nextDouble() * j;
+            other[j] = number;
+        }
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting " + Arrays.toString(some) + " and " 
+                + Arrays.toString(other) + " are different beyond variance " 
+                + Asserters.DEFAULT_TEST_DELTA 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     // TODO: Write more tests for assertDifferent(double[]s), default delta, 
     // default message 
     
