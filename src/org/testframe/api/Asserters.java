@@ -1491,37 +1491,114 @@ public class Asserters {
         }
     }
     
+    /**
+     * Asserts that two arrays of 64-bit floating point numbers differ either in 
+     * length or are the same length but at least one element differs by more 
+     * than {@link #DEFAULT_TEST_DELTA}. If the two arrays are the same length, 
+     * the elements will be compared one by one starting with the element at 
+     * index 0, and continuing until either finding an element that differs by 
+     * more than <code>DEFAULT_TEST_DELTA</code> variance or reaching the end of 
+     * the arrays. If no significant differences are found, the assertion will 
+     * fail and the test failure explanation will quote both arrays.
+     * @param some An array to assert is different from the other. For example, 
+     * {&minus;0.5, 2.718281828459045, 3.141592653589793, 10.0}.
+     * @param other The other array. For example, {&minus;0.5, 
+     * 2.718281828459045, 3.142857142857143, 10.0}.
+     * @throws NullPointerException If either array is null.
+     */
     public static void assertDifferent(double[] some, double[] other) {
         assertDifferent(some, other, DEFAULT_TEST_DELTA, "");
     }
     
+    /**
+     * Asserts that two arrays of 64-bit floating point numbers differ either in 
+     * length or are the same length but at least one element differs by more 
+     * than a specified variance. If the two arrays are the same length, the 
+     * elements will be compared one by one starting with the element at index 
+     * 0, and continuing until either finding an element that differs by more 
+     * than the specified variance or reaching the end of the arrays. If no 
+     * significant differences are found, the assertion will fail and the test 
+     * failure explanation will quote both arrays.
+     * @param some An array to assert is different from the other. For example, 
+     * {&minus;0.5, 2.718281828459045, 3.141592653589793, 10.0}.
+     * @param other The other array. For example, {&minus;0.5, 
+     * 2.718281828459045, 3.142857142857143, 10.0}.
+     * @param delta The maximum by which two numbers can differ and still be 
+     * considered equal. Preferably a positive normalized number. For example, 
+     * 0.001. The third element of the example <code>some</code> and 
+     * <code>other</code> arrays differ by 0.0012644892673496777, so in this 
+     * example the two arrays are considered different by more than the 
+     * variance.
+     * @throws NullPointerException If either array is null.
+     */
     public static void assertDifferent(double[] some, double[] other, 
             double delta) {
         assertDifferent(some, other, delta, "");
     }
     
+    /**
+     * Asserts that two arrays of 64-bit floating point numbers differ either in 
+     * length or are the same length but at least one element differs by more 
+     * than {@link #DEFAULT_TEST_DELTA}. If the two arrays are the same length, 
+     * the elements will be compared one by one starting with the element at 
+     * index 0, and continuing until either finding an element that differs by 
+     * more than <code>DEFAULT_TEST_DELTA</code> variance or reaching the end of 
+     * the arrays. If no significant differences are found, the assertion will 
+     * fail and the test failure explanation will quote both arrays.
+     * @param some An array to assert is different from the other. For example, 
+     * {&minus;0.5, 2.718281828459045, 3.141592653589793, 10.0}.
+     * @param other The other array. For example, {&minus;0.5, 
+     * 2.718281828459045, 3.142857142857143, 10.0}.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails.
+     * @throws NullPointerException If either array is null.
+     */
     public static void assertDifferent(double[] some, double[] other, 
             String msg) {
         assertDifferent(some, other, DEFAULT_TEST_DELTA, msg);
     }
     
+    /**
+     * Asserts that two arrays of 64-bit floating point numbers differ either in 
+     * length or are the same length but at least one element differs by more 
+     * than a specified variance. If the two arrays are the same length, the 
+     * elements will be compared one by one starting with the element at index 
+     * 0, and continuing until either finding an element that differs by more 
+     * than the specified variance or reaching the end of the arrays. If no 
+     * significant differences are found, the assertion will fail and the test 
+     * failure explanation will quote both arrays.
+     * @param some An array to assert is different from the other. For example, 
+     * {&minus;0.5, 2.718281828459045, 3.141592653589793, 10.0}.
+     * @param other The other array. For example, {&minus;0.5, 
+     * 2.718281828459045, 3.142857142857143, 10.0}.
+     * @param delta The maximum by which two numbers can differ and still be 
+     * considered equal. Preferably a positive normalized number. For example, 
+     * 0.001. The third element of the example <code>some</code> and 
+     * <code>other</code> arrays differ by 0.0012644892673496777, so in this 
+     * example the two arrays are considered different by more than the 
+     * variance.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails.
+     * @throws NullPointerException If either array is null.
+     */
     public static void assertDifferent(double[] some, double[] other, 
             double delta, String msg) {
         int len = some.length;
         if (len == other.length) {
-            int diffCount = 0;
-            for (int i = 0; i < len; i++) {
-                double diff = Math.abs(some[i] - other[i]);
+            int index = 0;
+            while (index < len) {
+                double diff = Math.abs(some[index] - other[index]);
                 if (diff > delta) {
-                    diffCount++;
+                    return;
                 }
+                index++;
             }
             String intermediate = msg + ". Arrays " + Arrays.toString(some) 
                     + " and " + Arrays.toString(other) 
                     + " are not different beyond variance " + delta 
                     + " as asserted";
             String errMsg = prepMsg(intermediate);
-            assert diffCount > 0 : errMsg;
+            throw new AssertionError(errMsg);
         }
     }
     
