@@ -5530,7 +5530,8 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Arrays " + Arrays.toString(arrayA) + " and " 
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Arrays " 
+                    + Arrays.toString(arrayA) + " and " 
                     + Arrays.toString(arrayB) 
                     + " are not different beyond variance " 
                     + Asserters.DEFAULT_TEST_DELTA + " as asserted";
