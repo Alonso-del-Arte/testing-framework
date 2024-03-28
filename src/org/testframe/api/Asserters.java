@@ -1491,12 +1491,14 @@ public class Asserters {
         }
     }
     
-    // TODO: Write tests for this
     public static void assertDifferent(double[] some, double[] other) {
-        String errMsg = "Arrays " + Arrays.toString(some) + " and " 
-                + Arrays.toString(other) + " are not different beyond variance " 
-                + DEFAULT_TEST_DELTA + " as asserted";
-        throw new AssertionError(errMsg);
+        if (some.length == other.length) {
+            String errMsg = "Arrays " + Arrays.toString(some) + " and " 
+                    + Arrays.toString(other) 
+                    + " are not different beyond variance " + DEFAULT_TEST_DELTA 
+                    + " as asserted";
+            throw new AssertionError(errMsg);
+        }
     }
     
     public static void assertDifferent(double[] some, double[] other, 
