@@ -5657,8 +5657,30 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-    // TODO: Write more tests for assertDifferent(double[]s), default delta, 
-    // default message 
+    @Test
+    public void testAssertDifferentDoubleArraysSameLenDiffOneElemDefVarMsg() {
+        int length = RANDOM.nextInt(8) + 2;
+        double[] some = new double[length];
+        double[] other = new double[length];
+        for (int i = 0; i < length; i++) {
+            double number = RANDOM.nextDouble() + i;
+            some[i] = number;
+            other[i] = number + HALF_DEFAULT_DELTA;
+        }
+        int changeIndex = RANDOM.nextInt(length);
+        other[changeIndex] += THOUSAND_TIMES_DEFAULT_DELTA;
+        boolean failOccurred = false;
+        try {
+            Asserters.assertDifferent(some, other);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting " + Arrays.toString(some) + " and " 
+                + Arrays.toString(other) + " are different beyond variance " 
+                + Asserters.DEFAULT_TEST_DELTA 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
     
     @Test
     public void testAssertDifferentObjectArraysButAreSame() {
