@@ -3295,7 +3295,7 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Value " 
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Number " 
                     + aboveMaximum +  " expected to be at most " + maximum;
             String actual = ae.getMessage();
             System.out.println("\"" + actual + "\"");
@@ -3337,7 +3337,7 @@ public class AssertersTest {
             Asserters.assertMaximum(aboveMaximum, maximum);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Value " + aboveMaximum 
+            String expected = "Number " + aboveMaximum 
                     + " expected to be at most " + maximum;
             String actual = ae.getMessage();
             System.out.println("\"" + actual + "\"");
@@ -3380,7 +3380,7 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String msgStandardPart = "Value " + aboveMaximum 
+            String msgStandardPart = "Number " + aboveMaximum 
                     + " expected to be at most " + maximum;
             String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". " 
                     + msgStandardPart;
@@ -3427,7 +3427,7 @@ public class AssertersTest {
             Asserters.assertMaximum(aboveMaximum, maximum);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Value " + aboveMaximum 
+            String expected = "Number " + aboveMaximum 
                     + " expected to be at most " + maximum;
             String actual = ae.getMessage();
             System.out.println("\"" + actual + "\"");
