@@ -932,7 +932,7 @@ public class Asserters {
      * assertion fails.
      */
     public static void assertMaximum(long actual, long maximum, String msg) {
-        String intermediate = msg + ". Value " + actual 
+        String intermediate = msg + ". Number " + actual 
                 + " expected to be at most " + maximum;
         String errMsg = prepMsg(intermediate);
         assert maximum >= actual : errMsg;
@@ -963,7 +963,7 @@ public class Asserters {
      */
     public static void assertMaximum(double actual, double maximum,  
             String msg) {
-        String intermediate = msg + ". Value " + actual 
+        String intermediate = msg + ". Number " + actual 
                 + " expected to be at most " + maximum;
         String errMsg = prepMsg(intermediate);
         assert maximum >= actual : errMsg;
