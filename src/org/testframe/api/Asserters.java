@@ -579,11 +579,7 @@ public class Asserters {
      * the maximum &minus;1 will be appended to the test failure explanation.
      */
     public static void assertNegative(long actual, String msg) {
-        String intermediate = msg + ". Number " + actual 
-                + " expected to be at most -1";
-        String errMsg = prepMsg(intermediate);
-        assert actual < 0 : errMsg;
-        // TODO: Refactor when assertMaximum() is available
+        assertMaximum(actual, -1, msg);
     }
 
     /**
