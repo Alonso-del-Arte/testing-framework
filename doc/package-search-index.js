@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.testframe.api"},{"l":"org.testframe.api.random"},{"l":"org.testframe.api.text"},{"l":"org.testframe.engine"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.testframe.api"}];updateSearchResults();
