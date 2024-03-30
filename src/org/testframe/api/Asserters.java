@@ -1885,11 +1885,11 @@ public class Asserters {
         assert expSet.equals(actSet) : errMsg;
     }
     
-////     TODO: Write tests for this
-//    public static String assertPrintOut(Predicate<String> predicate, 
-//            Procedure lambda, String msg) {
-//        return "SORRY NOT IMPLEMENTED YET";
-//    }
+//     TODO: Write tests for this
+    public static String assertPrintOut(Predicate<String> predicate, 
+            Procedure lambda, String msg) {
+        return "SORRY NOT IMPLEMENTED YET";
+    }
     
     /**
      * Fails a test regardless of anything else. Hence it generally makes sense 
@@ -2005,9 +2005,9 @@ public class Asserters {
         }
     }
     
-//    public static void assertTimeout(Procedure lambda, Duration allottedTime, 
-//            String msg) {
-//        // TODO: Write tests for assertTimeout()
-//    }
+    public static void assertTimeout(Procedure lambda, Duration allottedTime, 
+            String msg) {
+        // TODO: Write tests for assertTimeout()
+    }
 
 }
