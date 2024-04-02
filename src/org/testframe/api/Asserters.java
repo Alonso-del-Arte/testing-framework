@@ -391,11 +391,13 @@ public class Asserters {
      * Asserts that two arrays of <code>Object</code> instances are equal. The 
      * elements are the same and in the same order. 
      * @param expected The expected array. For example, the colors cyan, 
-     * magenta, yellow and black.
+     * magenta, yellow and black. Should not contain any nulls.
      * @param actual The actual array. For example, the colors cyan, black, 
      * yellow and magenta.
      * @param msg A message to include in the test failure explanation if the 
      * test fails.
+     * @throws NullPointerException If two arrays are of the same length and 
+     * <code>expected</code> contains even just one null.
      */
     public static void assertEquals(Object[] expected, Object[] actual, 
             String msg) {
