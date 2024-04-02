@@ -239,7 +239,7 @@ public class AssertersTest {
     @Test
     public void testAssertEqualsDoubleCloseEnough() {
         double someNumber = RANDOM.nextDouble();
-        double nearNumber = someNumber + LOCAL_DELTA / 2;
+        double nearNumber = someNumber + HALF_LOCAL_DELTA;
         boolean failOccurred = false;
         try {
             Asserters.assertEquals(someNumber, nearNumber, LOCAL_DELTA, 
@@ -250,29 +250,6 @@ public class AssertersTest {
         }
         String message = "Asserting " + someNumber + " is equal to " 
                 + nearNumber + " within variance " + LOCAL_DELTA 
-                + " should not have failed the test";
-        assert !failOccurred : message;
-    }
-    
-    // TODO: Reassess this test consider that it failed for 
-    // Asserting 0.993872748424878 is equal to 1.0016852484248782 within 
-    // variance 0.0078125 should not have failed the test. According to the 
-    // Windows 10 Calculator, the variance here is 0.0078125000000002.
-//    @Test
-    public void testAssertEqualsDoubleJustAtVariance() {
-        double someNumber = RANDOM.nextDouble();
-        double variance = 0.0078125;
-        double nearNumber = someNumber + variance;
-        boolean failOccurred = false;
-        try {
-            Asserters.assertEquals(someNumber, nearNumber, variance, 
-                    EXAMPLE_ASSERTION_MESSAGE_PART);
-        } catch (AssertionError ae) {
-            failOccurred = true;
-            System.out.println("\"" + ae.getMessage() + "\"");
-        }
-        String message = "Asserting " + someNumber + " is equal to " 
-                + nearNumber + " within variance " + variance 
                 + " should not have failed the test";
         assert !failOccurred : message;
     }
