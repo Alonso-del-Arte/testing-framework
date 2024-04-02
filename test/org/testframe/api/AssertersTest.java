@@ -1189,10 +1189,6 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-    // TODO: Test in which two Object[] same length but all nulls
-  
-    // TODO: Write more tests for assertEquals() for arrays
-
     @Test
     public void testAssertNullButItIsNot() {
         Object object = LocalDateTime.now();
@@ -6495,6 +6491,32 @@ public class AssertersTest {
                 + listB.toString() 
                 + " contain the same elements should not have failed the test";
         assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertPrintout() {
+        System.out.println("assertPrintOut");
+        String currTimeStr = LocalDateTime.now().toString();
+        String expected = "assertPrintOut() test ran on " + currTimeStr;
+        boolean failOccurred = false;
+        String actual;
+        try {
+            actual = Asserters.assertPrintOut(s -> s.contains(currTimeStr), 
+                    () -> {
+                        System.out.println(expected);
+                    }, EXAMPLE_ASSERTION_MESSAGE_PART).replace("\n", "")
+                            .replace("\r", "");
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println(ae.getMessage());
+        }
+        String msg = "Asserting that \"" + expected + "\" contains \"" 
+                + currTimeStr + "\" should not have failed the test";
+        assert !failOccurred : msg;
+        
     }
     
     @Test
