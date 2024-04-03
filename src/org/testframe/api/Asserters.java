@@ -1887,7 +1887,24 @@ public class Asserters {
         assert expSet.equals(actSet) : errMsg;
     }
     
-//     TODO: Write tests for this
+    /**
+     * Makes a Boolean assertion about what a lambda sends to 
+     * <code>System.out</code>. The normal <code>System.out</code> is rerouted 
+     * to an interceptor at the beginning of this procedure, then restored at 
+     * the end, provided no unrecoverable errors occur, nor that 
+     * <code>System.exit()</code> is invoked.
+     * @param predicate A predicate about what should be sent to 
+     * <code>System.out</code>. For example, a valid e-mail address should be 
+     * included.
+     * @param lambda A procedure to run, preferably one that includes at least 
+     * one of <code>System.out.print()</code> or 
+     * <code>System.out.println()</code>.
+     * @param msg A message that will be the entirety of the test failure 
+     * explanation. This parameter is required, this assertion provides no 
+     * default message. For example, "Printout should include e-mail address."
+     * @return What was printed to <code>System.out</code>. Beware of unexpected 
+     * line endings and other system-dependent characteristics.
+     */
     public static String assertPrintOut(Predicate<String> predicate, 
             Procedure lambda, String msg) {
         PrintStream normalOut = System.out;
@@ -1904,7 +1921,9 @@ public class Asserters {
             normalOut.println("Restored usual System.out");
             interceptedStream.close();
         }
-        return interceptor.toString();
+        String s = interceptor.toString();
+        assert predicate.test(s) : msg;
+        return s;
     }
     
     /**
