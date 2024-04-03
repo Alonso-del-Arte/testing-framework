@@ -1890,7 +1890,21 @@ public class Asserters {
 //     TODO: Write tests for this
     public static String assertPrintOut(Predicate<String> predicate, 
             Procedure lambda, String msg) {
-        return "SORRY NOT IMPLEMENTED YET";
+        PrintStream normalOut = System.out;
+        normalOut.println("About to reroute System.out");
+        ByteArrayOutputStream interceptor = new ByteArrayOutputStream();
+        PrintStream interceptedStream = new PrintStream(interceptor);
+        System.setOut(interceptedStream);
+        try {
+            lambda.execute();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.setOut(normalOut);
+            normalOut.println("Restored usual System.out");
+            interceptedStream.close();
+        }
+        return interceptor.toString();
     }
     
     /**
