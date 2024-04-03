@@ -6515,8 +6515,32 @@ public class AssertersTest {
         assert expected.equals(actual) : eqMsg;
         String msg = "Asserting that \"" + expected + "\" contains \"" 
                 + currTimeStr + "\" should not have failed the test";
-        assert !failOccurred : msg;
-        
+        assert !failOccurred : msg;        
+    }
+    
+    @Test
+    public void testAssertPrintoutButDoesNot() {
+        String example = "Example that will not be printed out correctly"
+                .toLowerCase().replace(" ", "");
+        String modified = example.toUpperCase();
+        String regex = "\\p{javaLowerCase}{" + example.length() + "}";
+        String expected = "Expecting \"" + modified + "\" to match regex \"" 
+                + regex + "\"";
+        boolean failOccurred = false;
+        try {
+            Asserters.assertPrintOut(s -> s.matches(regex), () -> {
+                System.out.println(modified);
+            }, expected);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String actual = ae.getMessage();
+            String msg = "Expecting \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that \"" + modified + "\" matches \"" + regex 
+                + "\" should have failed the test";
+        assert failOccurred : msg;        
     }
     
     @Test
