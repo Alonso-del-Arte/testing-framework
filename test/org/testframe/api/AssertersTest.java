@@ -6499,20 +6499,20 @@ public class AssertersTest {
         String currTimeStr = LocalDateTime.now().toString();
         String expected = "assertPrintOut() test ran on " + currTimeStr;
         boolean failOccurred = false;
-        String actual;
+        String actual = "Initial value";
         try {
             actual = Asserters.assertPrintOut(s -> s.contains(currTimeStr), 
                     () -> {
                         System.out.println(expected);
                     }, EXAMPLE_ASSERTION_MESSAGE_PART).replace("\n", "")
                             .replace("\r", "");
-            String msg = "Expected \"" + expected + "\" but was \"" + actual 
-                    + "\"";
-            assert expected.equals(actual) : msg;
         } catch (AssertionError ae) {
             failOccurred = true;
             System.out.println(ae.getMessage());
         }
+        String eqMsg = "Expected \"" + expected + "\" but was \"" + actual 
+                + "\"";
+        assert expected.equals(actual) : eqMsg;
         String msg = "Asserting that \"" + expected + "\" contains \"" 
                 + currTimeStr + "\" should not have failed the test";
         assert !failOccurred : msg;
