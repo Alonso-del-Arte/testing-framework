@@ -1912,7 +1912,7 @@ public class Asserters {
         try {
             lambda.execute();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("SORRY");
         } finally {
             System.setOut(normalOut);
             normalOut.println("Restored usual System.out");
