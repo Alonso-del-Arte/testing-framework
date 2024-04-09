@@ -6544,6 +6544,28 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertPrintOutWrapsUnexpectedExceptionWithMessage() {
+        boolean exceptionOccurred = false;
+        String msg = "FOR TESTING PURPOSES ONLY";
+        int n = RANDOM.nextInt();
+        try {
+            Asserters.assertPrintOut(s -> !s.isEmpty(), () -> {
+                System.out.println(n / 0);
+            }, msg);
+        } catch (RuntimeException re) {
+            exceptionOccurred = true;
+            Throwable cause = re.getCause();
+            assert cause instanceof ArithmeticException 
+                    : "RuntimeException should wrap ArithmeticException";
+            String excMsg = re.getMessage();
+            assert !excMsg.isEmpty() : "Exception message should not be empty";
+        }
+        String excOccurMsg = "Lambda that tries to print out " + n 
+                + " divided by 0 should've cause exception";
+        assert exceptionOccurred : excOccurMsg;
+    }
+    
+    @Test
     public void testAssertThrows() {
         System.out.println("assertThrows");
         String msg = "Division by zero should cause ArithmeticException";
