@@ -1,5 +1,5 @@
-This project won't be open to Hacktoberfest 2023, might be open to Hacktoberfest 
-2024.
+This project won't be open to Hacktoberfest 2024, but it *might* be open to 
+Hacktoberfest 2025.
 
 # Guidelines for Hacktoberfest 2024 Contributors
 
