@@ -2041,5 +2041,8 @@ public class Asserters {
             String msg) {
         // TODO: Write tests for assertTimeout()
     }
+    
+    private Asserters() {
+    }
 
 }
