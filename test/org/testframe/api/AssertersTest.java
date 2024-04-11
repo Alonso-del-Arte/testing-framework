@@ -6865,6 +6865,47 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testAssertTimeout() {
+        System.out.println("assertTimeout");
+        int milliseconds = RANDOM.nextInt(4096) + 1024;
+        Duration duration = Duration.of(milliseconds, ChronoUnit.MILLIS);
+        TimeoutExceptionRecorder handler = new TimeoutExceptionRecorder();
+        Thread thread = new Thread() {
+            
+            @Override
+            public void run() {
+                System.out.println("Starting at 0");
+                Asserters.assertTimeout(() -> {
+                    int counter = 0;
+                    int max = milliseconds / 10;
+                    do {
+                        counter++;
+                    } while (counter < max);
+                    System.out.println("Reached " + max);
+                }, duration, EXAMPLE_ASSERTION_MESSAGE_PART);
+            }
+            
+        };
+        thread.setUncaughtExceptionHandler(handler);
+        boolean failOccurred = false;
+        System.out.println("Testing assertTimeout() for " + milliseconds 
+                + " milliseconds...");
+        try {
+            thread.start();
+            Thread.sleep(milliseconds + TIMEOUT_GRACE_PERIOD_MILLISECONDS);
+        } catch (InterruptedException ie) {
+            throw new RuntimeException(ie);
+        }
+        Throwable t = handler.record;
+        if (t instanceof AssertionError) {
+            failOccurred = true;
+        }
+        String msg = "Asserting quick counting could occur in less than " 
+                + duration.toString() + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
     private static class TimeoutExceptionRecorder 
             implements Thread.UncaughtExceptionHandler {
         
