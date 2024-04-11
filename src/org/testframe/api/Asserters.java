@@ -2037,9 +2037,19 @@ public class Asserters {
         }
     }
     
+    // TODO: Write tests for assertTimeout()
     public static void assertTimeout(Procedure lambda, Duration allottedTime, 
             String msg) {
-        // TODO: Write tests for assertTimeout()
+//        long milliseconds = allottedTime.toMillis();
+//        try {
+//            Thread.sleep(milliseconds);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException
+//            ("SORRY, MESSAGE TO FAIL InterruptedException TEST");
+//        }
+        String errMsg = msg + ". Procedure took longer than allotted duration " 
+                + allottedTime.toString();
+        throw new AssertionError(errMsg);
     }
     
     private Asserters() {
