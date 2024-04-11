@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,6 +27,11 @@ import java.util.Set;
  * @author Alonso del Arte
  */
 public class AssertersTest {
+    
+    /**
+     * How many extra milliseconds to allow for tests of assertTimeout().
+     */
+    private static final int TIMEOUT_GRACE_PERIOD_MILLISECONDS = 1024;
     
     /**
      * Bit mask for a 64-bit "negative" NaN in which the sign bit, all the 
@@ -6810,5 +6816,47 @@ public class AssertersTest {
         }
         assert !failOccurred : msg;
     }
+    
+    @Test
+    public void testAssertTimeoutButRunsOver() {
+        int milliseconds = RANDOM.nextInt(4096) + 1024;
+        Duration duration = Duration.of(milliseconds, ChronoUnit.MILLIS);
+        Thread thread = new Thread() {
+            
+            @Override
+            public void run() {
+                Asserters.assertTimeout(() -> {
+                    int counter = 0;
+                    do {
+                        counter++;
+                    } while (counter != 0);
+                    System.out.println("Got back to 0");
+                }, duration, EXAMPLE_ASSERTION_MESSAGE_PART);
+            }
+            
+        };
+        boolean failOccurred = false;
+        System.out.println("Testing assertTimeout() for " + milliseconds 
+                + " milliseconds...");
+        try {
+            thread.start();
+            thread.join(milliseconds + TIMEOUT_GRACE_PERIOD_MILLISECONDS);
+        } catch (InterruptedException ie) {
+            throw new RuntimeException(ie);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Procedure took longer than allotted duration " 
+                    + duration.toString();
+            String actual = ae.getMessage();
+            String msg = "Expecting \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting excessive counting could occur in less than " 
+                + duration.toString() + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
     
 }
