@@ -6821,10 +6821,12 @@ public class AssertersTest {
     public void testAssertTimeoutButRunsOver() {
         int milliseconds = RANDOM.nextInt(4096) + 1024;
         Duration duration = Duration.of(milliseconds, ChronoUnit.MILLIS);
+        TimeoutExceptionRecorder handler = new TimeoutExceptionRecorder();
         Thread thread = new Thread() {
             
             @Override
             public void run() {
+                System.out.println("Starting at 0");
                 Asserters.assertTimeout(() -> {
                     int counter = 0;
                     do {
@@ -6835,20 +6837,25 @@ public class AssertersTest {
             }
             
         };
+        thread.setUncaughtExceptionHandler(handler);
         boolean failOccurred = false;
         System.out.println("Testing assertTimeout() for " + milliseconds 
                 + " milliseconds...");
         try {
             thread.start();
-            thread.join(milliseconds + TIMEOUT_GRACE_PERIOD_MILLISECONDS);
+            Thread.sleep(milliseconds + TIMEOUT_GRACE_PERIOD_MILLISECONDS);
         } catch (InterruptedException ie) {
             throw new RuntimeException(ie);
-        } catch (AssertionError ae) {
+        }
+        Throwable t = handler.record;
+        if (t != null) {
+            assert t instanceof AssertionError 
+                    : "Uncaught throwable should be an assertion error";
             failOccurred = true;
             String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
                     + ". Procedure took longer than allotted duration " 
                     + duration.toString();
-            String actual = ae.getMessage();
+            String actual = t.getMessage();
             String msg = "Expecting \"" + expected + "\" but was \"" + actual 
                     + "\"";
             assert expected.equals(actual) : msg;
@@ -6858,5 +6865,16 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    private static class TimeoutExceptionRecorder 
+            implements Thread.UncaughtExceptionHandler {
+        
+        private Throwable record = null;
+        
+        @Override
+        public void uncaughtException(Thread thread, Throwable throwable) {
+            record = throwable;
+        }
+        
+    }
     
 }
