@@ -158,3 +158,9 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+
+# Miscellaneous
+src/draft/
+src/secrets/
+test/draft/
+test/secrets/
