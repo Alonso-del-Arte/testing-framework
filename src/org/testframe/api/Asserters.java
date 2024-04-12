@@ -2037,22 +2037,57 @@ public class Asserters {
         }
     }
     
-    // TODO: Write tests for assertTimeout()
     public static void assertTimeout(Procedure lambda, Duration allottedTime, 
             String msg) {
-//        long milliseconds = allottedTime.toMillis();
-//        try {
-//            Thread.sleep(milliseconds);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException
-//            ("SORRY, MESSAGE TO FAIL InterruptedException TEST");
-//        }
-        String errMsg = msg + ". Procedure took longer than allotted duration " 
-                + allottedTime.toString();
-        throw new AssertionError(errMsg);
+        long milliseconds = allottedTime.toMillis();
+//        DuringTimedTestExceptionRecorder recorder 
+//                = new DuringTimedTestExceptionRecorder();
+        Thread thread = new Thread() {
+            
+            @Override
+            public void run() {
+                try {
+                    lambda.execute();
+                } catch (Exception e) {
+                    throw new RuntimeException();
+                }
+            }
+            
+        };
+//        thread.setUncaughtExceptionHandler(recorder);
+        boolean outOfTime = false;
+        try {
+            thread.start();
+            Thread.sleep(milliseconds);
+            if (thread.isAlive()) {
+                outOfTime = true;
+                thread.interrupt();
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException
+            ("SORRY, MESSAGE TO FAIL InterruptedException TEST");
+        }
+        if (outOfTime) {
+            String errMsg = msg 
+                    + ". Procedure took longer than allotted duration " 
+                    + allottedTime.toString();
+            throw new AssertionError(errMsg);
+        }
     }
     
     private Asserters() {
     }
+    
+//    private static class DuringTimedTestExceptionRecorder 
+//            implements Thread.UncaughtExceptionHandler {
+//        
+//        private Throwable record = null;
+//        
+//        @Override
+//        public void uncaughtException(Thread thread, Throwable throwable) {
+//            record = throwable;
+//        }
+//        
+//    }
 
 }
