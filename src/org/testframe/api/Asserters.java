@@ -27,6 +27,8 @@ public class Asserters {
      */
     public static final double DEFAULT_TEST_DELTA = -(0.5 / Short.MIN_VALUE);
     
+    private static final int TIMEOUT_POLLING_FREQUENCY_MILLISECONDS = 128;
+    
     private static String prepMsg(String intermediate) {
         if (intermediate.startsWith(". ")) {
             return intermediate.substring(2);
@@ -2058,8 +2060,14 @@ public class Asserters {
         boolean outOfTime = false;
         try {
             thread.start();
-            Thread.sleep(milliseconds);
-            if (thread.isAlive()) {
+            boolean keepPolling = true;
+            int sleptMilliseconds = 0;
+            while (keepPolling && sleptMilliseconds < milliseconds) {
+                Thread.sleep(TIMEOUT_POLLING_FREQUENCY_MILLISECONDS);
+                sleptMilliseconds += TIMEOUT_POLLING_FREQUENCY_MILLISECONDS;
+                keepPolling = thread.isAlive();
+            }
+            if (keepPolling) {
                 outOfTime = true;
                 thread.interrupt();
             }
