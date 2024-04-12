@@ -6894,7 +6894,10 @@ public class AssertersTest {
                 + " milliseconds...");
         try {
             thread.start();
-            Thread.sleep(milliseconds + TIMEOUT_GRACE_PERIOD_MILLISECONDS);
+            Thread.sleep(TIMEOUT_GRACE_PERIOD_MILLISECONDS);
+            boolean stillRunning = thread.isAlive();
+            assert !stillRunning 
+                    : "Quick counting test should've finished already";
         } catch (InterruptedException ie) {
             throw new RuntimeException(ie);
         }
