@@ -6956,6 +6956,52 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
+    @Test
+    public void testTimedTestsCanHaveExceptions() {
+        System.out.println("assertTimeout");
+        int milliseconds = RANDOM.nextInt(4096) + 1024;
+        Duration duration = Duration.of(milliseconds, ChronoUnit.MILLIS);
+        String expected = "Message from an exception";
+        TimeoutExceptionRecorder handler = new TimeoutExceptionRecorder();
+        Thread thread = new Thread() {
+            
+            @Override
+            public void run() {
+                int max = milliseconds / 10;
+                System.out.println("Starting at " + max);
+                Asserters.assertTimeout(() -> {
+                    int counter = max;
+                    do {
+                        counter--;
+                    } while (counter > 0);
+                    System.out.println("Reached 0");
+                    throw new ArithmeticException(expected);
+                }, duration, EXAMPLE_ASSERTION_MESSAGE_PART);
+            }
+            
+        };
+        thread.setUncaughtExceptionHandler(handler);
+        boolean exceptionOccurred = false;
+        System.out.println("Testing assertTimeout() for " + milliseconds 
+                + " milliseconds...");
+        try {
+            thread.start();
+            Thread.sleep(TIMEOUT_GRACE_PERIOD_MILLISECONDS);
+        } catch (InterruptedException ie) {
+            throw new RuntimeException(ie);
+        }
+        Throwable t = handler.record;
+        if (t instanceof RuntimeException) {
+            exceptionOccurred = true;
+            String actual = t.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Exception from timed test should have been reported";
+        assert exceptionOccurred : msg;
+    }
+    
     private static class TimeoutExceptionRecorder 
             implements Thread.UncaughtExceptionHandler {
         
