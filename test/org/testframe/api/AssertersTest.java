@@ -24,6 +24,8 @@ import java.util.Set;
  * Tests of the Asserters class. These are more elegant than the tests of 
  * testframe.engine.TestRunner, but still more clunky than the tests that can be
  * written once Asserters is fully tested and proven.
+ * <p>Because of the tests for assertTimeout(), this test class could take as 
+ * much as ten seconds to run.</p>
  * @author Alonso del Arte
  */
 public class AssertersTest {
@@ -6993,7 +6995,11 @@ public class AssertersTest {
         Throwable t = handler.record;
         if (t instanceof RuntimeException) {
             exceptionOccurred = true;
-            String actual = t.getMessage();
+            Throwable wrapper = t.getCause();
+            assert wrapper != null : "Reported exception should wrap another";
+            Throwable wrapped = wrapper.getCause();
+            assert wrapped != null : "Wrapped exception should not be null";
+            String actual = wrapped.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
             assert expected.equals(actual) : msg;
