@@ -6830,12 +6830,11 @@ public class AssertersTest {
             public void run() {
                 System.out.println("Starting at 0");
                 Asserters.assertTimeout(() -> {
-                    int counter = 0;
+                    long counter = 0L;
                     do {
-                        counter <<= 1;
                         counter++;
-                    } while (counter % 2 != 0);
-                    System.out.println("Got back to an even number");
+                    } while (counter != 0L);
+                    System.out.println("Got back to 0");
                 }, duration, EXAMPLE_ASSERTION_MESSAGE_PART);
             }
             
