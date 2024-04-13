@@ -2039,11 +2039,26 @@ public class Asserters {
         }
     }
     
+    /**
+     * Asserts that a lambda completes in a certain amount of time. A new thread 
+     * is started to run the lambda on.
+     * @param lambda The anonymous procedure that should run in a certain amount 
+     * of time.
+     * @param allottedTime How much time to allow the procedure to run in. For 
+     * example, 5 seconds. Should generally be much less than a minute. We make 
+     * no guarantees as to how precisely the time will be measured. Allow a 
+     * grace period of as much as a full second. 
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails after running out of time. For example, "All the 
+     * customer's transactions should've been processed in less than 5 seconds."
+     * @throws ArithmeticException If <code>allottedTime</code> in milliseconds 
+     * is greater than <code>Long.MAX_VALUE</code>.
+     */
     public static void assertTimeout(Procedure lambda, Duration allottedTime, 
             String msg) {
         long milliseconds = allottedTime.toMillis();
-//        DuringTimedTestExceptionRecorder recorder 
-//                = new DuringTimedTestExceptionRecorder();
+        DuringTimedTestExceptionRecorder recorder 
+                = new DuringTimedTestExceptionRecorder();
         Thread thread = new Thread() {
             
             @Override
@@ -2051,12 +2066,12 @@ public class Asserters {
                 try {
                     lambda.execute();
                 } catch (Exception e) {
-                    throw new RuntimeException();
+                    throw new RuntimeException(e);
                 }
             }
             
         };
-//        thread.setUncaughtExceptionHandler(recorder);
+        thread.setUncaughtExceptionHandler(recorder);
         boolean outOfTime = false;
         try {
             thread.start();
@@ -2073,7 +2088,16 @@ public class Asserters {
             }
         } catch (InterruptedException e) {
             throw new RuntimeException
-            ("SORRY, MESSAGE TO FAIL InterruptedException TEST");
+            ("SORRY, THIS IS A  MESSAGE TO FAIL InterruptedException TEST");
+        }
+        Throwable t = recorder.record;
+        if (t != null) {
+            if (t instanceof AssertionError) {
+                throw (AssertionError) t;
+            }
+            if (t instanceof Exception) {
+                throw new RuntimeException(t);
+            }
         }
         if (outOfTime) {
             String errMsg = msg 
@@ -2086,16 +2110,16 @@ public class Asserters {
     private Asserters() {
     }
     
-//    private static class DuringTimedTestExceptionRecorder 
-//            implements Thread.UncaughtExceptionHandler {
-//        
-//        private Throwable record = null;
-//        
-//        @Override
-//        public void uncaughtException(Thread thread, Throwable throwable) {
-//            record = throwable;
-//        }
-//        
-//    }
+    private static class DuringTimedTestExceptionRecorder 
+            implements Thread.UncaughtExceptionHandler {
+        
+        private Throwable record = null;
+        
+        @Override
+        public void uncaughtException(Thread thread, Throwable throwable) {
+            record = throwable;
+        }
+        
+    }
 
 }
