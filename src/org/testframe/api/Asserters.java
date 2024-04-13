@@ -2056,55 +2056,55 @@ public class Asserters {
      */
     public static void assertTimeout(Procedure lambda, Duration allottedTime, 
             String msg) {
-//        long milliseconds = allottedTime.toMillis();
-////        DuringTimedTestExceptionRecorder recorder 
-////                = new DuringTimedTestExceptionRecorder();
-//        Thread thread = new Thread() {
-//            
-//            @Override
-//            public void run() {
-//                try {
-//                    lambda.execute();
-//                } catch (Exception e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//            
-//        };
-////        thread.setUncaughtExceptionHandler(recorder);
-//        boolean outOfTime = false;
-//        try {
-//            thread.start();
-//            boolean keepPolling = true;
-//            int sleptMilliseconds = 0;
-//            while (keepPolling && sleptMilliseconds < milliseconds) {
-//                Thread.sleep(TIMEOUT_POLLING_FREQUENCY_MILLISECONDS);
-//                sleptMilliseconds += TIMEOUT_POLLING_FREQUENCY_MILLISECONDS;
-//                keepPolling = thread.isAlive();
-//            }
-//            if (keepPolling) {
-//                outOfTime = true;
-//                thread.interrupt();
-//            }
-//        } catch (InterruptedException e) {
+        long milliseconds = allottedTime.toMillis();
+        DuringTimedTestExceptionRecorder recorder 
+                = new DuringTimedTestExceptionRecorder();
+        Thread thread = new Thread() {
+            
+            @Override
+            public void run() {
+                try {
+                    lambda.execute();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            
+        };
+        thread.setUncaughtExceptionHandler(recorder);
+        boolean outOfTime = false;
+        try {
+            thread.start();
+            boolean keepPolling = true;
+            int sleptMilliseconds = 0;
+            while (keepPolling && sleptMilliseconds < milliseconds) {
+                Thread.sleep(TIMEOUT_POLLING_FREQUENCY_MILLISECONDS);
+                sleptMilliseconds += TIMEOUT_POLLING_FREQUENCY_MILLISECONDS;
+                keepPolling = thread.isAlive();
+            }
+            if (keepPolling) {
+                outOfTime = true;
+                thread.interrupt();
+            }
+        } catch (InterruptedException e) {
 //            throw new RuntimeException
 //            ("SORRY, THIS IS A MESSAGE TO FAIL InterruptedException TEST");
-//        }
-////        Throwable t = recorder.record;
-////        if (t != null) {
-////            if (t instanceof AssertionError) {
-////                throw (AssertionError) t;
-////            }
-////            if (t instanceof Exception) {
-////                throw new RuntimeException(t);
-////            }
-////        }
-//        if (outOfTime) {
-//            String errMsg = msg 
-//                    + ". Procedure took longer than allotted duration " 
-//                    + allottedTime.toString();
-//            throw new AssertionError(errMsg);
-//        }
+        }
+        Throwable t = recorder.record;
+        if (t != null) {
+            if (t instanceof AssertionError) {
+                throw (AssertionError) t;
+            }
+            if (t instanceof Exception) {
+                throw new RuntimeException(t);
+            }
+        }
+        if (outOfTime) {
+            String errMsg = msg 
+                    + ". Procedure took longer than allotted duration " 
+                    + allottedTime.toString();
+            throw new AssertionError(errMsg);
+        }
     }
     
     private Asserters() {
