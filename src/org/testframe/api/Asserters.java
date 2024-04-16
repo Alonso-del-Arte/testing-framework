@@ -2115,10 +2115,10 @@ public class Asserters {
 //            }
 //        }
 //        if (outOfTime) {
-//            String errMsg = msg 
-//                    + ". Procedure took longer than allotted duration " 
-//                    + allottedTime.toString();
-//            throw new AssertionError(errMsg);
+            String errMsg = msg 
+                    + ". Procedure took longer than allotted duration " 
+                    + allottedTime.toString();
+            throw new AssertionError(errMsg);
 //        }
     }
     
