@@ -6867,7 +6867,7 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-//    @Test
+    @Test
     public void testAssertTimeout() {
         System.out.println("assertTimeout");
         int milliseconds = RANDOM.nextInt(4096) + 1024;
