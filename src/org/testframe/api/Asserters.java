@@ -1886,6 +1886,18 @@ public class Asserters {
         assert expSet.equals(actSet) : errMsg;
     }
     
+    // TODO: Write tests for this
+    public static <E> void assertContainsSameOrder(List<E> expected, 
+            List<E> actual) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static <E> void assertContainsSameOrder(List<E> expected, 
+            List<E> actual, String msg) {
+        //
+    }
+    
     /**
      * Makes a Boolean assertion about what a lambda sends to 
      * <code>System.out</code>. The normal <code>System.out</code> is rerouted 
@@ -2043,14 +2055,17 @@ public class Asserters {
      * Asserts that a lambda completes in a certain amount of time. A new thread 
      * is started to run the lambda on.
      * @param lambda The anonymous procedure that should run in a certain amount 
-     * of time.
+     * of time. For example, a lambda that adds up the values of all of a 
+     * customer's pending transactions to calculate the net change on the 
+     * account if all those transactions go through.
      * @param allottedTime How much time to allow the procedure to run in. For 
      * example, 5 seconds. Should generally be much less than a minute. We make 
      * no guarantees as to how precisely the time will be measured. Allow a 
      * grace period of as much as a full second. 
      * @param msg A message to include in the test failure explanation if the 
-     * assertion fails after running out of time. For example, "All the 
-     * customer's transactions should've been processed in less than 5 seconds."
+     * assertion fails after running out of time. For example, "All of the 
+     * customer's pending transactions should've been added up in less than 5 
+     * seconds."
      * @throws ArithmeticException If <code>allottedTime</code> in milliseconds 
      * is greater than <code>Long.MAX_VALUE</code>.
      */
