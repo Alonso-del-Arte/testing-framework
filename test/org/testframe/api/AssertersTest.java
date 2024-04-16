@@ -6911,7 +6911,7 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-//    @Test
+    @Test
     public void testTimedTestsCanHaveOtherAssertions() {
         System.out.println("assertTimeout");
         int milliseconds = RANDOM.nextInt(4096) + 1024;
@@ -6957,7 +6957,7 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-//    @Test
+    @Test
     public void testTimedTestsCanHaveExceptions() {
         System.out.println("assertTimeout");
         int milliseconds = RANDOM.nextInt(4096) + 1024;
