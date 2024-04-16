@@ -2072,8 +2072,8 @@ public class Asserters {
     public static void assertTimeout(Procedure lambda, Duration allottedTime, 
             String msg) {
         long milliseconds = allottedTime.toMillis();
-//        DuringTimedTestExceptionRecorder recorder 
-//                = new DuringTimedTestExceptionRecorder();
+        DuringTimedTestExceptionRecorder recorder 
+                = new DuringTimedTestExceptionRecorder();
         Thread thread = new Thread() {
             
             @Override
@@ -2086,7 +2086,7 @@ public class Asserters {
             }
             
         };
-//        thread.setUncaughtExceptionHandler(recorder);
+        thread.setUncaughtExceptionHandler(recorder);
         boolean outOfTime = false;
         try {
             thread.start();
@@ -2105,15 +2105,15 @@ public class Asserters {
 //            throw new RuntimeException
 //            ("SORRY, THIS IS A MESSAGE TO FAIL InterruptedException TEST");
         }
-//        Throwable t = recorder.record;
-//        if (t != null) {
-//            if (t instanceof AssertionError) {
-//                throw (AssertionError) t;
-//            }
-//            if (t instanceof Exception) {
-//                throw new RuntimeException(t);
-//            }
-//        }
+        Throwable t = recorder.record;
+        if (t != null) {
+            if (t instanceof AssertionError) {
+                throw (AssertionError) t;
+            }
+            if (t instanceof Exception) {
+                throw new RuntimeException(t);
+            }
+        }
         if (outOfTime) {
             String errMsg = msg 
                     + ". Procedure took longer than allotted duration " 
