@@ -2,6 +2,7 @@ package org.testframe.api;
 
 import java.awt.Color;
 import java.awt.font.NumericShaper;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.DayOfWeek;
 import java.time.Duration;
@@ -15,6 +16,7 @@ import java.util.Collections;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.IntSummaryStatistics;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -6561,6 +6563,32 @@ public class AssertersTest {
                 + " contains the same elements as " + listBStr 
                 + " in the same order should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertContainsSameOrder() {
+        System.out.println("assertContainsSameOrder");
+        int len = RANDOM.nextInt(16) + 4;
+        List<BigInteger> someList = new ArrayList<>(len);
+        List<BigInteger> sameList = new LinkedList<>();
+        for (int i = 0; i < len; i++) {
+            BigInteger number = new BigInteger(64 + i, RANDOM);
+            someList.add(number);
+            sameList.add(number);
+        }
+        String someListAStr = someList.toString();
+        String sameListBStr = sameList.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSameOrder(someList, sameList, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + someListAStr 
+                + " contains the same elements as " + sameListBStr 
+                + " in the same order should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     @Test
