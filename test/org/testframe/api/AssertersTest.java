@@ -6504,31 +6504,6 @@ public class AssertersTest {
     }
     
     @Test
-    public void testAssertPrintout() {
-        System.out.println("assertPrintOut");
-        String currTimeStr = LocalDateTime.now().toString();
-        String expected = "assertPrintOut() test ran on " + currTimeStr;
-        boolean failOccurred = false;
-        String actual = "Initial value";
-        try {
-            actual = Asserters.assertPrintOut(s -> s.contains(currTimeStr), 
-                    () -> {
-                        System.out.println(expected);
-                    }, EXAMPLE_ASSERTION_MESSAGE_PART).replace("\n", "")
-                            .replace("\r", "");
-        } catch (AssertionError ae) {
-            failOccurred = true;
-            System.out.println(ae.getMessage());
-        }
-        String eqMsg = "Expected \"" + expected + "\" but was \"" + actual 
-                + "\"";
-        assert expected.equals(actual) : eqMsg;
-        String msg = "Asserting that \"" + expected + "\" contains \"" 
-                + currTimeStr + "\" should not have failed the test";
-        assert !failOccurred : msg;        
-    }
-    
-    @Test
     public void testAssertContainsSameOrderButDiffersInLength() {
         int listALength = RANDOM.nextInt(8) + 2;
         int listBLength = listALength + RANDOM.nextInt(8) + 2;
@@ -6626,6 +6601,31 @@ public class AssertersTest {
                 + " contains the same elements as " + listBStr 
                 + " in the same order should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertPrintout() {
+        System.out.println("assertPrintOut");
+        String currTimeStr = LocalDateTime.now().toString();
+        String expected = "assertPrintOut() test ran on " + currTimeStr;
+        boolean failOccurred = false;
+        String actual = "Initial value";
+        try {
+            actual = Asserters.assertPrintOut(s -> s.contains(currTimeStr), 
+                    () -> {
+                        System.out.println(expected);
+                    }, EXAMPLE_ASSERTION_MESSAGE_PART).replace("\n", "")
+                            .replace("\r", "");
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            System.out.println(ae.getMessage());
+        }
+        String eqMsg = "Expected \"" + expected + "\" but was \"" + actual 
+                + "\"";
+        assert expected.equals(actual) : eqMsg;
+        String msg = "Asserting that \"" + expected + "\" contains \"" 
+                + currTimeStr + "\" should not have failed the test";
+        assert !failOccurred : msg;        
     }
     
     @Test
