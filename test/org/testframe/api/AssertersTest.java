@@ -6639,6 +6639,30 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertContainsSameOrderDefaultMessage() {
+        int len = RANDOM.nextInt(16) + 4;
+        List<BigInteger> someList = new ArrayList<>(len);
+        List<BigInteger> sameList = new LinkedList<>();
+        for (int i = 0; i < len; i++) {
+            BigInteger number = new BigInteger(64 + i, RANDOM);
+            someList.add(number);
+            sameList.add(number);
+        }
+        String someListAStr = someList.toString();
+        String sameListBStr = sameList.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSameOrder(someList, sameList);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + someListAStr 
+                + " contains the same elements as " + sameListBStr 
+                + " in the same order should not have failed the test";
+        assert !failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertPrintout() {
         System.out.println("assertPrintOut");
         String currTimeStr = LocalDateTime.now().toString();
