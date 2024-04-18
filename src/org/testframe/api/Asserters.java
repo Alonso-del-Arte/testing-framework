@@ -1893,37 +1893,41 @@ public class Asserters {
     }
     
     /**
-     * Asserts two lists contain the same elements in the same order. The 
-     * assertion 
-     * 
-     * To assert 
-     * that two lists contain the same elements without regard for order, use 
-     * {@link #assertContainsSame(List, List, String)}.
+     * Asserts two lists contain the same elements in the same order. As long as 
+     * the two lists have the same elements in the same order, even if the two 
+     * lists are different implementations of <code>java.util.List</code>, the 
+     * assertion will not fail. To assert that two lists contain the same 
+     * elements without regard for order, use {@link #assertContainsSame(List, 
+     * List, String)}.
      * @param <E> The type of the elements in the two lists. For example, 
-     * <code>LocalDate</code>.
-     * @param expected
-     * @param actual
-     * @param msg
+     * <code>LocalDate</code>. Remember that this is not checked at runtime.
+     * @param expected A list with the expected order. For example, an 
+     * <code>ArrayList</code> consisting of the dates March 31, 2024; April 4, 
+     * 2021; April 9, 2023; April 17, 2022; April 20, 2025.
+     * @param actual A list that is asserted to be in the same order as 
+     * <code>expected</code>. For example, a <code>LinkedList</code> consisting 
+     * of the dates April 4, 2021; April 17, 2022; April 9, 2023; March 31, 
+     * 2024; April 20, 2025.
+     * @param msg A message to include the test failure explanation. For 
+     * example, "Easters should be listed in order by month and day, then year." 
      * @throws NullPointerException If <code>expected</code> and 
      * <code>actual</code> are of the same size but <code>expected</code> 
-     * contains any nulls. And obviously also if either of those is null.
+     * contains any nulls. And obviously also if either <code>expected</code> or 
+     * <code>actual</code> is null.
      */
     public static <E> void assertContainsSameOrder(List<E> expected, 
             List<E> actual, String msg) {
         int len = expected.size();
-        boolean foundReasonToFail = len != actual.size();
+        boolean foundNoReasonToFail = len == actual.size();
         int index = 0;
-        while (!foundReasonToFail && index < len) {
-            foundReasonToFail = !expected.get(index).equals(actual.get(index));
+        while (foundNoReasonToFail && index < len) {
+            foundNoReasonToFail = expected.get(index).equals(actual.get(index));
             index++;
         }
-        if (foundReasonToFail) {
-            String errMsg = msg + ". Expected list to contain " 
-                    + expected.toString() 
-                    + " in that order but actually contained " 
-                    + actual.toString();
-            throw new AssertionError(errMsg);
-        }
+        String errMsg = msg + ". Expected list to contain " 
+                + expected.toString() + " in that order but actually contained " 
+                + actual.toString();
+        assert foundNoReasonToFail : errMsg;
     }
     
     /**
