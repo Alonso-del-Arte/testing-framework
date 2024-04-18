@@ -1892,10 +1892,32 @@ public class Asserters {
         //
     }
     
-    // TODO: Write tests for this
+    /**
+     * Asserts two lists contain the same elements in the same order. The 
+     * assertion 
+     * 
+     * To assert 
+     * that two lists contain the same elements without regard for order, use 
+     * {@link #assertContainsSame(List, List, String)}.
+     * @param <E> The type of the elements in the two lists. For example, 
+     * <code>LocalDate</code>.
+     * @param expected
+     * @param actual
+     * @param msg
+     * @throws NullPointerException If <code>expected</code> and 
+     * <code>actual</code> are of the same size but <code>expected</code> 
+     * contains any nulls. And obviously also if either of those is null.
+     */
     public static <E> void assertContainsSameOrder(List<E> expected, 
             List<E> actual, String msg) {
-        if (expected.size() != actual.size()) {
+        int len = expected.size();
+        boolean foundReasonToFail = len != actual.size();
+        int index = 0;
+        while (!foundReasonToFail && index < len) {
+            foundReasonToFail = !expected.get(index).equals(actual.get(index));
+            index++;
+        }
+        if (foundReasonToFail) {
             String errMsg = msg + ". Expected list to contain " 
                     + expected.toString() 
                     + " in that order but actually contained " 
