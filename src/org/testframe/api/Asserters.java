@@ -1889,7 +1889,9 @@ public class Asserters {
     // TODO: Write tests for this
     public static <E> void assertContainsSameOrder(List<E> expected, 
             List<E> actual) {
-        //
+        String errMsg = "Expected list to contain " + expected.toString() 
+                + " in that order but actually contained " + actual.toString();
+        throw new AssertionError(errMsg);
     }
     
     /**
