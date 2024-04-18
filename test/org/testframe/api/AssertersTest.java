@@ -6604,6 +6604,41 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertContainsSameOrderButDiffersInLengthDefaultMessage() {
+        int listALength = RANDOM.nextInt(8) + 2;
+        int listBLength = listALength + RANDOM.nextInt(8) + 2;
+        List<IntSummaryStatistics> listA = new ArrayList<>(listALength);
+        List<IntSummaryStatistics> listB = new ArrayList<>(listBLength);
+        for (int i = 0; i < listALength; i++) {
+            IntSummaryStatistics stats = makeRandomSummary(2 * i + 1);
+            listA.add(stats);
+            listB.add(stats);
+        }
+        for (int j = listALength; j < listBLength; j++) {
+            IntSummaryStatistics stats = makeRandomSummary(j);
+            listB.add(stats);
+        }
+        String listAStr = listA.toString();
+        String listBStr = listB.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSameOrder(listA, listB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected list to contain " + listAStr 
+                    + " in that order but actually contained " + listBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + listAStr 
+                + " contains the same elements as " + listBStr 
+                + " in the same order should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertPrintout() {
         System.out.println("assertPrintOut");
         String currTimeStr = LocalDateTime.now().toString();
