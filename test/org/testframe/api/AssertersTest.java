@@ -75,7 +75,7 @@ public class AssertersTest {
                     + "\"";
             assert expected.equals(actual) : msg;
         }
-        assert failOccurred : "fail() should have occurred when called";
+        assert failOccurred : "fail() should have caused test to fail";
     }
     
     @Test
@@ -6660,6 +6660,42 @@ public class AssertersTest {
                 + " contains the same elements as " + sameListBStr 
                 + " in the same order should not have failed the test";
         assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertContainsSameOrderButDiffersInOrderDefaultMessage() {
+        int len = RANDOM.nextInt(8) + 2;
+        BigDecimal max = BigDecimal.valueOf(len);
+        List<BigDecimal> listA = new ArrayList<>(len);
+        List<BigDecimal> listB = new LinkedList<BigDecimal>();
+        BigDecimal origin = BigDecimal.valueOf(RANDOM.nextDouble() + 1);
+        BigDecimal previous = origin;
+        for (BigDecimal x = BigDecimal.ZERO; x.compareTo(max) < 0; 
+                x = x.add(BigDecimal.ONE)) {
+            BigDecimal number = previous.multiply(origin).add(x);
+            listA.add(number);
+            listB.add(0, number);
+            previous = number;
+        }
+        String listAStr = listA.toString();
+        String listBStr = listB.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSameOrder(listA, listB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Expected list to contain " + listAStr 
+                    + " in that order but actually contained " + listBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + listAStr 
+                + " contains the same elements as " + listBStr 
+                + " in the same order should have failed the test";
+        assert failOccurred : msg;
     }
     
     @Test
