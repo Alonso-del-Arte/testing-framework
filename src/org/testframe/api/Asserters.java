@@ -1886,15 +1886,24 @@ public class Asserters {
         assert expSet.equals(actSet) : errMsg;
     }
     
-    // TODO: Write tests for this
+    /**
+     * 
+     * @param <E>
+     * @param expected
+     * @param actual
+     */
     public static <E> void assertContainsSameOrder(List<E> expected, 
             List<E> actual) {
-        if (expected.size() != actual.size()) {
-            String errMsg = "Expected list to contain " + expected.toString() 
-                    + " in that order but actually contained " 
-                    + actual.toString();
-            throw new AssertionError(errMsg);
+        int len = expected.size();
+        boolean foundNoReasonToFail = len == actual.size();
+        int index = 0;
+        while (foundNoReasonToFail && index < len) {
+            foundNoReasonToFail = expected.get(index).equals(actual.get(index));
+            index++;
         }
+        String errMsg = "Expected list to contain " + expected.toString() 
+                + " in that order but actually contained " + actual.toString();
+        assert foundNoReasonToFail : errMsg;
     }
     
     /**
