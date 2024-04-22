@@ -1887,32 +1887,40 @@ public class Asserters {
     }
     
     /**
-     * 
-     * @param <E>
-     * @param expected
-     * @param actual
+     * Asserts two lists contain the same elements in the same order. As long as 
+     * the two lists have the same elements in the same order, even if the two 
+     * lists are different implementations of <code>java.util.List</code>, the 
+     * assertion will not fail. Both lists will be quoted in the test failure 
+     * explanation if the test fails on account of order. To assert that two 
+     * lists contain the same elements without regard for order, use {@link 
+     * #assertContainsSame(List, List)}. 
+     * @param <E> The type of the elements in the two lists. For example, 
+     * <code>LocalDate</code>. Remember that this is not checked at runtime.
+     * @param expected A list with the expected order. For example, an 
+     * <code>ArrayList</code> consisting of the dates March 31, 2024; April 4, 
+     * 2021; April 9, 2023; April 17, 2022; April 20, 2025.
+     * @param actual A list that is asserted to be in the same order as 
+     * <code>expected</code>. For example, a <code>LinkedList</code> consisting 
+     * of the dates April 4, 2021; April 17, 2022; April 9, 2023; March 31, 
+     * 2024; April 20, 2025.
+     * @throws NullPointerException If <code>expected</code> and 
+     * <code>actual</code> are of the same size but <code>expected</code> 
+     * contains any nulls. And obviously also if either <code>expected</code> or 
+     * <code>actual</code> is null.
      */
     public static <E> void assertContainsSameOrder(List<E> expected, 
             List<E> actual) {
-        int len = expected.size();
-        boolean foundNoReasonToFail = len == actual.size();
-        int index = 0;
-        while (foundNoReasonToFail && index < len) {
-            foundNoReasonToFail = expected.get(index).equals(actual.get(index));
-            index++;
-        }
-        String errMsg = "Expected list to contain " + expected.toString() 
-                + " in that order but actually contained " + actual.toString();
-        assert foundNoReasonToFail : errMsg;
+        assertContainsSameOrder(expected, actual, "");
     }
     
     /**
      * Asserts two lists contain the same elements in the same order. As long as 
      * the two lists have the same elements in the same order, even if the two 
      * lists are different implementations of <code>java.util.List</code>, the 
-     * assertion will not fail. To assert that two lists contain the same 
-     * elements without regard for order, use {@link #assertContainsSame(List, 
-     * List, String)}.
+     * assertion will not fail. Both lists will be quoted in the test failure 
+     * explanation if the test fails on account of order. To assert that two 
+     * lists contain the same elements without regard for order, use {@link 
+     * #assertContainsSame(List, List, String)}.
      * @param <E> The type of the elements in the two lists. For example, 
      * <code>LocalDate</code>. Remember that this is not checked at runtime.
      * @param expected A list with the expected order. For example, an 
@@ -1938,9 +1946,10 @@ public class Asserters {
             foundNoReasonToFail = expected.get(index).equals(actual.get(index));
             index++;
         }
-        String errMsg = msg + ". Expected list to contain " 
+        String intermediate = msg + ". Expected list to contain " 
                 + expected.toString() + " in that order but actually contained " 
                 + actual.toString();
+        String errMsg = prepMsg(intermediate);
         assert foundNoReasonToFail : errMsg;
     }
     
