@@ -1,6 +1,7 @@
 package org.testframe.api.random;
 
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Random;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Random;
  * as a fallback.
  * @author Alonso del Arte
  */
-class Pseudorandomness extends Random {
+class Pseudorandomness extends ExpandedRandom {
 
     private static final long serialVersionUID = 4553879963396210688L;
     
@@ -33,6 +34,42 @@ class Pseudorandomness extends Random {
         return false;
     }
     
+    // TODO: Write tests for this
+    @Override
+    public CoinSide flipCoin() {
+        return CoinSide.HEADS;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public char nextASCIIChar() {
+        return '?';
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public String nextASCIICharSeq(int length) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public String nextASCIICharSeq(int minLength, int maxLength) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public String nextString() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public OffsetDateTime nextDateTime() {
+        return OffsetDateTime.now();
+    }
+
     public Pseudorandomness(ExternalRandomnessProvider provider) {
         this.randomProvider = provider;
     }
