@@ -2,7 +2,9 @@ package org.testframe.api.random;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Provides numbers and other data that can be relied on to be at least 
@@ -30,8 +32,8 @@ class Pseudorandomness extends ExpandedRandom {
     
     // TODO: Write tests for this
     @Override
-    public boolean nextBoolean() {
-        return false;
+    public int nextPowerOfTwo() {
+        return -1;
     }
     
     // TODO: Write tests for this
@@ -68,6 +70,24 @@ class Pseudorandomness extends ExpandedRandom {
     @Override
     public OffsetDateTime nextDateTime() {
         return OffsetDateTime.now();
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public <E> E nextObject(E[] array) {
+        return null;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public <E> E nextObject(List<E> list) {
+        return null;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public <E> E nextObject(Set<E> set) {
+        return null;
     }
 
     public Pseudorandomness(ExternalRandomnessProvider provider) {
