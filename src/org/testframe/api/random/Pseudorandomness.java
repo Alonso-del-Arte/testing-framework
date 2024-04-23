@@ -25,11 +25,6 @@ class Pseudorandomness extends ExpandedRandom {
     
     private int[] integers = {};
     
-    int[] connectToExternalRandomnessProvider() throws IOException {
-        int[] numbers = {};
-        return numbers;
-    }
-    
     // TODO: Write tests for this
     @Override
     public int nextPowerOfTwo() {

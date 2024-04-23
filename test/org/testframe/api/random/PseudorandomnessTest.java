@@ -17,6 +17,9 @@ public class PseudorandomnessTest {
         @Override
         public int[] giveNumbers(int amount) throws IOException {
             int[] array = new int[amount];
+            for (int i = 0; i < amount; i++) {
+                array[i] = this.numbers[i];
+            }
             return array;
         }
 
@@ -38,18 +41,4 @@ public class PseudorandomnessTest {
         
     }
     
-    private static class OfflinePseudorandomness extends Pseudorandomness {
-        
-        @Override
-        int[] connectToExternalRandomnessProvider() throws IOException {
-            String excMsg = "Simulating the Internet connection is unavailable";
-            throw new IOException(excMsg);
-        }
-        
-        OfflinePseudorandomness(ExternalRandomnessProvider provider) {
-            super(provider);
-        }
-
-    }
-
 }
