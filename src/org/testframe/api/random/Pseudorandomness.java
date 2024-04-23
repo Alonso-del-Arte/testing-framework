@@ -38,6 +38,12 @@ class Pseudorandomness extends ExpandedRandom {
     
     // TODO: Write tests for this
     @Override
+    public boolean nextBoolean() {
+        return false;
+    }
+    
+    // TODO: Write tests for this
+    @Override
     public CoinSide flipCoin() {
         return CoinSide.HEADS;
     }
