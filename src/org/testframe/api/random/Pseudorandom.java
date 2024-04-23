@@ -151,4 +151,7 @@ public class Pseudorandom {
         return nextObject(list);
     }
     
+    private Pseudorandom() {
+    }
+    
 }
