@@ -14,6 +14,13 @@ public class FallbackRandomnessProvider extends ExternalRandomnessProvider {
 
     // TODO: Write tests for this
     @Override
+    public int[] giveNumbers(int amount) throws IOException {
+        int[] array = new int[Math.abs(amount)];
+        return array;
+    }
+
+    // TODO: Write tests for this
+    @Override
     public int[] giveNumbers(int amount, int minimum, int maximum) {
         try {
             return this.primaryProvider.giveNumbers(amount, minimum, maximum);

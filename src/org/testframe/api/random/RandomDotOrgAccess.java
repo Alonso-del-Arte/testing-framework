@@ -50,6 +50,13 @@ class RandomDotOrgAccess extends ExternalRandomnessProvider {
         return new URL(urlStr);
     }
     
+    // TODO: Write tests for this
+    @Override
+    public int[] giveNumbers(int amount) throws IOException {
+        int[] array = new int[Math.abs(amount)];
+        return array;
+    }
+
     /**
      * Provides random numbers in a specified range.
      * @param amount How many random numbers to provide. Ought to be positive, 

@@ -72,6 +72,12 @@ public class FallbackRandomnessProviderTest {
         }
 
         @Override
+        public int[] giveNumbers(int amount) throws IOException {
+            int[] array = new int[Math.abs(amount)];
+            return array;
+        }
+
+        @Override
         public int[] giveNumbers(int amount, int minimum, int maximum) 
                 throws IOException {
             if (this.active) {

@@ -9,6 +9,20 @@ import java.io.IOException;
 public abstract class ExternalRandomnessProvider {
     
     /**
+     * Provides random 32-bit signed integers.
+     * @param amount How many random numbers to provide. Ought to be positive. 
+     * May use 0, but that's pointless.
+     * @return An array with as many integers as specified by 
+     * <code>amount</code>.
+     * @throws IllegalArgumentException If <code>amount</code> is negative.
+     * @throws IOException If there is any problem connecting to the Internet to 
+     * get the random numbers.
+     * @throws RuntimeException If there is a response from the external 
+     * provider but there is a problem processing that response.
+     */
+    public abstract int[] giveNumbers(int amount) throws IOException;
+    
+    /**
      * Provides random numbers in a specified range.
      * @param amount How many random numbers to provide. Ought to be positive.
      * @param minimum The minimum each number can be. Ought to be less than 
