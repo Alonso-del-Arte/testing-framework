@@ -53,10 +53,20 @@ class Pseudorandomness extends ExpandedRandom {
         return bit == 1;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Flips a coin, so to speak. This function is closely related to {@link 
+     * #nextBoolean()}, though we don't guarantee that heads will map to either 
+     * true or false, nor tails to the other.
+     * @return Either heads or tails.
+     */
     @Override
     public CoinSide flipCoin() {
-        return CoinSide.HEADS;
+        boolean choseHeads = this.nextBoolean();
+        if (choseHeads) {
+            return CoinSide.HEADS;
+        } else {
+            return CoinSide.TAILS;
+        }
     }
 
     // TODO: Write tests for this
