@@ -1,12 +1,10 @@
 package org.testframe.api.random;
 
-import static org.testframe.api.Asserters.*;
-
 import java.io.IOException;
+import java.util.Arrays;
 
+import static org.testframe.api.Asserters.*;
 import org.testframe.api.Test;
-import org.testframe.api.random.ExternalRandomnessProvider;
-import org.testframe.api.random.Pseudorandomness;
 
 public class PseudorandomnessTest {
     
@@ -25,8 +23,8 @@ public class PseudorandomnessTest {
         System.out.println("nextBoolean");
         int numberA = (int) System.currentTimeMillis();
         int numberB = (int) (System.currentTimeMillis() >> NUMBER_OF_BITS);
-        int[] nums = {numberA, numberB, 0};
-        MockProvider provider = new MockProvider(nums);
+        int[] nums = {numberA, numberB};
+        ExternalRandomnessProvider provider = new MockProvider(nums);
         Pseudorandomness instance = new Pseudorandomness(provider);
         this.bitSource = numberA;
         String msgPart = "Given position from right ";
@@ -47,12 +45,37 @@ public class PseudorandomnessTest {
         }
     }
     
+    @Test
+    public void testFlipCoin() {
+        System.out.println("flipCoin");
+        long millis = System.currentTimeMillis();
+        int number = (int) ((millis >> NUMBER_OF_BITS) ^ millis);
+        int[] nums = {number};
+        ExternalRandomnessProvider provider = new MockProvider(nums);
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        int expHeadsOrTails = Integer.bitCount(number);
+        int expTailsOrHeads = NUMBER_OF_BITS - expHeadsOrTails;
+        int[] actualHeadsAndTailsCount = {0, 0};
+        for (int i = 0; i < NUMBER_OF_BITS; i++) {
+            CoinSide side = instance.flipCoin();
+            actualHeadsAndTailsCount[side.ordinal()]++;
+        }
+        boolean result = (actualHeadsAndTailsCount[0] == expHeadsOrTails 
+                && actualHeadsAndTailsCount[1] == expTailsOrHeads)
+                || (actualHeadsAndTailsCount[0] == expTailsOrHeads 
+                        && actualHeadsAndTailsCount[1] == expHeadsOrTails);
+        String msg = "Expected " + expHeadsOrTails + " heads and " 
+                + expTailsOrHeads + " tails or vice-versa, got " 
+                + Arrays.toString(actualHeadsAndTailsCount);
+        assert result : msg;
+    }
+    
     private static class MockProvider extends ExternalRandomnessProvider {
         
         private int[] numbers;
 
         @Override
-        public int[] giveNumbers(int amount) throws IOException {
+        public int[] giveNumbers(int amount) {
             int[] array = new int[amount];
             int providedLen = this.numbers.length;
             for (int i = 0; i < providedLen; i++) {
