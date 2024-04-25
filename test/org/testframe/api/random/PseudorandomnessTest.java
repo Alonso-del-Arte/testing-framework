@@ -10,6 +10,43 @@ import org.testframe.api.random.Pseudorandomness;
 
 public class PseudorandomnessTest {
     
+    private static final int NUMBER_OF_BITS = Integer.BYTES * 8;
+    
+    private int bitSource;
+    
+    private boolean getNextBooleanOffBitSource() {
+        int leastSignificantBit = this.bitSource & 1;
+        this.bitSource >>= 1;
+        return leastSignificantBit == 1;
+    }
+
+    @Test
+    public void testNextBoolean() {
+        System.out.println("nextBoolean");
+        int numberA = (int) System.currentTimeMillis();
+        int numberB = (int) (System.currentTimeMillis() >> NUMBER_OF_BITS);
+        int[] nums = {numberA, numberB};
+        MockProvider provider = new MockProvider(nums);
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        this.bitSource = numberA;
+        String msgPart = "Given position from right ";
+        String msgAPart = " in " + numberA + ", expected ";
+        for (int i = 0; i < NUMBER_OF_BITS; i++) {
+            boolean expected = this.getNextBooleanOffBitSource();
+            boolean actual = instance.nextBoolean();
+            String msg = msgPart + i + msgAPart + expected;
+            assert expected == actual : msg;
+        }
+        this.bitSource = numberB;
+        String msgBPart = " in " + numberB + ", expected ";
+        for (int j = 0; j < NUMBER_OF_BITS; j++) {
+            boolean expected = this.getNextBooleanOffBitSource();
+            boolean actual = instance.nextBoolean();
+            String msg = msgPart + j + msgBPart + expected;
+            assert expected == actual : msg;
+        }
+    }
+    
     private static class MockProvider extends ExternalRandomnessProvider {
         
         private int[] numbers;
