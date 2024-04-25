@@ -54,8 +54,12 @@ public class PseudorandomnessTest {
         @Override
         public int[] giveNumbers(int amount) throws IOException {
             int[] array = new int[amount];
-            for (int i = 0; i < amount; i++) {
+            int providedLen = this.numbers.length;
+            for (int i = 0; i < providedLen; i++) {
                 array[i] = this.numbers[i];
+            }
+            for (int j = providedLen; j < amount; j++) {
+                array[j] = 0;
             }
             return array;
         }
