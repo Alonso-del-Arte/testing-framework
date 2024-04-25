@@ -25,7 +25,7 @@ public class PseudorandomnessTest {
         System.out.println("nextBoolean");
         int numberA = (int) System.currentTimeMillis();
         int numberB = (int) (System.currentTimeMillis() >> NUMBER_OF_BITS);
-        int[] nums = {numberA, numberB};
+        int[] nums = {numberA, numberB, 0};
         MockProvider provider = new MockProvider(nums);
         Pseudorandomness instance = new Pseudorandomness(provider);
         this.bitSource = numberA;
