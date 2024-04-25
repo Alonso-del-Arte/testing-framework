@@ -19,11 +19,19 @@ class Pseudorandomness extends ExpandedRandom {
 
     private static final long serialVersionUID = 4553879963396210688L;
     
+    private static final int NUMBER_OF_INT_BITS = Integer.BYTES * 8;
+    
     static final int REFRESH_INTERVAL = 100;
     
     private final ExternalRandomnessProvider randomProvider;
     
     private int[] integers = {};
+    
+    private int index = 0;
+    
+    private int boolsBitSource;
+    
+    private int boolBitsUsed = 0;
     
     // TODO: Write tests for this
     @Override
@@ -31,10 +39,18 @@ class Pseudorandomness extends ExpandedRandom {
         return -1;
     }
     
-    // TODO: Write tests for this
     @Override
     public boolean nextBoolean() {
-        return false;
+        int bit = this.boolsBitSource & 1;
+        this.boolBitsUsed++;
+        if (this.boolBitsUsed == NUMBER_OF_INT_BITS) {
+            this.index++;
+            this.boolsBitSource = this.integers[this.index];
+            this.boolBitsUsed = 0;
+        } else {
+            this.boolsBitSource >>= 1;
+        }
+        return bit == 1;
     }
     
     // TODO: Write tests for this
@@ -93,6 +109,13 @@ class Pseudorandomness extends ExpandedRandom {
 
     public Pseudorandomness(ExternalRandomnessProvider provider) {
         this.randomProvider = provider;
+        try {
+            this.integers = this.randomProvider.giveNumbers(3);
+            this.boolsBitSource = this.integers[0];
+        } catch (IOException ioe) {
+            RuntimeException re = new RuntimeException(ioe);
+            throw re;
+        }
     }
 
 }
