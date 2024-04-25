@@ -30,7 +30,7 @@ public class PseudorandomnessTest {
         Pseudorandomness instance = new Pseudorandomness(provider);
         this.bitSource = numberA;
         String msgPart = "Given position from right ";
-        String msgAPart = " in " + numberA + ", expected ";
+        String msgAPart = " in " + numberA + " (A), expected ";
         for (int i = 0; i < NUMBER_OF_BITS; i++) {
             boolean expected = this.getNextBooleanOffBitSource();
             boolean actual = instance.nextBoolean();
@@ -38,7 +38,7 @@ public class PseudorandomnessTest {
             assert expected == actual : msg;
         }
         this.bitSource = numberB;
-        String msgBPart = " in " + numberB + ", expected ";
+        String msgBPart = " in " + numberB + " (B), expected ";
         for (int j = 0; j < NUMBER_OF_BITS; j++) {
             boolean expected = this.getNextBooleanOffBitSource();
             boolean actual = instance.nextBoolean();
