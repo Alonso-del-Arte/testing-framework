@@ -122,6 +122,12 @@ class Pseudorandomness extends ExpandedRandom {
         return this.integers[this.index++];
     }
 
+    // TODO: Write tests for this
+    @Override
+    public int nextInt(int bound) {
+        return Integer.MAX_VALUE;
+    }
+
     public Pseudorandomness(ExternalRandomnessProvider provider) {
         this.randomProvider = provider;
         try {
