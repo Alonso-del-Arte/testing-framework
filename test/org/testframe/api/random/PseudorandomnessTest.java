@@ -121,4 +121,22 @@ public class PseudorandomnessTest {
         
     }
     
+    private static class CallTrackingPseudorandomness extends Pseudorandomness {
+        
+        private static final long serialVersionUID = 1L;
+        
+        int nextIntCallsSoFar = 0;
+        
+        @Override
+        public int nextInt() {
+            this.nextIntCallsSoFar++;
+            return super.nextInt();
+        }
+        
+        public CallTrackingPseudorandomness(MockProvider provider) {
+            super(provider);
+        }
+        
+    }
+    
 }
