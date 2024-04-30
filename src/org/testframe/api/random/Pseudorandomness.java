@@ -116,6 +116,11 @@ class Pseudorandomness extends ExpandedRandom {
     public <E> E nextObject(Set<E> set) {
         return null;
     }
+    
+    @Override
+    public int nextInt() {
+        return this.integers[this.index++];
+    }
 
     public Pseudorandomness(ExternalRandomnessProvider provider) {
         this.randomProvider = provider;
