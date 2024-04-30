@@ -70,6 +70,22 @@ public class PseudorandomnessTest {
         assert result : msg;
     }
     
+    @Test
+    public void testNextInt() {
+        System.out.println("nextInt");
+        int[] nums = new int[Pseudorandomness.REFRESH_INTERVAL];
+        for (int i = 0; i < Pseudorandomness.REFRESH_INTERVAL; i++) {
+            nums[i] = i;
+        }
+        MockProvider provider = new MockProvider(nums);
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        for (int j = 0; j < Pseudorandomness.REFRESH_INTERVAL; j++) {
+            int expected = nums[j];
+            int actual = instance.nextInt();
+            assertEquals(expected, actual);
+        }
+    }
+    
     private static class MockProvider extends ExternalRandomnessProvider {
         
         private int[] numbers;
