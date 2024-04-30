@@ -120,7 +120,7 @@ class Pseudorandomness extends ExpandedRandom {
     public Pseudorandomness(ExternalRandomnessProvider provider) {
         this.randomProvider = provider;
         try {
-            this.integers = this.randomProvider.giveNumbers(3);
+            this.integers = this.randomProvider.giveNumbers(REFRESH_INTERVAL);
             this.boolsBitSource = this.integers[0];
         } catch (IOException ioe) {
             RuntimeException re = new RuntimeException(ioe);
