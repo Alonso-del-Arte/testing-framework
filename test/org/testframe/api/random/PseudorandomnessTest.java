@@ -86,6 +86,33 @@ public class PseudorandomnessTest {
         }
     }
     
+    @Test
+    public void testNextIntBounded() {
+        int len = Long.SIZE;
+        int[] nums = new int[len];
+        long source = System.currentTimeMillis();
+        for (int i = 0; i < len; i++) {
+            nums[i] = (int) source;
+            source >>= 1;
+        }
+        MockProvider provider = new MockProvider(nums);
+        CallTrackingPseudorandomness tracker 
+                = new CallTrackingPseudorandomness(provider);
+        int minimum = 0;
+        int maximum = 1 << 14;
+        String msgPart = " should be at least " + minimum 
+                + " but not more than " + maximum;
+        for (int expected = 0; expected < len; expected++) {
+            String callMsg = "As bounded nextInt() has been called " + expected 
+                    + " times, unbounded nextInt() should've been called also";
+            int actual = tracker.nextIntCallsSoFar;
+            assertEquals(expected, actual, callMsg);
+            int number = tracker.nextInt(maximum);
+            String msg = "Number " + number + msgPart;
+            assertInRange(minimum, number, maximum, msg);
+        }
+    }
+    
     private static class MockProvider extends ExternalRandomnessProvider {
         
         private int[] numbers;
