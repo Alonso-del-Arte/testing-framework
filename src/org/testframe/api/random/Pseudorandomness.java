@@ -125,7 +125,11 @@ class Pseudorandomness extends ExpandedRandom {
     // TODO: Write tests for this
     @Override
     public int nextInt(int bound) {
-        return Integer.MAX_VALUE;
+        int candidate = this.nextInt() % bound;
+        if (candidate < 0) {
+            candidate += bound;
+        }
+        return candidate;
     }
 
     public Pseudorandomness(ExternalRandomnessProvider provider) {
