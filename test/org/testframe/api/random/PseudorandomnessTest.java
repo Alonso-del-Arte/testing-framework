@@ -29,6 +29,27 @@ public class PseudorandomnessTest {
         }
         return array;
     }
+    
+    @Test
+    public void testGiveNumbersCalledUponRefreshInterval() {
+        int ceiling = Integer.MIN_VALUE + 31;
+        int len = (((int) System.currentTimeMillis()) & ceiling) + 1;
+        int[] nums = makeIntArray(len);
+        MockProvider provider = new MockProvider(nums);
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        int lastNum = 0;
+        int numberOfCallsSoFar = 0;
+        while (numberOfCallsSoFar < Pseudorandomness.REFRESH_INTERVAL) {
+            lastNum = instance.nextInt();
+            numberOfCallsSoFar++;
+        }
+        String msg = "After giving number " + lastNum 
+                + " and REFRESH_INTERVAL - 1 others, next call should refresh";
+        assertDoesNotThrow(() -> {
+            int nextNum = instance.nextInt();
+            System.out.println("Successfully got random number " + nextNum);
+        }, msg);
+    }
 
     @Test
     public void testNextBoolean() {
