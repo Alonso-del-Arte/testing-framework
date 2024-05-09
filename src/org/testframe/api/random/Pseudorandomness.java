@@ -41,7 +41,7 @@ class Pseudorandomness extends ExpandedRandom {
      */
     @Override
     public int nextPowerOfTwo() {
-        int shift = 7;// this.nextInt(31);
+        int shift = this.nextInt(31);
         return 1 << shift;
     }
     
