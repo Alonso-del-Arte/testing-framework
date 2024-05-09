@@ -2,6 +2,8 @@ package org.testframe.api.random;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.testframe.api.Asserters.*;
 import org.testframe.api.Test;
@@ -16,6 +18,16 @@ public class PseudorandomnessTest {
         int leastSignificantBit = this.bitSource & 1;
         this.bitSource >>= 1;
         return leastSignificantBit == 1;
+    }
+    
+    private static int[] makeIntArray(int len) {
+        long source = System.currentTimeMillis();
+        int[] array = new int[len];
+        for (int i = 0; i < len; i++) {
+            array[i] = (int) source + i;
+            source >>= 1;
+        }
+        return array;
     }
 
     @Test
@@ -111,6 +123,32 @@ public class PseudorandomnessTest {
             String msg = "Number " + number + msgPart;
             assertInRange(minimum, number, maximum, msg);
         }
+    }
+    
+    @Test
+    public void testNextPowerOfTwo() {
+        System.out.println("nextPowerOfTwo");
+        Set<Integer> expected = new HashSet<Integer>(NUMBER_OF_BITS - 1);
+        int power = 1 << 30;
+        while (power > 0) {
+            expected.add(power);
+            power >>= 1;
+        }
+        Set<Integer> actual = new HashSet<Integer>(NUMBER_OF_BITS - 1);
+        int[] nums = makeIntArray(Long.SIZE);
+        MockProvider provider = new MockProvider(nums);
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        int totalNumberOfCalls = 8 * NUMBER_OF_BITS;
+        int callsSoFar = 0;
+        while (callsSoFar < totalNumberOfCalls) {
+            int claimedPower = instance.nextPowerOfTwo();
+            actual.add(claimedPower);
+            String msg = "Number " + claimedPower + " should be a power of two";
+            assertEquals(Integer.highestOneBit(claimedPower), claimedPower, 
+                    msg);
+            callsSoFar++;
+        }
+        assertEquals(expected, actual);
     }
     
     private static class MockProvider extends ExternalRandomnessProvider {
