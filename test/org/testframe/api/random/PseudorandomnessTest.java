@@ -145,7 +145,7 @@ public class PseudorandomnessTest {
             assertInRange(minimum, number, maximum, msg);
         }
     }
-    @org.testframe.api.Skip
+
     @Test
     public void testNextPowerOfTwo() {
         System.out.println("nextPowerOfTwo");
@@ -176,11 +176,8 @@ public class PseudorandomnessTest {
         
         private int[] numbers;
         
-        int giveNumbersCallsSoFar = 0;
-
         @Override
         public int[] giveNumbers(int amount) {
-            this.giveNumbersCallsSoFar++;
             int[] array = new int[amount];
             int providedLen = this.numbers.length;
             for (int i = 0; i < providedLen; i++) {
