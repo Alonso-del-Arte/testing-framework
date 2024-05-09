@@ -33,10 +33,16 @@ class Pseudorandomness extends ExpandedRandom {
     
     private int boolBitsUsed = 0;
     
-    // TODO: Write tests for this
+    /**
+     * Gives a pseudorandomly chosen power of two.
+     * @return A pseudorandomly chosen power of two. For example, 1048576 = 
+     * 2<sup>20</sup>. Smallest possible return value is 1, highest is 
+     * 1073741824 = 2<sup>30</sup>. 
+     */
     @Override
     public int nextPowerOfTwo() {
-        return -1;
+        int shift = 7;// this.nextInt(31);
+        return 1 << shift;
     }
     
     @Override
@@ -117,8 +123,21 @@ class Pseudorandomness extends ExpandedRandom {
         return null;
     }
     
+    private void refresh() {
+        try {
+            this.integers = this.randomProvider.giveNumbers(REFRESH_INTERVAL);
+            this.index = 0;
+        } catch (IOException ioe) {
+            RuntimeException re = new RuntimeException(ioe);
+            throw re;
+        }
+    }
+    
     @Override
     public int nextInt() {
+        if (this.index == REFRESH_INTERVAL) {
+            this.refresh();
+        }
         return this.integers[this.index++];
     }
 
