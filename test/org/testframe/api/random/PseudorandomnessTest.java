@@ -135,7 +135,7 @@ public class PseudorandomnessTest {
             power >>= 1;
         }
         Set<Integer> actual = new HashSet<Integer>(NUMBER_OF_BITS - 1);
-        int[] nums = makeIntArray(Long.SIZE);
+        int[] nums = makeIntArray(Integer.SIZE);
         MockProvider provider = new MockProvider(nums);
         Pseudorandomness instance = new Pseudorandomness(provider);
         int totalNumberOfCalls = 8 * NUMBER_OF_BITS;
