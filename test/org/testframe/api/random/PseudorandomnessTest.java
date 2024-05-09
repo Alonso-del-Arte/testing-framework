@@ -156,10 +156,10 @@ public class PseudorandomnessTest {
             power >>= 1;
         }
         Set<Integer> actual = new HashSet<Integer>(NUMBER_OF_BITS - 1);
-        int[] nums = makeIntArray(Integer.SIZE);
+        int[] nums = makeIntArray(Pseudorandomness.REFRESH_INTERVAL);
         MockProvider provider = new MockProvider(nums);
         Pseudorandomness instance = new Pseudorandomness(provider);
-        int totalNumberOfCalls = 8 * NUMBER_OF_BITS;
+        int totalNumberOfCalls = NUMBER_OF_BITS * NUMBER_OF_BITS;
         int callsSoFar = 0;
         while (callsSoFar < totalNumberOfCalls) {
             int claimedPower = instance.nextPowerOfTwo();
