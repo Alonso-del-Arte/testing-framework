@@ -44,6 +44,7 @@ public class Asserters {
      * state what the expected value was and what the actual value was.
      * @param expected The expected integer. For example, 73.
      * @param actual The actual integer. For example, &minus;410.
+     * @since 1.0
      */
     public static void assertEquals(int expected, int actual) {
          assertEquals(expected, actual, "");
@@ -60,6 +61,7 @@ public class Asserters {
      * same elements and should therefore they should be the same size." The 
      * expected and actual values will be appended to the test failure 
      * explanation.
+     * @since 1.0
      */
     public static void assertEquals(int expected, int actual, String msg) {
         String intermediate = msg + ". Expected = " + expected + ". Actual = " 
@@ -75,6 +77,7 @@ public class Asserters {
      * state what the expected value was and what the actual value was.
      * @param expected The expected integer. For example, 4294967369.
      * @param actual The actual integer. For example, &minus;4294967779.
+     * @since 1.0
      */
     public static void assertEquals(long expected, long actual) {
          assertEquals(expected, actual, "");
@@ -91,6 +94,7 @@ public class Asserters {
      * same elements and should therefore they should be the same size." The 
      * expected and actual values will be appended to the test failure 
      * explanation.
+     * @since 1.0
      */
     public static void assertEquals(long expected, long actual, String msg) {
         String intermediate = msg + ". Expected = " + expected + ". Actual = " 
@@ -109,6 +113,7 @@ public class Asserters {
      * values are NaN, regardless of their bit patterns.</p>
      * @param expected The expected value. For example, 3.14159.
      * @param actual The actual value. For example, 3.14161.
+     * @since 1.0
      */
     public static void assertEquals(double expected, double actual) {
          assertEquals(expected, actual, DEFAULT_TEST_DELTA, "");
@@ -129,6 +134,7 @@ public class Asserters {
      * positive, though less than 1.0. Negative variances are not recommended, 
      * and the behavior is not at all guaranteed to remain consistent from one 
      * version of this framework to the next.
+     * @since 1.0
      */
     public static void assertEquals(double expected, double actual, 
             double delta) {
@@ -146,6 +152,7 @@ public class Asserters {
      * test fails because of the assertion. For example, "The number should 
      * converge to &pi;." The expected, actual and default delta values will be 
      * appended to the test failure explanation.
+     * @since 1.0
      */
     public static void assertEquals(double expected, double actual, 
             String msg) {
@@ -169,6 +176,7 @@ public class Asserters {
      * test fails because of the assertion. For example, "The number should 
      * converge to &pi;." The expected, actual and delta values will be appended 
      * to the test failure explanation.
+     * @since 1.0
      */
     public static void assertEquals(double expected, double actual, 
             double delta, String msg) {
@@ -190,6 +198,7 @@ public class Asserters {
      * @param actual The actual object. For example, a 
      * <code>LocalDateTime</code> object for this time of day tomorrow.
      * @throws NullPointerException If <code>expected</code> is null.
+     * @since 1.0
      */
     public static void assertEquals(Object expected, Object actual) {
          assertEquals(expected, actual, "");
@@ -212,6 +221,7 @@ public class Asserters {
      * expected and actual values will be appended to the test failure 
      * explanation.
      * @throws NullPointerException If <code>expected</code> is null.
+     * @since 1.0
      */
     public static void assertEquals(Object expected, Object actual, 
             String msg) {
@@ -231,6 +241,7 @@ public class Asserters {
      * 47, 76}.
      * @param actual The actual array. Examples: {2, 1, 3, 4, 7, 11, 18, 29, 47, 
      * 76}, {1, 3, 4, 7, 11, 12, 18, 21, 28}.
+     * @since 1.0
      */
     public static void assertEquals(int[] expected, int[] actual) {
          assertEquals(expected, actual, "");
@@ -245,6 +256,7 @@ public class Asserters {
      * @param actual The actual array. Examples: {2, 1, 3, 4, 7, 11, 18, 29, 47, 
      * 76}, {1, 3, 4, 7, 11, 12, 18, 21, 28}.
      * @param msg A message for the test failure explanation.
+     * @since 1.0
      */
     public static void assertEquals(int[] expected, int[] actual, String msg) {
         if (expected.length != actual.length) {
@@ -277,6 +289,7 @@ public class Asserters {
      * containing 4.0, 3.0, 3.25, 3.16 in that order.
      * @param actual The array of actual values. For example, an array  
      * containing 4.0, 3.0, 3.2507, 3.15999 in that order.
+     * @since 1.0
      */
     public static void assertEquals(double[] expected, double[] actual) {
         assertEquals(expected, actual, DEFAULT_TEST_DELTA, "");
@@ -303,6 +316,7 @@ public class Asserters {
      * 1.0. Negative variances are not recommended, and the behavior is not at 
      * all guaranteed to remain consistent from one version of this framework to 
      * the next.
+     * @since 1.0
      */
     public static void assertEquals(double[] expected, double[] actual, 
             double delta) {
@@ -324,6 +338,7 @@ public class Asserters {
      * containing 4.0, 3.0, 3.2507, 3.15999 in that order.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails. For example, "Numbers should converge to &pi;."
+     * @since 1.0
      */
     public static void assertEquals(double[] expected, double[] actual, 
             String msg) {
@@ -352,6 +367,7 @@ public class Asserters {
      * the next.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails. For example, "Numbers should converge to &pi;."
+     * @since 1.0
      */
     public static void assertEquals(double[] expected, double[] actual, 
             double delta, String msg) {
@@ -381,6 +397,7 @@ public class Asserters {
      * magenta, yellow and black.
      * @param actual The actual array. For example, the colors cyan, black, 
      * yellow and magenta.
+     * @since 1.0
      */
     public static void assertEquals(Object[] expected, Object[] actual) {
         assertEquals(expected, actual, "");
@@ -397,6 +414,7 @@ public class Asserters {
      * test fails.
      * @throws NullPointerException If two arrays are of the same length and 
      * <code>expected</code> contains even just one null.
+     * @since 1.0
      */
     public static void assertEquals(Object[] expected, Object[] actual, 
             String msg) {
@@ -432,6 +450,7 @@ public class Asserters {
      * with an appropriate message.</p>
      * @param object The object to assert is null. For example, a field that is 
      * not supposed to be initialized at construction time.
+     * @since 1.0
      */
     public static void assertNull(Object object) {
         assertNull(object, "");
@@ -445,6 +464,7 @@ public class Asserters {
      * @param msg A message for the test failure explanation, to which will be 
      * appended a message saying a null object was expected but instead a 
      * non-null object was found, if the test fails.
+     * @since 1.0
      */
     public static void assertNull(Object object, String msg) {
         if (object != null) {
@@ -464,6 +484,7 @@ public class Asserters {
      * @param minimum The minimum permissible value. For example, 100.
      * @param actual The value to compare against the specified minimum. For 
      * example, 95.
+     * @since 1.0
      */
     public static void assertMinimum(long minimum, long actual) {
         assertMinimum(minimum, actual, "");
@@ -480,6 +501,7 @@ public class Asserters {
      * test fails because of the assertion. For example, "List should have at 
      * least as many elements as the set." The minimum and actual values will be 
      * appended to the test failure explanation.
+     * @since 1.0
      */
     public static void assertMinimum(long minimum, long actual, String msg) {
         String intermediate = msg + ". Number " + actual 
