@@ -172,6 +172,26 @@ public class PseudorandomnessTest {
         assertEquals(expected, actual);
     }
     
+    @Test
+    public void testNextASCIIChar() {
+        System.out.println("nextASCIIChar");
+        Set<Character> expected = new HashSet<>();
+        for (char ch = ' '; ch < '\u007F'; ch++) {
+            expected.add(ch);
+        }
+        int size = expected.size();
+        Set<Character> actual = new HashSet<>(size);
+        int numberOfCalls = 32 * size;
+        MockProvider provider = new MockProvider(makeIntArray(size));
+        CallTrackingPseudorandomness instance 
+                = new CallTrackingPseudorandomness(provider);
+        for (int i = 0; i < numberOfCalls; i++) {
+            actual.add(instance.nextASCIIChar());
+        }
+        assertEquals(expected, actual);
+        assertEquals(numberOfCalls, instance.nextIntCallsSoFar);
+    }
+    
     private static class MockProvider extends ExternalRandomnessProvider {
         
         private int[] numbers;
