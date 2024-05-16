@@ -3,7 +3,6 @@ package org.testframe.api.random;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 /**
@@ -32,6 +31,8 @@ class Pseudorandomness extends ExpandedRandom {
     private int boolsBitSource;
     
     private int boolBitsUsed = 0;
+    
+    private int asciiSource = 0;
     
     /**
      * Gives a pseudorandomly chosen power of two.
@@ -85,9 +86,18 @@ class Pseudorandomness extends ExpandedRandom {
      */
     @Override
     public char nextASCIIChar() {
+        if (this.asciiSource == 0) {
+            this.asciiSource = this.nextInt();
+        }
+        // TODO: Write test with timeout for all numbers provided being 
+        // 2139062143
+//        if (this.asciiSource == 0x7F7F7F7F) {
+//            this.asciiSource &= (int) System.currentTimeMillis();
+//        }
         int candidate;
         do {
-            candidate = this.nextInt() & 127;
+            candidate = this.asciiSource & 127;
+            this.asciiSource >>= 8;
         } while (candidate == 127);
         if (candidate < ' ') {
             candidate += ' ';
