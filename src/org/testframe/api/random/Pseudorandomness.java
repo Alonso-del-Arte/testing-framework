@@ -89,11 +89,6 @@ class Pseudorandomness extends ExpandedRandom {
         if (this.asciiSource == 0) {
             this.asciiSource = this.nextInt();
         }
-        // TODO: Write test with timeout for all numbers provided being 
-        // 2139062143
-//        if (this.asciiSource == 0x7F7F7F7F) {
-//            this.asciiSource &= (int) System.currentTimeMillis();
-//        }
         int candidate;
         do {
             candidate = this.asciiSource & 127;
@@ -108,7 +103,7 @@ class Pseudorandomness extends ExpandedRandom {
     // TODO: Write tests for this
     @Override
     public String nextASCIICharSeq(int length) {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return "SORRY, NOT IMPLEMENTED YET THIS HAS BEEN";
     }
 
     // TODO: Write tests for this
