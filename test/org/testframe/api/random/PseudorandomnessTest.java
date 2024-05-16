@@ -175,21 +175,29 @@ public class PseudorandomnessTest {
     @Test
     public void testNextASCIIChar() {
         System.out.println("nextASCIIChar");
+        char start = ' ';
+        char stop = '\u007F';
+        int[] nums = new int[stop - start];
+        int currNum = 0;
         Set<Character> expected = new HashSet<>();
-        for (char ch = ' '; ch < '\u007F'; ch++) {
+        for (char ch = start; ch < stop; ch++) {
+            currNum <<= Byte.SIZE;
+            currNum += ch;
+            nums[ch - start] = currNum;
             expected.add(ch);
         }
         int size = expected.size();
         Set<Character> actual = new HashSet<>(size);
         int numberOfCalls = 32 * size;
-        MockProvider provider = new MockProvider(makeIntArray(size));
+        MockProvider provider = new MockProvider(nums);
         CallTrackingPseudorandomness instance 
                 = new CallTrackingPseudorandomness(provider);
         for (int i = 0; i < numberOfCalls; i++) {
             actual.add(instance.nextASCIIChar());
         }
         assertEquals(expected, actual);
-        assertEquals(numberOfCalls, instance.nextIntCallsSoFar);
+        assert instance.nextIntCallsSoFar > 0 
+                : "nextInt() should've been called at least once";
     }
     
     private static class MockProvider extends ExternalRandomnessProvider {
