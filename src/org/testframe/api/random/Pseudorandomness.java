@@ -11,8 +11,8 @@ import java.util.Set;
  * pseudorandom if not truly random. The idea is that instances of this class 
  * will try to connect to an external source like Random.org, which is said to 
  * provide truly random numbers. If there's any problem making the connection or 
- * interpreting the response, a local pseudorandom number generator will be used 
- * as a fallback.
+ * interpreting the response, a local pseudorandom number generator could be  
+ * used as a fallback.
  * @author Alonso del Arte
  */
 class Pseudorandomness extends ExpandedRandom {
@@ -75,10 +75,24 @@ class Pseudorandomness extends ExpandedRandom {
         }
     }
 
-    // TODO: Write tests for this
+    /**
+     * Gives a pseudorandomly chosen printing ASCII character. Non-printing 
+     * characters like end of transmission and data link escape are excluded 
+     * from consideration. The horizontal and vertical tabs are also excluded, 
+     * as well as carriage return and line feed.
+     * @return A pseudorandomly chosen ASCII character. For example, 'a'. May 
+     * also be the space ' '.
+     */
     @Override
     public char nextASCIIChar() {
-        return '?';
+        int candidate;
+        do {
+            candidate = this.nextInt() & 127;
+        } while (candidate == 127);
+        if (candidate < ' ') {
+            candidate += ' ';
+        }
+        return (char) candidate;
     }
 
     // TODO: Write tests for this
