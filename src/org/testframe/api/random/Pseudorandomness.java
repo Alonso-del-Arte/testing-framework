@@ -153,11 +153,11 @@ class Pseudorandomness extends ExpandedRandom {
     }
     
     @Override
-    public int nextInt() {return 0;
-//        if (this.index == REFRESH_INTERVAL) {
-//            this.refresh();
-//        }
-//        return this.integers[this.index++];
+    public int nextInt() {
+        if (this.index == REFRESH_INTERVAL) {
+            this.refresh();
+        }
+        return this.integers[this.index++];
     }
 
     // TODO: Write tests for this
