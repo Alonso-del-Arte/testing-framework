@@ -155,7 +155,8 @@ class Pseudorandomness extends ExpandedRandom {
     @Override
     public int nextInt() {
         if (this.index == REFRESH_INTERVAL) {
-            this.refresh();
+//            this.refresh();
+            throw new RuntimeException();
         }
         return this.integers[this.index++];
     }
