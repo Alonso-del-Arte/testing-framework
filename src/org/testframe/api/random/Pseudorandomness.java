@@ -103,6 +103,10 @@ class Pseudorandomness extends ExpandedRandom {
     // TODO: Write tests for this
     @Override
     public String nextASCIICharSeq(int length) {
+        if (length < 0) {
+            String excMsg = "Negative length " + length + " is not valid";
+            throw new NegativeArraySizeException(excMsg);
+        }
         return "SORRY, NOT IMPLEMENTED YET THIS HAS BEEN";
     }
 
