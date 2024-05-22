@@ -198,6 +198,26 @@ public class PseudorandomnessTest {
                 : "nextInt() should've been called at least once";
     }
     
+    @Test
+    public void testNextASCIICharSeqRejectsNegativeLength() {
+        int floor = -256;
+        int badLen = ((int) System.currentTimeMillis()) | floor;
+        MockProvider provider = new MockProvider(makeIntArray(Pseudorandomness
+                .REFRESH_INTERVAL));
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        String msg = "Bad length " + badLen 
+                + " for nextASCIICharSeq should cause exception";
+        Throwable t = assertThrows(() -> {
+            String badResult = instance.nextASCIICharSeq(badLen);
+            System.out.println(msg + ", not give bad result \"" + badResult 
+                    + "\"");
+        }, NegativeArraySizeException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
     private static class MockProvider extends ExternalRandomnessProvider {
         
         private int[] numbers;
