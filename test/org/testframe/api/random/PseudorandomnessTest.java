@@ -32,8 +32,7 @@ public class PseudorandomnessTest {
     
     @Test
     public void testGiveNumbersCalledUponRefreshInterval() {
-        int len = (((int) System.currentTimeMillis()) & 255) + 1;
-        int[] nums = makeIntArray(len);
+        int[] nums = makeIntArray(Pseudorandomness.REFRESH_INTERVAL);
         MockProvider provider = new MockProvider(nums);
         Pseudorandomness instance = new Pseudorandomness(provider);
         int lastNum = 0;
