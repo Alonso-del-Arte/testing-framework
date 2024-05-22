@@ -237,7 +237,15 @@ public class PseudorandomnessTest {
         
         private static final long serialVersionUID = 1L;
         
+        int nextASCIICharCallsSoFar = 0;
+        
         int nextIntCallsSoFar = 0;
+
+        @Override
+        public char nextASCIIChar() {
+            this.nextASCIICharCallsSoFar++;
+            return super.nextASCIIChar();
+        }
         
         @Override
         public int nextInt() {
