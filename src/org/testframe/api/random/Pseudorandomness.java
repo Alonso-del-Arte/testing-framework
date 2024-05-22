@@ -100,14 +100,20 @@ class Pseudorandomness extends ExpandedRandom {
         return (char) candidate;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Gives a pseudorandom sequence of printing ASCII characters. 
+     * @param length How long the sequence of ASCII characters should be. Should 
+     * not be negative. May be 0, but there's not much point to that.
+     * @return 
+     * @throws NegativeArraySizeException If <code>length</code> is negative.
+     */
     @Override
     public String nextASCIICharSeq(int length) {
         if (length < 0) {
             String excMsg = "Negative length " + length + " is not valid";
             throw new NegativeArraySizeException(excMsg);
         }
-        return "SORRY, NOT IMPLEMENTED YET THIS HAS BEEN";
+        return "";
     }
 
     // TODO: Write tests for this
