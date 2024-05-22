@@ -218,6 +218,15 @@ public class PseudorandomnessTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
+    @Test
+    public void testNextASCIICharSeqLengthZero() {
+        MockProvider provider = new MockProvider(makeIntArray(Pseudorandomness
+                .REFRESH_INTERVAL));
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        assertEquals("", instance.nextASCIICharSeq(0), 
+                "Length 0 should give empty String");
+    }
+    
     private static class MockProvider extends ExternalRandomnessProvider {
         
         private int[] numbers;
