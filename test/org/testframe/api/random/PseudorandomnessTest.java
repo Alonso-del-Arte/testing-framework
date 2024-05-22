@@ -32,8 +32,7 @@ public class PseudorandomnessTest {
     
     @Test
     public void testGiveNumbersCalledUponRefreshInterval() {
-        int ceiling = Integer.MIN_VALUE + 31;
-        int len = (((int) System.currentTimeMillis()) & ceiling) + 1;
+        int len = (((int) System.currentTimeMillis()) & 255) + 1;
         int[] nums = makeIntArray(len);
         MockProvider provider = new MockProvider(nums);
         Pseudorandomness instance = new Pseudorandomness(provider);
