@@ -10,6 +10,10 @@ import org.testframe.api.Test;
 
 public class PseudorandomnessTest {
     
+    private static final char ASCII_PRINT_START = ' ';
+    
+    private static final char ASCII_PRINT_STOP = '\u007F';
+    
     private static final int NUMBER_OF_BITS = Integer.BYTES * 8;
     
     private int bitSource;
@@ -173,15 +177,13 @@ public class PseudorandomnessTest {
     @Test
     public void testNextASCIIChar() {
         System.out.println("nextASCIIChar");
-        char start = ' ';
-        char stop = '\u007F';
-        int[] nums = new int[stop - start];
+        int[] nums = new int[ASCII_PRINT_STOP - ASCII_PRINT_START];
         int currNum = 0;
         Set<Character> expected = new HashSet<>();
-        for (char ch = start; ch < stop; ch++) {
+        for (char ch = ASCII_PRINT_START; ch < ASCII_PRINT_STOP; ch++) {
             currNum <<= Byte.SIZE;
             currNum += ch;
-            nums[ch - start] = currNum;
+            nums[ch - ASCII_PRINT_START] = currNum;
             expected.add(ch);
         }
         int size = expected.size();
@@ -225,6 +227,38 @@ public class PseudorandomnessTest {
         Pseudorandomness instance = new Pseudorandomness(provider);
         assertEquals("", instance.nextASCIICharSeq(0), 
                 "Length 0 should give empty String");
+    }
+    
+    private static void assertAllPrintingASCIICharacters(String s) {
+        char[] chs = s.toCharArray();
+        for (char ch : chs) {
+            String msg = "Character '" + ch + "' in \"" + s 
+                    + "\" should be a printing character";
+            assert ch >= ASCII_PRINT_START : msg;
+            assert ch < ASCII_PRINT_STOP : msg;
+        }
+    }
+    
+    @Test
+    public void testNextASCIICharSeq() {
+        System.out.println("nextASCIICharSeq");
+        MockProvider provider = new MockProvider(makeIntArray(Pseudorandomness
+                .REFRESH_INTERVAL));
+        CallTrackingPseudorandomness instance 
+                = new CallTrackingPseudorandomness(provider);
+        int expected = 0;
+        int lengthThreshold = 20;
+        for (int i = 1; i < lengthThreshold; i++) {
+            String s = instance.nextASCIICharSeq(i);
+            String lenMsg = "\"" + s + "\" should be of length " + i;
+            assertEquals(i, s.length(), lenMsg);
+            assertAllPrintingASCIICharacters(s);
+            expected += i;
+        }
+        int actual = instance.nextASCIICharCallsSoFar;
+        String msg = "nextASCIIChar() should've been called " + expected 
+                + " times";
+        assertEquals(expected, actual, msg);
     }
     
     private static class MockProvider extends ExternalRandomnessProvider {
