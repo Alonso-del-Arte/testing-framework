@@ -113,7 +113,14 @@ class Pseudorandomness extends ExpandedRandom {
             String excMsg = "Negative length " + length + " is not valid";
             throw new NegativeArraySizeException(excMsg);
         }
-        return "";
+        if (length == 0) {
+            return "";
+        }
+        char[] array = new char[length];
+        for (int i = 0; i < length; i++) {
+            array[i] = this.nextASCIIChar();
+        }
+        return new String(array);
     }
 
     // TODO: Write tests for this
