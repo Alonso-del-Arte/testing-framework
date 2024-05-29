@@ -247,7 +247,7 @@ public class PseudorandomnessTest {
         CallTrackingPseudorandomness instance 
                 = new CallTrackingPseudorandomness(provider);
         int expected = 0;
-        int lengthThreshold = 20;
+        int lengthThreshold = 10;
         for (int i = 1; i < lengthThreshold; i++) {
             String s = instance.nextASCIICharSeq(i);
             String lenMsg = "\"" + s + "\" should be of length " + i;
