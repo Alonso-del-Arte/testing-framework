@@ -103,8 +103,10 @@ class Pseudorandomness extends ExpandedRandom {
     /**
      * Gives a pseudorandom sequence of printing ASCII characters. 
      * @param length How long the sequence of ASCII characters should be. Should 
-     * not be negative. May be 0, but there's not much point to that.
-     * @return 
+     * not be negative. May be 0, but there's not much point to that. For 
+     * example, 7.
+     * @return A pseudorandom <code>String</code> with <code>length</code> ASCII 
+     * characters. For example, "z7_ arm". 
      * @throws NegativeArraySizeException If <code>length</code> is negative.
      */
     @Override
@@ -112,9 +114,6 @@ class Pseudorandomness extends ExpandedRandom {
         if (length < 0) {
             String excMsg = "Negative length " + length + " is not valid";
             throw new NegativeArraySizeException(excMsg);
-        }
-        if (length == 0) {
-            return "";
         }
         char[] array = new char[length];
         for (int i = 0; i < length; i++) {
