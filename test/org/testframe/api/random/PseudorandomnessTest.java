@@ -28,8 +28,9 @@ public class PseudorandomnessTest {
         long source = System.currentTimeMillis();
         int[] array = new int[len];
         for (int i = 0; i < len; i++) {
-            array[i] = (int) source + i;
+            array[i] = (int) source;
             source >>= 1;
+            source += i;
         }
         return array;
     }
@@ -242,18 +243,22 @@ public class PseudorandomnessTest {
     @Test
     public void testNextASCIICharSeq() {
         System.out.println("nextASCIICharSeq");
-        MockProvider provider = new MockProvider(makeIntArray(Pseudorandomness
-                .REFRESH_INTERVAL));
+        int lengthThreshold = 20;
+        int size = lengthThreshold * lengthThreshold;
+        int[] nums = new int[size];
+        for (int i = 0; i < size; i++) {
+            nums[i] = i;
+        }
+        MockProvider provider = new MockProvider(nums);
         CallTrackingPseudorandomness instance 
                 = new CallTrackingPseudorandomness(provider);
         int expected = 0;
-        int lengthThreshold = 10;
-        for (int i = 1; i < lengthThreshold; i++) {
-            String s = instance.nextASCIICharSeq(i);
-            String lenMsg = "\"" + s + "\" should be of length " + i;
-            assertEquals(i, s.length(), lenMsg);
+        for (int j = 1; j < lengthThreshold; j++) {
+            String s = instance.nextASCIICharSeq(j);
+            String lenMsg = "\"" + s + "\" should be of length " + j;
+            assertEquals(j, s.length(), lenMsg);
             assertAllPrintingASCIICharacters(s);
-            expected += i;
+            expected += j;
         }
         int actual = instance.nextASCIICharCallsSoFar;
         String msg = "nextASCIIChar() should've been called " + expected 
@@ -268,12 +273,9 @@ public class PseudorandomnessTest {
         @Override
         public int[] giveNumbers(int amount) {
             int[] array = new int[amount];
-            int providedLen = this.numbers.length;
-            for (int i = 0; i < providedLen; i++) {
+            int len = Math.min(amount, this.numbers.length);
+            for (int i = 0; i < len; i++) {
                 array[i] = this.numbers[i];
-            }
-            for (int j = providedLen; j < amount; j++) {
-                array[j] = 0;
             }
             return array;
         }
