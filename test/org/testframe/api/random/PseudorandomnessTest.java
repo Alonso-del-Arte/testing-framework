@@ -290,6 +290,27 @@ public class PseudorandomnessTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
+    @Test
+    public void testNextASCIICharSeqRejectsNegativeMaxLength() {
+        MockProvider provider = new MockProvider(makeIntArray(Pseudorandomness
+                .REFRESH_INTERVAL));
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        int badMaxLength = -LOCAL_RANDOM.nextInt(1024) - 1;
+        int minLength = -badMaxLength - 1;
+        String msg = "Bad maximum " + badMaxLength + " and minimum " 
+                + minLength + " should cause an exception";
+        Throwable t = assertThrows(() -> {
+            String badResult = instance.nextASCIICharSeq(minLength, 
+                    badMaxLength);
+            System.out.println(msg + ", not give result \"" + badResult 
+                    + "\"");
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
     private static class MockProvider extends ExternalRandomnessProvider {
         
         private int[] numbers;
