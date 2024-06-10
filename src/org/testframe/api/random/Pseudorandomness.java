@@ -125,6 +125,10 @@ class Pseudorandomness extends ExpandedRandom {
     // TODO: Write tests for this
     @Override
     public String nextASCIICharSeq(int minLength, int maxLength) {
+        if (minLength < 0) {
+            String excMsg = "Minimum length " + minLength + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
