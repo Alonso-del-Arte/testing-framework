@@ -3,6 +3,7 @@ package org.testframe.api.random;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import static org.testframe.api.Asserters.*;
@@ -15,6 +16,8 @@ public class PseudorandomnessTest {
     private static final char ASCII_PRINT_STOP = '\u007F';
     
     private static final int NUMBER_OF_BITS = Integer.BYTES * 8;
+    
+    private static final Random LOCAL_RANDOM = new Random();
     
     private int bitSource;
     
@@ -264,6 +267,27 @@ public class PseudorandomnessTest {
         String msg = "nextASCIIChar() should've been called " + expected 
                 + " times";
         assertEquals(expected, actual, msg);
+    }
+    
+    @Test
+    public void testNextASCIICharSeqRejectsNegativeMinLength() {
+        MockProvider provider = new MockProvider(makeIntArray(Pseudorandomness
+                .REFRESH_INTERVAL));
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        int badMinLength = -LOCAL_RANDOM.nextInt(1024) - 1;
+        int maxLength = -badMinLength + 1;
+        String msg = "Bad minimum " + badMinLength + " and maximum " 
+                + maxLength + " should cause an exception";
+        Throwable t = assertThrows(() -> {
+            String badResult = instance.nextASCIICharSeq(badMinLength, 
+                    maxLength);
+            System.out.println(msg + ", not give result \"" + badResult 
+                    + "\"");
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
     }
     
     private static class MockProvider extends ExternalRandomnessProvider {
