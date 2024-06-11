@@ -126,7 +126,7 @@ class Pseudorandomness extends ExpandedRandom {
     @Override
     public String nextASCIICharSeq(int minLength, int maxLength) {
         int diff = maxLength - minLength;
-        if (minLength < 0 || maxLength < 0 || diff < 0) {
+        if (minLength < 0 || diff < 0) {
             String excMsg = "Minimum length " + minLength 
                     + " and maximum length " + maxLength + " are not valid";
             throw new IllegalArgumentException(excMsg);
