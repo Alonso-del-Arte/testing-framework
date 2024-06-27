@@ -1908,6 +1908,17 @@ public class Asserters {
         assert expSet.equals(actSet) : errMsg;
     }
     
+    // TODO: Write tests for this
+    public static <E> void assertContainsSame(Set<E> expected, Set<E> actual) {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public static <E> void assertContainsSame(Set<E> expected, Set<E> actual, 
+            String msg) {
+        //
+    }
+    
     /**
      * Asserts two lists contain the same elements in the same order. As long as 
      * the two lists have the same elements in the same order, even if the two 
