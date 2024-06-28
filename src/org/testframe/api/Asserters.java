@@ -1916,7 +1916,9 @@ public class Asserters {
     // TODO: Write tests for this
     public static <E> void assertContainsSame(Set<E> expected, Set<E> actual, 
             String msg) {
-        //
+        String errMsg = msg + ". Expected set to contain " + expected.toString() 
+                + " but actually contained " + actual.toString();
+        throw new AssertionError(errMsg);
     }
     
     /**
