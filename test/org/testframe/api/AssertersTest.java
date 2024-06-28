@@ -6557,6 +6557,37 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertSetContainsSameButDoesNotThoughDiffSize() {
+        int size = RANDOM.nextInt(8) + 2;
+        Set<LocalDateTime> setA = new HashSet<>(size);
+        Set<LocalDateTime> setB = new TreeSet<>();
+        for (int i = 0; i < size; i++) {
+            setA.add(LocalDateTime.now().minusHours(i));
+            setB.add(LocalDateTime.now().plusHours(i));
+        }
+        String setAStr = setA.toString();
+        String setBStr = setB.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(setA, setB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Expected set to contain " + setAStr 
+                    + " but actually contained " + setBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + setAStr 
+                + " contains the same elements as " + setBStr 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+    @Test
     public void testAssertContainsSameOrderButDiffersInLength() {
         int listALength = RANDOM.nextInt(8) + 2;
         int listBLength = listALength + RANDOM.nextInt(8) + 2;
