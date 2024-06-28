@@ -6588,6 +6588,84 @@ public class AssertersTest {
     }
     
     @Test
+    public void testAssertSetContainsSameButDoesNotDefaultMessage() {
+        int size = RANDOM.nextInt(16) + 4;
+        Set<BigInteger> setA = new HashSet<>(size);
+        TreeSet<BigInteger> setB = new TreeSet<>();
+        for (int i = 0; i < size; i++) {
+            BigInteger number = new BigInteger(64 + i, RANDOM);
+            setA.add(number);
+            setB.add(number);
+        }
+        setA.add(setB.first().negate());
+        String setAStr = setA.toString();
+        String setBStr = setB.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(setA, setB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected set to contain " + setAStr 
+                    + " but actually contained " + setBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + setAStr 
+                + " contains the same elements as " + setBStr 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
+    
+//    @Test
+//    public void testAssertSetContainsSameDefaultMessage() {
+//        Set<Currency> someSet = Currency.getAvailableCurrencies();
+//        Set<Currency> sameSet = new TreeSet<Currency>((a, b) 
+//                -> a.getCurrencyCode().compareTo(b.getCurrencyCode()));
+//        sameSet.addAll(someSet);
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertContainsSame(someSet, sameSet);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//        }
+//        String msg = "Asserting that " + someSet.toString() 
+//                + " contains the same elements as " + sameSet.toString() 
+//                + " should not have failed the test";
+//        assert !failOccurred : msg;
+//    }
+    
+//    @Test
+//    public void testAssertSetContainsSameButDoesNotThoughDiffSizeDefMsg() {
+//        int size = RANDOM.nextInt(8) + 2;
+//        Set<LocalDateTime> setA = new HashSet<>(size);
+//        Set<LocalDateTime> setB = new TreeSet<>();
+//        for (int i = 0; i < size; i++) {
+//            setA.add(LocalDateTime.now().minusHours(i));
+//            setB.add(LocalDateTime.now().plusHours(i));
+//        }
+//        String setAStr = setA.toString();
+//        String setBStr = setB.toString();
+//        boolean failOccurred = false;
+//        try {
+//            Asserters.assertContainsSame(setA, setB);
+//        } catch (AssertionError ae) {
+//            failOccurred = true;
+//            String expected = "Expected set to contain " + setAStr 
+//                    + " but actually contained " + setBStr;
+//            String actual = ae.getMessage();
+//            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+//                    + "\"";
+//            assert expected.equals(actual) : msg;
+//        }
+//        String msg = "Asserting that " + setAStr 
+//                + " contains the same elements as " + setBStr 
+//                + " should have failed the test";
+//        assert failOccurred : msg;
+//    }
+    
+    @Test
     public void testAssertContainsSameOrderButDiffersInLength() {
         int listALength = RANDOM.nextInt(8) + 2;
         int listBLength = listALength + RANDOM.nextInt(8) + 2;
