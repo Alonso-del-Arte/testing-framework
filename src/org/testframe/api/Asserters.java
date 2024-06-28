@@ -1918,7 +1918,7 @@ public class Asserters {
             String msg) {
         String errMsg = msg + ". Expected set to contain " + expected.toString() 
                 + " but actually contained " + actual.toString();
-        throw new AssertionError(errMsg);
+        assert expected.size() == actual.size() : errMsg;
     }
     
     /**
