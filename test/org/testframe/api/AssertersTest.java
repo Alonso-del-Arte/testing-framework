@@ -6618,23 +6618,23 @@ public class AssertersTest {
         assert failOccurred : msg;
     }
     
-//    @Test
-//    public void testAssertSetContainsSameDefaultMessage() {
-//        Set<Currency> someSet = Currency.getAvailableCurrencies();
-//        Set<Currency> sameSet = new TreeSet<Currency>((a, b) 
-//                -> a.getCurrencyCode().compareTo(b.getCurrencyCode()));
-//        sameSet.addAll(someSet);
-//        boolean failOccurred = false;
-//        try {
-//            Asserters.assertContainsSame(someSet, sameSet);
-//        } catch (AssertionError ae) {
-//            failOccurred = true;
-//        }
-//        String msg = "Asserting that " + someSet.toString() 
-//                + " contains the same elements as " + sameSet.toString() 
-//                + " should not have failed the test";
-//        assert !failOccurred : msg;
-//    }
+    @Test
+    public void testAssertSetContainsSameDefaultMessage() {
+        Set<Currency> someSet = Currency.getAvailableCurrencies();
+        Set<Currency> sameSet = new TreeSet<Currency>((a, b) 
+                -> a.getCurrencyCode().compareTo(b.getCurrencyCode()));
+        sameSet.addAll(someSet);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(someSet, sameSet);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + someSet.toString() 
+                + " contains the same elements as " + sameSet.toString() 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
+    }
     
 //    @Test
 //    public void testAssertSetContainsSameButDoesNotThoughDiffSizeDefMsg() {
