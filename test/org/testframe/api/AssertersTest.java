@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Tests of the Asserters class. These are more elegant than the tests of 
@@ -6501,6 +6502,39 @@ public class AssertersTest {
                 + listB.toString() 
                 + " contain the same elements should not have failed the test";
         assert !failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertSetContainsSameButDoesNot() {
+        int size = RANDOM.nextInt(16) + 4;
+        Set<BigInteger> setA = new HashSet<BigInteger>(size);
+        TreeSet<BigInteger> setB = new TreeSet<>();
+        for (int i = 0; i < size; i++) {
+            BigInteger number = new BigInteger(64 + i, RANDOM);
+            setA.add(number);
+            setB.add(number);
+        }
+        setA.add(setB.first().negate());
+        String setAStr = setA.toString();
+        String setBStr = setB.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(setA, setB, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART 
+                    + ". Expected list to contain " + setAStr 
+                    + " but actually contained " + setBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + setAStr 
+                + " contains the same elements as " + setBStr 
+                + " should have failed the test";
+        assert failOccurred : msg;
     }
     
     @Test
