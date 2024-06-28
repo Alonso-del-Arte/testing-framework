@@ -6507,7 +6507,7 @@ public class AssertersTest {
     @Test
     public void testAssertSetContainsSameButDoesNot() {
         int size = RANDOM.nextInt(16) + 4;
-        Set<BigInteger> setA = new HashSet<BigInteger>(size);
+        Set<BigInteger> setA = new HashSet<>(size);
         TreeSet<BigInteger> setB = new TreeSet<>();
         for (int i = 0; i < size; i++) {
             BigInteger number = new BigInteger(64 + i, RANDOM);
@@ -6535,6 +6535,25 @@ public class AssertersTest {
                 + " contains the same elements as " + setBStr 
                 + " should have failed the test";
         assert failOccurred : msg;
+    }
+    
+    @Test
+    public void testAssertSetContainsSame() {
+        Set<Currency> someSet = Currency.getAvailableCurrencies();
+        Set<Currency> sameSet = new TreeSet<Currency>((a, b) 
+                -> a.getCurrencyCode().compareTo(b.getCurrencyCode()));
+        sameSet.addAll(someSet);
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(someSet, sameSet, 
+                    EXAMPLE_ASSERTION_MESSAGE_PART);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+        }
+        String msg = "Asserting that " + someSet.toString() 
+                + " contains the same elements as " + sameSet.toString() 
+                + " should not have failed the test";
+        assert !failOccurred : msg;
     }
     
     @Test
