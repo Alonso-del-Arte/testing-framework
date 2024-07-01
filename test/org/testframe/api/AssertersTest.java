@@ -6636,34 +6636,34 @@ public class AssertersTest {
         assert !failOccurred : msg;
     }
     
-//    @Test
-//    public void testAssertSetContainsSameButDoesNotThoughDiffSizeDefMsg() {
-//        int size = RANDOM.nextInt(8) + 2;
-//        Set<LocalDateTime> setA = new HashSet<>(size);
-//        Set<LocalDateTime> setB = new TreeSet<>();
-//        for (int i = 0; i < size; i++) {
-//            setA.add(LocalDateTime.now().minusHours(i));
-//            setB.add(LocalDateTime.now().plusHours(i));
-//        }
-//        String setAStr = setA.toString();
-//        String setBStr = setB.toString();
-//        boolean failOccurred = false;
-//        try {
-//            Asserters.assertContainsSame(setA, setB);
-//        } catch (AssertionError ae) {
-//            failOccurred = true;
-//            String expected = "Expected set to contain " + setAStr 
-//                    + " but actually contained " + setBStr;
-//            String actual = ae.getMessage();
-//            String msg = "Expected \"" + expected + "\" but was \"" + actual 
-//                    + "\"";
-//            assert expected.equals(actual) : msg;
-//        }
-//        String msg = "Asserting that " + setAStr 
-//                + " contains the same elements as " + setBStr 
-//                + " should have failed the test";
-//        assert failOccurred : msg;
-//    }
+    @Test
+    public void testAssertSetContainsSameButDoesNotThoughSameSizeDefMsg() {
+        int size = RANDOM.nextInt(8) + 2;
+        Set<LocalDateTime> setA = new HashSet<>(size);
+        Set<LocalDateTime> setB = new TreeSet<>();
+        for (int i = 0; i < size; i++) {
+            setA.add(LocalDateTime.now().minusHours(i));
+            setB.add(LocalDateTime.now().plusHours(i));
+        }
+        String setAStr = setA.toString();
+        String setBStr = setB.toString();
+        boolean failOccurred = false;
+        try {
+            Asserters.assertContainsSame(setA, setB);
+        } catch (AssertionError ae) {
+            failOccurred = true;
+            String expected = "Expected set to contain " + setAStr 
+                    + " but actually contained " + setBStr;
+            String actual = ae.getMessage();
+            String msg = "Expected \"" + expected + "\" but was \"" + actual 
+                    + "\"";
+            assert expected.equals(actual) : msg;
+        }
+        String msg = "Asserting that " + setAStr 
+                + " contains the same elements as " + setBStr 
+                + " should have failed the test";
+        assert failOccurred : msg;
+    }
     
     @Test
     public void testAssertContainsSameOrderButDiffersInLength() {
