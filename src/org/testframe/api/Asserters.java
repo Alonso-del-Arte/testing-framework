@@ -1925,11 +1925,11 @@ public class Asserters {
      */
     public static <E> void assertContainsSame(Set<E> expected, Set<E> actual, 
             String msg) {
-//        Set<E> expSet = new HashSet<>(expected);
-//        Set<E> actSet = new HashSet<>(actual);
-//        String errMsg = msg + ". Expected set to contain " + expected.toString() 
-//                + " but actually contained " + actual.toString();
-//        assert expSet.equals(actSet) : errMsg;
+        Set<E> expSet = new HashSet<>(expected);
+        Set<E> actSet = new HashSet<>(actual);
+        String errMsg = msg + ". Expected set to contain " + expected.toString() 
+                + " but actually contained " + actual.toString();
+        assert expSet.equals(actSet) : errMsg;
     }
     
     /**
