@@ -6557,7 +6557,7 @@ public class AssertersTest {
     }
     
     @Test
-    public void testAssertSetContainsSameButDoesNotThoughDiffSize() {
+    public void testAssertSetContainsSameButDoesNotThoughSameSize() {
         int size = RANDOM.nextInt(8) + 2;
         Set<LocalDateTime> setA = new HashSet<>(size);
         Set<LocalDateTime> setB = new TreeSet<>();
