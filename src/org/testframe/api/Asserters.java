@@ -1908,14 +1908,12 @@ public class Asserters {
         assert expSet.equals(actSet) : errMsg;
     }
     
-    // TODO: Write tests for this
     public static <E> void assertContainsSame(Set<E> expected, Set<E> actual) {
-//        Set<E> expSet = new HashSet<>(expected);
-//        Set<E> actSet = new HashSet<>(actual);
+        Set<E> expSet = new HashSet<>(expected);
+        Set<E> actSet = new HashSet<>(actual);
         String errMsg = "Expected set to contain " + expected.toString() 
                 + " but actually contained " + actual.toString();
-        assert expected.size() == actual.size() : errMsg;
-//        assert expSet.equals(actSet) : errMsg;
+        assert expSet.equals(actSet) : errMsg;
     }
     
     /**
