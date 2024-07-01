@@ -1908,27 +1908,63 @@ public class Asserters {
         assert expSet.equals(actSet) : errMsg;
     }
     
+    /**
+     * Asserts that two sets contain the same elements. The motivation for this 
+     * assertion was the concern that two instances of different implementations  
+     * of <code>java.util.Set</code> containing the same elements might cause a 
+     * test calling {@link #assertEquals(Object, Object)} to fail. For example, 
+     * a test builds the expected set using <code>Set.of()</code>, then the 
+     * actual set is initialized as an empty <code>HashSet</code> and the 
+     * elements are added with repeated calls to the function under test. From 
+     * my limited experimentation with <code>HashSet</code>, 
+     * <code>TreeSet</code> and <code>Set.of()</code>, this concern might be 
+     * unwarranted. Even so, at least for the time being, I recommend using this 
+     * assertion instead of <code>assertEquals()</code> to assert that two sets 
+     * contain the same elements without regard for runtime class.
+     * @param <E> The type of the elements that the sets contain. Remember that 
+     * this is not checked at runtime. For example, <code>LocalDate</code>.
+     * @param expected The set with the expected elements. For example, July 1, 
+     * 2024; July 2, 2024 and July July 3, 2024.
+     * @param actual The set with the actual elements. For example, July 3, 
+     * 2024; July 1, 2024 and July 2, 2024.
+     * @since 1.0
+     */
     public static <E> void assertContainsSame(Set<E> expected, Set<E> actual) {
-        Set<E> expSet = new HashSet<>(expected);
-        Set<E> actSet = new HashSet<>(actual);
-        String errMsg = "Expected set to contain " + expected.toString() 
-                + " but actually contained " + actual.toString();
-        assert expSet.equals(actSet) : errMsg;
+        assertContainsSame(expected, actual, "");
     }
     
     /**
-     * 
-     * @param <E>
-     * @param expected
-     * @param actual
-     * @param msg
+     * Asserts that two sets contain the same elements. The motivation for this 
+     * assertion was the concern that two instances of different implementations  
+     * of <code>java.util.Set</code> containing the same elements might cause a 
+     * test calling {@link #assertEquals(Object, Object, String)} to fail. For 
+     * example, a test builds the expected set using <code>Set.of()</code>, then 
+     * the actual set is initialized as an empty <code>HashSet</code> and the 
+     * elements are added with repeated calls to the function under test. From 
+     * my limited experimentation with <code>HashSet</code>, 
+     * <code>TreeSet</code> and <code>Set.of()</code>, this concern might be 
+     * unwarranted. Even so, at least for the time being, I recommend using this 
+     * assertion instead of <code>assertEquals()</code> to assert that two sets 
+     * contain the same elements without regard for runtime class.
+     * @param <E> The type of the elements that the sets contain. Remember that 
+     * this is not checked at runtime. For example, <code>LocalDate</code>.
+     * @param expected The set with the expected elements. For example, July 1, 
+     * 2024; July 2, 2024 and July July 3, 2024.
+     * @param actual The set with the actual elements. For example, July 3, 
+     * 2024; July 1, 2024 and July 2, 2024.
+     * @param msg A message to include in the test failure explanation if the 
+     * assertion fails. For example, "Set of dates should include today and next 
+     * two days."
+     * @since 1.0
      */
     public static <E> void assertContainsSame(Set<E> expected, Set<E> actual, 
             String msg) {
         Set<E> expSet = new HashSet<>(expected);
         Set<E> actSet = new HashSet<>(actual);
-        String errMsg = msg + ". Expected set to contain " + expected.toString() 
-                + " but actually contained " + actual.toString();
+        String intermediate = msg + ". Expected set to contain " 
+                + expected.toString() + " but actually contained " 
+                + actual.toString();
+        String errMsg = prepMsg(intermediate);
         assert expSet.equals(actSet) : errMsg;
     }
     
