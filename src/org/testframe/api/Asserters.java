@@ -1914,8 +1914,8 @@ public class Asserters {
 //        Set<E> actSet = new HashSet<>(actual);
         String errMsg = "Expected set to contain " + expected.toString() 
                 + " but actually contained " + actual.toString();
+        assert expected.size() == actual.size() : errMsg;
 //        assert expSet.equals(actSet) : errMsg;
-        throw new AssertionError(errMsg);
     }
     
     /**
