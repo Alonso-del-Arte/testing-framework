@@ -36,7 +36,7 @@ public abstract class ExpandedRandom extends Random {
      * not be negative. May be 0, but there's not much point to that. For 
      * example, 7.
      * @return A pseudorandom <code>String</code> with <code>length</code> ASCII 
-     * characters. For example, "t.lm8Q<". 
+     * characters. For example, "t.lm8Q&lt;". 
      * @throws NegativeArraySizeException If <code>length</code> is negative.
      */
     public abstract String nextASCIICharSeq(int length);

@@ -16,8 +16,9 @@ public enum TestResultStatus {
     
     /**
      * Indicates the test was skipped. Generally associated with gray. A skipped 
-     * test must be annotated with both {@link testframe.api.Skip} <em>and</em> 
-     * {@link testframe.api.Test} or else it will be ignored by the test runner. 
+     * test must be annotated with both {@link org.testframe.api.Skip} 
+     * <em>and</em> {@link org.testframe.api.Test} or else it will be ignored by  
+     * the test runner. 
      */
     SKIPPED, 
     

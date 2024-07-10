@@ -44,7 +44,7 @@ public class Pseudorandom {
      * @return A <code>String</code> instance of ASCII printing characters. Note 
      * that the straight single and double quote can occur in the results. 
      * Examples for <code>length</code> being 12: "]Vv36l"o'eVA", 
-     * "KYY>xld?J[Zw", "aWG[Q B:_3aY" and "gk|0++euub&v".
+     * "KYY>xld?J[Zw", "aWG[Q B:_3aY" and "gk|0++euub&amp;v".
      * @throws NegativeArraySizeException If <code>length</code> is negative.
      */
     public static String nextASCIICharSeq(int length) {
@@ -140,7 +140,7 @@ public class Pseudorandom {
      * element of the set should be given at least once.
      * @param <E> The type of the elements in the list. For example, 
      * <code>java.lang.Integer</code>.
-     * @param list A list of objects of type <code>E</code>. For example, {0, 1,
+     * @param set A list of objects of type <code>E</code>. For example, {0, 1,
      * 4, 9, 16, 25, 6, 19, 21, 10, 24, 15} (these are the squares modulo 30).
      * @return One element of the set, chosen pseudorandomly. For example, 19. 
      * May be null, since a set in Java is allowed to have one null.
