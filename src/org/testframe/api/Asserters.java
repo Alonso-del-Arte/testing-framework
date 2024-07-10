@@ -25,6 +25,7 @@ import java.util.function.Predicate;
  * <li>No <code>assertNotNull()</code> will be provided. Use plain Java 
  * <code>assert</code>.</li>
  * </ul>
+ * @since 1.0
  * @author Alonso del Arte
  */
 public class Asserters {
@@ -53,7 +54,6 @@ public class Asserters {
      * state what the expected value was and what the actual value was.
      * @param expected The expected integer. For example, 73.
      * @param actual The actual integer. For example, &minus;410.
-     * @since 1.0
      */
     public static void assertEquals(int expected, int actual) {
          assertEquals(expected, actual, "");
@@ -70,7 +70,6 @@ public class Asserters {
      * same elements and should therefore they should be the same size." The 
      * expected and actual values will be appended to the test failure 
      * explanation.
-     * @since 1.0
      */
     public static void assertEquals(int expected, int actual, String msg) {
         String intermediate = msg + ". Expected = " + expected + ". Actual = " 
@@ -86,7 +85,6 @@ public class Asserters {
      * state what the expected value was and what the actual value was.
      * @param expected The expected integer. For example, 4294967369.
      * @param actual The actual integer. For example, &minus;4294967779.
-     * @since 1.0
      */
     public static void assertEquals(long expected, long actual) {
          assertEquals(expected, actual, "");
@@ -103,7 +101,6 @@ public class Asserters {
      * same elements and should therefore they should be the same size." The 
      * expected and actual values will be appended to the test failure 
      * explanation.
-     * @since 1.0
      */
     public static void assertEquals(long expected, long actual, String msg) {
         String intermediate = msg + ". Expected = " + expected + ". Actual = " 
@@ -122,7 +119,6 @@ public class Asserters {
      * values are NaN, regardless of their bit patterns.</p>
      * @param expected The expected value. For example, 3.14159.
      * @param actual The actual value. For example, 3.14161.
-     * @since 1.0
      */
     public static void assertEquals(double expected, double actual) {
          assertEquals(expected, actual, DEFAULT_TEST_DELTA, "");
@@ -143,7 +139,6 @@ public class Asserters {
      * positive, though less than 1.0. Negative variances are not recommended, 
      * and the behavior is not at all guaranteed to remain consistent from one 
      * version of this framework to the next.
-     * @since 1.0
      */
     public static void assertEquals(double expected, double actual, 
             double delta) {
@@ -161,7 +156,6 @@ public class Asserters {
      * test fails because of the assertion. For example, "The number should 
      * converge to &pi;." The expected, actual and default delta values will be 
      * appended to the test failure explanation.
-     * @since 1.0
      */
     public static void assertEquals(double expected, double actual, 
             String msg) {
@@ -185,7 +179,6 @@ public class Asserters {
      * test fails because of the assertion. For example, "The number should 
      * converge to &pi;." The expected, actual and delta values will be appended 
      * to the test failure explanation.
-     * @since 1.0
      */
     public static void assertEquals(double expected, double actual, 
             double delta, String msg) {
@@ -207,7 +200,6 @@ public class Asserters {
      * @param actual The actual object. For example, a 
      * <code>LocalDateTime</code> object for this time of day tomorrow.
      * @throws NullPointerException If <code>expected</code> is null.
-     * @since 1.0
      */
     public static void assertEquals(Object expected, Object actual) {
          assertEquals(expected, actual, "");
@@ -230,7 +222,6 @@ public class Asserters {
      * expected and actual values will be appended to the test failure 
      * explanation.
      * @throws NullPointerException If <code>expected</code> is null.
-     * @since 1.0
      */
     public static void assertEquals(Object expected, Object actual, 
             String msg) {
@@ -250,7 +241,6 @@ public class Asserters {
      * 47, 76}.
      * @param actual The actual array. Examples: {2, 1, 3, 4, 7, 11, 18, 29, 47, 
      * 76}, {1, 3, 4, 7, 11, 12, 18, 21, 28}.
-     * @since 1.0
      */
     public static void assertEquals(int[] expected, int[] actual) {
          assertEquals(expected, actual, "");
@@ -265,7 +255,6 @@ public class Asserters {
      * @param actual The actual array. Examples: {2, 1, 3, 4, 7, 11, 18, 29, 47, 
      * 76}, {1, 3, 4, 7, 11, 12, 18, 21, 28}.
      * @param msg A message for the test failure explanation.
-     * @since 1.0
      */
     public static void assertEquals(int[] expected, int[] actual, String msg) {
         if (expected.length != actual.length) {
@@ -298,7 +287,6 @@ public class Asserters {
      * containing 4.0, 3.0, 3.25, 3.16 in that order.
      * @param actual The array of actual values. For example, an array  
      * containing 4.0, 3.0, 3.2507, 3.15999 in that order.
-     * @since 1.0
      */
     public static void assertEquals(double[] expected, double[] actual) {
         assertEquals(expected, actual, DEFAULT_TEST_DELTA, "");
@@ -325,7 +313,6 @@ public class Asserters {
      * 1.0. Negative variances are not recommended, and the behavior is not at 
      * all guaranteed to remain consistent from one version of this framework to 
      * the next.
-     * @since 1.0
      */
     public static void assertEquals(double[] expected, double[] actual, 
             double delta) {
@@ -347,7 +334,6 @@ public class Asserters {
      * containing 4.0, 3.0, 3.2507, 3.15999 in that order.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails. For example, "Numbers should converge to &pi;."
-     * @since 1.0
      */
     public static void assertEquals(double[] expected, double[] actual, 
             String msg) {
@@ -376,7 +362,6 @@ public class Asserters {
      * the next.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails. For example, "Numbers should converge to &pi;."
-     * @since 1.0
      */
     public static void assertEquals(double[] expected, double[] actual, 
             double delta, String msg) {
@@ -406,7 +391,6 @@ public class Asserters {
      * magenta, yellow and black.
      * @param actual The actual array. For example, the colors cyan, black, 
      * yellow and magenta.
-     * @since 1.0
      */
     public static void assertEquals(Object[] expected, Object[] actual) {
         assertEquals(expected, actual, "");
@@ -423,7 +407,6 @@ public class Asserters {
      * test fails.
      * @throws NullPointerException If two arrays are of the same length and 
      * <code>expected</code> contains even just one null.
-     * @since 1.0
      */
     public static void assertEquals(Object[] expected, Object[] actual, 
             String msg) {
@@ -453,7 +436,6 @@ public class Asserters {
      * with an appropriate message.</p>
      * @param object The object to assert is null. For example, a field that is 
      * not supposed to be initialized at construction time.
-     * @since 1.0
      */
     public static void assertNull(Object object) {
         assertNull(object, "");
@@ -467,7 +449,6 @@ public class Asserters {
      * @param msg A message for the test failure explanation, to which will be 
      * appended a message saying a null object was expected but instead a 
      * non-null object was found, if the test fails.
-     * @since 1.0
      */
     public static void assertNull(Object object, String msg) {
         if (object != null) {
@@ -485,7 +466,6 @@ public class Asserters {
      * @param minimum The minimum permissible value. For example, 100.
      * @param actual The value to compare against the specified minimum. For 
      * example, 95.
-     * @since 1.0
      */
     public static void assertMinimum(long minimum, long actual) {
         assertMinimum(minimum, actual, "");
@@ -502,7 +482,6 @@ public class Asserters {
      * test fails because of the assertion. For example, "List should have at 
      * least as many elements as the set." The minimum and actual values will be 
      * appended to the test failure explanation.
-     * @since 1.0
      */
     public static void assertMinimum(long minimum, long actual, String msg) {
         String intermediate = msg + ". Number " + actual 
@@ -520,7 +499,6 @@ public class Asserters {
      * @param minimum The minimum possible number. For example, &minus;0.5.
      * @param actual The number to compare against the specified minimum. For 
      * example, &minus;1.83.
-     * @since 1.0
      */
     public static void assertMinimum(double minimum, double actual) {
         assertMinimum(minimum, actual, "");
@@ -538,7 +516,6 @@ public class Asserters {
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The minimum and actual values will 
      * be appended to the test failure explanation.
-     * @since 1.0
      */
     public static void assertMinimum(double minimum, double actual, 
             String msg) {
@@ -558,7 +535,6 @@ public class Asserters {
      * <sup>3</sup>&frasl;<sub>2</sub>.
      * @param actual The value to compare against the specified minimum. For 
      * example, <sup>21</sup>&frasl;<sub>16</sub>.
-     * @since 1.0
      */
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual) {
@@ -578,7 +554,6 @@ public class Asserters {
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The minimum and actual values will 
      * be appended to the test failure explanation.
-     * @since 1.0
      */
     public static <T extends Comparable<T>> void assertMinimum(T minimum, 
             T actual, String msg) {
@@ -594,7 +569,6 @@ public class Asserters {
      * &minus;1 will be included in the test failure explanation if the 
      * assertion fails.
      * @param actual The number to check. For example, &minus;14370899.
-     * @since 1.0
      */
     public static void assertNegative(long actual) {
         assertNegative(actual, "");
@@ -606,7 +580,6 @@ public class Asserters {
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The number <code>actual</code> and 
      * the maximum &minus;1 will be appended to the test failure explanation.
-     * @since 1.0
      */
     public static void assertNegative(long actual, String msg) {
         assertMaximum(actual, -1, msg);
@@ -636,7 +609,6 @@ public class Asserters {
      * that NaN is not considered negative, zero or positive.</p>
      * @param actual The number to check. For example, &minus;2.6065827580858707 
      * &times; 10<sup>8</sup>.
-     * @since 1.0
      */
     public static void assertNegative(double actual) {
         assertNegative(actual, "");
@@ -667,7 +639,6 @@ public class Asserters {
      * the threshold 0.0 will be appended to the test failure explanation, or, 
      * in the case of NaN, the appended explanation will say that NaN "is not 
      * considered negative, zero or positive."
-     * @since 1.0
      */
     public static void assertNegative(double actual, String msg) {
         if (Double.isNaN(actual)) {
@@ -689,7 +660,6 @@ public class Asserters {
      * failure explanation.
      * @param actual The number to assert is not positive. For example, 
      * &minus;47.
-     * @since 1.0
      */
     public static void assertNotPositive(long actual) {
         assertNotPositive(actual, "");
@@ -702,7 +672,6 @@ public class Asserters {
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The number <code>actual</code> and 
      * the threshold 1 will be appended to the test failure explanation.
-     * @since 1.0
      */
     public static void assertNotPositive(long actual, String msg) {
         String intermediate = msg + ". Number " + actual 
@@ -720,7 +689,6 @@ public class Asserters {
      * @param actual The number to be checked. For example, 10.843979291045144. 
      * This number will be included in the test failure explanation if the test 
      * fails because of this assertion.
-     * @since 1.0
      */
     public static void assertNotPositive(double actual) {
         assertNotPositive(actual, "");
@@ -736,7 +704,6 @@ public class Asserters {
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The actual value will be included in 
      * the test failure explanation.
-     * @since 1.0
      */
     public static void assertNotPositive(double actual, String msg) {
         if (Double.isNaN(actual)) {
@@ -755,7 +722,6 @@ public class Asserters {
      * differ in their wording. The number actual number and the expected value 
      * of 0 will be appended to the test failure explanation.
      * @param actual The number to assert is equal to 0. For example, 133.
-     * @since 1.0
      */
     public static void assertZero(long actual) {
         assertZero(actual, "");
@@ -770,7 +736,6 @@ public class Asserters {
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The number <code>actual</code> and 
      * the expected value of 0 will be appended to the test failure explanation.
-     * @since 1.0
      */
     public static void assertZero(long actual, String msg) {
         String intermediate = msg + ". Number " + actual + " expected to be 0";
@@ -787,7 +752,6 @@ public class Asserters {
      * explanation will include the numbers <code>actual</code> and 0.0.
      * @param actual The floating point number to assert is equal to &pm;0.0. 
      * For example, &minus;0.0078125.
-     * @since 1.0
      */
     public static void assertZero(double actual) {
         assertZero(actual, "");
@@ -803,7 +767,6 @@ public class Asserters {
      * For example, &minus;0.0078125.
      * @param msg The message for the test failure explanation. The numbers 
      * <code>actual</code> and 0.0 will be appended to this message.
-     * @since 1.0
      */
     public static void assertZero(double actual, String msg) {
         String intermediate = msg + ". Number " + actual 
@@ -817,7 +780,6 @@ public class Asserters {
      * failing the assertion. The number will be included in the test failure 
      * explanation if the test fails because of this assertion.
      * @param actual The number to be checked. For example, &minus;103.
-     * @since 1.0
      */
     public static void assertNotNegative(long actual) {
         assertMinimum(0, actual);
@@ -830,7 +792,6 @@ public class Asserters {
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The actual value will be appended to 
      * the test failure explanation.
-     * @since 1.0
      */
     public static void assertNotNegative(long actual, String msg) {
         assertMinimum(0, actual, msg);
@@ -840,7 +801,6 @@ public class Asserters {
      * Asserts a given number is not negative. The number may be -0.0 or 0.0 
      * without failing the assertion.
      * @param actual The number to be checked. For example, 10.843979291045144.
-     * @since 1.0
      */
     public static void assertNotNegative(double actual) {
         assertNotNegative(actual, "");
@@ -854,7 +814,6 @@ public class Asserters {
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The actual value will be included in 
      * the test failure explanation.
-     * @since 1.0
      */
     public static void assertNotNegative(double actual, String msg) {
         if (Double.isNaN(actual)) {
@@ -870,7 +829,6 @@ public class Asserters {
      * Asserts that an integer is positive. The number must be 1 or greater to 
      * pass the assertion.
      * @param actual The number to assert is positive. For example, &minus;347.
-     * @since 1.0
      */
     public static void assertPositive(long actual) {
         assertPositive(actual, "");
@@ -881,7 +839,6 @@ public class Asserters {
      * pass the assertion.
      * @param actual The number to assert is positive. For example, &minus;347.
      * @param msg The message for the test failure explanation.
-     * @since 1.0
      */
     public static void assertPositive(long actual, String msg) {
         String intermediate = msg + ". Number " + actual 
@@ -909,7 +866,6 @@ public class Asserters {
      * </ul>
      * @param actual The number to check. For example, &minus;2.6065827580858707 
      * &times; 10<sup>8</sup>.
-     * @since 1.0
      */
     public static void assertPositive(double actual) {
         assertPositive(actual, "");
@@ -939,7 +895,6 @@ public class Asserters {
      * the threshold 0.0 will be appended to the test failure explanation, or, 
      * in the case of NaN, the appended explanation will say that NaN "is not 
      * considered negative, zero or positive."
-     * @since 1.0
      */
     public static void assertPositive(double actual, String msg) {
         if (Double.isNaN(actual)) {
@@ -962,7 +917,6 @@ public class Asserters {
      * example, 1000.
      * @param maximum The maximum that <code>actual</code> can be without 
      * failing the assertion. For example, 973.
-     * @since 1.0
      */
     public static void assertMaximum(long actual, long maximum) {
         assertMaximum(actual, maximum, "");
@@ -976,7 +930,6 @@ public class Asserters {
      * failing the assertion. For example, 973.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
-     * @since 1.0
      */
     public static void assertMaximum(long actual, long maximum, String msg) {
         String intermediate = msg + ". Number " + actual 
@@ -993,7 +946,6 @@ public class Asserters {
      * example, 99.890773.
      * @param maximum The number <code>actual</code> is expected to be less than 
      * or equal to. For example, 100.0.
-     * @since 1.0
      */
     public static void assertMaximum(double actual, double maximum) {
         assertMaximum(actual, maximum, "");
@@ -1008,7 +960,6 @@ public class Asserters {
      * or equal to. For example, 100.0.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
-     * @since 1.0
      */
     public static void assertMaximum(double actual, double maximum,  
             String msg) {
@@ -1029,7 +980,6 @@ public class Asserters {
      * example, <sup>25</sup>&frasl;<sub>16</sub>.
      * @param maximum The maximum permissible value. For example, 
      * <sup>3</sup>&frasl;<sub>2</sub>.
-     * @since 1.0
      */
     public static <T extends Comparable<T>> void assertMaximum(T actual, 
             T maximum) {
@@ -1049,7 +999,6 @@ public class Asserters {
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion. The maximum and actual values will 
      * be appended to the test failure explanation.
-     * @since 1.0
      */
     public static <T extends Comparable<T>> void assertMaximum(T actual, 
             T maximum, String msg) {
@@ -1066,7 +1015,6 @@ public class Asserters {
      * the actual number if the test fails.
      * @param actual The number to assert is NaN. For example, negative 
      * infinity.
-     * @since 1.0
      */
     public static void assertNaN(double actual) {
         assertNaN(actual, "");
@@ -1082,7 +1030,6 @@ public class Asserters {
      * infinity.
      * @param msg The message to put into the test failure explanation if the 
      * test fails because of the assertion.
-     * @since 1.0
      */
     public static void assertNaN(double actual, String msg) {
         String intermediate = msg + ". Number " + actual 
@@ -1097,7 +1044,6 @@ public class Asserters {
      * not be NaN.
      * @param actual The number to assert is not NaN. For example, 
      * <code>Math.PI</code>.
-     * @since 1.0
      */
     public static void assertNotNaN(double actual) {
         assertNotNaN(actual, "");
@@ -1109,7 +1055,6 @@ public class Asserters {
      * <code>Math.PI</code>.
      * @param msg The message to be included in the test failure explanation if 
      * the number is indeed NaN.
-     * @since 1.0
      */
     public static void assertNotNaN(double actual, String msg) {
         String intermediate = msg + ". Number " + actual 
@@ -1144,7 +1089,6 @@ public class Asserters {
      * <code>maximum</code>, without regard for what <code>actual</code> is. The 
      * exception message will include <code>minimum</code> and 
      * <code>maximum</code> but not <code>actual</code>.
-     * @since 1.0
      */
     public static void assertInRange(long minimum, long actual, long maximum) {
         assertInRange(minimum, actual, maximum, "");
@@ -1178,7 +1122,6 @@ public class Asserters {
      * <code>maximum</code>, without regard for what <code>actual</code> is. The 
      * exception message will include <code>minimum</code> and 
      * <code>maximum</code> but not <code>actual</code>.
-     * @since 1.0
      */
     public static void assertInRange(long minimum, long actual, long maximum, 
             String msg) {
@@ -1209,7 +1152,6 @@ public class Asserters {
      * @throws IllegalArgumentException If either <code>minimum</code> or 
      * <code>maximum</code> is NaN, or if <code>minimum</code> is greater than 
      * <code>maximum</code>, without regard for the variance.
-     * @since 1.0
      */
     public static void assertInRange(double minimum, double actual, 
             double maximum) {
@@ -1234,7 +1176,6 @@ public class Asserters {
      * @throws IllegalArgumentException If either <code>minimum</code> or 
      * <code>maximum</code> is NaN, or if <code>minimum</code> is greater than 
      * <code>maximum</code>, without regard for the variance.
-     * @since 1.0
      */
     public static void assertInRange(double minimum, double actual, 
             double maximum, double delta) {
@@ -1258,7 +1199,6 @@ public class Asserters {
      * @throws IllegalArgumentException If either <code>minimum</code> or 
      * <code>maximum</code> is NaN, or if <code>minimum</code> is greater than 
      * <code>maximum</code>, without regard for the variance.
-     * @since 1.0
      */
     public static void assertInRange(double minimum, double actual, 
             double maximum, String msg) {
@@ -1284,7 +1224,6 @@ public class Asserters {
      * @throws IllegalArgumentException If either <code>minimum</code> or 
      * <code>maximum</code> is NaN, or if <code>minimum</code> is greater than 
      * <code>maximum</code>, without regard for the variance.
-     * @since 1.0
      */
     public static void assertInRange(double minimum, double actual, 
             double maximum, double delta, String msg) {
@@ -1325,7 +1264,6 @@ public class Asserters {
      * pass the assertion. For example, Friday.
      * @throws IllegalArgumentException If <code>minimum</code> is greater than 
      * <code>maximum</code>.
-     * @since 1.0
      */
     public static <T extends Comparable<T>> void assertInRange(T minimum, 
             T actual, T maximum) {
@@ -1352,7 +1290,6 @@ public class Asserters {
      * assertion fails. For example, "Assigned day expected to be a weekday."
      * @throws IllegalArgumentException If <code>minimum</code> is greater than 
      * <code>maximum</code>.
-     * @since 1.0
      */
     public static <T extends Comparable<T>> void assertInRange(T minimum, 
             T actual, T maximum, String msg) {
@@ -1376,7 +1313,6 @@ public class Asserters {
      * @param some The integer the other integer should not be. For example, 
      * 5777096943112551843.
      * @param other The other integer. For example, &minus;6892550187484447930.
-     * @since 1.0
      */
     public static void assertDifferent(long some, long other) {
         assertDifferent(some, other, "");
@@ -1390,7 +1326,6 @@ public class Asserters {
      * @param msg A message for the test failure explanation. If the assertion 
      * fails, the explanation will include the number that was expected to be 
      * different.
-     * @since 1.0
      */
     public static void assertDifferent(long some, long other, String msg) {
         String intermediate = msg + ". Expected " + some 
@@ -1408,7 +1343,6 @@ public class Asserters {
      * @param other A floating point value said to be different from 
      * <code>some</code> by more than the default variance. For example, 
      * 3.142857142857143.
-     * @since 1.0
      */
     public static void assertDifferent(double some, double other) {
          assertDifferent(some, other, DEFAULT_TEST_DELTA, "");
@@ -1427,7 +1361,6 @@ public class Asserters {
      * almost never be a subnormal value (remember that 0.0 is subnormal). We 
      * make no promises whatsoever regarding the accuracy of assertions 
      * involving subnormal values.
-     * @since 1.0
      */
     public static void assertDifferent(double some, double other, 
             double delta) {
@@ -1445,7 +1378,6 @@ public class Asserters {
      * 3.142857142857143.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
-     * @since 1.0
      */
     public static void assertDifferent(double some, double other, 
             String msg) {
@@ -1467,7 +1399,6 @@ public class Asserters {
      * involving subnormal values.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
-     * @since 1.0
      */
     public static void assertDifferent(double some, double other, 
             double delta, String msg) {
@@ -1492,7 +1423,6 @@ public class Asserters {
      * <code>LocalDate</code> object for tomorrow's date.
      * @throws NullPointerException If either <code>some</code> or 
      * <code>other</code> is null.
-     * @since 1.0
      */
     public static void assertDifferent(Object some, Object other) {
         assertDifferent(some, other, "");
@@ -1512,7 +1442,6 @@ public class Asserters {
      * assertion fails.
      * @throws NullPointerException If either <code>some</code> or 
      * <code>other</code> is null.
-     * @since 1.0
      */
     public static void assertDifferent(Object some, Object other, 
             String msg) {
@@ -1530,7 +1459,6 @@ public class Asserters {
      * example, {1, 0, &minus;1, &minus;1, &minus;2}.
      * @param other An array to assert is different from some array. For 
      * For example, {1, 0, &minus;1, 0, &minus;1}.
-     * @since 1.0
      */
     public static void assertDifferent(int[] some, int[] other) {
         assertDifferent(some, other, "");
@@ -1545,7 +1473,6 @@ public class Asserters {
      * example, {1, 0, &minus;1, 0, &minus;1}.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
-     * @since 1.0
      */
     public static void assertDifferent(int[] some, int[] other, String msg) {
         int len = some.length;
@@ -1578,7 +1505,6 @@ public class Asserters {
      * @param other The other array. For example, {&minus;0.5, 
      * 2.718281828459045, 3.142857142857143, 10.0}.
      * @throws NullPointerException If either array is null.
-     * @since 1.0
      */
     public static void assertDifferent(double[] some, double[] other) {
         assertDifferent(some, other, DEFAULT_TEST_DELTA, "");
@@ -1604,7 +1530,6 @@ public class Asserters {
      * example the two arrays are considered different by more than the 
      * variance.
      * @throws NullPointerException If either array is null.
-     * @since 1.0
      */
     public static void assertDifferent(double[] some, double[] other, 
             double delta) {
@@ -1627,7 +1552,6 @@ public class Asserters {
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
      * @throws NullPointerException If either array is null.
-     * @since 1.0
      */
     public static void assertDifferent(double[] some, double[] other, 
             String msg) {
@@ -1656,7 +1580,6 @@ public class Asserters {
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
      * @throws NullPointerException If either array is null.
-     * @since 1.0
      */
     public static void assertDifferent(double[] some, double[] other, 
             double delta, String msg) {
@@ -1696,7 +1619,6 @@ public class Asserters {
      * numbers, and a null. 
      * @throws NullPointerException If <code>some</code> or <code>other</code> 
      * is null, but not if either array contains nulls.
-     * @since 1.0
      */
     public static <E> void assertDifferent(E[] some, E[] other) {
         assertDifferent(some, other, "");
@@ -1721,7 +1643,6 @@ public class Asserters {
      * assertion fails.
      * @throws NullPointerException If <code>some</code> or <code>other</code> 
      * is null, but not if either array contains nulls.
-     * @since 1.0
      */
     public static <E> void assertDifferent(E[] some, E[] other, String msg) {
         boolean noDifferenceFound = Arrays.equals(some, other);
@@ -1746,7 +1667,6 @@ public class Asserters {
      * Monday, Tuesday, Wednesday, Thursday and Friday.
      * @throws NullPointerException If <code>expected</code> is null and 
      * <code>actual</code> is not an empty array.
-     * @since 1.0
      */
     public static <E> void assertContains(E expected, E[] actual) {
         assertContains(expected, actual, "");
@@ -1767,7 +1687,6 @@ public class Asserters {
      * test fails because of the assertion.
      * @throws NullPointerException If <code>expected</code> is null and 
      * <code>actual</code> is not an empty array.
-     * @since 1.0
      */
     public static <E> void assertContains(E expected, E[] actual, String msg) {
         boolean found = false;
@@ -1797,7 +1716,6 @@ public class Asserters {
      * of whether or not <code>actual</code> is an empty list. Depending on user 
      * feedback, this behavior might be changed so that a null 
      * <code>expected</code> does not cause this exception.
-     * @since 1.0
      */
     public static <E> void assertContains(E expected, List<E> actual) {
         assertContains(expected, actual, "");
@@ -1820,7 +1738,6 @@ public class Asserters {
      * of whether or not <code>actual</code> is an empty list. Depending on user 
      * feedback, this behavior might be changed so that a null 
      * <code>expected</code> does not cause this exception.
-     * @since 1.0
      */
     public static <E> void assertContains(E expected, List<E> actual, 
             String msg) {
@@ -1844,7 +1761,6 @@ public class Asserters {
      * of whether or not <code>actual</code> is an empty set. Depending on user 
      * feedback, this behavior might be changed so that a null 
      * <code>expected</code> does not cause this exception.
-     * @since 1.0
      */
     public static <E> void assertContains(E expected, Set<E> actual) {
         assertContains(expected, actual, "");
@@ -1867,7 +1783,6 @@ public class Asserters {
      * of whether or not <code>actual</code> is an empty set. Depending on user 
      * feedback, this behavior might be changed so that a null 
      * <code>expected</code> does not cause this exception.
-     * @since 1.0
      */
     public static <E> void assertContains(E expected, Set<E> actual, 
             String msg) {
@@ -1891,7 +1806,6 @@ public class Asserters {
      * @param actual The array to check against <code>expected</code>. For 
      * example, <code>APRIL</code>, <code>APRIL</code>, <code>JUNE</code>, 
      * <code>MARCH</code>, <code>MAY</code> and <code>MAY</code>.
-     * @since 1.0
      */
     public static <E> void assertContainsSame(E[] expected, E[] actual) {
         assertContainsSame(expected, actual, "");
@@ -1913,7 +1827,6 @@ public class Asserters {
      * <code>MARCH</code>, <code>MAY</code> and <code>MAY</code>.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
-     * @since 1.0
      */
     public static <E> void assertContainsSame(E[] expected, E[] actual, 
             String msg) {
@@ -1942,7 +1855,6 @@ public class Asserters {
      * @param actual The list to check against <code>expected</code>. For 
      * example, <code>APRIL</code>, <code>APRIL</code>, <code>JUNE</code>, 
      * <code>MARCH</code>, <code>MAY</code> and <code>MAY</code>.
-     * @since 1.0
      */
     public static <E> void assertContainsSame(List<E> expected, 
             List<E> actual) {
@@ -1965,7 +1877,6 @@ public class Asserters {
      * <code>MARCH</code>, <code>MAY</code> and <code>MAY</code>.
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails.
-     * @since 1.0
      */
     public static <E> void assertContainsSame(List<E> expected, 
             List<E> actual, String msg) {
@@ -1997,7 +1908,6 @@ public class Asserters {
      * 2024; July 2, 2024 and July July 3, 2024.
      * @param actual The set with the actual elements. For example, July 3, 
      * 2024; July 1, 2024 and July 2, 2024.
-     * @since 1.0
      */
     public static <E> void assertContainsSame(Set<E> expected, Set<E> actual) {
         assertContainsSame(expected, actual, "");
@@ -2025,7 +1935,6 @@ public class Asserters {
      * @param msg A message to include in the test failure explanation if the 
      * assertion fails. For example, "Set of dates should include today and next 
      * two days."
-     * @since 1.0
      */
     public static <E> void assertContainsSame(Set<E> expected, Set<E> actual, 
             String msg) {
@@ -2059,7 +1968,6 @@ public class Asserters {
      * <code>actual</code> are of the same size but <code>expected</code> 
      * contains any nulls. And obviously also if either <code>expected</code> or 
      * <code>actual</code> is null.
-     * @since 1.0
      */
     public static <E> void assertContainsSameOrder(List<E> expected, 
             List<E> actual) {
@@ -2089,7 +1997,6 @@ public class Asserters {
      * <code>actual</code> are of the same size but <code>expected</code> 
      * contains any nulls. And obviously also if either <code>expected</code> or 
      * <code>actual</code> is null.
-     * @since 1.0
      */
     public static <E> void assertContainsSameOrder(List<E> expected, 
             List<E> actual, String msg) {
@@ -2124,7 +2031,6 @@ public class Asserters {
      * default message. For example, "Printout should include e-mail address."
      * @return What was printed to <code>System.out</code>. Beware of unexpected 
      * line endings and other system-dependent characteristics.
-     * @since 1.0
      */
     public static String assertPrintOut(Predicate<String> predicate, 
             Procedure lambda, String msg) {
@@ -2154,7 +2060,6 @@ public class Asserters {
      * #assertThrows} or {@link #assertDoesNotThrow}.
      * @param msg The message for the test failure explanation. Nothing will be 
      * appended to this message.
-     * @since 1.0
      */
     public static void fail(String msg) {
         throw new AssertionError(msg);
@@ -2177,7 +2082,6 @@ public class Asserters {
      * useless if assertions are not enabled. 
      * @throws NullPointerException If <code>lambda</code>, 
      * <code>exceptionType</code> or <code>msg</code> is null.
-     * @since 1.0
      */
     public static <E extends Exception> E assertThrows(Procedure lambda, 
             Class<E> exceptionType) {
@@ -2204,7 +2108,6 @@ public class Asserters {
      * useless if assertions are not enabled. 
      * @throws NullPointerException If <code>lambda</code>, 
      * <code>exceptionType</code> or <code>msg</code> is null.
-     * @since 1.0
      */
     @SuppressWarnings("unchecked")
     public static <E extends Exception> E assertThrows(Procedure lambda, 
@@ -2234,7 +2137,6 @@ public class Asserters {
      * }</code>.
      * @throws NullPointerException If <code>lambda</code> or <code>msg</code> 
      * is null.
-     * @since 1.0
      */
     public static void assertDoesNotThrow(Procedure lambda) {
         assertDoesNotThrow(lambda, "");
@@ -2252,7 +2154,6 @@ public class Asserters {
      * ArrayIndexOutOfBoundsException did."
      * @throws NullPointerException If <code>lambda</code> or <code>msg</code> 
      * is null.
-     * @since 1.0
      */
     public static void assertDoesNotThrow(Procedure lambda, String msg) {
         try {
@@ -2283,7 +2184,6 @@ public class Asserters {
      * seconds."
      * @throws ArithmeticException If <code>allottedTime</code> in milliseconds 
      * is greater than <code>Long.MAX_VALUE</code>.
-     * @since 1.0
      */
     public static void assertTimeout(Procedure lambda, Duration allottedTime, 
             String msg) {
