@@ -18,6 +18,7 @@ import org.testframe.api.Test;
  * Runs the tests in a test class. You can use the -enableassertions switch on 
  * the command line, but that's not necessary, because this test runner makes 
  * sure that assertions are turned on.
+ * @since 1.0
  * @author Alonso del Arte
  */
 public class TestRunner {

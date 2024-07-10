@@ -9,6 +9,7 @@ import java.util.List;
  * might provide clickable line numbers (e.g., 
  * <code>AssertersTest.java:17</code>) that take you to the line that caused the 
  * test failure or error.
+ * @since 1.0
  * @author Alonso del Arte
  */
 public class TestResultsReporter {

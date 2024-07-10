@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 /**
  * Holds the results of a test. Includes a <code>Throwable</code> if it was 
  * provided to hold the stack trace.
+ * @since 1.0
  * @author Alonso del Arte
  */
 public class TestResult {
@@ -37,7 +38,7 @@ public class TestResult {
     /**
      * Tells whether the result has a stack trace or not.
      * @return True if a <code>Throwable</code> object presumably holding a 
-     * stack trace was provided to the constructor, false otherwise. 
+     * stack trace was provided to the constructor, false otherwise.
      */
     public boolean hasStackTrace() {
         return this.testStackTraceHolder != null;

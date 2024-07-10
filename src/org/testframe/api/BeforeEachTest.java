@@ -30,6 +30,7 @@ import java.lang.annotation.Target;
  * <p>You may use any identifier the compiler allows, but it's recommended that 
  * it be something that clearly indicates what the procedure does, such as 
  * <code>setUp()</code> or <code>setUpTest()</code>.</p>
+ * @since 1.0
  * @author Alonso del Arte
  */
 @Retention(RetentionPolicy.RUNTIME)

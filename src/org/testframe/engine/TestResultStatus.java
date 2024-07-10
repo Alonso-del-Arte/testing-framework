@@ -4,6 +4,7 @@ package org.testframe.engine;
  * Enumerates the four possible outcomes of running a test: it passed, it 
  * failed, it was skipped or it caused an error. Tests are annotated with the 
  * annotation {@link org.testframe.api.Test}.
+ * @since 1.0
  * @author Alonso del Arte
  */
 public enum TestResultStatus {
@@ -32,7 +33,8 @@ public enum TestResultStatus {
     ERROR,
 
     /**
-     * Indicates the test failed. Generally associated with the color yellow.
+     * Indicates the test failed. Generally associated with the color yellow. 
+     * The developer should check that the test failed for the expected reason.
      */
     FAILED
     
