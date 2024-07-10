@@ -10,16 +10,25 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * Static class containing procedures to simplify making assertions in tests. It 
- * almost goes without saying that each of these throws an 
+ * Static class containing procedures to simplify writing assertions in tests. 
+ * It almost goes without saying that each of these throws an 
  * <code>AssertionError</code> if the specified assertion fails. That particular 
  * bit of information is not repeated in any procedure's Javadoc, but I do try 
  * to make a note of other throwables that might arise even if they seem obvious 
  * (e.g., <code>NullPointerException</code>).
+ * <p>The following assertions will not be provided:</p>
+ * <ul>
+ * <li>No <code>assertArrayEquals()</code> will be provided. Just use 
+ * <code>assertEquals()</code> &mdash; same as in TestNG.</li>
+ * <li>Neither <code>assertTrue</code> nor <code>assertFalse</code> will be 
+ * provided. Use plain Java <code>assert</code>.</li>
+ * <li>No <code>assertNotNull()</code> will be provided. Use plain Java 
+ * <code>assert</code>.</li>
+ * </ul>
  * @author Alonso del Arte
  */
 public class Asserters {
-    
+
     /**
      * The default tolerance for comparing floating point values, roughly 
      * 1.52587890625 &times; 10<sup>&minus;5</sup>. This might be too little for  
@@ -437,12 +446,6 @@ public class Asserters {
         assert equalSoFar : errMsg;
     }
     
-    // No assertArrayEquals will be provided. Use assertEquals.
-
-    // No assertTrue will be provided. Use plain Java assert.
-    
-    // No assertFalse will be provided. Use plain Java assert.
-    
     /**
      * Asserts that an object is null. If the object is not null, the test 
      * failure explanation will include the object's <code>toString()</code>.
@@ -474,8 +477,6 @@ public class Asserters {
             throw new AssertionError(errMsg);
         }
     }
-    
-    // No assertNotNull will provided. Use plain Java assert.
     
     /**
      * Asserts that an integer is greater than or equal to a specified minimum. 
