@@ -343,7 +343,7 @@ public class PseudorandomnessTest {
         int numberOfCalls = 2 * range * range + range;
         int[] nums = new int[numberOfCalls];
         for (int i = 0; i < numberOfCalls; i++) {
-            nums[i] = i;
+            nums[i] = (i << 16) + i;
         }
         MockProvider provider = new MockProvider(nums);
         Pseudorandomness instance = new Pseudorandomness(provider);
