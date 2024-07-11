@@ -29,10 +29,13 @@ public class PseudorandomnessTest {
     
     private static int[] makeIntArray(int len) {
         long source = System.currentTimeMillis();
+        long adjust = len > 8 * Long.BYTES ? ~source : 0L;
         int[] array = new int[len];
         for (int i = 0; i < len; i++) {
             array[i] = (int) source;
             source >>= 1;
+            source += adjust;
+            source -= 1431655764;
             source += i;
         }
         return array;
@@ -331,22 +334,27 @@ public class PseudorandomnessTest {
         assert !excMsg.isEmpty() : "Exception message should not be empty";
         System.out.println("\"" + excMsg + "\"");
     }
-    
+
     @Test
     public void testNextASCIICharSeqMinAndMaxLen() {
-        MockProvider provider = new MockProvider(makeIntArray(Pseudorandomness
-                .REFRESH_INTERVAL));
-        Pseudorandomness instance = new Pseudorandomness(provider);
         int minLength = LOCAL_RANDOM.nextInt(8) + 2;
         int maxLength = minLength + LOCAL_RANDOM.nextInt(8) + 2;
         int range = maxLength - minLength;
         int numberOfCalls = 2 * range * range + range;
+        int[] nums = new int[numberOfCalls];
+        for (int i = 0; i < numberOfCalls; i++) {
+            nums[i] = i;
+        }
+        MockProvider provider = new MockProvider(nums);
+        Pseudorandomness instance = new Pseudorandomness(provider);
         Set<String> strings = new HashSet<String>(numberOfCalls);
         Set<Integer> lengths = new HashSet<Integer>(range);
         String msgPart = "\" should have at least " + minLength 
                 + " characters and at most " + maxLength + " characters";
         for (int i = 0; i < numberOfCalls; i++) {
             String s = instance.nextASCIICharSeq(minLength, maxLength);
+            assertAllPrintingASCIICharacters(s);
+            System.out.println("\"" + s + "\"");
             int actual = s.length();
             String msg = "String \"" + s + msgPart;
             assertInRange(minLength, actual, maxLength, msg);
