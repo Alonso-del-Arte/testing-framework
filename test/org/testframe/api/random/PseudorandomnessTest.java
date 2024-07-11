@@ -340,8 +340,9 @@ public class PseudorandomnessTest {
         int minLength = LOCAL_RANDOM.nextInt(8) + 2;
         int maxLength = minLength + LOCAL_RANDOM.nextInt(8) + 2;
         int range = maxLength - minLength;
-        int numberOfCalls = range * range;
-        Set<String> set = new HashSet<String>(numberOfCalls);
+        int numberOfCalls = 2 * range * range + range;
+        Set<String> strings = new HashSet<String>(numberOfCalls);
+        Set<Integer> lengths = new HashSet<Integer>(range);
         String msgPart = "\" should have at least " + minLength 
                 + " characters and at most " + maxLength + " characters";
         for (int i = 0; i < numberOfCalls; i++) {
@@ -349,13 +350,17 @@ public class PseudorandomnessTest {
             int actual = s.length();
             String msg = "String \"" + s + msgPart;
             assertInRange(minLength, actual, maxLength, msg);
-            set.add(s);
+            strings.add(s);
+            lengths.add(actual);
         }
         int minimum = 3 * numberOfCalls / 5;
-        int actual = set.size();
+        int actual = strings.size();
         String msg = "Set should have at least " + minimum 
                 + " distinct ASCII character sequences";
         assertMinimum(minimum, actual, msg);
+        int expected = range + 1;
+        String lenMsg = "Expected " + expected + " different lengths";
+        assertEquals(expected, lengths.size(), lenMsg); 
     }
     
     private static class MockProvider extends ExternalRandomnessProvider {
