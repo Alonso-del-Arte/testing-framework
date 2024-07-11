@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.testframe.api.Asserters.*;
 import org.testframe.api.Test;
@@ -343,12 +345,12 @@ public class PseudorandomnessTest {
         int numberOfCalls = 2 * range * range + range;
         int[] nums = new int[numberOfCalls];
         for (int i = 0; i < numberOfCalls; i++) {
-            nums[i] = (i << 16) + i;
+            nums[i] = LOCAL_RANDOM.nextInt() + (i << 16);
         }
         MockProvider provider = new MockProvider(nums);
         Pseudorandomness instance = new Pseudorandomness(provider);
         Set<String> strings = new HashSet<String>(numberOfCalls);
-        Set<Integer> lengths = new HashSet<Integer>(range);
+        Set<Integer> actLens = new HashSet<Integer>(range);
         String msgPart = "\" should have at least " + minLength 
                 + " characters and at most " + maxLength + " characters";
         for (int i = 0; i < numberOfCalls; i++) {
@@ -359,16 +361,17 @@ public class PseudorandomnessTest {
             String msg = "String \"" + s + msgPart;
             assertInRange(minLength, actual, maxLength, msg);
             strings.add(s);
-            lengths.add(actual);
+            actLens.add(actual);
         }
         int minimum = 3 * numberOfCalls / 5;
         int actual = strings.size();
         String msg = "Set should have at least " + minimum 
                 + " distinct ASCII character sequences";
         assertMinimum(minimum, actual, msg);
-        int expected = range + 1;
-        String lenMsg = "Expected " + expected + " different lengths";
-        assertEquals(expected, lengths.size(), lenMsg); 
+        Set<Integer> expLens = IntStream.rangeClosed(minLength, maxLength)
+                .boxed().collect(Collectors.toSet());
+        String lenMsg = "Expected " + (range + 1) + " different lengths";
+        assertContainsSame(expLens, actLens, lenMsg);
     }
     
     private static class MockProvider extends ExternalRandomnessProvider {
