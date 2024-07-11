@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.testframe.api.Asserters.*;
 import org.testframe.api.Test;
@@ -339,39 +337,7 @@ public class PseudorandomnessTest {
 
     @Test
     public void testNextASCIICharSeqMinAndMaxLen() {
-        int minLength = LOCAL_RANDOM.nextInt(8) + 2;
-        int maxLength = minLength + LOCAL_RANDOM.nextInt(8) + 2;
-        int range = maxLength - minLength;
-        int numberOfCalls = 2 * range * range + range;
-        int[] nums = new int[numberOfCalls];
-        for (int i = 0; i < numberOfCalls; i++) {
-            nums[i] = LOCAL_RANDOM.nextInt() + (i << 16);
-        }
-        MockProvider provider = new MockProvider(nums);
-        Pseudorandomness instance = new Pseudorandomness(provider);
-        Set<String> strings = new HashSet<String>(numberOfCalls);
-        Set<Integer> actLens = new HashSet<Integer>(range);
-        String msgPart = "\" should have at least " + minLength 
-                + " characters and at most " + maxLength + " characters";
-        for (int i = 0; i < numberOfCalls; i++) {
-            String s = instance.nextASCIICharSeq(minLength, maxLength);
-            assertAllPrintingASCIICharacters(s);
-            System.out.println("\"" + s + "\"");
-            int actual = s.length();
-            String msg = "String \"" + s + msgPart;
-            assertInRange(minLength, actual, maxLength, msg);
-            strings.add(s);
-            actLens.add(actual);
-        }
-        int minimum = 3 * numberOfCalls / 5;
-        int actual = strings.size();
-        String msg = "Set should have at least " + minimum 
-                + " distinct ASCII character sequences";
-        assertMinimum(minimum, actual, msg);
-        Set<Integer> expLens = IntStream.rangeClosed(minLength, maxLength)
-                .boxed().collect(Collectors.toSet());
-        String lenMsg = "Expected " + (range + 1) + " different lengths";
-        assertContainsSame(expLens, actLens, lenMsg);
+        fail("RETHINK THIS TEST FROM THE GROUND UP");
     }
     
     private static class MockProvider extends ExternalRandomnessProvider {
