@@ -35,7 +35,7 @@ public class GraphicsCommandRecord {
 
     private final String commName;
     
-//    private final Color currColor;
+    private final Color currColor;
     
 //    private final Font currFont;
     
@@ -48,9 +48,13 @@ public class GraphicsCommandRecord {
         return this.commName;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Retrieves the current color.
+     * @return The color that was passed to the constructor. For example, lime 
+     * green.
+     */
     public Color getCurrentColor() {
-        return Color.BLACK;// this.currColor;
+        return this.currColor;
     }
     
     // TODO: Write tests for this
@@ -84,7 +88,7 @@ public class GraphicsCommandRecord {
             throw new NullPointerException(excMsg);
         }
         this.commName = name;
-//        this.currColor = color;
+        this.currColor = color;
 //        this.currFont = font;
     }
     
