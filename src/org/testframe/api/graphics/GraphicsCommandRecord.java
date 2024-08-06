@@ -83,7 +83,7 @@ public class GraphicsCommandRecord {
             String excMsg = "Command name must not be null";
             throw new NullPointerException(excMsg);
         }
-        if (color == null) {// || font == null) {
+        if (color == null || font == null) {
             String excMsg = "Both color and font must be non-null";
             throw new NullPointerException(excMsg);
         }
