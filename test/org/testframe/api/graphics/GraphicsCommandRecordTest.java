@@ -77,4 +77,24 @@ public class GraphicsCommandRecordTest {
         }
     }
     
+    @Test
+    public void testPrimaryConstructorRejectsNullColor() {
+        String cmd = "doSomething";
+        Font font = FONTS[1];
+        try {
+            GraphicsCommandRecord badRecord = new GraphicsCommandRecord(cmd, 
+                    null, font);
+            String msg = "Should not have been able to create " 
+                    + badRecord.toString() + " with null color";
+            fail(msg);
+        } catch (NullPointerException npe) {
+            System.out.println("Null color correctly caused NPE");
+            System.out.println("\"" + npe.getMessage() + "\"");
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName() 
+                    + " is the wrong exception for null color";
+            fail(msg);
+        }
+    }
+    
 }
