@@ -57,4 +57,24 @@ public class GraphicsCommandRecordTest {
         assertEquals(expected, actual);
     }
     
+    @Test
+    public void testPrimaryConstructorRejectsNullCommandName() {
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[0];
+        try {
+            GraphicsCommandRecord badRecord = new GraphicsCommandRecord(null, 
+                    color, font);
+            String msg = "Should not have been able to create " 
+                    + badRecord.toString() + " with null command name";
+            fail(msg);
+        } catch (NullPointerException npe) {
+            System.out.println("Null command name correctly caused NPE");
+            System.out.println("\"" + npe.getMessage() + "\"");
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName() 
+                    + " is the wrong exception for null command name";
+            fail(msg);
+        }
+    }
+    
 }
