@@ -45,4 +45,16 @@ public class GraphicsCommandRecordTest {
 
     private static final Random RANDOM = new Random();
 
+    @Test
+    public void testGetCommandName() {
+        System.out.println("getCommandName");
+        String expected = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        GraphicsCommandRecord record = new GraphicsCommandRecord(expected, 
+                color, font);
+        String actual = record.getCommandName();
+        assertEquals(expected, actual);
+    }
+    
 }
