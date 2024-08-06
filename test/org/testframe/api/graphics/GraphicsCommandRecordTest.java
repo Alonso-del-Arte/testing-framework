@@ -97,4 +97,24 @@ public class GraphicsCommandRecordTest {
         }
     }
     
+    @Test
+    public void testPrimaryConstructorRejectsNullFont() {
+        String cmd = "doSomething";
+        Color color = new Color(RANDOM.nextInt());
+        try {
+            GraphicsCommandRecord badRecord = new GraphicsCommandRecord(cmd, 
+                    color, null);
+            String msg = "Should not have been able to create " 
+                    + badRecord.toString() + " with null font";
+            fail(msg);
+        } catch (NullPointerException npe) {
+            System.out.println("Null font correctly caused NPE");
+            System.out.println("\"" + npe.getMessage() + "\"");
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName() 
+                    + " is the wrong exception for null font";
+            fail(msg);
+        }
+    }
+    
 }
