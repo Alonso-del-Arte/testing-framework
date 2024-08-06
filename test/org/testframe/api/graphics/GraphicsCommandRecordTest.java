@@ -58,6 +58,18 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testGetCurrentColor() {
+        System.out.println("getCurrentColor");
+        String command = "command" + RANDOM.nextInt();
+        Color expected = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        GraphicsCommandRecord record = new GraphicsCommandRecord(command, 
+                expected, font);
+        Color actual = record.getCurrentColor();
+        assertEquals(expected, actual);
+    }
+    
+    @Test
     public void testPrimaryConstructorRejectsNullCommandName() {
         Color color = new Color(RANDOM.nextInt());
         Font font = FONTS[0];
