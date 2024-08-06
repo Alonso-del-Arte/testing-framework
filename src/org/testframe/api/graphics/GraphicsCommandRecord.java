@@ -33,15 +33,19 @@ import java.text.AttributedCharacterIterator;
  */
 public class GraphicsCommandRecord {
 
-//    private final String commName;
+    private final String commName;
     
 //    private final Color currColor;
     
 //    private final Font currFont;
     
-    // TODO: Write tests for this
+    /**
+     * Retrieves the name of the command.
+     * @return The name of the command that was passed to the constructor. For 
+     * example, "setColor".
+     */
     public String getCommandName() {
-        return "SORRY, NOT IMPLEMENTED YET";// this.commName;
+        return this.commName;
     }
     
     // TODO: Write tests for this
@@ -83,7 +87,7 @@ public class GraphicsCommandRecord {
 //            String excMsg = "Both color and font must be non-null";
 //            throw new NullPointerException(excMsg);
 //        }
-//        this.commName = name;
+        this.commName = name;
 //        this.currColor = color;
 //        this.currFont = font;
     }
