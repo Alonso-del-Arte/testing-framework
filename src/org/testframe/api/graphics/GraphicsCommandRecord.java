@@ -260,10 +260,10 @@ public class GraphicsCommandRecord {
         public WithAttributedCharacterIterator(String name, Color color, 
                 Font font, int x, int y, AttributedCharacterIterator iterator) {
             super(name, color, font, x, y);
-//            if (iterator == null) {
-//                String excMsg = "Iterator must not be null";
-//                throw new NullPointerException(excMsg);
-//            }
+            if (iterator == null) {
+                String excMsg = "Iterator must not be null";
+                throw new NullPointerException(excMsg);
+            }
 //            this.commCharIter = iterator;
         }
     }
