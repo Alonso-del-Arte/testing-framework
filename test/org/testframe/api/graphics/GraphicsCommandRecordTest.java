@@ -98,6 +98,22 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testGetText() {
+        System.out.println("WithString.getText");
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int x = RANDOM.nextInt(1920);
+        int y = RANDOM.nextInt(1080);
+        String expected = "Some text " + RANDOM.nextInt();
+        GraphicsCommandRecord.WithString record 
+                = new GraphicsCommandRecord.WithString(command, color, font, x, 
+                        y, expected);
+        String actual = record.getText();
+        assertEquals(expected, actual);
+    }
+    
+    @Test
     public void testPrimaryConstructorRejectsNullCommandName() {
         Color color = new Color(RANDOM.nextInt());
         Font font = FONTS[0];
