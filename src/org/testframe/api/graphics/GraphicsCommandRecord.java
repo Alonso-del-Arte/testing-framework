@@ -37,7 +37,7 @@ public class GraphicsCommandRecord {
     
     private final Color currColor;
     
-//    private final Font currFont;
+    private final Font currFont;
     
     /**
      * Retrieves the name of the command.
@@ -57,9 +57,13 @@ public class GraphicsCommandRecord {
         return this.currColor;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Retrieves the current font.
+     * @return The font that was passed to the constructor. For example, 
+     * 12-point Times New Roman italic.
+     */
     public Font getCurrentFont() {
-        return null;// this.currFont;
+        return this.currFont;
     }
     
     // TODO: Write tests for this
@@ -89,7 +93,7 @@ public class GraphicsCommandRecord {
         }
         this.commName = name;
         this.currColor = color;
-//        this.currFont = font;
+        this.currFont = font;
     }
     
     /**
