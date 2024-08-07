@@ -82,6 +82,22 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testGetXAndY() {
+        System.out.println("WithXAndY.getPoint");
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int x = RANDOM.nextInt(1920);
+        int y = RANDOM.nextInt(1080);
+        GraphicsCommandRecord.WithXAndY record 
+                = new GraphicsCommandRecord.WithXAndY(command, color, font, 
+                        x, y);
+        Point expected = new Point(x, y);
+        Point actual = record.getPoint();
+        assertEquals(expected, actual);
+    }
+    
+    @Test
     public void testPrimaryConstructorRejectsNullCommandName() {
         Color color = new Color(RANDOM.nextInt());
         Font font = FONTS[0];
