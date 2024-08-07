@@ -276,11 +276,15 @@ public class GraphicsCommandRecord {
      */
     public static class WithSecondXAndY extends WithXAndY {
         
-//        private final int comm2ndX, comm2ndY;
+        private final int comm2ndX, comm2ndY;
         
-        // TODO: Write tests for this
+        /**
+         * Retrieves the second point.
+         * @return The second point that was passed to the constructor. For 
+         * example, (477, 888).
+         */
         public Point getSecondPoint() {
-            return new Point();//(this.comm2ndX, this.comm2ndY);
+            return new Point(this.comm2ndX, this.comm2ndY);
         }
         
         // TODO: Write tests for this
@@ -288,7 +292,6 @@ public class GraphicsCommandRecord {
             return new Dimension();//(this.comm2ndX, this.comm2ndY);
         }
         
-        // TODO: Write tests for this
         /**
          * Constructor. Use this for any of the following commands: 
          * <code>drawLine()</code>, <code>drawOval()</code>, the version of 
@@ -309,8 +312,8 @@ public class GraphicsCommandRecord {
         public WithSecondXAndY(String name, Color color, Font font, int x, 
                 int y, int dx, int dy) {
             super(name, color, font, x, y);
-//            this.comm2ndX = dx;
-//            this.comm2ndY = dy;
+            this.comm2ndX = dx;
+            this.comm2ndY = dy;
         }
         
     }
