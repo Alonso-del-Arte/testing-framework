@@ -140,6 +140,31 @@ public class GraphicsCommandRecordTest {
     // TODO: Write test for non-null AttributedCharacterIterator
     
     @Test
+    public void testConstructorRejectsNullAttributedCharacterIterator() {
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int x = RANDOM.nextInt(1920);
+        int y = RANDOM.nextInt(1080);
+        try {
+            GraphicsCommandRecord.WithAttributedCharacterIterator badRecord 
+                    = new GraphicsCommandRecord
+                            .WithAttributedCharacterIterator(command, color, 
+                                    font, x, y, null);
+            String msg = "should not have been able to create " 
+                    + badRecord.toString() + " with null character iterator";
+            fail(msg);
+        } catch (NullPointerException npe) {
+            System.out.println("Null character iterator correctly caused NPE");
+            System.out.println("\"" + npe.getMessage() + "\"");
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName() 
+                    + " is the wrong exception for null character iterator";
+            fail(msg);
+        }
+    }
+    
+    @Test
     public void testPrimaryConstructorRejectsNullCommandName() {
         Color color = new Color(RANDOM.nextInt());
         Font font = FONTS[0];
