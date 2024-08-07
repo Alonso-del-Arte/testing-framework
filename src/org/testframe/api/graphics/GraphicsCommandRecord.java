@@ -177,7 +177,6 @@ public class GraphicsCommandRecord {
         
     }
     
-    // TODO: Write tests for this
     /**
      * Records a <code>drawString()</code> command to a <code>Graphics</code> 
      * instance. The command includes <i>x</i> and <i>y</i> parameters.
@@ -191,15 +190,14 @@ public class GraphicsCommandRecord {
      */
     public static class WithString extends WithXAndY {
         
-//        private final String commText;
+        private final String commText;
         
-        // TODO: Write tests for this
         /**
          * Retrieves the text this object was constructed with.
          * @return The text this object was constructed with.
          */
         public String getText() {
-            return "SORRY, NOT IMPLEMENTED YET";// this.commText;
+            return this.commText;
         }
         
         // TODO: Write tests for this
@@ -226,7 +224,7 @@ public class GraphicsCommandRecord {
 //                String excMsg = "Iterator must not be null";
 //                throw new NullPointerException(excMsg);
 //            }
-//            this.commText = text;
+            this.commText = text;
         }
         
     }
