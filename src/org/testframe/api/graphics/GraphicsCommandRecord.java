@@ -138,16 +138,14 @@ public class GraphicsCommandRecord {
         
     }
     
-    // TODO: Write tests for this
     /**
      * Records a <code>Graphics</code> command with <i>x</i> and <i>y</i> 
      * parameters.
      */
     public static class WithXAndY extends GraphicsCommandRecord {
         
-//        private final int commX, commY;
+        private final int commX, commY;
         
-        // TODO: Write tests for this
         /**
          * Retrieves the <i>x</i> and <i>y</i> parameters that this record was 
          * constructed with.
@@ -155,16 +153,15 @@ public class GraphicsCommandRecord {
          * <code>Point</code> object.
          */
         public Point getPoint() {
-            return new Point();//(this.commX, this.commY);
+            return new Point(this.commX, this.commY);
         }
         
-        // TODO: Write tests for this
         /**
          * Constructor. Use this for the <code>translate()</code> command.
          * @param name The name of the command. For example, "translate". Must 
          * not be null.
          * @param color The current color. For example, <code>Color.RED</code>. 
-         *  Must not be null.
+         * Must not be null.
          * @param font The current font. For example, 12-point Courier. Must not 
          * be null.
          * @param x The <code>x</code> parameter.
@@ -174,8 +171,8 @@ public class GraphicsCommandRecord {
          */
         public WithXAndY(String name, Color color, Font font, int x, int y) {
             super(name, color, font);
-//            this.commX = x;
-//            this.commY = y;
+            this.commX = x;
+            this.commY = y;
         }
         
     }
