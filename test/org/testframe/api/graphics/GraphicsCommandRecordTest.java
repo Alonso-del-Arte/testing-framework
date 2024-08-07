@@ -140,6 +140,24 @@ public class GraphicsCommandRecordTest {
     // TODO: Write test for non-null AttributedCharacterIterator
     
     @Test
+    public void testGetSecondPoint() {
+        System.out.println("getSecondPoint");
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int x = RANDOM.nextInt(1920);
+        int y = RANDOM.nextInt(1080);
+        int dx = RANDOM.nextInt(1920);
+        int dy = RANDOM.nextInt(1080);
+        GraphicsCommandRecord.WithSecondXAndY record 
+                = new GraphicsCommandRecord.WithSecondXAndY(command, color, 
+                        font, x, y, dx, dy);
+        Point expected = new Point(dx, dy);
+        Point actual = record.getSecondPoint();
+        assertEquals(expected, actual);
+    }
+    
+    @Test
     public void testConstructorRejectsNullAttributedCharacterIterator() {
         String command = "command" + RANDOM.nextInt();
         Color color = new Color(RANDOM.nextInt());
