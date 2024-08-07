@@ -114,6 +114,32 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testConstructorRejectsNullText() {
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int x = RANDOM.nextInt(1920);
+        int y = RANDOM.nextInt(1080);
+        try {
+            GraphicsCommandRecord.WithString badRecord 
+                    = new GraphicsCommandRecord.WithString(command, color, font, 
+                            x, y, null);
+            String msg = "should not have been able to create " 
+                    + badRecord.toString() + " with null text";
+            fail(msg);
+        } catch (NullPointerException npe) {
+            System.out.println("Null text correctly caused NPE");
+            System.out.println("\"" + npe.getMessage() + "\"");
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName() 
+                    + " is the wrong exception for null text";
+            fail(msg);
+        }
+    }
+    
+    // TODO: Write test for non-null AttributedCharacterIterator
+    
+    @Test
     public void testPrimaryConstructorRejectsNullCommandName() {
         Color color = new Color(RANDOM.nextInt());
         Font font = FONTS[0];
