@@ -158,6 +158,24 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testGetDimension() {
+        System.out.println("getDimension");
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int x = RANDOM.nextInt(1920);
+        int y = RANDOM.nextInt(1080);
+        int height = RANDOM.nextInt(1920);
+        int width = RANDOM.nextInt(1080);
+        GraphicsCommandRecord.WithSecondXAndY record 
+                = new GraphicsCommandRecord.WithSecondXAndY(command, color, 
+                        font, x, y, height, width);
+        Dimension expected = new Dimension(height, width);
+        Dimension actual = record.getDimension();
+        assertEquals(expected, actual);
+    }
+    
+    @Test
     public void testConstructorRejectsNullAttributedCharacterIterator() {
         String command = "command" + RANDOM.nextInt();
         Color color = new Color(RANDOM.nextInt());
