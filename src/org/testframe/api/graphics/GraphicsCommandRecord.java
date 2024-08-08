@@ -126,10 +126,10 @@ public class GraphicsCommandRecord {
          */
         public WithShape(String name, Color color, Font font, Shape shape) {
             super(name, color, font);
-//            if (shape == null) {
-//                String excMsg = "Shape must not be null";
-//                throw new NullPointerException(excMsg);
-//            }
+            if (shape == null) {
+                String excMsg = "Shape must not be null";
+                throw new NullPointerException(excMsg);
+            }
             this.commShape = shape;
         }
         
