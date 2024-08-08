@@ -87,10 +87,10 @@ public class GraphicsCommandRecord {
      * @throws NullPointerException If any of the parameters is null.
      */
     public GraphicsCommandRecord(String name, Color color, Font font) {
-//        if (name == null || color == null || font == null) {
-//            String excMsg = "Command name, color, font must not be null";
-//            throw new NullPointerException(excMsg);
-//        }
+        if (name == null || color == null || font == null) {
+            String excMsg = "Command name, color, font must not be null";
+            throw new NullPointerException(excMsg);
+        }
         this.commName = name;
         this.currColor = color;
         this.currFont = font;
@@ -126,10 +126,10 @@ public class GraphicsCommandRecord {
          */
         public WithShape(String name, Color color, Font font, Shape shape) {
             super(name, color, font);
-//            if (shape == null) {
-//                String excMsg = "Shape must not be null";
-//                throw new NullPointerException(excMsg);
-//            }
+            if (shape == null) {
+                String excMsg = "Shape must not be null";
+                throw new NullPointerException(excMsg);
+            }
             this.commShape = shape;
         }
         
@@ -216,10 +216,10 @@ public class GraphicsCommandRecord {
         public WithString(String name, Color color, Font font, int x, int y, 
                 String text) {
             super(name, color, font, x, y);
-//            if (text == null) {
-//                String excMsg = "Iterator must not be null";
-//                throw new NullPointerException(excMsg);
-//            }
+            if (text == null) {
+                String excMsg = "Iterator must not be null";
+                throw new NullPointerException(excMsg);
+            }
             this.commText = text;
         }
         
@@ -257,10 +257,10 @@ public class GraphicsCommandRecord {
         public WithAttributedCharacterIterator(String name, Color color, 
                 Font font, int x, int y, AttributedCharacterIterator iterator) {
             super(name, color, font, x, y);
-//            if (iterator == null) {
-//                String excMsg = "Iterator must not be null";
-//                throw new NullPointerException(excMsg);
-//            }
+            if (iterator == null) {
+                String excMsg = "Iterator must not be null";
+                throw new NullPointerException(excMsg);
+            }
 //            this.commCharIter = iterator;
         }
     }
