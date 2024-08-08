@@ -194,6 +194,28 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testWithShapeConstructorRejectsNullShape() {
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        try {
+            GraphicsCommandRecord.WithShape badRecord 
+                    = new GraphicsCommandRecord.WithShape(command, color, font, 
+                            null);
+            String msg = "Should not have been able to create " 
+                    + badRecord.toString() + " with null shape";
+            fail(msg);
+        } catch (NullPointerException npe) {
+            System.out.println("Trying to use null shape correctly caused NPE");
+            System.out.println("\"" + npe.getMessage() + "\"");
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName() 
+                    + " is the wrong exception for null shape";
+            fail(msg);
+        }
+    }
+    
+    @Test
     public void testConstructorRejectsNullAttributedCharacterIterator() {
         String command = "command" + RANDOM.nextInt();
         Color color = new Color(RANDOM.nextInt());
