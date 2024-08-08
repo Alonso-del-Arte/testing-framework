@@ -216,10 +216,10 @@ public class GraphicsCommandRecord {
         public WithString(String name, Color color, Font font, int x, int y, 
                 String text) {
             super(name, color, font, x, y);
-            if (text == null) {
-                String excMsg = "Iterator must not be null";
-                throw new NullPointerException(excMsg);
-            }
+//            if (text == null) {
+//                String excMsg = "Iterator must not be null";
+//                throw new NullPointerException(excMsg);
+//            }
             this.commText = text;
         }
         
