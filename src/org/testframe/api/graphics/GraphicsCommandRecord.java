@@ -97,34 +97,31 @@ public class GraphicsCommandRecord {
     }
     
     /**
-     * Records a command involving a <code>Shape</code> parameter.
+     * Records a command involving a {@code Shape} parameter.
      */
     public static class WithShape extends GraphicsCommandRecord {
         
-//        private final Shape commShape;
+        private final Shape commShape;
         
-        // TODO: Write tests for this
         /**
          * Retrieves the shape that this record was instantiated with.
          * @return The shape that this record was instantiated with.
          */
         public Shape getShape() {
-            return null;// this.commShape;
+            return this.commShape;
         }
         
-        // TODO: Write tests for this
         /**
-         * Constructor. Use this for either the version of the 
-         * <code>setClip()</code> command that takes a <code>Shape</code> 
-         * object.
+         * Constructor. Use this for either {@code getClip()} or the version of 
+         * the {@link setClip()} command that takes a {@code Shape} object.
          * @param name The name of the command. For example, "setClip". Must not 
          * be null.
-         * @param color The current color. For example, 
-         * <code>Color.BLACK</code>. Must not be null.
+         * @param color The current color. For example, {@code Color.BLACK}. 
+         * Must not be null.
          * @param font The current font. For example, 12-point Arial. Must not 
          * be null.
-         * @param shape The shape, such as for example an instance of 
-         * <code>RoundRectangle2D</code>. Must not be null.
+         * @param shape The shape, such as for example an instance of {@code 
+         * RoundRectangle2D}. Must not be null.
          * @throws NullPointerException If any of the parameters is null.
          */
         public WithShape(String name, Color color, Font font, Shape shape) {
@@ -133,7 +130,7 @@ public class GraphicsCommandRecord {
 //                String excMsg = "Shape must not be null";
 //                throw new NullPointerException(excMsg);
 //            }
-//            this.commShape = shape;
+            this.commShape = shape;
         }
         
     }
@@ -291,7 +288,8 @@ public class GraphicsCommandRecord {
         /**
          * Retrieves the dimension. This is meant for the {@code drawOval()} and 
          * {@code drawRect()} commands.
-         * @return
+         * @return The dimension that was passed to the constructor. For 
+         * example, (477, 888).
          */
         public Dimension getDimension() {
             return new Dimension(this.comm2ndX, this.comm2ndY);
