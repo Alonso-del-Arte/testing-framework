@@ -113,30 +113,6 @@ public class GraphicsCommandRecordTest {
         assertEquals(expected, actual);
     }
     
-    @Test
-    public void testConstructorRejectsNullText() {
-        String command = "command" + RANDOM.nextInt();
-        Color color = new Color(RANDOM.nextInt());
-        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
-        int x = RANDOM.nextInt(1920);
-        int y = RANDOM.nextInt(1080);
-        try {
-            GraphicsCommandRecord.WithString badRecord 
-                    = new GraphicsCommandRecord.WithString(command, color, font, 
-                            x, y, null);
-            String msg = "should not have been able to create " 
-                    + badRecord.toString() + " with null text";
-            fail(msg);
-        } catch (NullPointerException npe) {
-            System.out.println("Null text correctly caused NPE");
-            System.out.println("\"" + npe.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName() 
-                    + " is the wrong exception for null text";
-            fail(msg);
-        }
-    }
-    
     // TODO: Write test for non-null AttributedCharacterIterator
     
     @Test
@@ -194,25 +170,43 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testConstructorRejectsNullText() {
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int x = RANDOM.nextInt(1920);
+        int y = RANDOM.nextInt(1080);
+        String msg = "Null text should cause exception";
+        Throwable t = assertThrows(() -> {
+            GraphicsCommandRecord.WithString badRecord 
+                    = new GraphicsCommandRecord.WithString(command, color, font, 
+                            x, y, null);
+            System.out.println(msg + ", not given result " 
+                    + badRecord.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testWithShapeConstructorRejectsNullShape() {
         String command = "command" + RANDOM.nextInt();
         Color color = new Color(RANDOM.nextInt());
         Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
-        try {
+        String msg = "Null shape should cause exception";
+        Throwable t = assertThrows(() -> {
             GraphicsCommandRecord.WithShape badRecord 
                     = new GraphicsCommandRecord.WithShape(command, color, font, 
                             null);
-            String msg = "Should not have been able to create " 
-                    + badRecord.toString() + " with null shape";
-            fail(msg);
-        } catch (NullPointerException npe) {
-            System.out.println("Trying to use null shape correctly caused NPE");
-            System.out.println("\"" + npe.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName() 
-                    + " is the wrong exception for null shape";
-            fail(msg);
-        }
+            System.out.println(msg + ", not given result " 
+                            + badRecord.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
     }
     
     @Test
@@ -222,82 +216,70 @@ public class GraphicsCommandRecordTest {
         Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
         int x = RANDOM.nextInt(1920);
         int y = RANDOM.nextInt(1080);
-        try {
+        String msg = "Null character iterator should cause exception";
+        Throwable t = assertThrows(() -> {
             GraphicsCommandRecord.WithAttributedCharacterIterator badRecord 
                     = new GraphicsCommandRecord
                             .WithAttributedCharacterIterator(command, color, 
                                     font, x, y, null);
-            String msg = "should not have been able to create " 
-                    + badRecord.toString() + " with null character iterator";
-            fail(msg);
-        } catch (NullPointerException npe) {
-            System.out.println("Null character iterator correctly caused NPE");
-            System.out.println("\"" + npe.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName() 
-                    + " is the wrong exception for null character iterator";
-            fail(msg);
-        }
+            System.out.println(msg + ", not given result " 
+                    + badRecord.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
     }
     
     @Test
     public void testPrimaryConstructorRejectsNullCommandName() {
         Color color = new Color(RANDOM.nextInt());
         Font font = FONTS[0];
-        try {
+        String msg = "Null command name should cause an exception";
+        Throwable t = assertThrows(() -> {
             GraphicsCommandRecord badRecord = new GraphicsCommandRecord(null, 
                     color, font);
-            String msg = "Should not have been able to create " 
-                    + badRecord.toString() + " with null command name";
-            fail(msg);
-        } catch (NullPointerException npe) {
-            System.out.println("Null command name correctly caused NPE");
-            System.out.println("\"" + npe.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName() 
-                    + " is the wrong exception for null command name";
-            fail(msg);
-        }
+            System.out.println(msg + ", not given result " 
+                    + badRecord.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
     }
     
     @Test
     public void testPrimaryConstructorRejectsNullColor() {
         String cmd = "doSomething";
         Font font = FONTS[1];
-        try {
+        String msg = "Null color should cause an exception";
+        Throwable t = assertThrows(() -> {
             GraphicsCommandRecord badRecord = new GraphicsCommandRecord(cmd, 
                     null, font);
-            String msg = "Should not have been able to create " 
-                    + badRecord.toString() + " with null color";
-            fail(msg);
-        } catch (NullPointerException npe) {
-            System.out.println("Null color correctly caused NPE");
-            System.out.println("\"" + npe.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName() 
-                    + " is the wrong exception for null color";
-            fail(msg);
-        }
+            System.out.println(msg + ", not given result " 
+                    + badRecord.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
     }
     
     @Test
     public void testPrimaryConstructorRejectsNullFont() {
         String cmd = "doSomething";
         Color color = new Color(RANDOM.nextInt());
-        try {
+        String msg = "Null font should cause an exception";
+        Throwable t = assertThrows(() -> {
             GraphicsCommandRecord badRecord = new GraphicsCommandRecord(cmd, 
                     color, null);
-            String msg = "Should not have been able to create " 
-                    + badRecord.toString() + " with null font";
-            fail(msg);
-        } catch (NullPointerException npe) {
-            System.out.println("Null font correctly caused NPE");
-            System.out.println("\"" + npe.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName() 
-                    + " is the wrong exception for null font";
-            fail(msg);
-        }
+            System.out.println(msg + ", not given result " 
+                    + badRecord.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
     }
     
 }
