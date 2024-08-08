@@ -176,6 +176,24 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testGetShape() {
+        System.out.println("WithShape.getShape");
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int height = RANDOM.nextInt(1920) + 1;
+        int width = RANDOM.nextInt(1080) + 1;
+        int x = RANDOM.nextInt(height) + 1;
+        int y = RANDOM.nextInt(width) + 1;
+        Shape expected = new Rectangle(x, y, height, width);
+        GraphicsCommandRecord.WithShape record 
+                = new GraphicsCommandRecord.WithShape(command, color, font, 
+                        expected);
+        Shape actual = record.getShape();
+        assertEquals(expected, actual);
+    }
+    
+    @Test
     public void testConstructorRejectsNullAttributedCharacterIterator() {
         String command = "command" + RANDOM.nextInt();
         Color color = new Color(RANDOM.nextInt());
