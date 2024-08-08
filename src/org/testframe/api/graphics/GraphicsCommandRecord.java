@@ -279,7 +279,8 @@ public class GraphicsCommandRecord {
         private final int comm2ndX, comm2ndY;
         
         /**
-         * Retrieves the second point.
+         * Retrieves the second point. This is meant for the {@code drawLine()} 
+         * command.
          * @return The second point that was passed to the constructor. For 
          * example, (477, 888).
          */
@@ -287,27 +288,31 @@ public class GraphicsCommandRecord {
             return new Point(this.comm2ndX, this.comm2ndY);
         }
         
-        // TODO: Write tests for this
+        /**
+         * Retrieves the dimension. This is meant for the {@code drawOval()} and 
+         * {@code drawRect()} commands.
+         * @return
+         */
         public Dimension getDimension() {
-            return new Dimension();//(this.comm2ndX, this.comm2ndY);
+            return new Dimension(this.comm2ndX, this.comm2ndY);
         }
         
         /**
          * Constructor. Use this for any of the following commands: 
-         * <code>drawLine()</code>, <code>drawOval()</code>, the version of 
-         * <code>setClip()</code> that takes four integers.
+         * {@code drawLine()}, {@code drawOval()}, {@code drawRect()}, and the 
+         * version of {@code setClip()} that takes four integers.
          * @param name The name of the command. For example, "drawLine". Must 
          * not be null.
-         * @param color The current color. For example, <code>Color.BLUE</code>. 
-         * Must not be null.
+         * @param color The current color. For example, {@code Color.BLUE}. Must 
+         * not be null.
          * @param font The current font. For example, 12-point Zapf Dingbats. 
          * Must not be null.
-         * @param x The <code>x1</code> parameter.
-         * @param y The <code>y1</code> parameter.
-         * @param dx The <code>x2</code> or <code>width</code> parameter.
-         * @param dy The <code>y2</code> or <code>height</code> parameter.
-         * @throws NullPointerException If <code>name</code>, <code>color</code> 
-         * or <code>font</code> is null.
+         * @param x The {@code x1} parameter.
+         * @param y The {@code y1} parameter.
+         * @param dx The {@code x2} or {@code width} parameter.
+         * @param dy The {@code y2} or {@code height} parameter.
+         * @throws NullPointerException If {@code name}, {@code color} or {@code 
+         * font} is null.
          */
         public WithSecondXAndY(String name, Color color, Font font, int x, 
                 int y, int dx, int dy) {
