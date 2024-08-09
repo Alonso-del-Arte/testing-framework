@@ -214,6 +214,29 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testGetBackgroundColor() {
+        System.out.println("WithImage.getBackgroundColor");
+        int width = 480;
+        int height = 270;
+        BufferedImage image = new BufferedImage(width, height, 
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image.createGraphics();
+        g.setColor(Color.CYAN);
+        g.fillRect(0, 0, width, height);
+        g.setColor(Color.BLACK);
+        g.drawString("image", width / 16, height / 9);
+        Font font = FONTS[RANDOM.nextInt(FONTS.length)];
+        ImageObserver observer = new Checkbox("FOR TESTING PURPOSES ONLY");
+        Color expected = new Color(RANDOM.nextInt());
+        GraphicsCommandRecord.WithImage record 
+                = new GraphicsCommandRecord.WithImage("drawImage", Color.BLACK, 
+                        font, image, observer, expected, width, width, 
+                        width, width, width, width, width, width);
+        Color actual = record.getBackgroundColor();
+        assertEquals(expected, actual);
+    }
+    
+    @Test
     public void testConstructorRejectsNullText() {
         String command = "command" + RANDOM.nextInt();
         Color color = new Color(RANDOM.nextInt());
