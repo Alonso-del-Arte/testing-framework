@@ -327,7 +327,7 @@ public class GraphicsCommandRecord {
         
         private final ImageObserver commObserver;
         
-//        private final Color commBackgroundColor;
+        private final Color commBackgroundColor;
         
         /**
          * Retrieves the image that was passed to the constructor.
@@ -345,9 +345,13 @@ public class GraphicsCommandRecord {
             return this.commObserver;
         }
         
-        // TODO: Write tests for this
+        /**
+         * Retrieves the background color that was passed to the constructor.
+         * @return The background color that was passed to the constructor. For 
+         * example, light gray.
+         */
         public Color getBackgroundColor() {
-            return Color.BLACK;// this.commBackgroundColor;
+            return this.commBackgroundColor;
         }
         
         // TODO: Write tests for this
@@ -375,7 +379,7 @@ public class GraphicsCommandRecord {
             super(name, color, font, x, y, dx, dy);
             this.commImage = image;
             this.commObserver = observer;
-//            this.commBackgroundColor = bgColor;
+            this.commBackgroundColor = bgColor;
         }
         
     }
