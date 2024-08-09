@@ -325,7 +325,7 @@ public class GraphicsCommandRecord {
         
         private final Image commImage;
         
-//        private final ImageObserver commObserver;
+        private final ImageObserver commObserver;
         
 //        private final Color commBackgroundColor;
         
@@ -337,9 +337,12 @@ public class GraphicsCommandRecord {
             return this.commImage;
         }
         
-        // TODO: Write tests for this
+        /**
+         * Retrieves the observer that was passed to the constructor.
+         * @return The observer that was passed to the constructor.
+         */
         public ImageObserver getObserver() {
-            return null;// this.commObserver;
+            return this.commObserver;
         }
         
         // TODO: Write tests for this
@@ -371,7 +374,7 @@ public class GraphicsCommandRecord {
                 int dy, int sx1, int sy1, int sx2, int sy2) {
             super(name, color, font, x, y, dx, dy);
             this.commImage = image;
-//            this.commObserver = observer;
+            this.commObserver = observer;
 //            this.commBackgroundColor = bgColor;
         }
         
