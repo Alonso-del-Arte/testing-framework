@@ -260,6 +260,36 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testConstructorRejectsNullObserver() {
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int x = RANDOM.nextInt(1920);
+        int y = RANDOM.nextInt(1080);
+        int width = 480;
+        int height = 270;
+        BufferedImage image = new BufferedImage(width, height, 
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image.createGraphics();
+        g.setColor(Color.CYAN);
+        g.fillRect(0, 0, width, height);
+        g.setColor(Color.BLACK);
+        g.drawString("image", width / 16, height / 9);
+        String msg = "Null observer should cause exception";
+        Throwable t = assertThrows(() -> {
+            GraphicsCommandRecord badRecord 
+                    = new GraphicsCommandRecord.WithImage(command, color, font, 
+                            image, null, Color.BLACK, x, y, x, y, x, y, x, y);
+            System.out.println(msg + ", not given result " 
+                    + badRecord.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testConstructorRejectsNullText() {
         String command = "command" + RANDOM.nextInt();
         Color color = new Color(RANDOM.nextInt());
