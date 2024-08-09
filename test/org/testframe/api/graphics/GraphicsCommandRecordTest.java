@@ -237,6 +237,29 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testConstructorRejectsNullImage() {
+        String command = "command" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        int x = RANDOM.nextInt(1920);
+        int y = RANDOM.nextInt(1080);
+        ImageObserver observer = new Checkbox("FOR TESTING PURPOSES ONLY");
+        String msg = "Null image should cause exception";
+        Throwable t = assertThrows(() -> {
+            GraphicsCommandRecord badRecord 
+                    = new GraphicsCommandRecord.WithImage(command, color, font, 
+                            null, observer, Color.BLACK, x, y, x, y, x, y, x, 
+                            y);
+            System.out.println(msg + ", not given result " 
+                    + badRecord.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testConstructorRejectsNullText() {
         String command = "command" + RANDOM.nextInt();
         Color color = new Color(RANDOM.nextInt());
