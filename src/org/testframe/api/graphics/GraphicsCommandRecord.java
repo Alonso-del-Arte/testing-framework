@@ -323,15 +323,18 @@ public class GraphicsCommandRecord {
     
     public static class WithImage extends WithSecondXAndY {
         
-//        private final Image commImage;
+        private final Image commImage;
         
 //        private final ImageObserver commObserver;
         
 //        private final Color commBackgroundColor;
         
-        // TODO: Write tests for this
+        /**
+         * Retrieves the image that was passed to the constructor.
+         * @return The image that was passed to the constructor.
+         */
         public Image getImage() {
-            return null;// this.commImage;
+            return this.commImage;
         }
         
         // TODO: Write tests for this
@@ -367,7 +370,7 @@ public class GraphicsCommandRecord {
                 ImageObserver observer, Color bgColor, int x, int y, int dx, 
                 int dy, int sx1, int sy1, int sx2, int sy2) {
             super(name, color, font, x, y, dx, dy);
-//            this.commImage = image;
+            this.commImage = image;
 //            this.commObserver = observer;
 //            this.commBackgroundColor = bgColor;
         }
