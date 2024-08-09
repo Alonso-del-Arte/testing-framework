@@ -377,6 +377,10 @@ public class GraphicsCommandRecord {
                 ImageObserver observer, Color bgColor, int x, int y, int dx, 
                 int dy, int sx1, int sy1, int sx2, int sy2) {
             super(name, color, font, x, y, dx, dy);
+            if (image == null) {
+                String excMsg = "Image must not be null";
+                throw new NullPointerException(excMsg);
+            }
             this.commImage = image;
             this.commObserver = observer;
             this.commBackgroundColor = bgColor;
