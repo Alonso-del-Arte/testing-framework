@@ -54,12 +54,29 @@ public class MockGraphicsTest {
     public void testConstructorRejectsNullColor() {
         int index = RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS);
         Font font = FONTS[index];
-        String msg = "Constructor should reject null font";
+        String msg = "Constructor should reject null color";
         Throwable t = assertThrows(() -> {
             Graphics badGraphics = new MockGraphics(null, font);
             System.out.println("Should not have been able to create " 
                     + badGraphics.toString() + " with null color and " 
                     + font.getFontName());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
+    public void testConstructorRejectsNullFont() {
+        int rgb = RANDOM.nextInt();
+        Color color = new Color(rgb);
+        String msg = "Constructor should reject null font";
+        Throwable t = assertThrows(() -> {
+            Graphics badGraphics = new MockGraphics(color, null);
+            System.out.println("Should not have been able to create " 
+                    + badGraphics.toString() + " with color " + color.toString()
+                    + " and null font");
         }, NullPointerException.class, msg);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
