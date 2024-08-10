@@ -51,6 +51,18 @@ public class MockGraphicsTest {
     private static final Random RANDOM = new Random();
     
     @Test
+    public void testGetColor() {
+        System.out.println("getColor");
+        Graphics g = new MockGraphics();
+        Color expected = new Color(RANDOM.nextInt());
+        g.setColor(expected);
+        Color actual = g.getColor();
+        assertEquals(expected, actual);
+    }
+    
+    // TODO: Write test for toString()
+    
+    @Test
     public void testConstructorRejectsNullColor() {
         int index = RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS);
         Font font = FONTS[index];
