@@ -49,5 +49,22 @@ public class MockGraphicsTest {
     private static final int TOTAL_NUMBER_OF_FONTS = FONTS.length;
 
     private static final Random RANDOM = new Random();
-
+    
+    @Test
+    public void testConstructorRejectsNullColor() {
+        int index = RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS);
+        Font font = FONTS[index];
+        String msg = "Constructor should reject null font";
+        Throwable t = assertThrows(() -> {
+            Graphics badGraphics = new MockGraphics(null, font);
+            System.out.println("Should not have been able to create " 
+                    + badGraphics.toString() + " with null color and " 
+                    + font.getFontName());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
 }
