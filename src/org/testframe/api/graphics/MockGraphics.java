@@ -287,7 +287,7 @@ public class MockGraphics extends Graphics {
      * @throws NullPointerException If <code>color</code> is null.
      */
     MockGraphics(Color color, Font font) {
-        if (color == null) {// || font == null) {
+        if (color == null || font == null) {
             String excMsg = "Neither color nor font can be null";
             throw new NullPointerException(excMsg);
         }
