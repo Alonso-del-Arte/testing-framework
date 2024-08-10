@@ -188,12 +188,12 @@ public class MockGraphics extends Graphics {
 
     @Override
     public Color getColor() {
-        return this.currColor;
+        return Color.BLACK;// this.currColor;
     }
 
     @Override
     public Font getFont() {
-        return this.currFont;
+        return null;// this.currFont;
     }
 
 // TODO: Write tests for this
@@ -287,10 +287,10 @@ public class MockGraphics extends Graphics {
      * @throws NullPointerException If <code>color</code> is null.
      */
     MockGraphics(Color color, Font font) {
-        if (color == null || font == null) {
-            String excMsg = "Neither color nor font can be null";
-            throw new NullPointerException(excMsg);
-        }
+//        if (color == null || font == null) {
+//            String excMsg = "Neither color nor font can be null";
+//            throw new NullPointerException(excMsg);
+//        }
         this.currColor = color;
         this.currFont = font;
     }
