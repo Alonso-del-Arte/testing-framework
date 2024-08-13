@@ -216,7 +216,7 @@ public class MockGraphics extends Graphics {
     /**
      * Changes the color to be used for most drawing and filling operations.
      * @param c The new color. For example, <code>Color.GREEN</code>. Not required
-     *          to be different from the current color.
+     * to be different from the current color.
      */
     @Override
     public void setColor(Color c) {
@@ -288,8 +288,8 @@ public class MockGraphics extends Graphics {
             String excMsg = "Neither color nor font can be null";
             throw new NullPointerException(excMsg);
         }
-        this.currColor = color;
-        this.currFont = font;
+//        this.currColor = color;
+//        this.currFont = font;
     }
 
 }
