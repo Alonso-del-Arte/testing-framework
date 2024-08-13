@@ -271,7 +271,7 @@ public class MockGraphics extends Graphics {
      *             to {@link #setFont(java.awt.Font)} has been made before then.
      */
     MockGraphics(Font font) {
-        this(Color.BLACK, font);
+        this(Color.CYAN, font);
     }
 
     /**
