@@ -50,7 +50,9 @@ public class MockGraphics extends Graphics {
 
     private FontMetrics currFontMetrics;
 
-    private static final Font FIRST_FONT = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()[0];
+    private static final Font FIRST_FONT 
+            = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                    .getAllFonts()[0];
 
     @Override
     public void clearRect(int x, int y, int width, int height) {
@@ -69,7 +71,7 @@ public class MockGraphics extends Graphics {
 
     @Override
     public Graphics create() {
-        throw new UnsupportedOperationException("Sorry, not implemented");
+        throw new RuntimeException("Sorry, not implemented");
     }
 
     @Override
@@ -188,7 +190,7 @@ public class MockGraphics extends Graphics {
 
     @Override
     public Color getColor() {
-        return Color.BLACK;// this.currColor;
+        return this.currColor;
     }
 
     @Override
