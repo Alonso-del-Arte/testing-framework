@@ -60,6 +60,16 @@ public class MockGraphicsTest {
         assertEquals(expected, actual);
     }
     
+    @Test
+    public void testGetFont() {
+        System.out.println("getFont");
+        Graphics g = new MockGraphics();
+        Font expected = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        g.setFont(expected);
+        Font actual = g.getFont();
+        assertEquals(expected, actual);
+    }
+    
     // TODO: Write test for toString()
     
     @Test
