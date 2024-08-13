@@ -91,6 +91,17 @@ public class MockGraphicsTest {
     }
     
     @Test
+    public void testAuxiliaryInferredFontConstructor() {
+        int rgb = RANDOM.nextInt();
+        Color color = new Color(rgb);
+        Graphics g = new MockGraphics(color);
+        Font expected = FONTS[0];
+        Font actual = g.getFont();
+        assertEquals(expected, actual);
+        assertEquals(color, g.getColor());
+    }
+    
+    @Test
     public void testConstructorRejectsNullColor() {
         int index = RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS);
         Font font = FONTS[index];
