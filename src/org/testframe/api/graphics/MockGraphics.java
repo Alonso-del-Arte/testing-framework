@@ -249,19 +249,21 @@ public class MockGraphics extends Graphics {
      * <code>getAllFonts()</code>.
      */
     public MockGraphics() {
-        this(Color.BLACK, FIRST_FONT);
+        this(Color.BLACK, GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getAllFonts()[2]);
     }
 
     /**
      * Constructor. Note that this constructor is package private. The font is
-     * inferred to be whatever happens to be listed first by AWT's
-     * <code>getAllFonts()</code>.
-     * @param color The color to be returned by the first call to
-     *              {@link #getColor()}, provided no call to
-     *              {@link #setColor(java.awt.Color)} has been made before then.
+     * inferred to be whatever happens to be listed first by AWT's {@code 
+     * getAllFonts()} function.
+     * @param color The color to be returned by the first call to {@link 
+     * #getColor()}, provided no call to {@link #setColor(java.awt.Color)} has 
+     * been made before then.
      */
     MockGraphics(Color color) {
-        this(color, FIRST_FONT);
+        this(color, GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getAllFonts()[1]);
     }
 
     /**
@@ -276,11 +278,11 @@ public class MockGraphics extends Graphics {
 
     /**
      * Constructor. Note that this constructor is package private.
-     * @param color The color to be returned by the first call to
-     *              {@link #getColor()}, provided no call to
-     *              {@link #setColor(java.awt.Color)} has been made before then.
-     * @param font  The font to be returned by {@link #getFont()}, provided no call
-     *              to {@link #setFont(java.awt.Font)} has been made before then.
+     * @param color The color to be returned by the first call to {@link 
+     * #getColor()}, provided no call to {@link #setColor(java.awt.Color)} has 
+     * been made before then.
+     * @param font The font to be returned by {@link #getFont()}, provided no 
+     * call to {@link #setFont(java.awt.Font)} has been made before then.
      * @throws NullPointerException If <code>color</code> is null.
      */
     MockGraphics(Color color, Font font) {
