@@ -249,8 +249,7 @@ public class MockGraphics extends Graphics {
      * <code>getAllFonts()</code>.
      */
     public MockGraphics() {
-        this(Color.BLACK, GraphicsEnvironment.getLocalGraphicsEnvironment()
-                .getAllFonts()[2]);
+        this(Color.BLACK, FIRST_FONT);
     }
 
     /**
