@@ -288,8 +288,8 @@ public class MockGraphics extends Graphics {
             String excMsg = "Neither color nor font can be null";
             throw new NullPointerException(excMsg);
         }
-//        this.currColor = color;
-//        this.currFont = font;
+        this.currColor = color;
+        this.currFont = font;
     }
 
 }
