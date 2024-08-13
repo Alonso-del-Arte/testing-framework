@@ -39,6 +39,16 @@ public class GraphicsCommandRecord {
     
     private final Font currFont;
     
+    // TODO: Write tests for this
+    public boolean isGetterCommand() {
+        return true;
+    }
+    
+    // TODO: Write tests for this
+    public boolean isSetterCommand() {
+        return true;
+    }
+    
     /**
      * Retrieves the name of the command.
      * @return The name of the command that was passed to the constructor. For 
@@ -79,7 +89,7 @@ public class GraphicsCommandRecord {
      * @param color The current color, the one that <code>getColor()</code> from 
      * the <code>Graphics</code> instance would return. However, when recording 
      * a <code>setColor()</code> command, send the new color that is being set. 
-     *  Must not be null.
+     * Must not be null.
      * @param font The current font, the one that <code>getFont()</code> from 
      * the <code>Graphics</code> instance would return. However, when recording 
      * a <code>setFont()</code> command, send the new font that is being set. 
