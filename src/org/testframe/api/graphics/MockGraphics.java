@@ -66,9 +66,10 @@ public class MockGraphics extends Graphics {
         // TODO: Write tests for this
     }
 
+    // TODO: Write tests for this
     @Override
     public Graphics create() {
-        throw new RuntimeException("Sorry, not implemented");
+        return new MockGraphics();
     }
 
     @Override
