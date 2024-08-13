@@ -102,6 +102,17 @@ public class MockGraphicsTest {
     }
     
     @Test
+    public void testAuxiliaryInferredFontAndColorConstructor() {
+        Graphics g = new MockGraphics();
+        Color expColor = Color.BLACK;
+        Color actColor = g.getColor();
+        Font expFont = FONTS[0];
+        Font actFont = g.getFont();
+        assertEquals(expColor, actColor);
+        assertEquals(expFont, actFont);
+    }
+    
+    @Test
     public void testConstructorRejectsNullColor() {
         int index = RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS);
         Font font = FONTS[index];
