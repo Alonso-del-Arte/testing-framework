@@ -70,8 +70,16 @@ public class MockGraphicsTest {
         assertEquals(expected, actual);
     }
     
-    // TODO: Write test for toString()
-    
+    @Test
+    public void testPrimaryConstructor() {
+        int rgb = RANDOM.nextInt();
+        Color color = new Color(rgb);
+        Font font = FONTS[FONTS.length - 1];
+        Graphics g = new MockGraphics(color, font);
+        assertEquals(color, g.getColor());
+        assertEquals(font, g.getFont());
+    }
+      
     @Test
     public void testConstructorRejectsNullColor() {
         int index = RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS);
