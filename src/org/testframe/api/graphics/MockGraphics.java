@@ -33,10 +33,7 @@ import java.util.ArrayList;
  * Though I haven't decided if I'll actually use any of the usual logging since
  * order of class loading is not a concern here. So I might opt for a more
  * direct way of querying what calls have been made.
- * <p>
- * I'm not sure if this is just reproducing <code>DebugGraphics</code>.
- * </p>
- * 
+ * <p>I'm not sure if this is just reproducing <code>DebugGraphics</code>.</p>
  * @author Alonso del Arte
  * @since 1.1
  */
@@ -172,7 +169,8 @@ public class MockGraphics extends Graphics {
     }
 
     @Override
-    public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+    public void fillRoundRect(int x, int y, int width, int height, 
+            int arcWidth, int arcHeight) {
 // TODO: Write tests for this
     }
 
@@ -195,7 +193,7 @@ public class MockGraphics extends Graphics {
 
     @Override
     public Font getFont() {
-        return null;// this.currFont;
+        return this.currFont;
     }
 
 // TODO: Write tests for this
@@ -216,7 +214,6 @@ public class MockGraphics extends Graphics {
 
     /**
      * Changes the color to be used for most drawing and filling operations.
-     * 
      * @param c The new color. For example, <code>Color.GREEN</code>. Not required
      *          to be different from the current color.
      */
@@ -227,7 +224,7 @@ public class MockGraphics extends Graphics {
 
     @Override
     public void setFont(Font f) {
-// TODO: Write tests for this
+        this.currFont = f;
     }
 
     @Override
@@ -258,7 +255,6 @@ public class MockGraphics extends Graphics {
      * Constructor. Note that this constructor is package private. The font is
      * inferred to be whatever happens to be listed first by AWT's
      * <code>getAllFonts()</code>.
-     * 
      * @param color The color to be returned by the first call to
      *              {@link #getColor()}, provided no call to
      *              {@link #setColor(java.awt.Color)} has been made before then.
@@ -270,7 +266,6 @@ public class MockGraphics extends Graphics {
     /**
      * Constructor. Note that this constructor is package private. The color is
      * inferred to be black.
-     * 
      * @param font The font to be returned by {@link #getFont()}, provided no call
      *             to {@link #setFont(java.awt.Font)} has been made before then.
      */
@@ -280,7 +275,6 @@ public class MockGraphics extends Graphics {
 
     /**
      * Constructor. Note that this constructor is package private.
-     * 
      * @param color The color to be returned by the first call to
      *              {@link #getColor()}, provided no call to
      *              {@link #setColor(java.awt.Color)} has been made before then.
