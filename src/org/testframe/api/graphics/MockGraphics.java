@@ -268,10 +268,10 @@ public class MockGraphics extends Graphics {
      * Constructor. Note that this constructor is package private. The color is
      * inferred to be black.
      * @param font The font to be returned by {@link #getFont()}, provided no call
-     *             to {@link #setFont(java.awt.Font)} has been made before then.
+     * to {@link #setFont(java.awt.Font)} has been made before then.
      */
     MockGraphics(Font font) {
-        this(Color.CYAN, font);
+        this(Color.BLACK, font);
     }
 
     /**
