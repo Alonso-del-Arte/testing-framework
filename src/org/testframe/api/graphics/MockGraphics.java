@@ -262,8 +262,7 @@ public class MockGraphics extends Graphics {
      * been made before then.
      */
     MockGraphics(Color color) {
-        this(color, GraphicsEnvironment.getLocalGraphicsEnvironment()
-                .getAllFonts()[1]);
+        this(color, FIRST_FONT);
     }
 
     /**
