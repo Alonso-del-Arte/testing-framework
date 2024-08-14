@@ -48,9 +48,13 @@ public class GraphicsCommandRecord {
         return this.commName.startsWith("get");
     }
     
-    // TODO: Write tests for this
+    /**
+     * Tells whether this record is of a setter command or not.
+     * @return True if the command name starts with "set" (case sensitive), 
+     * false otherwise.
+     */
     public boolean isSetterCommand() {
-        return true;
+        return this.commName.startsWith("set");
     }
     
     // TODO: Write tests for this
