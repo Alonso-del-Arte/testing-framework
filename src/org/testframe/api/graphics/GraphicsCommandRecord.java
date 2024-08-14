@@ -39,9 +39,13 @@ public class GraphicsCommandRecord {
     
     private final Font currFont;
     
-    // TODO: Write tests for this
+    /**
+     * Tells whether this record is of a getter command or not.
+     * @return True if the command name starts with "get" (case sensitive), 
+     * false otherwise.
+     */
     public boolean isGetterCommand() {
-        return true;
+        return this.commName.startsWith("get");
     }
     
     // TODO: Write tests for this
