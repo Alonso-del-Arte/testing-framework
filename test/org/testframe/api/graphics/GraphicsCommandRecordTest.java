@@ -115,6 +115,29 @@ public class GraphicsCommandRecordTest {
     }
 
     @Test
+    public void testIsFillingCommand() {
+        System.out.println("isFillingCommand");
+        String name = "fillCommand" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        GraphicsCommandRecord record = new GraphicsCommandRecord(name, color, 
+                font);
+        String msg = "Command " + name + " should be a filling command";
+        assert record.isFillingCommand() : msg;
+    }
+
+//    @Test
+//    public void testIsNotDrawingCommand() {
+//        String name = "notDrawingCommand" + RANDOM.nextInt();
+//        Color color = new Color(RANDOM.nextInt());
+//        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+//        GraphicsCommandRecord record = new GraphicsCommandRecord(name, color, 
+//                font);
+//        String msg = "Command " + name + " should not be a drawing command";
+//        assert !record.isDrawingCommand() : msg;
+//    }
+
+    @Test
     public void testGetCommandName() {
         System.out.println("getCommandName");
         String expected = "command" + RANDOM.nextInt();
