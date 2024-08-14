@@ -50,7 +50,7 @@ public class GraphicsCommandRecord {
     
     // TODO: Write tests for this
     public boolean isSetterCommand() {
-        return false;
+        return true;
     }
     
     // TODO: Write tests for this
