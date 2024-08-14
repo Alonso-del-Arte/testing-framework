@@ -44,6 +44,18 @@ public class GraphicsCommandRecordTest {
     private static final int TOTAL_NUMBER_OF_FONTS = FONTS.length;
 
     private static final Random RANDOM = new Random();
+    
+    @Test
+    public void testIsGetterCommand() {
+        System.out.println("isGetterCommand");
+        String name = "getCommand" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        GraphicsCommandRecord record = new GraphicsCommandRecord(name, color, 
+                font);
+        String msg = "Command " + name + " should be a getter command";
+        assert record.isGetterCommand() : msg;
+    }
 
     @Test
     public void testGetCommandName() {
