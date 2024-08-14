@@ -59,7 +59,7 @@ public class GraphicsCommandRecord {
     
     // TODO: Write tests for this
     public boolean isDrawingCommand() {
-        return false;
+        return true;
     }
     
     // TODO: Write tests for this
