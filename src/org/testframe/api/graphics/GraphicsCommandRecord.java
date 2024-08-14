@@ -66,9 +66,13 @@ public class GraphicsCommandRecord {
         return this.commName.startsWith("draw");
     }
     
-    // TODO: Write tests for this
+    /**
+     * Tells whether this record is of a filling command or not.
+     * @return True if the command name starts with "fill" (case sensitive), 
+     * false otherwise.
+     */
     public boolean isFillingCommand() {
-        return true;
+        return this.commName.startsWith("fill");
     }
     
     /**
