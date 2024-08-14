@@ -41,22 +41,22 @@ public class GraphicsCommandRecord {
     
     // TODO: Write tests for this
     public boolean isGetterCommand() {
-        return true;
+        return false;
     }
     
     // TODO: Write tests for this
     public boolean isSetterCommand() {
-        return true;
+        return false;
     }
     
     // TODO: Write tests for this
     public boolean isDrawingCommand() {
-        return true;
+        return false;
     }
     
     // TODO: Write tests for this
     public boolean isFillingCommand() {
-        return true;
+        return false;
     }
     
     /**
