@@ -58,6 +58,17 @@ public class GraphicsCommandRecordTest {
     }
 
     @Test
+    public void testIsNotGetterCommand() {
+        String name = "notGetterCommand" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        GraphicsCommandRecord record = new GraphicsCommandRecord(name, color, 
+                font);
+        String msg = "Command " + name + " should not be a getter command";
+        assert !record.isGetterCommand() : msg;
+    }
+
+    @Test
     public void testGetCommandName() {
         System.out.println("getCommandName");
         String expected = "command" + RANDOM.nextInt();
