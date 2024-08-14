@@ -49,6 +49,16 @@ public class GraphicsCommandRecord {
         return true;
     }
     
+    // TODO: Write tests for this
+    public boolean isDrawingCommand() {
+        return true;
+    }
+    
+    // TODO: Write tests for this
+    public boolean isFillingCommand() {
+        return true;
+    }
+    
     /**
      * Retrieves the name of the command.
      * @return The name of the command that was passed to the constructor. For 
