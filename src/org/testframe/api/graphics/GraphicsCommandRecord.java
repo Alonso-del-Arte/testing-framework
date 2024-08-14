@@ -41,7 +41,7 @@ public class GraphicsCommandRecord {
     
     // TODO: Write tests for this
     public boolean isGetterCommand() {
-        return false;
+        return true;
     }
     
     // TODO: Write tests for this
