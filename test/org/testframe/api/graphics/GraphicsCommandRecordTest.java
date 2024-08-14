@@ -92,6 +92,29 @@ public class GraphicsCommandRecordTest {
     }
 
     @Test
+    public void testIsDrawingCommand() {
+        System.out.println("isDrawingCommand");
+        String name = "drawCommand" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        GraphicsCommandRecord record = new GraphicsCommandRecord(name, color, 
+                font);
+        String msg = "Command " + name + " should be a drawing command";
+        assert record.isDrawingCommand() : msg;
+    }
+
+//    @Test
+//    public void testIsNotSetterCommand() {
+//        String name = "notSetterCommand" + RANDOM.nextInt();
+//        Color color = new Color(RANDOM.nextInt());
+//        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+//        GraphicsCommandRecord record = new GraphicsCommandRecord(name, color, 
+//                font);
+//        String msg = "Command " + name + " should not be a setter command";
+//        assert !record.isSetterCommand() : msg;
+//    }
+
+    @Test
     public void testGetCommandName() {
         System.out.println("getCommandName");
         String expected = "command" + RANDOM.nextInt();
