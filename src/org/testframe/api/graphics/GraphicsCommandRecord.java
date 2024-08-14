@@ -57,9 +57,13 @@ public class GraphicsCommandRecord {
         return this.commName.startsWith("set");
     }
     
-    // TODO: Write tests for this
+    /**
+     * Tells whether this record is of a drawing command or not.
+     * @return True if the command name starts with "draw" (case sensitive), 
+     * false otherwise.
+     */
     public boolean isDrawingCommand() {
-        return true;
+        return this.commName.startsWith("draw");
     }
     
     // TODO: Write tests for this
