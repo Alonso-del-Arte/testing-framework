@@ -2,9 +2,20 @@ package org.testframe.api.text;
 
 public class PlainTextProcessor {
     
-    // TODO: Write tests for this
+    /**
+     * Gives the lowest unassigned Unicode character. This function actually 
+     * searches through the Unicode characters, starting with U+0000 until 
+     * finding one for which {@code Character.isDefined()} returns false.
+     * @return The lowest unassigned Unicode character. As of August 2024, that 
+     * character is U+0378, which follows &#x0377, the Greek small letter 
+     * pamphylian digamma. 
+     */
     public static char lowestUnassignedUnicodeCharacter() {
-        return '?';
+        char ch = '\u0000';
+        while (Character.isDefined(ch)) {
+            ch++;
+        }
+        return ch;
     }
     
     /**
