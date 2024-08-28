@@ -9,7 +9,7 @@ import org.testframe.api.text.PlainTextProcessor;
 
 public class PlainTextProcessorTest {
     
-    private static final Random RANDOM = new Random();
+    static final Random RANDOM = new Random();
     
     private static final char[] WHITESPACE_CHARS = {' ', '\t', '\n', '\u000B', 
             '\f', '\r', '\u001C', '\u001D', '\u001E', '\u001F'};
