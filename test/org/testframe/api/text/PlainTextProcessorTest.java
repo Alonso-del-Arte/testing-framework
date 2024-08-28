@@ -17,6 +17,19 @@ public class PlainTextProcessorTest {
     private static final int NUMBER_OF_WHITESPACE_CHARS 
             = WHITESPACE_CHARS.length;
     
+    @Test
+    public void testLowestUnassignedUnicodeCharacter() {
+        char expected = '\u0000';
+        while (Character.isDefined(expected)) {
+            expected++;
+        }
+        char actual = PlainTextProcessor.lowestUnassignedUnicodeCharacter();
+        char highestAssigned = (char) (expected - 1);
+        String msg = "Character after '" + highestAssigned + "' (" 
+                + Character.getName(highestAssigned) + ") should be unassigned";
+        assertEquals(expected, actual, msg);
+    }
+    
     private static String randomSpacesAndTabs() {
         int len = RANDOM.nextInt(8) + 2;
         char[] array = new char[len];
