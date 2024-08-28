@@ -2,6 +2,11 @@ package org.testframe.api.text;
 
 public class PlainTextProcessor {
     
+    // TODO: Write tests for this
+    public static char lowestUnassignedUnicodeCharacter() {
+        return '?';
+    }
+    
     /**
      * Collapses consecutive tabs and spaces in a <code>String</code> to single 
      * spaces.
