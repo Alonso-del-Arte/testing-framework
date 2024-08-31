@@ -17,6 +17,18 @@ public class HTMLProcessorTest {
     }
     
     @Test
+    public void testStringUnchangedIfNoCharacterEntities() {
+        int len = RANDOM.nextInt(32) + 8;
+        char[] characters = new char[len];
+        for (int i = 0; i < len; i++) {
+            characters[i] = chooseBMPChar();
+        }
+        String intermediate = new String(characters);
+        String expected = intermediate.replace("&#", "__");
+        String actual = HTMLProcessor.conformCharacterEntities(expected);
+        assertEquals(expected, actual);
+    }
+    
     public void testConformCharacterEntities() {
         System.out.println("conformCharacterEntities");
         int len = RANDOM.nextInt(16) + 4;
