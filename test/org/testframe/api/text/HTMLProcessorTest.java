@@ -29,6 +29,7 @@ public class HTMLProcessorTest {
         assertEquals(expected, actual);
     }
     
+    @Test
     public void testConformCharacterEntities() {
         System.out.println("conformCharacterEntities");
         int len = RANDOM.nextInt(16) + 4;
