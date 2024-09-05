@@ -1,14 +1,6 @@
 package org.testframe.api.text;
 
-import java.util.Optional;
-
 public class HTMLProcessor {
-    
-    private Optional<String> firstCharEntity(String s) {
-        int index = s.indexOf("&#");
-        int semicolonIndex = s.indexOf(';', index);
-        return Optional.empty();
-    }
     
     // TODO: Write tests for this
     public static String conformCharacterEntities(String s) {
