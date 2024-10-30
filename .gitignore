@@ -158,3 +158,11 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+
+# Miscellaneous
+scratchpad.txt
+src/draft/
+src/secrets/
+test/draft/
+test/secrets/
+
