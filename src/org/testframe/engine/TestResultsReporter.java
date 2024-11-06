@@ -1,4 +1,4 @@
-package testframe.engine;
+package org.testframe.engine;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import java.util.List;
  * might provide clickable line numbers (e.g., 
  * <code>AssertersTest.java:17</code>) that take you to the line that caused the 
  * test failure or error.
+ * @since 1.0
  * @author Alonso del Arte
  */
 public class TestResultsReporter {
@@ -20,8 +21,6 @@ public class TestResultsReporter {
     /**
      * Reports the test results to <code>System.out</code>. The output includes 
      * one or more stack traces if any tests failed or caused an error.
-     * @param results The list of test results to report. Preferably not an 
-     * empty list.
      */
     public void report() {
         int totalCount = this.resultsList.size();
@@ -67,6 +66,13 @@ public class TestResultsReporter {
         System.out.println("Total: " + totalCount);
     }
     
+    /**
+     * Sole constructor.
+     * @param name The name of the test class, fully qualified. For example, 
+     * <code>org.example.HelloWorldTest</code>.
+     * @param results The results of the tests. Such as, for example, that one 
+     * test passed and another failed.
+     */
     public TestResultsReporter(String name, List<TestResult> results) {
         this.testClassName = name;
         this.resultsList = results;

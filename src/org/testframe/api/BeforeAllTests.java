@@ -1,4 +1,4 @@
-package testframe.api;
+package org.testframe.api;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
  * run before any procedures annotated {@link BeforeEachTest}, {@link Test}, 
  * {@link AfterEachTest} or {@link AfterAllTests}. That is guaranteed because 
  * I have written tests for this in the test class for {@link 
- * testframe.engine.TestRunner}.</p>
+ * org.testframe.engine.TestRunner}.</p>
  * <p>One test class may have more than one procedure annotated 
  * <code>@BeforeAllTests</code>. I make no guarantees as to what order multiple 
  * procedures with this annotation will run in, other that they won't run after 
@@ -33,6 +33,7 @@ import java.lang.annotation.Target;
  * <p>You may use any identifier the compiler allows, but it's recommended that 
  * it be something that clearly indicates what the procedure does, such as 
  * <code>setUpClass()</code>.</p>
+ * @since 1.0
  * @author Alonso del Arte
  */
 @Retention(RetentionPolicy.RUNTIME)

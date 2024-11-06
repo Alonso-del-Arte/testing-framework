@@ -1,8 +1,10 @@
-package testframe.engine;
+package org.testframe.engine;
 
 /**
  * Enumerates the four possible outcomes of running a test: it passed, it 
- * failed, it was skipped or it caused an error.
+ * failed, it was skipped or it caused an error. Tests are annotated with the 
+ * annotation {@link org.testframe.api.Test}.
+ * @since 1.0
  * @author Alonso del Arte
  */
 public enum TestResultStatus {
@@ -13,12 +15,10 @@ public enum TestResultStatus {
     PASSED, 
     
     /**
-     * Indicates the test failed. Generally associated with the color yellow.
-     */
-    FAILED, 
-    
-    /**
-     * Indicates the test was skipped. Generally associated with gray.
+     * Indicates the test was skipped. Generally associated with gray. A skipped 
+     * test must be annotated with both {@link org.testframe.api.Skip} 
+     * <em>and</em> {@link org.testframe.api.Test} or else it will be ignored by  
+     * the test runner. 
      */
     SKIPPED, 
     
@@ -29,8 +29,14 @@ public enum TestResultStatus {
      * or not. In my opinion, if a test caused an unforeseen error or exception, 
      * it's neither a pass nor a failure, but an interruption of the test-driven 
      * development process that needs to be addressed before getting back to the 
-     * normal cycle.
+     * normal test-driven development (TDD) cycle.
      */
-    ERROR
+    ERROR,
 
+    /**
+     * Indicates the test failed. Generally associated with the color yellow. 
+     * The developer should check that the test failed for the expected reason.
+     */
+    FAILED
+    
 }

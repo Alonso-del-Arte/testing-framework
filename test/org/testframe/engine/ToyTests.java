@@ -1,16 +1,18 @@
-package testframe.engine;
+package org.testframe.engine;
 
 import java.util.logging.Logger;
 
-import testframe.api.AfterAllTests;
-import testframe.api.AfterEachTest;
-import testframe.api.BeforeAllTests;
-import testframe.api.BeforeEachTest;
-import testframe.api.Test;
+import org.testframe.api.AfterAllTests;
+import org.testframe.api.AfterEachTest;
+import org.testframe.api.BeforeAllTests;
+import org.testframe.api.BeforeEachTest;
+import org.testframe.api.Skip;
+import org.testframe.api.Test;
 
 public class ToyTests {
     
-    private static final String TEST_CLASS_NAME = "testframe.engine.ToyTests";
+    private static final String TEST_CLASS_NAME 
+            = "org.testframe.engine.ToyTests";
     
     private static final Logger INVOCATION_LOGGER 
             = Logger.getLogger(TEST_CLASS_NAME);
@@ -40,7 +42,14 @@ public class ToyTests {
         assert false : msg;
     }
     
-    // TODO: Write test that should be skipped
+    @Skip @Test
+    public void testThatShouldBeSkipped() {
+        INVOCATION_LOGGER.entering(TEST_CLASS_NAME, "@Skip @Test");
+        String msg = "This test should be skipped";
+        System.out.println(msg);
+        assert false : msg;
+    }
+    
     
     @Test
     public void testThatShouldCauseError() {

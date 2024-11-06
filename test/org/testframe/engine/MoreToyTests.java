@@ -1,12 +1,12 @@
-package testframe.engine;
+package org.testframe.engine;
 
 import java.util.logging.Logger;
 
-import testframe.api.AfterAllTests;
-import testframe.api.AfterEachTest;
-import testframe.api.BeforeAllTests;
-import testframe.api.BeforeEachTest;
-import testframe.api.Test;
+import org.testframe.api.AfterAllTests;
+import org.testframe.api.AfterEachTest;
+import org.testframe.api.BeforeAllTests;
+import org.testframe.api.BeforeEachTest;
+import org.testframe.api.Test;
 
 /**
  * Just two more toy tests, one that should pass and one that should fail. The 
@@ -20,7 +20,7 @@ import testframe.api.Test;
 public class MoreToyTests {
 
     private static final String TEST_CLASS_NAME 
-            = "testframe.engine.MoreToyTests";
+            = "org.testframe.engine.MoreToyTests";
     
     private static final Logger INVOCATION_LOGGER 
             = Logger.getLogger(TEST_CLASS_NAME);

@@ -1,4 +1,4 @@
-package testframe.api;
+package org.testframe.api;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -21,6 +21,7 @@ import java.lang.annotation.Target;
  * <p>In this testing framework, this annotation doesn't have any attributes and 
  * I don't think those will be necessary. Use {@link Asserters#assertTimeout} or
  * {@link Asserters#assertThrows}.</p>
+ * @since 1.0
  * @author Alonso del Arte
  */
 @Retention(RetentionPolicy.RUNTIME)
