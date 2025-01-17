@@ -16,3 +16,7 @@ contribute to this project, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Note that although we've upgraded to Java 21, the releases 0.9, 0.95 and 1.0 
 were compiled with Java 8.
+
+Obviously this testing framework is a test dependency and should be put in test 
+libraries rather than source libraries. However, other items in the 
+`org.testframe`, like the warnings library, are meant to be source libraries.
