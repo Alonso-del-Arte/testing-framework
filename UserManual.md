@@ -9,6 +9,23 @@ Most of the examples will be drawn from
 `org.example.exercises.arithmetic.FractionTest` (these were split off to a 
 separate repository, Examples for Testing Framework).
 
+## Installation instructions
+
+Download the JAR for the latest release and put it in an appropriate folder on 
+your local machine.
+
+### Eclipse
+
+PLACEHOLDER
+
+### Apache NetBeans
+
+PLACEHOLDER
+
+### JetBrains IntelliJ IDEA
+
+PLACEHOLDER
+
 ## Starting to write the class to be tested
 
 I strongly recommend putting in a stub for the class to be tested (in Source 
