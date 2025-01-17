@@ -1,7 +1,7 @@
 # How to Use This Testing Framework
 
-Aside from the fact that this testing framework has no integration with any 
-integrated development environment (IDE), at least not yet anyway, using this 
+Aside from the fact that this testing framework does not yet have any 
+integration with any integrated development environment (IDE), using this 
 testing framework is a lot like using JUnit or TestNG.
 
 Most of the examples will be drawn from 
