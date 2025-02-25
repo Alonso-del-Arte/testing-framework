@@ -1,12 +1,24 @@
 package org.testframe.api.text;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.testframe.api.Asserters.*;
 import org.testframe.api.Test;
 import static org.testframe.api.text.PlainTextProcessorTest.RANDOM;
 
 public class HTMLProcessorTest {
+    
+    private static Map<String, Character> CURRENCY_ENTITIES_MAP 
+            = new HashMap<>();
+    
+    static {
+        CURRENCY_ENTITIES_MAP.put("&cent;", '\u00A2');
+        CURRENCY_ENTITIES_MAP.put("&pound;", '\u00A3');
+        CURRENCY_ENTITIES_MAP.put("&yen;", '\u00A5');
+        CURRENCY_ENTITIES_MAP.put("&euro;", '\u20AC');
+    }
     
     private static char chooseBMPChar() {
         char ch = (char) RANDOM.nextInt(Short.MAX_VALUE);
