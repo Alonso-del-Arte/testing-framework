@@ -29,17 +29,18 @@ import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 
 /**
- * A subclass of <code>Graphics</code> that does little besides log calls.
- * Though I haven't decided if I'll actually use any of the usual logging since
- * order of class loading is not a concern here. So I might opt for a more
- * direct way of querying what calls have been made.
- * <p>I'm not sure if this is just reproducing <code>DebugGraphics</code>.</p>
+ * A subclass of {@code Graphics} that does little besides log calls. Though I 
+ * haven't decided if I'll actually use any of the usual logging since order of 
+ * class loading is not a concern here. So I might opt for a more direct way of 
+ * querying what calls have been made.
+ * <p>I'm not sure if this is just reproducing {@code DebugGraphics}.</p>
  * @author Alonso del Arte
  * @since 1.1
  */
 public class MockGraphics extends Graphics {
 
-    private static ArrayList<GraphicsCommandRecord> commandsList = new ArrayList<>();
+    private static ArrayList<GraphicsCommandRecord> commandsList 
+            = new ArrayList<>();
 
     private Color currColor;
 
@@ -78,12 +79,14 @@ public class MockGraphics extends Graphics {
     }
 
     @Override
-    public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+    public void drawArc(int x, int y, int width, int height, int startAngle, 
+            int arcAngle) {
         // TODO: Write tests for this
     }
 
     @Override
-    public boolean drawImage(Image img, int x, int y, Color bgcolor, ImageObserver observer) {
+    public boolean drawImage(Image img, int x, int y, Color bgcolor, 
+            ImageObserver observer) {
         return true;
     }
 
@@ -93,24 +96,27 @@ public class MockGraphics extends Graphics {
     }
 
     @Override
-    public boolean drawImage(Image img, int x, int y, int width, int height, Color bgcolor, ImageObserver observer) {
-        return true;
-    }
-
-    @Override
-    public boolean drawImage(Image img, int x, int y, int width, int height, ImageObserver observer) {
-        return true;
-    }
-
-    @Override
-    public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2,
+    public boolean drawImage(Image img, int x, int y, int width, int height, 
             Color bgcolor, ImageObserver observer) {
         return true;
     }
 
     @Override
-    public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2,
+    public boolean drawImage(Image img, int x, int y, int width, int height, 
             ImageObserver observer) {
+        return true;
+    }
+
+    @Override
+    public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, 
+            int sx1, int sy1, int sx2, int sy2, Color bgcolor, 
+            ImageObserver observer) {
+        return true;
+    }
+
+    @Override
+    public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, 
+            int sx1, int sy1, int sx2, int sy2, ImageObserver observer) {
         return true;
     }
 
@@ -135,7 +141,8 @@ public class MockGraphics extends Graphics {
     }
 
     @Override
-    public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+    public void drawRoundRect(int x, int y, int width, int height, int arcWidth, 
+            int arcHeight) {
 // TODO: Write tests for this
     }
 
@@ -150,7 +157,8 @@ public class MockGraphics extends Graphics {
     }
 
     @Override
-    public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+    public void fillArc(int x, int y, int width, int height, int startAngle, 
+            int arcAngle) {
 // TODO: Write tests for this
     }
 
@@ -215,8 +223,8 @@ public class MockGraphics extends Graphics {
 
     /**
      * Changes the color to be used for most drawing and filling operations.
-     * @param c The new color. For example, <code>Color.GREEN</code>. Not required
-     * to be different from the current color.
+     * @param c The new color. For example, {@code Color.GREEN}. Not required to 
+     * be different from the current color.
      */
     @Override
     public void setColor(Color c) {
