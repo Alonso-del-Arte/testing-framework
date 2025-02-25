@@ -174,6 +174,16 @@ public class GraphicsCommandRecordTest {
     }
     
     @Test
+    public void testReferentialEquality() {
+        String name = "example" + RANDOM.nextInt();
+        Color color = new Color(RANDOM.nextInt());
+        Font font = FONTS[RANDOM.nextInt(TOTAL_NUMBER_OF_FONTS)];
+        GraphicsCommandRecord record = new GraphicsCommandRecord(name, color, 
+                font);
+        assertEquals(record, record);
+    }
+    
+    @Test
     public void testGetXAndY() {
         System.out.println("WithXAndY.getPoint");
         String command = "command" + RANDOM.nextInt();
