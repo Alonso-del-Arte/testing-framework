@@ -103,6 +103,18 @@ public class GraphicsCommandRecord {
     }
     
     // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    // TODO: Write tests for this
     /**
      * Constructor. Use this for any of the following commands: 
      * <code>create()</code>, <code>dispose()</code>, <code>getClip()</code>, 
