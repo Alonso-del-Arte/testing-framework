@@ -23,19 +23,19 @@ import org.testframe.api.Test;
  */
 public class TestRunner {
     
-    private static List<Method> setUps = new ArrayList<Method>();
+    private static List<Method> setUps = new ArrayList<>();
 
-    private static List<Method> befores = new ArrayList<Method>();
+    private static List<Method> befores = new ArrayList<>();
 
-    private static List<Method> tests = new ArrayList<Method>();
+    private static List<Method> tests = new ArrayList<>();
 
-    private static List<Method> skips = new ArrayList<Method>();
+    private static List<Method> skips = new ArrayList<>();
 
-    private static List<Method> afters = new ArrayList<Method>();
+    private static List<Method> afters = new ArrayList<>();
     
-    private static List<Method> tearDowns = new ArrayList<Method>();
+    private static List<Method> tearDowns = new ArrayList<>();
     
-    private static List<TestResult> results = new ArrayList<TestResult>();
+    private static List<TestResult> results = new ArrayList<>();
 
     private static List<Method> filter(Method[] procedures, 
             Class<? extends Annotation> annotation) {

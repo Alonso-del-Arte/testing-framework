@@ -29,7 +29,7 @@ public class TestResultComparatorCheck {
             int bound = procedures.length;
             List<TestResultStatus> list = new ArrayList<>(expected);
             Collections.shuffle(list);
-            List<TestResult> results = new ArrayList<TestResult>(len);
+            List<TestResult> results = new ArrayList<>(len);
             int size = expected.size();
             for (int j = 0; j < size; j++) {
                 TestResult result 
