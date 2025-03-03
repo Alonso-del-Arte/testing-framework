@@ -1240,8 +1240,9 @@ public class Asserters {
         double adjustedMininum = minimum - delta;
         double adjustedMaxinum = maximum + delta;
         if (actual < adjustedMininum || adjustedMaxinum < actual) {
-            String intermediate = "Expected " + actual + " to be in range from " 
-                    + minimum + " to " + maximum + " with variance " + delta;
+            String intermediate = msg + ". Expected " + actual 
+                    + " to be in range from " + minimum + " to " + maximum 
+                    + " with variance " + delta;
             String errMsg = prepMsg(intermediate);
             throw new AssertionError(errMsg);
         }
