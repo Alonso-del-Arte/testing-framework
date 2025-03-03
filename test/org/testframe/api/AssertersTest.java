@@ -4074,9 +4074,9 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Expected " + belowRange + " to be in range from " 
-                    + minimum + " to " + maximum + " with variance " 
-                    + LOCAL_DELTA;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + belowRange + " to be in range from " + minimum + " to " 
+                    + maximum + " with variance " + LOCAL_DELTA;
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
@@ -4116,9 +4116,9 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Expected " + aboveRange + " to be in range from " 
-                    + minimum + " to " + maximum + " with variance " 
-                    + LOCAL_DELTA;
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + aboveRange + " to be in range from " + minimum + " to " 
+                    + maximum + " with variance " + LOCAL_DELTA;
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
                     + "\"";
@@ -4249,8 +4249,9 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Expected " + belowRange + " to be in range from " 
-                    + minimum + " to " + maximum + " with variance " 
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + belowRange + " to be in range from " + minimum + " to " 
+                    + maximum + " with variance " 
                     + Asserters.DEFAULT_TEST_DELTA;
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
@@ -4292,8 +4293,9 @@ public class AssertersTest {
                     EXAMPLE_ASSERTION_MESSAGE_PART);
         } catch (AssertionError ae) {
             failOccurred = true;
-            String expected = "Expected " + aboveRange + " to be in range from " 
-                    + minimum + " to " + maximum + " with variance " 
+            String expected = EXAMPLE_ASSERTION_MESSAGE_PART + ". Expected " 
+                    + aboveRange + " to be in range from " + minimum + " to " 
+                    + maximum + " with variance " 
                     + Asserters.DEFAULT_TEST_DELTA;
             String actual = ae.getMessage();
             String msg = "Expected \"" + expected + "\" but was \"" + actual 
