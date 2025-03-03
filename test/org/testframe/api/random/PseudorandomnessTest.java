@@ -2,7 +2,9 @@ package org.testframe.api.random;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -337,7 +339,14 @@ public class PseudorandomnessTest {
 
     @Test
     public void testNextASCIICharSeqMinAndMaxLen() {
-        fail("RETHINK THIS TEST FROM THE GROUND UP");
+        MockProvider provider = new MockProvider(makeIntArray(Pseudorandomness
+                .REFRESH_INTERVAL));
+        Pseudorandomness instance = new Pseudorandomness(provider);
+        int minLength = LOCAL_RANDOM.nextInt(8) + 2;
+        int diff = LOCAL_RANDOM.nextInt(minLength) + 1;
+        int maxLength = minLength + diff;
+        int numberOfCalls = diff * 12;
+        fail("FINISH REWRITING THIS TEST");
     }
     
     private static class MockProvider extends ExternalRandomnessProvider {
