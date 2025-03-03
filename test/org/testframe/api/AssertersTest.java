@@ -6182,7 +6182,7 @@ public class AssertersTest {
     }
     
     private static Set<Currency> pickOutHistoricals(Set<Currency> currencies) {
-        Set<Currency> historicals = new HashSet<Currency>();
+        Set<Currency> historicals = new HashSet<>();
         for (Currency currency : currencies) {
             String displayName = currency.getDisplayName();
             if (displayName.contains("19") || displayName.contains("20")) {
@@ -6441,7 +6441,7 @@ public class AssertersTest {
     public void testAssertListContainsSame() {
         DayOfWeek[] days = DayOfWeek.values();
         List<DayOfWeek> listA = Arrays.asList(days);
-        List<DayOfWeek> listB = new ArrayList<DayOfWeek>(listA);
+        List<DayOfWeek> listB = new ArrayList<>(listA);
         Collections.shuffle(listB, RANDOM);
         listB.add(LocalDate.now().getDayOfWeek());
         boolean failOccurred = false;
@@ -6488,7 +6488,7 @@ public class AssertersTest {
     public void testAssertListContainsSameDefaultMessage() {
         DayOfWeek[] days = DayOfWeek.values();
         List<DayOfWeek> listA = Arrays.asList(days);
-        List<DayOfWeek> listB = new ArrayList<DayOfWeek>(listA);
+        List<DayOfWeek> listB = new ArrayList<>(listA);
         Collections.shuffle(listB, RANDOM);
         listB.add(LocalDate.now().getDayOfWeek());
         boolean failOccurred = false;
@@ -6540,7 +6540,7 @@ public class AssertersTest {
     @Test
     public void testAssertSetContainsSame() {
         Set<Currency> someSet = Currency.getAvailableCurrencies();
-        Set<Currency> sameSet = new TreeSet<Currency>((a, b) 
+        Set<Currency> sameSet = new TreeSet<>((a, b) 
                 -> a.getCurrencyCode().compareTo(b.getCurrencyCode()));
         sameSet.addAll(someSet);
         boolean failOccurred = false;
@@ -6621,7 +6621,7 @@ public class AssertersTest {
     @Test
     public void testAssertSetContainsSameDefaultMessage() {
         Set<Currency> someSet = Currency.getAvailableCurrencies();
-        Set<Currency> sameSet = new TreeSet<Currency>((a, b) 
+        Set<Currency> sameSet = new TreeSet<>((a, b) 
                 -> a.getCurrencyCode().compareTo(b.getCurrencyCode()));
         sameSet.addAll(someSet);
         boolean failOccurred = false;
@@ -6733,7 +6733,7 @@ public class AssertersTest {
         int len = RANDOM.nextInt(8) + 2;
         BigDecimal max = BigDecimal.valueOf(len);
         List<BigDecimal> listA = new ArrayList<>(len);
-        List<BigDecimal> listB = new LinkedList<BigDecimal>();
+        List<BigDecimal> listB = new LinkedList<>();
         BigDecimal origin = BigDecimal.valueOf(RANDOM.nextDouble() + 1);
         BigDecimal previous = origin;
         for (BigDecimal x = BigDecimal.ZERO; x.compareTo(max) < 0; 
@@ -6829,7 +6829,7 @@ public class AssertersTest {
         int len = RANDOM.nextInt(8) + 2;
         BigDecimal max = BigDecimal.valueOf(len);
         List<BigDecimal> listA = new ArrayList<>(len);
-        List<BigDecimal> listB = new LinkedList<BigDecimal>();
+        List<BigDecimal> listB = new LinkedList<>();
         BigDecimal origin = BigDecimal.valueOf(RANDOM.nextDouble() + 1);
         BigDecimal previous = origin;
         for (BigDecimal x = BigDecimal.ZERO; x.compareTo(max) < 0; 
