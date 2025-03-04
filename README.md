@@ -19,4 +19,14 @@ Note that although we've upgraded to Java 21, the releases 0.9, 0.95 and 1.0 and
 
 Obviously this testing framework is a test dependency and should be put in test 
 libraries rather than source libraries. However, other items in the 
-`org.testframe`, like the warnings library, are meant to be source libraries.
+`org.testframe` namespace, like the warnings library, are meant to be source 
+libraries. Those will be provided in separate JARs.
+
+## Release history
+
+* Early users beta, December 30, 2023. This was very bare bones.
+* 0.95, March 30, 2024. This was much closer to usable.
+* 1.0, July 10, 2024. Pretty much everything I wanted the first official release 
+to have.
+* 1.01, March 3, 2025. I discovered `assertInRange()` was missing the customized 
+messages for parameters of type `double`, so I patched that.
