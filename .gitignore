@@ -158,6 +158,9 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+# Vim specific
+*.swp
+
 # Miscellaneous
 scratchpad.txt
 src/draft/
