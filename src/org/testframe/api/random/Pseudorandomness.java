@@ -20,6 +20,8 @@ class Pseudorandomness extends ExpandedRandom {
     
     private static final int NUMBER_OF_INT_BITS = Integer.BYTES * 8;
     
+    private static final int MAX_CONSECUTIVE_SAME_CHAR = 5;
+    
     static final int REFRESH_INTERVAL = 100;
     
     private final ExternalRandomnessProvider randomProvider;
@@ -92,7 +94,7 @@ class Pseudorandomness extends ExpandedRandom {
         int candidate;
         do {
             candidate = this.asciiSource & 127;
-            this.asciiSource >>= 8;
+            this.asciiSource += this.nextInt();
         } while (candidate == 127);
         if (candidate < ' ') {
             candidate += ' ';
@@ -122,7 +124,17 @@ class Pseudorandomness extends ExpandedRandom {
         return new String(array);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Gives a pseudorandom sequence of ASCII characters with a length equal to 
+     * or greater than a specified minimum and less than or equal to a specified 
+     * maximum.
+     * @param minLength The minimum length. For example, 10.
+     * @param maxLength The maximum length. For example, 16.
+     * @return [FINISH WRITING] For example, "_&H0I>%H(%lQ"
+     * @throws IllegalArgumentException If either {@code minLength} or {@code 
+     * maxLength} is negative or if they're both positive but {@code minLength} 
+     * is greater than {@code maxLength}.
+     */
     @Override
     public String nextASCIICharSeq(int minLength, int maxLength) {
         int diff = maxLength - minLength;
@@ -131,7 +143,13 @@ class Pseudorandomness extends ExpandedRandom {
                     + " and maximum length " + maxLength + " are not valid";
             throw new IllegalArgumentException(excMsg);
         }
-        return "SORRY, NOT IMPLEMENTED YET";
+//        int bound = maxLength - minLength + 1;
+//        int length = minLength + this.nextInt(bound);
+//        char[] array = new char[length];
+//        for (int i = 0; i < length; i++) {
+//            array[i] = this.nextASCIIChar();
+//        }
+        return "SORRY";// new String(array);
     }
 
     // TODO: Write tests for this
