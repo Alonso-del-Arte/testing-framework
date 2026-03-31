@@ -346,6 +346,18 @@ public class PseudorandomnessTest {
         int diff = LOCAL_RANDOM.nextInt(minLength) + 1;
         int maxLength = minLength + diff;
         int numberOfCalls = diff * 12;
+        Set<String> asciiCharSeqs = new HashSet<>();
+        Set<Integer> expected = new HashSet<>();
+        for (int i = minLength; i <= maxLength; i++) {
+            expected.add(i);
+        }
+        Set<Integer> actual = new HashSet<>();
+        for (int j = 0; j < numberOfCalls; j++) {
+            String asciiCharSeq = instance.nextASCIICharSeq(minLength, 
+                    maxLength);
+            asciiCharSeqs.add(asciiCharSeq);
+            actual.add(asciiCharSeq.length());
+        }
         fail("FINISH REWRITING THIS TEST");
     }
     
