@@ -1,5 +1,11 @@
 # Testing Framework
 
+NOTE: I have decided to upgrade this project to Java 21. I want this testing 
+framework to be at least one LTS version behind the latest LTS version, but Java 
+8 is too far now. The release after 1.01 will require Java 21.
+
+----
+
 The idea isn't to supplant JUnit or any other existing unit testing framework, 
 but to understand how a testing framework could be created from scratch through 
 test-driven development (TDD) without recourse to any existing testing 
