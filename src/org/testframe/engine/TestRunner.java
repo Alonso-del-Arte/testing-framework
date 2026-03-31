@@ -156,7 +156,8 @@ public class TestRunner {
         loader.setDefaultAssertionStatus(true);    
         try {
             Class<?> type = loader.loadClass(testClassName);
-            Object testClassInstance = type.newInstance();
+            Object testClassInstance 
+                    = type.getDeclaredConstructor().newInstance();
             Method[] procedures = type.getMethods();
             setUps = filter(procedures, BeforeAllTests.class);
             befores = filter(procedures, BeforeEachTest.class);
@@ -175,6 +176,9 @@ public class TestRunner {
         } catch (IllegalAccessException | InstantiationException ie) {
             System.err.println("No tests ran because of " 
                     + ie.getClass().getName());
+        } catch (ReflectiveOperationException roe) {
+            String excMsg = "Encountered " + roe.getClass().getName();
+            throw new RuntimeException(excMsg, roe);
         }
         return results;
     }
