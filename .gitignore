@@ -162,7 +162,10 @@ nb-configuration.xml
 *.swp
 
 # Miscellaneous
+localdevicenotes.txt
 scratchpad.txt
+tempnotes.html
+tempnotes.md
 src/draft/
 src/secrets/
 test/draft/
