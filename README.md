@@ -28,6 +28,11 @@ libraries rather than source libraries. However, other items in the
 `org.testframe` namespace, like the warnings library, are meant to be source 
 libraries. Those will be provided in separate JARs.
 
+I originally used Eclipse for this project, but now I've decided I will not use 
+any integrated development environment (IDE) for it. I will use a combination of 
+Brackets and Vim to edit the source files, and compile and run on the command 
+line.
+
 ## Release history
 
 * Early users beta, December 30, 2023. This was very bare bones.
