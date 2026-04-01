@@ -3,6 +3,7 @@ package org.testframe.api.random;
 import java.io.InputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
@@ -47,7 +48,8 @@ class RandomDotOrgAccess extends ExternalRandomnessProvider {
         String urlStr = "https://www.random.org/integers/?num=" + amount 
                 + "&min=" + minimum + "&max=" + maximum 
                 + "&col=1&base=10&format=plain&rnd=new";
-        return new URL(urlStr);
+        URI uri = URI.create(urlStr);
+        return uri.toURL();
     }
     
     // TODO: Write tests for this
@@ -96,7 +98,8 @@ class RandomDotOrgAccess extends ExternalRandomnessProvider {
     
     @Override
     public boolean haveNotExceededQuota() throws IOException {
-        URL url = new URL("https://www.random.org/quota/?format=plain");
+        URI uri = URI.create("https://www.random.org/quota/?format=plain");
+        URL url = uri.toURL();
         URLConnection conn = url.openConnection();
         InputStream content = (InputStream) conn.getContent();
         try (Scanner scanner = new Scanner(content)) {
