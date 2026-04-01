@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -26,8 +26,8 @@ import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 
 /**
- * Base class for classes that record commands to <code>Graphics</code> 
- * instances. However, it's not abstract and may be used for a few commands.
+ * Base class for classes that record commands to {@code Graphics} instances. 
+ * However, it's not abstract and may be used for a few commands.
  * @author Alonso del Arte
  * @since 1.1
  */
@@ -116,22 +116,21 @@ public class GraphicsCommandRecord {
 
     // TODO: Write tests for this
     /**
-     * Constructor. Use this for any of the following commands: 
-     * <code>create()</code>, <code>dispose()</code>, <code>getClip()</code>, 
-     * <code>getClipBounds()</code>, <code>getColor()</code>, 
-     * <code>getFont()</code>, <code>getFontMetrics()</code>, 
-     * <code>setColor()</code>, <code>setFont()</code>, 
-     * <code>setPaintMode()</code>, <code>setXORMode()</code>.
+     * Constructor. Use this for any of the following commands: {@code 
+     * create()}, {@code dispose()}, {@code getClip()}, {@code getClipBounds()}, 
+     * {@code getColor()}, {@code getFont()}, {@code getFontMetrics()}, {@code 
+     * setColor()}, {@code setFont()}, {@code setPaintMode()}, {@code 
+     setXORMode()}.
      * @param name The name of the command. For example, "create". Must not be 
      * null.
-     * @param color The current color, the one that <code>getColor()</code> from 
-     * the <code>Graphics</code> instance would return. However, when recording 
-     * a <code>setColor()</code> command, send the new color that is being set. 
-     * Must not be null.
-     * @param font The current font, the one that <code>getFont()</code> from 
-     * the <code>Graphics</code> instance would return. However, when recording 
-     * a <code>setFont()</code> command, send the new font that is being set. 
-     * Must not be null.
+     * @param color The current color, the one that {@code getColor()} from 
+     * the {@code Graphics} instance would return. However, when recording a 
+     * {@code setColor()} command, send the new color that is being set. Must 
+     * not be null.
+     * @param font The current font, the one that {@code getFont()} from the 
+     * {@code Graphics} instance would return. However, when recording a {@code 
+     * setFont()} command, send the new font that is being set. Must not be 
+     * null.
      * @throws NullPointerException If any of the parameters is null.
      */
     public GraphicsCommandRecord(String name, Color color, Font font) {
@@ -184,8 +183,7 @@ public class GraphicsCommandRecord {
     }
     
     /**
-     * Records a <code>Graphics</code> command with <i>x</i> and <i>y</i> 
-     * parameters.
+     * Records a {@code Graphics} command with <i>x</i> and <i>y</i> parameters.
      */
     public static class WithXAndY extends GraphicsCommandRecord {
         
@@ -194,25 +192,25 @@ public class GraphicsCommandRecord {
         /**
          * Retrieves the <i>x</i> and <i>y</i> parameters that this record was 
          * constructed with.
-         * @return The <i>x</i> and <i>y</i> parameters bundled into a 
-         * <code>Point</code> object.
+         * @return The <i>x</i> and <i>y</i> parameters bundled into a {@code 
+         * Point} object.
          */
         public Point getPoint() {
             return new Point(this.commX, this.commY);
         }
         
         /**
-         * Constructor. Use this for the <code>translate()</code> command.
+         * Constructor. Use this for the {@code translate()} command.
          * @param name The name of the command. For example, "translate". Must 
          * not be null.
-         * @param color The current color. For example, <code>Color.RED</code>. 
+         * @param color The current color. For example, {@code Color.RED}. 
          * Must not be null.
          * @param font The current font. For example, 12-point Courier. Must not 
          * be null.
-         * @param x The <code>x</code> parameter.
-         * @param y The <code>y</code> parameter.
-         * @throws NullPointerException If <code>name</code>, <code>color</code> 
-         * or <code>font</code> is null.
+         * @param x The {@code x} parameter.
+         * @param y The {@code y} parameter.
+         * @throws NullPointerException If {@code name}, {@code color} or {@code 
+         * font} is null.
          */
         public WithXAndY(String name, Color color, Font font, int x, int y) {
             super(name, color, font);
@@ -223,15 +221,14 @@ public class GraphicsCommandRecord {
     }
     
     /**
-     * Records a <code>drawString()</code> command to a <code>Graphics</code> 
-     * instance. The command includes <i>x</i> and <i>y</i> parameters.
-     * <p>Maybe this can also be used for <code>drawBytes()</code> or 
-     * <code>drawChars()</code>. But given that the former is not recommended on 
-     * account of being limited to ASCII characters and the latter takes a 
-     * <code>char</code> array that can easily be converted to a 
-     * <code>String</code> instance, I just don't see much need for recording 
-     * either of those two commands like I see a need to record 
-     * <code>drawString()</code> commands.</p>
+     * Records a {@code drawString()} command to a {@code Graphics} instance. 
+     * The command includes <i>x</i> and <i>y</i> parameters.
+     * <p>Maybe this can also be used for {@code drawBytes()} or {@code 
+     * drawChars()}. But given that the former is not recommended on account of 
+     * being limited to ASCII characters and the latter takes a {@code char} 
+     * array that can easily be converted to a {@code String} instance, I just 
+     * don't see much need for recording either of those two commands like I see 
+     * a need to record {@code drawString()} commands.</p>
      */
     public static class WithString extends WithXAndY {
         
@@ -246,20 +243,20 @@ public class GraphicsCommandRecord {
         }
         
         /**
-         * Constructor. Use this for the version of <code>drawString()</code> 
-         * that a <code>String</code> parameter.
+         * Constructor. Use this for the version of {@code drawString()} that 
+         * takes a {@code String} parameter.
          * @param name The name of the command. For example, "drawString". Must 
          * not be null.
-         * @param color The current color. For example, 
-         * <code>Color.YELLOW</code>. Must not be null.
+         * @param color The current color. For example, {@code Color.YELLOW}. 
+         * Must not be null.
          * @param font The current font. For example, 12-point Georgia. Must not 
          * be null.
-         * @param x The <code>x</code> parameter.
-         * @param y The <code>y</code> parameter.
-         * @param text The text to write to the <code>Graphics</code> context. 
-         * Must not be null.
-         * @throws NullPointerException If <code>name</code>, 
-         * <code>color</code>, <code>font</code> or <code>text</code> is null.
+         * @param x The {@code x} parameter.
+         * @param y The {@code y} parameter.
+         * @param text The text to write to the {@code Graphics} context. Must 
+         * not be null.
+         * @throws NullPointerException If {@code name}, {@code color}, {@code 
+         * font} or {@code text} is null.
          */
         public WithString(String name, Color color, Font font, int x, int y, 
                 String text) {
@@ -284,23 +281,21 @@ public class GraphicsCommandRecord {
         
         // TODO: Write tests for this
         /**
-         * Constructor. Use this for the version of <code>drawString()</code> 
-         * that takes an <code>AttributedCharacterIterator</code>.
+         * Constructor. Use this for the version of {@code drawString()} that 
+         * takes an {@code AttributedCharacterIterator}.
          * @param name The name of the command. For example, "create". Must not 
          * be null.
-         * @param color The current color, the one that <code>getColor()</code> 
-         * from the <code>Graphics</code> instance would return. Must not be 
-         * null.
-         * @param font The current font, the one that <code>getFont()</code> 
-         * from the <code>Graphics</code> instance would return. However, when 
-         * recording a <code>setFont()</code> command, send the new font that is 
-         * being set. Must not be null.
-         * @param x The <code>x</code> parameter.
-         * @param y The <code>y</code> parameter.
+         * @param color The current color, the one that {@code getColor()} from 
+         * the {@code Graphics} instance would return. Must not be null.
+         * @param font The current font, the one that {@code getFont()} from the 
+         * {@code Graphics} instance would return. However, when recording a 
+         * {@code setFont()} command, send the new font that is being set. Must 
+         * not be null.
+         * @param x The {@code x} parameter.
+         * @param y The {@code y} parameter.
          * @param iterator The character iterator with the attributes.
-         * @throws NullPointerException If <code>name</code>, 
-         * <code>color</code>, <code>font</code> or <code>iterator</code> is 
-         * null.
+         * @throws NullPointerException If {@code name}, {@code color}, {@code 
+         * font} or {@code iterator} is null.
          */
         public WithAttributedCharacterIterator(String name, Color color, 
                 Font font, int x, int y, AttributedCharacterIterator iterator) {
@@ -314,10 +309,10 @@ public class GraphicsCommandRecord {
     }
     
     /**
-     * Records a <code>Graphics</code> command that takes four integer 
-     * parameters. The first two integer parameters are <i>x</i> and <i>y</i>. 
-     * The second two parameters can either be another <i>x</i> and <i>y</i> 
-     * pair or width and height parameters for a dimension.
+     * Records a {@code Graphics} command that takes four integer parameters. 
+     * The first two integer parameters are <i>x</i> and <i>y</i>. The second 
+     * two parameters can either be another <i>x</i> and <i>y</i> pair or width 
+     * and height parameters for a dimension.
      */
     public static class WithSecondXAndY extends WithXAndY {
         
@@ -344,9 +339,9 @@ public class GraphicsCommandRecord {
         }
         
         /**
-         * Constructor. Use this for any of the following commands: 
-         * {@code drawLine()}, {@code drawOval()}, {@code drawRect()}, and the 
-         * version of {@code setClip()} that takes four integers.
+         * Constructor. Use this for any of the following commands: {@code 
+         * drawLine()}, {@code drawOval()}, {@code drawRect()}, and the version 
+         * of {@code setClip()} that takes four integers.
          * @param name The name of the command. For example, "drawLine". Must 
          * not be null.
          * @param color The current color. For example, {@code Color.BLUE}. Must 
