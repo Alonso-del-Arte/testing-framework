@@ -41,3 +41,23 @@ line.
 to have.
 * 1.01, March 3, 2025. I discovered `assertInRange()` was missing the customized 
 messages for parameters of type `double`, so I patched that.
+
+## Known issues
+
+By doing more work on this project on the command line, I have discovered some 
+issues that are just not issues when using this testing framework in an IDE.
+
+* When the test runner can't find the test class, it reports it couldn't find 
+the test class, but then it also reports that 0 tests passed, 0 tests failed, 0 
+tests were skipped and 0 tests caused errors. This is confusing and I intend to 
+correct this once I decide on a better way for the test runner to behave in this 
+case.
+* On macOS, the test runner seems to get stuck after running more than 300 
+tests. It does report the results, but the command prompt doesn't return 
+immediately like it does when running a test class with fewer tests. I haven't 
+yet figured out why this is.
+* On an older computer that doesn't run as fast as it used to, such as a 
+computer that originally ran Windows 7, was upgraded to Windows 10 and can't be 
+"upgraded" to Windows 11, tests with `assertTimeout()` might be brittle, failing 
+then passing without changes to the class under test. I'm not sure if this is an 
+issue that I can fix.
