@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Provides numbers and other data that can be relied on to be at least 
@@ -46,6 +47,12 @@ class Pseudorandomness extends ExpandedRandom {
     public int nextPowerOfTwo() {
         int shift = this.nextInt(31);
         return 1 << shift;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public UUID nextUUID() {
+        return new UUID(-1L, -1L);
     }
     
     @Override

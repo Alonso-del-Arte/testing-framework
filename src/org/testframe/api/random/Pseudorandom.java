@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
 // TODO: Write static wrappers for Pseudorandomness's functions
 public class Pseudorandom {
@@ -19,7 +20,12 @@ public class Pseudorandom {
     // TODO: Change back to Pseudorandomness, or to FallbackRandomnessProvider
     private static final Random RANDOM = new Random();
 //            = new Pseudorandomness(new RandomDotOrgAccess());
-    
+   
+    // TODO: Write tests for this
+    public static UUID nextUUID() {
+        return new UUID(0L, 0L);
+    }
+ 
     /**
      * Tosses a coin, metaphorically.
      * @return Either {@link CoinSide#HEADS} or {@link CoinSide#TAILS}.
