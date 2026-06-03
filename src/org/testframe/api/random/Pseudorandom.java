@@ -83,7 +83,7 @@ public class Pseudorandom {
 
     /**
      * Gives a pseudorandomly chosen power of two. The number is always 
-     * positive, it's never <code>Integer.MIN_VALUE</code>.
+     * positive, it's never {@code Integer.MIN_VALUE}.
      * @return A power of 2, at least 1, at most 1073741824, which is 
      * 2<sup>30</sup>. For example, 524288, which is 2<sup>19</sup>.
      */
