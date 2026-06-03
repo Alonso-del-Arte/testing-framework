@@ -74,8 +74,8 @@ public class Pseudorandom {
     /**
      * Gives a pseudorandomly chosen integer up to a given bound.
      * @param bound The bound to go up to. For example, 100.
-     * @return An integer equal to at least 0 but not equal to 
-     * <code>bound</code> but not greater than that. For example, 22.
+     * @return An integer equal to at least 0 but less than {@code bound}. For 
+     * example, 22. In this example, 0 and 99 may occur, but 100 will not.
      */
     public static int nextInt(int bound) {
         return RANDOM.nextInt(bound);
