@@ -30,3 +30,13 @@ variables and other means.
 
 * Path: PATH GOES HERE
 * Version: 0.95
+
+## Output directories
+
+### Source Packages
+
+* Path: build/classes/
+
+### Test Packages
+
+* Path: build/test/classes/
