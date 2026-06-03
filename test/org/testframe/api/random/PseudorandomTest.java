@@ -1,7 +1,5 @@
 package org.testframe.api.random;
 
-import static org.testframe.api.Asserters.*;
-
 import java.math.BigInteger;
 import java.sql.Clob;
 import java.sql.Date;
@@ -14,10 +12,9 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
 
+import static org.testframe.api.Asserters.*;
 import org.testframe.api.Skip;
 import org.testframe.api.Test;
-import org.testframe.api.random.CoinSide;
-import org.testframe.api.random.Pseudorandom;
 
 /**
  * Tests of the Pseudorandom class.
