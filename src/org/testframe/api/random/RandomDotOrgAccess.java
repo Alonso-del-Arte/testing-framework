@@ -21,6 +21,9 @@ class RandomDotOrgAccess extends ExternalRandomnessProvider {
     private static final int MINIMUM_MINIMUM = -1000000000;
     
     private static final int MAXIMUM_MAXIMUM = 1000000000;
+    
+    private static final URL API_QUOTA_CHECK_URL 
+            = URI.create("https://www.random.org/quota/?format=plain").toURL();
         
     private static void validateParams(int amount, int minimum, int maximum) {
         if (amount < MINIMUM_AMOUNT || amount > MAXIMUM_AMOUNT) {
@@ -95,12 +98,11 @@ class RandomDotOrgAccess extends ExternalRandomnessProvider {
         }
         return numbers;
     }
-    
+
+    // TODO: Figure out how to test this
     @Override
     public boolean haveNotExceededQuota() throws IOException {
-        URI uri = URI.create("https://www.random.org/quota/?format=plain");
-        URL url = uri.toURL();
-        URLConnection conn = url.openConnection();
+        URLConnection conn = API_QUOTA_CHECK_URL.openConnection();
         InputStream content = (InputStream) conn.getContent();
         try (Scanner scanner = new Scanner(content)) {
             int quotaRemaining = scanner.nextInt();
