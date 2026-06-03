@@ -1,11 +1,10 @@
 package org.testframe.api.random;
 
-import static org.testframe.api.Asserters.*;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.testframe.api.Asserters.*;
 import org.testframe.api.BeforeAllTests;
 import org.testframe.api.Test;
 import org.testframe.api.random.ExternalRandomnessProvider;
