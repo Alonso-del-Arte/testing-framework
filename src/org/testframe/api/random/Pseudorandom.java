@@ -43,15 +43,15 @@ public class Pseudorandom {
     }
 
     /**
-     * Comes up with a <code>String</code> instance consisting of ASCII printing 
-     * characters. This means the <code>String</code> won't contain any ASCII 
-     * control characters like Data Link Escape (U+0010) or Delete (U+007F).
-     * @param length How long to make the <code>String</code>. For example, 12.
-     * @return A <code>String</code> instance of ASCII printing characters. Note 
-     * that the straight single and double quote can occur in the results. 
-     * Examples for <code>length</code> being 12: "]Vv36l"o'eVA", 
-     * "KYY>xld?J[Zw", "aWG[Q B:_3aY" and "gk|0++euub&amp;v".
-     * @throws NegativeArraySizeException If <code>length</code> is negative.
+     * Comes up with a {@code String} instance consisting of ASCII printing  
+     * characters. This means the {@code String} won't contain any ASCII control 
+     * characters like Data Link Escape (U+0010) or Delete (U+007F).
+     * @param length How long to make the {@code String}. For example, 12.
+     * @return A {@code String} instance of ASCII printing characters. Note that 
+     * the straight single and double quote can occur in the results. Examples 
+     * for {@code length} being 12: "]Vv36l"o'eVA", "KYY>xld?J[Zw", 
+     * "aWG[Q B:_3aY" and "gk|0++euub&amp;v".
+     * @throws NegativeArraySizeException If {@code length} is negative.
      */
     public static String nextASCIICharSeq(int length) {
         char[] characters = new char[length];
