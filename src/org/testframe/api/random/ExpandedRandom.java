@@ -42,25 +42,24 @@ public abstract class ExpandedRandom extends Random {
      * @param length How long the sequence of ASCII characters should be. Should 
      * not be negative. May be 0, but there's not much point to that. For 
      * example, 7.
-     * @return A pseudorandom <code>String</code> with <code>length</code> ASCII 
+     * @return A pseudorandom {@code String} with {@code length} ASCII 
      * characters. For example, "t.lm8Q&lt;". 
-     * @throws NegativeArraySizeException If <code>length</code> is negative.
+     * @throws NegativeArraySizeException If {@code length} is negative.
      */
     public abstract String nextASCIICharSeq(int length);
     
     /**
      * Gives a pseudorandom sequence of printing ASCII characters.
      * @param minLength The minimum length of the sequence. May be 0 but must 
-     * not be negative. Must not be greater than <code>maxLength</code>. For 
-     * example, 3.
+     * not be negative. Must not be greater than {@code maxLength}. For example,
+     * 3.
      * @param maxLength The maximum length of the sequence. Must not be less 
-     * than <code>minLength</code>. For example, 7.
+     * than {@code minLength}. For example, 7.
      * @return A sequence of printing ASCII characters of at least 
-     * <code>minLength</code> but not more than <code>maxLength</code>. For 
-     * example, "_aZ6WW".
-     * @throws IllegalArgumentException If either <code>minLength</code> or 
-     * <code>maxLength</code> is negative, or if the former is greater than the 
-     * latter.
+     * {@code minLength} but not more than {@code maxLength}. For example, 
+     * "_aZ6WW".
+     * @throws IllegalArgumentException If either {@code minLength} or {@code 
+     * maxLength} is negative, or if the former is greater than the latter.
      */
     public abstract String nextASCIICharSeq(int minLength, int maxLength);
     
