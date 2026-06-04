@@ -4,7 +4,6 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
 
 public abstract class ExpandedRandom extends Random {
 
@@ -17,12 +16,6 @@ public abstract class ExpandedRandom extends Random {
      */
     public abstract int nextPowerOfTwo();
 
-    /**
-     * Gives a random UUID.
-     * @return A random UUID.
-     */
-    public abstract UUID nextUUID();
-    
     /**
      * Flips a coin pseudorandomly.
      * @return Either {@link CoinSide#HEADS} or {@link CoinSide#TAILS}.

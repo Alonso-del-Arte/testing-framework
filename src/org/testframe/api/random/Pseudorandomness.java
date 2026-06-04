@@ -49,12 +49,6 @@ class Pseudorandomness extends ExpandedRandom {
         return 1 << shift;
     }
 
-    // TODO: Write tests for this
-    @Override
-    public UUID nextUUID() {
-        return new UUID(-1L, -1L);
-    }
-    
     @Override
     public boolean nextBoolean() {
         int bit = this.boolsBitSource & 1;

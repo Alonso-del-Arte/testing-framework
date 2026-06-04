@@ -21,11 +21,6 @@ public class Pseudorandom {
     private static final Random RANDOM = new Random();
 //            = new Pseudorandomness(new RandomDotOrgAccess());
    
-    // TODO: Write tests for this
-    public static UUID nextUUID() {
-        return new UUID(0L, 0L);
-    }
- 
     /**
      * Tosses a coin, metaphorically.
      * @return Either {@link CoinSide#HEADS} or {@link CoinSide#TAILS}.
